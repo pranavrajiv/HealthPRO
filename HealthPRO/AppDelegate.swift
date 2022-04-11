@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //delay the launch
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 2.0))
+//        UITabBar.appearance().tintColor = UIColor.black
+//        UITabBar.appearance().barTintColor = UIColor.red
         return true
     }
 

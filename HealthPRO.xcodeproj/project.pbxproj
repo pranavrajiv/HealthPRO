@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575BC28020DB900590F5C /* AppDelegate.swift */; };
 		F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575BE28020DB900590F5C /* SceneDelegate.swift */; };
-		F84575C128020DB900590F5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575C028020DB900590F5C /* ViewController.swift */; };
+		F84575C128020DB900590F5C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575C028020DB900590F5C /* LoginViewController.swift */; };
 		F84575C428020DB900590F5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F84575C228020DB900590F5C /* Main.storyboard */; };
 		F84575C728020DB900590F5C /* HealthPRO.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F84575C528020DB900590F5C /* HealthPRO.xcdatamodeld */; };
 		F84575C928020DBB00590F5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84575C828020DBB00590F5C /* Assets.xcassets */; };
@@ -17,6 +17,14 @@
 		F84575D728020DBB00590F5C /* HealthPROTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575D628020DBB00590F5C /* HealthPROTests.swift */; };
 		F84575E128020DBB00590F5C /* HealthPROUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575E028020DBB00590F5C /* HealthPROUITests.swift */; };
 		F84575E328020DBB00590F5C /* HealthPROUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575E228020DBB00590F5C /* HealthPROUITestsLaunchTests.swift */; };
+		F84575F12803E02E00590F5C /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F84575F02803E02E00590F5C /* Profile.storyboard */; };
+		F84575F32803E04700590F5C /* NutritionLabel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F84575F22803E04700590F5C /* NutritionLabel.storyboard */; };
+		F84575F52803E06A00590F5C /* Diet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F84575F42803E06A00590F5C /* Diet.storyboard */; };
+		F84575F72803E09100590F5C /* Exercise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F84575F62803E09100590F5C /* Exercise.storyboard */; };
+		F845760328040F6500590F5C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760228040F6500590F5C /* ProfileViewController.swift */; };
+		F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760428040F7D00590F5C /* NutritionLabelViewController.swift */; };
+		F845760728040F8800590F5C /* DietViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760628040F8800590F5C /* DietViewController.swift */; };
+		F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760828040F9200590F5C /* ExerciseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +48,7 @@
 		F84575B928020DB900590F5C /* HealthPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84575BC28020DB900590F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F84575BE28020DB900590F5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F84575C028020DB900590F5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F84575C028020DB900590F5C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F84575C328020DB900590F5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F84575C628020DB900590F5C /* HealthPRO.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthPRO.xcdatamodel; sourceTree = "<group>"; };
 		F84575C828020DBB00590F5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +59,14 @@
 		F84575DC28020DBB00590F5C /* HealthPROUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HealthPROUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84575E028020DBB00590F5C /* HealthPROUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPROUITests.swift; sourceTree = "<group>"; };
 		F84575E228020DBB00590F5C /* HealthPROUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPROUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F84575F02803E02E00590F5C /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		F84575F22803E04700590F5C /* NutritionLabel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NutritionLabel.storyboard; sourceTree = "<group>"; };
+		F84575F42803E06A00590F5C /* Diet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Diet.storyboard; sourceTree = "<group>"; };
+		F84575F62803E09100590F5C /* Exercise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Exercise.storyboard; sourceTree = "<group>"; };
+		F845760228040F6500590F5C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F845760428040F7D00590F5C /* NutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionLabelViewController.swift; sourceTree = "<group>"; };
+		F845760628040F8800590F5C /* DietViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewController.swift; sourceTree = "<group>"; };
+		F845760828040F9200590F5C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +119,9 @@
 			children = (
 				F84575BC28020DB900590F5C /* AppDelegate.swift */,
 				F84575BE28020DB900590F5C /* SceneDelegate.swift */,
-				F84575C028020DB900590F5C /* ViewController.swift */,
+				F845760B2804108A00590F5C /* Tabs */,
 				F84575C228020DB900590F5C /* Main.storyboard */,
+				F84575C028020DB900590F5C /* LoginViewController.swift */,
 				F84575C828020DBB00590F5C /* Assets.xcassets */,
 				F84575CA28020DBB00590F5C /* LaunchScreen.storyboard */,
 				F84575CD28020DBB00590F5C /* Info.plist */,
@@ -128,6 +145,21 @@
 				F84575E228020DBB00590F5C /* HealthPROUITestsLaunchTests.swift */,
 			);
 			path = HealthPROUITests;
+			sourceTree = "<group>";
+		};
+		F845760B2804108A00590F5C /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				F84575F02803E02E00590F5C /* Profile.storyboard */,
+				F845760228040F6500590F5C /* ProfileViewController.swift */,
+				F84575F22803E04700590F5C /* NutritionLabel.storyboard */,
+				F845760428040F7D00590F5C /* NutritionLabelViewController.swift */,
+				F84575F42803E06A00590F5C /* Diet.storyboard */,
+				F845760628040F8800590F5C /* DietViewController.swift */,
+				F84575F62803E09100590F5C /* Exercise.storyboard */,
+				F845760828040F9200590F5C /* ExerciseViewController.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +268,10 @@
 			files = (
 				F84575CC28020DBB00590F5C /* LaunchScreen.storyboard in Resources */,
 				F84575C928020DBB00590F5C /* Assets.xcassets in Resources */,
+				F84575F52803E06A00590F5C /* Diet.storyboard in Resources */,
+				F84575F72803E09100590F5C /* Exercise.storyboard in Resources */,
+				F84575F32803E04700590F5C /* NutritionLabel.storyboard in Resources */,
+				F84575F12803E02E00590F5C /* Profile.storyboard in Resources */,
 				F84575C428020DB900590F5C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,9 +297,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F84575C128020DB900590F5C /* ViewController.swift in Sources */,
+				F84575C128020DB900590F5C /* LoginViewController.swift in Sources */,
 				F84575C728020DB900590F5C /* HealthPRO.xcdatamodeld in Sources */,
+				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
+				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
+				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
+				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
