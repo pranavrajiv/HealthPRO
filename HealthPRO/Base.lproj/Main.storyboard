@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lvc-Jz-Qjy">
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="ipad11_0rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="Lvc-Jz-Qjy" customClass="LoginViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sn1-3F-YcK">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-cR-cX0">
-                                <rect key="frame" x="390.5" y="583.5" width="53" height="27.5"/>
+                                <rect key="frame" x="317" y="403" width="560" height="28"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Login">
                                     <backgroundConfiguration key="background"/>
@@ -26,7 +26,7 @@
                                 </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Health PRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Je8-qJ-jO0">
-                                <rect key="frame" x="272.5" y="307.5" width="289" height="33.5"/>
+                                <rect key="frame" x="452.5" y="307.5" width="289" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,10 +35,11 @@
                         <viewLayoutGuide key="safeArea" id="ido-a8-zyS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Je8-qJ-jO0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="423-qJ-lbP"/>
-                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="AeT-L4-OxI"/>
-                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerY" secondItem="sn1-3F-YcK" secondAttribute="centerY" id="cXd-Pr-vx5"/>
-                            <constraint firstItem="OVP-cR-cX0" firstAttribute="top" secondItem="Je8-qJ-jO0" secondAttribute="bottom" constant="242.5" id="t6g-wh-qaT"/>
+                            <constraint firstItem="OVP-cR-cX0" firstAttribute="leading" secondItem="ido-a8-zyS" secondAttribute="leading" constant="317" id="4UL-mW-Ayd"/>
+                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerX" secondItem="Je8-qJ-jO0" secondAttribute="centerX" id="At8-cl-WpE"/>
+                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerY" secondItem="sn1-3F-YcK" secondAttribute="centerY" id="SSq-nX-q9B"/>
+                            <constraint firstItem="Je8-qJ-jO0" firstAttribute="top" secondItem="ido-a8-zyS" secondAttribute="top" constant="283.5" id="V95-cL-wXD"/>
+                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="xMT-71-CJd"/>
                         </constraints>
                     </view>
                     <connections>
