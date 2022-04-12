@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lvc-Jz-Qjy">
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,34 +13,36 @@
             <objects>
                 <viewController id="Lvc-Jz-Qjy" customClass="LoginViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sn1-3F-YcK">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-cR-cX0">
-                                <rect key="frame" x="317" y="583" width="200" height="28"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Login" cornerStyle="capsule">
-                                    <backgroundConfiguration key="background"/>
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleCaption2"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Health PRO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Je8-qJ-jO0">
-                                <rect key="frame" x="272.5" y="307.5" width="289" height="33.5"/>
+                                <rect key="frame" x="62.666666666666657" y="251.00000000000003" width="289" height="33.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVP-cR-cX0">
+                                <rect key="frame" x="165.33333333333334" y="343" width="83.666666666666657" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="apq-mJ-oh8"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Login" cornerStyle="capsule">
+                                    <backgroundConfiguration key="background"/>
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ido-a8-zyS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="OVP-cR-cX0" firstAttribute="leading" secondItem="ido-a8-zyS" secondAttribute="leading" constant="317" id="4UL-mW-Ayd"/>
-                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerX" secondItem="Je8-qJ-jO0" secondAttribute="centerX" id="At8-cl-WpE"/>
-                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerY" secondItem="sn1-3F-YcK" secondAttribute="centerY" id="SSq-nX-q9B"/>
-                            <constraint firstItem="Je8-qJ-jO0" firstAttribute="top" secondItem="ido-a8-zyS" secondAttribute="top" constant="283.5" id="V95-cL-wXD"/>
-                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="xMT-71-CJd"/>
+                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerY" secondItem="sn1-3F-YcK" secondAttribute="centerY" id="4G8-kk-KOB"/>
+                            <constraint firstItem="Je8-qJ-jO0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="CJy-gl-bfV"/>
+                            <constraint firstItem="Je8-qJ-jO0" firstAttribute="top" secondItem="ido-a8-zyS" secondAttribute="top" constant="251" id="g8v-BK-Syu"/>
+                            <constraint firstItem="OVP-cR-cX0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="il7-U9-FCl"/>
                         </constraints>
                     </view>
                     <connections>
@@ -54,7 +56,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="4zO-17-OkU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YKS-u9-GnN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="tabBarVC" id="i6w-0m-yrA" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="403-zc-0Ph"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="4ow-GJ-8Fw">
@@ -70,6 +71,7 @@
                         <segue destination="cF7-JC-tS6" kind="relationship" relationship="viewControllers" id="bxC-zK-Hze"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YKS-u9-GnN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1924" y="349"/>
         </scene>
@@ -86,30 +88,30 @@
         <!--Exercise-->
         <scene sceneID="j0o-EX-2rM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mm6-DO-iYN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Exercise" id="BvA-5r-VH2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="4E6-RZ-aks"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mm6-DO-iYN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2114" y="785"/>
         </scene>
         <!--NutritionLabel-->
         <scene sceneID="eMX-LX-h9E">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W8Y-1o-AKU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="NutritionLabel" id="4Qq-lU-7he" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="eoG-PG-IBV"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8Y-1o-AKU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1809" y="785"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Es3-gb-YqE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u9B-Uk-Jb7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Profile" id="cF7-JC-tS6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="idX-iP-ocf"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u9B-Uk-Jb7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1574" y="785"/>
         </scene>

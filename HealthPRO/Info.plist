@@ -21,5 +21,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Biometric needed for login </string>
 </dict>
 </plist>
