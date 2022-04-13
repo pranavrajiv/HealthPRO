@@ -13,16 +13,18 @@ class NutritionLabelViewController: UIViewController {
 
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var processButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var scanImageView: UIImageView!
     private var ocrRequest = VNRecognizeTextRequest(completionHandler: nil)
     private var ocrText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.processButton.isUserInteractionEnabled = false
-        //TODO set background Color for processButton when disabled
-        
+        self.processButton.isHidden = true
+        self.clearButton.isHidden = true
         scanButton.addTarget(self, action: #selector(scanDocument), for: .touchUpInside)
+        processButton.addTarget(self, action: #selector(processButtonTouchUp), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clearButtonTouchUp), for: .touchUpInside)
         configureOCR()
     }
     
@@ -30,6 +32,32 @@ class NutritionLabelViewController: UIViewController {
         let scanVC = VNDocumentCameraViewController()
         scanVC.delegate = self
         present(scanVC, animated: true)
+    }
+    
+    @objc private func clearButtonTouchUp() {
+        self.scanImageView.image = nil
+        self.ocrText = ""
+        self.processButton.isHidden = true
+        self.clearButton.isHidden = true
+    }
+    
+    @objc private func processButtonTouchUp() {
+        if let image = self.scanImageView.image {
+            self.processImage(image)
+        }
+    }
+ 
+    @objc private func processImage(_ image: UIImage) {
+        guard let cgImage = image.cgImage else { return }
+
+        //scanButton.isEnabled = false
+        
+        let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        do {
+            try requestHandler.perform([self.ocrRequest])
+        } catch {
+            print(error)
+        }
     }
     
     private func configureOCR() {
@@ -43,12 +71,7 @@ class NutritionLabelViewController: UIViewController {
                 ocrText += topCandidate.string + "\n"
             }
             
-            
-            DispatchQueue.main.async {
-                //self.ocrTextView.text = ocrText
-                //self.scanButton.isEnabled = true
-                self.ocrText = ocrText
-            }
+            self.ocrText = ocrText
         }
         
         ocrRequest.recognitionLevel = .accurate
@@ -68,7 +91,8 @@ extension NutritionLabelViewController: VNDocumentCameraViewControllerDelegate {
         
         scanImageView.image = scan.imageOfPage(at: 0)
         //processImage(scan.imageOfPage(at: 0))
-        self.processButton.isUserInteractionEnabled = true
+        self.processButton.isHidden  = false
+        self.clearButton.isHidden = false
         controller.dismiss(animated: true)
     }
     

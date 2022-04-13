@@ -53,6 +53,20 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCx-fW-F2h">
+                                <rect key="frame" x="327" y="62" width="81" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="CWW-8d-UGw"/>
+                                    <constraint firstAttribute="height" constant="25" id="kSb-32-l6g"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Clear" cornerStyle="capsule">
+                                    <backgroundConfiguration key="background"/>
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
@@ -60,7 +74,9 @@
                             <constraint firstItem="3Q2-wR-YwW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0VV-5R-arI"/>
                             <constraint firstItem="JWy-KR-RCT" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="0mP-Lp-6B9"/>
                             <constraint firstItem="JWy-KR-RCT" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="11" id="J3C-Ul-4ve"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sCx-fW-F2h" secondAttribute="trailing" constant="6" id="N7o-gp-MVW"/>
                             <constraint firstItem="JWy-KR-RCT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NCd-Mh-PRP"/>
+                            <constraint firstItem="sCx-fW-F2h" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="18" id="aUN-W8-Tsl"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="3Q2-wR-YwW" secondAttribute="bottom" constant="27" id="e5U-mz-fcL"/>
                             <constraint firstItem="3Q2-wR-YwW" firstAttribute="top" secondItem="JWy-KR-RCT" secondAttribute="bottom" constant="36" id="hrf-bo-qcg"/>
                         </constraints>
@@ -68,6 +84,7 @@
                     <tabBarItem key="tabBarItem" title="Scan" image="square.and.arrow.down.fill" catalog="system" id="6XG-Zf-qGV"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="clearButton" destination="sCx-fW-F2h" id="zF5-wa-1b2"/>
                         <outlet property="processButton" destination="xcJ-Pw-hgk" id="hcL-Vn-3KY"/>
                         <outlet property="scanButton" destination="nxD-48-ZSF" id="bPJ-im-IYa"/>
                         <outlet property="scanImageView" destination="JWy-KR-RCT" id="Ori-oR-kda"/>
