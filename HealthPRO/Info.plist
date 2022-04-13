@@ -23,5 +23,7 @@
 	</dict>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Biometric needed for login </string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is needed to scan the document</string>
 </dict>
 </plist>

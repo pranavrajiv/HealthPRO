@@ -48,7 +48,6 @@ class LoginViewController: UIViewController {
                     DispatchQueue.main.async {
                         if success {
                             self?.openProfile()
-                            
                         } else {
                             if self?.loginWithEmailPasswordSuccessful() == true {
                                 self?.openProfile()
@@ -62,7 +61,6 @@ class LoginViewController: UIViewController {
                     }
                 }
             } else {
-                
                 if self.loginWithEmailPasswordSuccessful() == true {
                     self.openProfile()
                 } else {

@@ -11,23 +11,81 @@
         <!--Scan-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="NutritionLabelViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JWy-KR-RCT">
+                                <rect key="frame" x="0.0" y="55" width="414" height="645"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Q2-wR-YwW">
+                                <rect key="frame" x="22.5" y="736" width="369" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-48-ZSF">
+                                        <rect key="frame" x="0.0" y="0.0" width="174.5" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="WfL-VV-jfC"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="aTP-fe-ouD"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Scan Label" cornerStyle="capsule">
+                                            <backgroundConfiguration key="background"/>
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcJ-Pw-hgk">
+                                        <rect key="frame" x="194.5" y="0.0" width="174.5" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="1Zg-Ng-uSQ"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="wCu-OD-Ref"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Process Label" cornerStyle="capsule">
+                                            <backgroundConfiguration key="background"/>
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                        <constraints>
+                            <constraint firstItem="3Q2-wR-YwW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0VV-5R-arI"/>
+                            <constraint firstItem="JWy-KR-RCT" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="0mP-Lp-6B9"/>
+                            <constraint firstItem="JWy-KR-RCT" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="11" id="J3C-Ul-4ve"/>
+                            <constraint firstItem="JWy-KR-RCT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NCd-Mh-PRP"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="3Q2-wR-YwW" secondAttribute="bottom" constant="27" id="e5U-mz-fcL"/>
+                            <constraint firstItem="3Q2-wR-YwW" firstAttribute="top" secondItem="JWy-KR-RCT" secondAttribute="bottom" constant="36" id="hrf-bo-qcg"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Scan" image="square.and.arrow.down.fill" catalog="system" id="6XG-Zf-qGV"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="processButton" destination="xcJ-Pw-hgk" id="hcL-Vn-3KY"/>
+                        <outlet property="scanButton" destination="nxD-48-ZSF" id="bPJ-im-IYa"/>
+                        <outlet property="scanImageView" destination="JWy-KR-RCT" id="Ori-oR-kda"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="35" y="79"/>
+            <point key="canvasLocation" x="34.782608695652179" y="78.348214285714278"/>
         </scene>
     </scenes>
     <resources>
         <image name="square.and.arrow.down.fill" catalog="system" width="121" height="128"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
