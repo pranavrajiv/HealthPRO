@@ -44,14 +44,16 @@ class NutritionLabelViewController: UIViewController {
     @objc private func processButtonTouchUp() {
         if let image = self.scanImageView.image {
             self.processImage(image)
+            
+            let ac = UIAlertController(title: "Scanned OCR", message: self.ocrText, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
         }
     }
  
     @objc private func processImage(_ image: UIImage) {
         guard let cgImage = image.cgImage else { return }
 
-        //scanButton.isEnabled = false
-        
         let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         do {
             try requestHandler.perform([self.ocrRequest])
@@ -64,19 +66,17 @@ class NutritionLabelViewController: UIViewController {
         ocrRequest = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation] else { return }
             
-            var ocrText = ""
+            var detectedOcrText = ""
             for observation in observations {
-                guard let topCandidate = observation.topCandidates(1).first else { return }
-                
-                ocrText += topCandidate.string + "\n"
+                guard let textLine = observation.topCandidates(1).first else { return }
+                detectedOcrText += textLine.string + "\n"
             }
-            
-            self.ocrText = ocrText
+            self.ocrText = detectedOcrText
         }
         
-        ocrRequest.recognitionLevel = .accurate
         ocrRequest.recognitionLanguages = ["en-US"]
         ocrRequest.usesLanguageCorrection = true
+        ocrRequest.recognitionLevel = .accurate
     }
 }
 
@@ -90,14 +90,12 @@ extension NutritionLabelViewController: VNDocumentCameraViewControllerDelegate {
         }
         
         scanImageView.image = scan.imageOfPage(at: 0)
-        //processImage(scan.imageOfPage(at: 0))
         self.processButton.isHidden  = false
         self.clearButton.isHidden = false
         controller.dismiss(animated: true)
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
-        //Handle properly error
         controller.dismiss(animated: true)
     }
     
