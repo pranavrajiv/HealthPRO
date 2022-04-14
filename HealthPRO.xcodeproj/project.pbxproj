@@ -25,6 +25,8 @@
 		F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760428040F7D00590F5C /* NutritionLabelViewController.swift */; };
 		F845760728040F8800590F5C /* DietViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760628040F8800590F5C /* DietViewController.swift */; };
 		F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760828040F9200590F5C /* ExerciseViewController.swift */; };
+		F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B9152807F6DA00874872 /* CoreDataHandler.swift */; };
+		F861B919280801EE00874872 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B917280801EE00874872 /* User+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		F845760428040F7D00590F5C /* NutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionLabelViewController.swift; sourceTree = "<group>"; };
 		F845760628040F8800590F5C /* DietViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewController.swift; sourceTree = "<group>"; };
 		F845760828040F9200590F5C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		F861B9152807F6DA00874872 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		F861B917280801EE00874872 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		F84575B028020DB900590F5C = {
 			isa = PBXGroup;
 			children = (
+				F861B917280801EE00874872 /* User+CoreDataClass.swift */,
 				F84575BB28020DB900590F5C /* HealthPRO */,
 				F84575D528020DBB00590F5C /* HealthPROTests */,
 				F84575DF28020DBB00590F5C /* HealthPROUITests */,
@@ -122,6 +127,7 @@
 				F845760B2804108A00590F5C /* Tabs */,
 				F84575C228020DB900590F5C /* Main.storyboard */,
 				F84575C028020DB900590F5C /* LoginViewController.swift */,
+				F861B9152807F6DA00874872 /* CoreDataHandler.swift */,
 				F84575C828020DBB00590F5C /* Assets.xcassets */,
 				F84575CA28020DBB00590F5C /* LaunchScreen.storyboard */,
 				F84575CD28020DBB00590F5C /* Info.plist */,
@@ -301,8 +307,10 @@
 				F84575C728020DB900590F5C /* HealthPRO.xcdatamodeld in Sources */,
 				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
 				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
+				F861B919280801EE00874872 /* User+CoreDataClass.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
+				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,
 			);

@@ -13,14 +13,15 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var segCtrl: UISegmentedControl!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    var coreDataHandler:CoreDataHandler!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.coreDataHandler = CoreDataHandler.init()
+        
         // Do any additional setup after loading the view.
-        loginRegisterButton.addTarget(self, action: #selector(loginRegisterProfile(_:)), for: .touchUpInside)
+        loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
         segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
-        
-        
     }
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -32,19 +33,16 @@ class LoginViewController: UIViewController {
         loginRegisterButton.sizeToFit()
     }
 
-    @objc private func loginRegisterProfile(_ sender: UIButton){
+    @objc private func loginOrRegisterProfile(_ sender: UIButton){
+        //login button pressed
         if self.segCtrl.selectedSegmentIndex == 0 {
             loginRegisterButton.titleLabel?.text = "Login"
-            
             let context = LAContext()
-                var error: NSError?
-
+            var error: NSError?
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 let reason = "Biometric needed for login"
-
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
                     [weak self] success, authenticationError in
-
                     DispatchQueue.main.async {
                         if success {
                             self?.openProfile()
@@ -70,26 +68,29 @@ class LoginViewController: UIViewController {
                     self.present(ac, animated: true)
                 }
             }
-        } else {
+        } else {//register button pressed
+            
             //reset segment to login so that user can login after registration is complete
             self.segCtrl.selectedSegmentIndex = 0
             
-            //TODO add code to register
-            
-            let ac = UIAlertController(title: "Registration Complete", message: "Successfully Registered. Please login", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(ac, animated: true)
+            if let loginId = self.emailTextField.text, let password = self.passwordTextField.text {
+                //check if user already added to Core Data
+                if(self.coreDataHandler.doesUserExist(id: loginId)) {
+                  let ac = UIAlertController(title: "Registration Failed!!!", message: "User Already Exists", preferredStyle: .alert)
+                  ac.addAction(UIAlertAction(title: "OK", style: .default))
+                  self.present(ac, animated: true)
+                    
+                } else if(self.coreDataHandler.addUser(id: loginId, password: password)) {
+                    let ac = UIAlertController(title: "Registration Complete", message: "Successfully Registered. Please login", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(ac, animated: true)
+                }
+            }
         }
-        
-        
     }
     
     @objc private func loginWithEmailPasswordSuccessful()->Bool {
-        // TODO check database to see if login is correct
-        if ((self.emailTextField.text == "test") && (self.passwordTextField.text == "test")) {
-            return true
-        }
-        return false
+        return self.coreDataHandler.isValidLogin(id: self.emailTextField.text ?? "", passcode: self.passwordTextField.text ?? "")
     }
     
     @objc private func openProfile() {
