@@ -20,8 +20,8 @@
                                 <rect key="frame" x="0.0" y="55" width="414" height="645"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Q2-wR-YwW">
-                                <rect key="frame" x="22.5" y="736" width="369" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Q2-wR-YwW">
+                                <rect key="frame" x="28.5" y="736" width="357" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-48-ZSF">
                                         <rect key="frame" x="0.0" y="0.0" width="174.5" height="50"/>
@@ -38,7 +38,7 @@
                                         </buttonConfiguration>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcJ-Pw-hgk">
-                                        <rect key="frame" x="194.5" y="0.0" width="174.5" height="50"/>
+                                        <rect key="frame" x="182.5" y="0.0" width="174.5" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="1Zg-Ng-uSQ"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="wCu-OD-Ref"/>
@@ -81,7 +81,7 @@
                             <constraint firstItem="3Q2-wR-YwW" firstAttribute="top" secondItem="JWy-KR-RCT" secondAttribute="bottom" constant="36" id="hrf-bo-qcg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Scan" image="square.and.arrow.down.fill" catalog="system" id="6XG-Zf-qGV"/>
+                    <tabBarItem key="tabBarItem" title="Scan" image="scanner.fill" catalog="system" id="6XG-Zf-qGV"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="clearButton" destination="sCx-fW-F2h" id="zF5-wa-1b2"/>
@@ -96,7 +96,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="square.and.arrow.down.fill" catalog="system" width="121" height="128"/>
+        <image name="scanner.fill" catalog="system" width="128" height="93"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
