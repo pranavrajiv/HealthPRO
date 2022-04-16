@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,48 +13,15 @@
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="NutritionLabelViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JWy-KR-RCT">
-                                <rect key="frame" x="0.0" y="55" width="414" height="645"/>
+                                <rect key="frame" x="0.0" y="55" width="375" height="561"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Q2-wR-YwW">
-                                <rect key="frame" x="28.5" y="736" width="357" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-48-ZSF">
-                                        <rect key="frame" x="0.0" y="0.0" width="174.5" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="WfL-VV-jfC"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="aTP-fe-ouD"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Scan Label" cornerStyle="capsule">
-                                            <backgroundConfiguration key="background"/>
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
-                                        </buttonConfiguration>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcJ-Pw-hgk">
-                                        <rect key="frame" x="182.5" y="0.0" width="174.5" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="1Zg-Ng-uSQ"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="wCu-OD-Ref"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Process Label" cornerStyle="capsule">
-                                            <backgroundConfiguration key="background"/>
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
-                                        </buttonConfiguration>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCx-fW-F2h">
-                                <rect key="frame" x="327" y="62" width="81" height="25"/>
+                                <rect key="frame" x="288" y="62" width="81" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="CWW-8d-UGw"/>
                                     <constraint firstAttribute="height" constant="25" id="kSb-32-l6g"/>
@@ -67,18 +34,47 @@
                                     <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
                                 </buttonConfiguration>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="25P-Qp-mtL">
+                                <rect key="frame" x="4.6666666666666572" y="660" width="366" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-48-ZSF">
+                                        <rect key="frame" x="0.0" y="0.0" width="178" height="35"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Scan Label" cornerStyle="capsule">
+                                            <backgroundConfiguration key="background"/>
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcJ-Pw-hgk">
+                                        <rect key="frame" x="188" y="0.0" width="178" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="178" id="TMG-AF-6Es"/>
+                                            <constraint firstAttribute="height" constant="35" id="y0L-tO-Jn0"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Process Label" cornerStyle="capsule">
+                                            <backgroundConfiguration key="background"/>
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                         <constraints>
-                            <constraint firstItem="3Q2-wR-YwW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0VV-5R-arI"/>
                             <constraint firstItem="JWy-KR-RCT" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="0mP-Lp-6B9"/>
+                            <constraint firstItem="25P-Qp-mtL" firstAttribute="top" secondItem="JWy-KR-RCT" secondAttribute="bottom" constant="44" id="7qv-fa-TGq"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="25P-Qp-mtL" secondAttribute="bottom" constant="34" id="F0q-pp-5Pe"/>
                             <constraint firstItem="JWy-KR-RCT" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="11" id="J3C-Ul-4ve"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sCx-fW-F2h" secondAttribute="trailing" constant="6" id="N7o-gp-MVW"/>
                             <constraint firstItem="JWy-KR-RCT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NCd-Mh-PRP"/>
                             <constraint firstItem="sCx-fW-F2h" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="18" id="aUN-W8-Tsl"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="3Q2-wR-YwW" secondAttribute="bottom" constant="27" id="e5U-mz-fcL"/>
-                            <constraint firstItem="3Q2-wR-YwW" firstAttribute="top" secondItem="JWy-KR-RCT" secondAttribute="bottom" constant="36" id="hrf-bo-qcg"/>
+                            <constraint firstItem="25P-Qp-mtL" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="z6S-OJ-thr"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Scan" image="scanner.fill" catalog="system" id="6XG-Zf-qGV"/>
