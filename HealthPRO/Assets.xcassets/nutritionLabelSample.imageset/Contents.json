@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "new-label2_custom-78217b75f0547ec99d1e91170af0357a3bf2ebed-s1100-c50.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

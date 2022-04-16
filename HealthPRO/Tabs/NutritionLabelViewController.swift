@@ -26,6 +26,11 @@ class NutritionLabelViewController: UIViewController {
         processButton.addTarget(self, action: #selector(processButtonTouchUp), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearButtonTouchUp), for: .touchUpInside)
         configureOCR()
+        
+        #if targetEnvironment(simulator)
+        self.scanButton.isUserInteractionEnabled = false
+        self.simulateScanLabel(UIImage.init(named:"nutritionLabelSample")!)
+        #endif
     }
     
     @objc private func scanDocument() {
@@ -60,6 +65,12 @@ class NutritionLabelViewController: UIViewController {
         } catch {
             print(error)
         }
+    }
+    
+    @objc private func simulateScanLabel(_ image:UIImage) {
+        scanImageView.image = image
+        self.processButton.isHidden  = false
+        self.clearButton.isHidden = false
     }
     
     private func configureOCR() {
