@@ -50,9 +50,10 @@ class NutritionLabelViewController: UIViewController {
         if let image = self.scanImageView.image {
             self.processImage(image)
             
-            let ac = UIAlertController(title: "Scanned OCR", message: self.ocrText, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(ac, animated: true)
+            let secondViewController = ParsedNutritionLabelViewController.init(ocrText: self.ocrText)
+            secondViewController.modalPresentationStyle = .fullScreen
+            self.present(secondViewController, animated: true, completion: nil)
+
         }
     }
  

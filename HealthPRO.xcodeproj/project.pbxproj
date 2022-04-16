@@ -27,6 +27,8 @@
 		F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760828040F9200590F5C /* ExerciseViewController.swift */; };
 		F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B9152807F6DA00874872 /* CoreDataHandler.swift */; };
 		F861B919280801EE00874872 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B917280801EE00874872 /* User+CoreDataClass.swift */; };
+		F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */; };
+		F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		F845760828040F9200590F5C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		F861B9152807F6DA00874872 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		F861B917280801EE00874872 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedNutritionLabelViewController.swift; sourceTree = "<group>"; };
+		F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParsedNutritionLabelViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,8 @@
 				F845760B2804108A00590F5C /* Tabs */,
 				F84575C228020DB900590F5C /* Main.storyboard */,
 				F84575C028020DB900590F5C /* LoginViewController.swift */,
+				F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */,
+				F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */,
 				F861B9152807F6DA00874872 /* CoreDataHandler.swift */,
 				F84575C828020DBB00590F5C /* Assets.xcassets */,
 				F84575CA28020DBB00590F5C /* LaunchScreen.storyboard */,
@@ -273,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F84575CC28020DBB00590F5C /* LaunchScreen.storyboard in Resources */,
+				F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */,
 				F84575C928020DBB00590F5C /* Assets.xcassets in Resources */,
 				F84575F52803E06A00590F5C /* Diet.storyboard in Resources */,
 				F84575F72803E09100590F5C /* Exercise.storyboard in Resources */,
@@ -311,6 +318,7 @@
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
+				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,
 			);
