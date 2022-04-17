@@ -22,7 +22,7 @@ class ParsedNutritionLabelViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     var ocrText: String = ""
-    var macro:[String:String]=["Calories":"","Total Fat":"","Total Carbs":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":""]
+    var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":""]
 
     convenience init( ocrText: String ) {
         self.init()
@@ -69,7 +69,7 @@ class ParsedNutritionLabelViewController: UIViewController {
         self.totalFatVal.text = macro["Total Fat"]
         self.cholesterolVal.text = macro["Cholesterol"]
         self.sodiumVal.text = macro["Sodium"]
-        self.totalCarbohydratesVal.text = macro["Total Carbs"]
+        self.totalCarbohydratesVal.text = macro["Total Carb"]
         self.dietaryFibersVal.text = macro["Dietary Fiber"]
         self.totalSugarsVal.text = macro["Sugars"]
         self.proteinVal.text = macro["Protein"]
