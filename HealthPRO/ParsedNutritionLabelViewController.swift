@@ -19,10 +19,11 @@ class ParsedNutritionLabelViewController: UIViewController {
     @IBOutlet weak var proteinVal: UITextField!
     @IBOutlet weak var calciumVal: UITextField!
     @IBOutlet weak var ironVal: UITextField!
+    @IBOutlet weak var potassiumVal: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     var ocrText: String = ""
-    var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":""]
+    var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":"","Potassium":""]
 
     convenience init( ocrText: String ) {
         self.init()
@@ -61,13 +62,16 @@ class ParsedNutritionLabelViewController: UIViewController {
                             macro[macroKey] = value
                         }
                         
-                        //Apple OCR scanner keeps scanning calorie value in the nextLine. Special case
-                        if( (macroKey == "Calories") && (macro["Calories"] == "") && (index < (lines.count - 1)) ) {
-                            if let value = self.getMacroValue(macroNutrientLine: String(lines[index + 1]), endingWith: "") {
-                                macro[macroKey] = value
-                            }
+                        if(macroKey == "Calories") {
+                            if let value = self.getMacroValue(macroNutrientLine: String(lines[index][macroIndex...]), endingWith: "") {
+                               macro[macroKey] = value
+                           } //Apple OCR scanner keeps scanning calorie value in the nextLine. Special case
+                            else if(index < (lines.count - 1)) {
+                                 if let value = self.getMacroValue(macroNutrientLine: String(lines[index + 1]), endingWith: "") {
+                                     macro[macroKey] = value
+                                 }
+                             }
                         }
-
                     }
                 }
             }
@@ -83,6 +87,7 @@ class ParsedNutritionLabelViewController: UIViewController {
         self.proteinVal.text = macro["Protein"]
         self.calciumVal.text = macro["Calcium"]
         self.ironVal.text = macro["Iron"]
+        self.potassiumVal.text = macro["Potassium"]
         
     }
     

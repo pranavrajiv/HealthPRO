@@ -16,6 +16,7 @@
                 <outlet property="cholesterolVal" destination="len-0E-XLl" id="lfj-AY-zVy"/>
                 <outlet property="dietaryFibersVal" destination="3HD-Vp-8na" id="juc-4Q-pha"/>
                 <outlet property="ironVal" destination="FMU-f3-qMZ" id="zvz-Ub-WBc"/>
+                <outlet property="potassiumVal" destination="xqD-e5-bfZ" id="bfm-S2-CeL"/>
                 <outlet property="proteinVal" destination="pwg-Eg-AvT" id="WMp-no-E1u"/>
                 <outlet property="saveButton" destination="0GH-V6-ppz" id="A4t-W1-XeY"/>
                 <outlet property="sodiumVal" destination="ZM5-6U-gCe" id="8dK-HS-9Ol"/>
@@ -76,16 +77,16 @@
                     <rect key="frame" x="20" y="174" width="374" height="582"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTx-zr-0ji">
-                            <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="374" height="34.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lc-Uj-qXh">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="cal" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfw-qy-Ygi">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -96,16 +97,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4V-0f-vze">
-                            <rect key="frame" x="0.0" y="60" width="374" height="40.5"/>
+                            <rect key="frame" x="0.0" y="54.5" width="374" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Fat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCT-TH-H2U">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-YE-74H">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -116,16 +117,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-fj-p8M">
-                            <rect key="frame" x="0.0" y="120.5" width="374" height="40"/>
+                            <rect key="frame" x="0.0" y="109.5" width="374" height="34.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cholesterol" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3J-d6-7wI">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="len-0E-XLl">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -136,16 +137,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqx-RU-vJp">
-                            <rect key="frame" x="0.0" y="180.5" width="374" height="40.5"/>
+                            <rect key="frame" x="0.0" y="164" width="374" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sodium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ps2-rt-DYd">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-6U-gCe">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -156,16 +157,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SkI-hQ-xdJ">
-                            <rect key="frame" x="0.0" y="241" width="374" height="40"/>
+                            <rect key="frame" x="0.0" y="219" width="374" height="34.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Carbohydrates" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-FY-ZG7">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-a5-6Sl">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -176,16 +177,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4XX-qX-Acd">
-                            <rect key="frame" x="0.0" y="301" width="374" height="40"/>
+                            <rect key="frame" x="0.0" y="273.5" width="374" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dietary Fibers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndb-Ib-li1">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3HD-Vp-8na">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -196,16 +197,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEX-oK-S0k">
-                            <rect key="frame" x="0.0" y="361" width="374" height="40.5"/>
+                            <rect key="frame" x="0.0" y="328.5" width="374" height="34.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Sugars" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zd-eZ-Yb7">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDH-q5-GC7">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -216,16 +217,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNN-7Y-XIR">
-                            <rect key="frame" x="0.0" y="421.5" width="374" height="40"/>
+                            <rect key="frame" x="0.0" y="383" width="374" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protein" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3aa-FZ-JIl">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwg-Eg-AvT">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -236,16 +237,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ij-vH-D6i">
-                            <rect key="frame" x="0.0" y="481.5" width="374" height="40.5"/>
+                            <rect key="frame" x="0.0" y="438" width="374" height="34.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calcium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JJ-GQ-xCx">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfJ-cf-rkG">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -256,16 +257,16 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xm-ya-WnQ">
-                            <rect key="frame" x="0.0" y="542" width="374" height="40"/>
+                            <rect key="frame" x="0.0" y="492.5" width="374" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Iron" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ze-ZM-0et">
-                                    <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMU-f3-qMZ">
-                                    <rect key="frame" x="187" y="0.0" width="187" height="40"/>
+                                    <rect key="frame" x="187" y="0.0" width="187" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -273,6 +274,26 @@
                             <constraints>
                                 <constraint firstItem="FMU-f3-qMZ" firstAttribute="width" secondItem="9Ze-ZM-0et" secondAttribute="width" id="Rau-Ok-jTe"/>
                                 <constraint firstItem="FMU-f3-qMZ" firstAttribute="height" secondItem="9Ze-ZM-0et" secondAttribute="height" id="c2X-hs-8ae"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wSE-py-dlN">
+                            <rect key="frame" x="0.0" y="547.5" width="374" height="34.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Potassium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq7-EE-4kI">
+                                    <rect key="frame" x="0.0" y="0.0" width="187" height="34.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqD-e5-bfZ">
+                                    <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="xqD-e5-bfZ" firstAttribute="width" secondItem="Oq7-EE-4kI" secondAttribute="width" id="OB7-10-mZR"/>
+                                <constraint firstItem="xqD-e5-bfZ" firstAttribute="height" secondItem="Oq7-EE-4kI" secondAttribute="height" id="dZb-aS-Be7"/>
                             </constraints>
                         </stackView>
                     </subviews>
@@ -286,6 +307,7 @@
                         <constraint firstItem="zNN-7Y-XIR" firstAttribute="height" secondItem="BTx-zr-0ji" secondAttribute="height" id="hXu-MF-qLy"/>
                         <constraint firstItem="aqx-RU-vJp" firstAttribute="height" secondItem="BTx-zr-0ji" secondAttribute="height" id="jrP-ra-bpQ"/>
                         <constraint firstItem="IWW-fj-p8M" firstAttribute="height" secondItem="BTx-zr-0ji" secondAttribute="height" id="uEZ-pj-Th0"/>
+                        <constraint firstItem="wSE-py-dlN" firstAttribute="height" secondItem="4xm-ya-WnQ" secondAttribute="height" id="wzt-6x-c9Q"/>
                     </constraints>
                 </stackView>
             </subviews>
