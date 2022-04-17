@@ -10,8 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParsedNutritionLabelViewController" customModule="HealthPRO" customModuleProvider="target">
             <connections>
+                <outlet property="calciumVal" destination="J8r-Op-dUt" id="2aN-0I-Mqa"/>
+                <outlet property="caloriesVal" destination="vfw-qy-Ygi" id="A4e-Kp-DMb"/>
                 <outlet property="cancelButton" destination="J6f-Ay-KyW" id="jrb-GG-Pdk"/>
+                <outlet property="cholesterolVal" destination="J8r-Op-dUt" id="BOF-BE-qhw"/>
+                <outlet property="dietaryFibersVal" destination="J8r-Op-dUt" id="Dji-9C-bwj"/>
+                <outlet property="ironVal" destination="J8r-Op-dUt" id="fZq-ad-OeV"/>
+                <outlet property="proteinVal" destination="J8r-Op-dUt" id="sL3-2I-hbJ"/>
                 <outlet property="saveButton" destination="0GH-V6-ppz" id="A4t-W1-XeY"/>
+                <outlet property="sodiumVal" destination="J8r-Op-dUt" id="lkj-pU-yNl"/>
+                <outlet property="totalCarbohydratesVal" destination="J8r-Op-dUt" id="49e-cy-mgq"/>
+                <outlet property="totalFatVal" destination="J8r-Op-dUt" id="2X2-KK-uok"/>
+                <outlet property="totalSugarsVal" destination="J8r-Op-dUt" id="QEO-wN-jvs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

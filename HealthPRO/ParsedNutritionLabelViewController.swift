@@ -9,6 +9,16 @@ import UIKit
 
 class ParsedNutritionLabelViewController: UIViewController {
 
+    @IBOutlet weak var caloriesVal: UITextField!
+    @IBOutlet weak var totalFatVal: UIStackView!
+    @IBOutlet weak var cholesterolVal: UIStackView!
+    @IBOutlet weak var sodiumVal: UIStackView!
+    @IBOutlet weak var totalCarbohydratesVal: UIStackView!
+    @IBOutlet weak var dietaryFibersVal: UIStackView!
+    @IBOutlet weak var totalSugarsVal: UIStackView!
+    @IBOutlet weak var proteinVal: UIStackView!
+    @IBOutlet weak var calciumVal: UIStackView!
+    @IBOutlet weak var ironVal: UIStackView!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     var ocrText: String = ""
@@ -23,6 +33,7 @@ class ParsedNutritionLabelViewController: UIViewController {
         saveButton.addTarget(self, action: #selector(saveButtonTouchUp), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonTouchUp), for: .touchUpInside)
         // Do any additional setup after loading the view.
+        self.processOcrText()
     }
     
     
@@ -34,4 +45,10 @@ class ParsedNutritionLabelViewController: UIViewController {
         self.dismiss(animated: true)
     }
 
+    @objc private func processOcrText() {
+        
+    }
+    
+    
+    
 }
