@@ -9,18 +9,9 @@ import UIKit
 
 class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet var macroTextFieldCollections: [UITextField]!
+    
     @IBOutlet weak var itemNameVal: UITextField!
-    @IBOutlet weak var caloriesVal: UITextField!
-    @IBOutlet weak var totalFatVal: UITextField!
-    @IBOutlet weak var cholesterolVal: UITextField!
-    @IBOutlet weak var sodiumVal: UITextField!
-    @IBOutlet weak var totalCarbohydratesVal: UITextField!
-    @IBOutlet weak var dietaryFibersVal: UITextField!
-    @IBOutlet weak var totalSugarsVal: UITextField!
-    @IBOutlet weak var proteinVal: UITextField!
-    @IBOutlet weak var calciumVal: UITextField!
-    @IBOutlet weak var ironVal: UITextField!
-    @IBOutlet weak var potassiumVal: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     var ocrText: String = ""
@@ -39,17 +30,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         self.processOcrText()
         
         self.itemNameVal.delegate = self
-        self.caloriesVal.delegate = self
-        self.totalFatVal.delegate = self
-        self.cholesterolVal.delegate = self
-        self.sodiumVal.delegate = self
-        self.totalCarbohydratesVal.delegate = self
-        self.dietaryFibersVal.delegate = self
-        self.totalSugarsVal.delegate = self
-        self.proteinVal.delegate = self
-        self.calciumVal.delegate = self
-        self.ironVal.delegate = self
-        self.potassiumVal.delegate = self
+        self.macroTextFieldCollections.forEach({$0.delegate = self})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,19 +105,8 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
                 }
             }
         }
-
-        self.caloriesVal.text = macro["Calories"]
-        self.totalFatVal.text = macro["Total Fat"]
-        self.cholesterolVal.text = macro["Cholesterol"]
-        self.sodiumVal.text = macro["Sodium"]
-        self.totalCarbohydratesVal.text = macro["Total Carb"]
-        self.dietaryFibersVal.text = macro["Dietary Fiber"]
-        self.totalSugarsVal.text = macro["Sugars"]
-        self.proteinVal.text = macro["Protein"]
-        self.calciumVal.text = macro["Calcium"]
-        self.ironVal.text = macro["Iron"]
-        self.potassiumVal.text = macro["Potassium"]
         
+        self.macroTextFieldCollections.forEach({$0.text = macro[$0.accessibilityIdentifier!]})
     }
     
     //regex function to obtain macro nutrient value
@@ -173,36 +143,14 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.itemNameVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.itemNameVal.accessibilityIdentifier)
-        self.caloriesVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.caloriesVal.accessibilityIdentifier)
-        self.totalFatVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.totalFatVal.accessibilityIdentifier)
-        self.cholesterolVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.cholesterolVal.accessibilityIdentifier)
-        self.sodiumVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.sodiumVal.accessibilityIdentifier)
-        self.totalCarbohydratesVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.totalCarbohydratesVal.accessibilityIdentifier)
-        self.dietaryFibersVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.dietaryFibersVal.accessibilityIdentifier)
-        self.totalSugarsVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.totalSugarsVal.accessibilityIdentifier)
-        self.proteinVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.proteinVal.accessibilityIdentifier)
-        self.calciumVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.calciumVal.accessibilityIdentifier)
-        self.ironVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.ironVal.accessibilityIdentifier)
-        self.potassiumVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.potassiumVal.accessibilityIdentifier)
-        
+        self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = (textField.accessibilityIdentifier == $0.accessibilityIdentifier)})
         self.activeTextField = textField
         
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.itemNameVal.isUserInteractionEnabled = true
-        self.caloriesVal.isUserInteractionEnabled = true
-        self.totalFatVal.isUserInteractionEnabled = true
-        self.cholesterolVal.isUserInteractionEnabled = true
-        self.sodiumVal.isUserInteractionEnabled = true
-        self.totalCarbohydratesVal.isUserInteractionEnabled = true
-        self.dietaryFibersVal.isUserInteractionEnabled = true
-        self.totalSugarsVal.isUserInteractionEnabled = true
-        self.proteinVal.isUserInteractionEnabled = true
-        self.calciumVal.isUserInteractionEnabled = true
-        self.ironVal.isUserInteractionEnabled = true
-        self.potassiumVal.isUserInteractionEnabled = true
-        
+        self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = true})
         self.activeTextField = textField
     }
 }

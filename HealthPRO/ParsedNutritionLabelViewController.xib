@@ -10,21 +10,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParsedNutritionLabelViewController" customModule="HealthPRO" customModuleProvider="target">
             <connections>
-                <outlet property="calciumVal" destination="VfJ-cf-rkG" id="3lg-FD-3n4"/>
-                <outlet property="caloriesVal" destination="vfw-qy-Ygi" id="A4e-Kp-DMb"/>
                 <outlet property="cancelButton" destination="J6f-Ay-KyW" id="jrb-GG-Pdk"/>
-                <outlet property="cholesterolVal" destination="len-0E-XLl" id="lfj-AY-zVy"/>
-                <outlet property="dietaryFibersVal" destination="3HD-Vp-8na" id="juc-4Q-pha"/>
-                <outlet property="ironVal" destination="FMU-f3-qMZ" id="zvz-Ub-WBc"/>
                 <outlet property="itemNameVal" destination="zUs-M3-BRu" id="ubL-dY-ijw"/>
-                <outlet property="potassiumVal" destination="xqD-e5-bfZ" id="bfm-S2-CeL"/>
-                <outlet property="proteinVal" destination="pwg-Eg-AvT" id="WMp-no-E1u"/>
                 <outlet property="saveButton" destination="0GH-V6-ppz" id="A4t-W1-XeY"/>
-                <outlet property="sodiumVal" destination="ZM5-6U-gCe" id="8dK-HS-9Ol"/>
-                <outlet property="totalCarbohydratesVal" destination="wcS-a5-6Sl" id="WvS-cX-mj0"/>
-                <outlet property="totalFatVal" destination="TMA-YE-74H" id="gJh-zR-v58"/>
-                <outlet property="totalSugarsVal" destination="HDH-q5-GC7" id="sny-pS-ShH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="macroTextFieldCollections" destination="vfw-qy-Ygi" collectionClass="NSMutableArray" id="8sW-iy-xOz"/>
+                <outletCollection property="macroTextFieldCollections" destination="TMA-YE-74H" collectionClass="NSMutableArray" id="LKP-ir-qCc"/>
+                <outletCollection property="macroTextFieldCollections" destination="len-0E-XLl" collectionClass="NSMutableArray" id="dzc-cz-9pd"/>
+                <outletCollection property="macroTextFieldCollections" destination="ZM5-6U-gCe" collectionClass="NSMutableArray" id="yNg-co-ohe"/>
+                <outletCollection property="macroTextFieldCollections" destination="wcS-a5-6Sl" collectionClass="NSMutableArray" id="QcG-yh-ho9"/>
+                <outletCollection property="macroTextFieldCollections" destination="3HD-Vp-8na" collectionClass="NSMutableArray" id="rsy-7P-Mnq"/>
+                <outletCollection property="macroTextFieldCollections" destination="HDH-q5-GC7" collectionClass="NSMutableArray" id="ZKk-uk-goN"/>
+                <outletCollection property="macroTextFieldCollections" destination="pwg-Eg-AvT" collectionClass="NSMutableArray" id="Y14-bv-hG3"/>
+                <outletCollection property="macroTextFieldCollections" destination="VfJ-cf-rkG" collectionClass="NSMutableArray" id="vgO-hz-qhQ"/>
+                <outletCollection property="macroTextFieldCollections" destination="FMU-f3-qMZ" collectionClass="NSMutableArray" id="LrL-Bj-wCH"/>
+                <outletCollection property="macroTextFieldCollections" destination="xqD-e5-bfZ" collectionClass="NSMutableArray" id="ohh-0b-ZOq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -89,7 +89,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="cal" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfw-qy-Ygi">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="calories"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Calories"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -110,7 +110,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-YE-74H">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="totalFat"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Total Fat"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -131,7 +131,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="len-0E-XLl">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="cholesterol"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Cholesterol"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -152,7 +152,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-6U-gCe">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="sodium"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Sodium"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -173,7 +173,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-a5-6Sl">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="totalCarbohydrates"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Total Carb"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -194,7 +194,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3HD-Vp-8na">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="dietaryFibers"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Dietary Fiber"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -215,7 +215,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDH-q5-GC7">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="totalSugars"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Sugars"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -236,7 +236,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwg-Eg-AvT">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="protein"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Protein"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -257,7 +257,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfJ-cf-rkG">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="calcium"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Calcium"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -278,7 +278,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMU-f3-qMZ">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="iron"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Iron"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -299,7 +299,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqD-e5-bfZ">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
-                                    <accessibility key="accessibilityConfiguration" identifier="potassium"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Potassium"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
