@@ -16,6 +16,7 @@
                 <outlet property="cholesterolVal" destination="len-0E-XLl" id="lfj-AY-zVy"/>
                 <outlet property="dietaryFibersVal" destination="3HD-Vp-8na" id="juc-4Q-pha"/>
                 <outlet property="ironVal" destination="FMU-f3-qMZ" id="zvz-Ub-WBc"/>
+                <outlet property="itemNameVal" destination="zUs-M3-BRu" id="ubL-dY-ijw"/>
                 <outlet property="potassiumVal" destination="xqD-e5-bfZ" id="bfm-S2-CeL"/>
                 <outlet property="proteinVal" destination="pwg-Eg-AvT" id="WMp-no-E1u"/>
                 <outlet property="saveButton" destination="0GH-V6-ppz" id="A4t-W1-XeY"/>
@@ -62,6 +63,7 @@
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zUs-M3-BRu">
                             <rect key="frame" x="0.0" y="60" width="374" height="50"/>
+                            <accessibility key="accessibilityConfiguration" identifier="itemName"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="n3V-VR-P8b"/>
                             </constraints>
@@ -87,6 +89,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="cal" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfw-qy-Ygi">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="calories"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -107,6 +110,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-YE-74H">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="totalFat"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -127,6 +131,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="len-0E-XLl">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="cholesterol"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -147,6 +152,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-6U-gCe">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="sodium"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -167,6 +173,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-a5-6Sl">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="totalCarbohydrates"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -187,6 +194,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3HD-Vp-8na">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="dietaryFibers"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -207,6 +215,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDH-q5-GC7">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="totalSugars"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -227,6 +236,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwg-Eg-AvT">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="protein"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -247,6 +257,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfJ-cf-rkG">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="calcium"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -267,6 +278,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMU-f3-qMZ">
                                     <rect key="frame" x="187" y="0.0" width="187" height="35"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="iron"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -287,6 +299,7 @@
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqD-e5-bfZ">
                                     <rect key="frame" x="187" y="0.0" width="187" height="34.5"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="potassium"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
