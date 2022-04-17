@@ -10,18 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParsedNutritionLabelViewController" customModule="HealthPRO" customModuleProvider="target">
             <connections>
-                <outlet property="calciumVal" destination="J8r-Op-dUt" id="2aN-0I-Mqa"/>
+                <outlet property="calciumVal" destination="VfJ-cf-rkG" id="3lg-FD-3n4"/>
                 <outlet property="caloriesVal" destination="vfw-qy-Ygi" id="A4e-Kp-DMb"/>
                 <outlet property="cancelButton" destination="J6f-Ay-KyW" id="jrb-GG-Pdk"/>
-                <outlet property="cholesterolVal" destination="J8r-Op-dUt" id="BOF-BE-qhw"/>
-                <outlet property="dietaryFibersVal" destination="J8r-Op-dUt" id="Dji-9C-bwj"/>
-                <outlet property="ironVal" destination="J8r-Op-dUt" id="fZq-ad-OeV"/>
-                <outlet property="proteinVal" destination="J8r-Op-dUt" id="sL3-2I-hbJ"/>
+                <outlet property="cholesterolVal" destination="len-0E-XLl" id="lfj-AY-zVy"/>
+                <outlet property="dietaryFibersVal" destination="3HD-Vp-8na" id="juc-4Q-pha"/>
+                <outlet property="ironVal" destination="FMU-f3-qMZ" id="zvz-Ub-WBc"/>
+                <outlet property="proteinVal" destination="pwg-Eg-AvT" id="WMp-no-E1u"/>
                 <outlet property="saveButton" destination="0GH-V6-ppz" id="A4t-W1-XeY"/>
-                <outlet property="sodiumVal" destination="J8r-Op-dUt" id="lkj-pU-yNl"/>
-                <outlet property="totalCarbohydratesVal" destination="J8r-Op-dUt" id="49e-cy-mgq"/>
-                <outlet property="totalFatVal" destination="J8r-Op-dUt" id="2X2-KK-uok"/>
-                <outlet property="totalSugarsVal" destination="J8r-Op-dUt" id="QEO-wN-jvs"/>
+                <outlet property="sodiumVal" destination="ZM5-6U-gCe" id="8dK-HS-9Ol"/>
+                <outlet property="totalCarbohydratesVal" destination="wcS-a5-6Sl" id="WvS-cX-mj0"/>
+                <outlet property="totalFatVal" destination="TMA-YE-74H" id="gJh-zR-v58"/>
+                <outlet property="totalSugarsVal" destination="HDH-q5-GC7" id="sny-pS-ShH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -104,7 +104,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-YE-74H">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-YE-74H">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -124,7 +124,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="len-0E-XLl">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="len-0E-XLl">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -144,7 +144,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-6U-gCe">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-6U-gCe">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -164,7 +164,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-a5-6Sl">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-a5-6Sl">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -184,7 +184,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3HD-Vp-8na">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3HD-Vp-8na">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -204,7 +204,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDH-q5-GC7">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDH-q5-GC7">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -224,7 +224,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwg-Eg-AvT">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwg-Eg-AvT">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -244,7 +244,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfJ-cf-rkG">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfJ-cf-rkG">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -264,7 +264,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMU-f3-qMZ">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="g/mg" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMU-f3-qMZ">
                                     <rect key="frame" x="187" y="0.0" width="187" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
