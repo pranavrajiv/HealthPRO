@@ -53,18 +53,26 @@ class ParsedNutritionLabelViewController: UIViewController {
             for (index, line) in lines.enumerated() {
                 print("\(index + 1). \(line)")
                 if  (macro[macroKey] == "") {
+                    //some macros ends with a 'g' while others ends with a 'mg'
                     if let macroIndex = line.index(of: macroKey) {
                         if let value = self.getMacroValue(macroNutrientLine: String(lines[index][macroIndex...]), endingWith: "mg") {
                             macro[macroKey] = value
                         } else if let value = self.getMacroValue(macroNutrientLine: String(lines[index][macroIndex...]), endingWith: "g") {
                             macro[macroKey] = value
                         }
+                        
+                        //Apple OCR scanner keeps scanning calorie value in the nextLine. Special case
+                        if( (macroKey == "Calories") && (macro["Calories"] == "") && (index < (lines.count - 1)) ) {
+                            if let value = self.getMacroValue(macroNutrientLine: String(lines[index + 1]), endingWith: "") {
+                                macro[macroKey] = value
+                            }
+                        }
+
                     }
                 }
             }
         }
-        
-        
+
         self.caloriesVal.text = macro["Calories"]
         self.totalFatVal.text = macro["Total Fat"]
         self.cholesterolVal.text = macro["Cholesterol"]
@@ -78,6 +86,7 @@ class ParsedNutritionLabelViewController: UIViewController {
         
     }
     
+    //regex function to obtain macro nutrient value
     @objc private func getMacroValue(macroNutrientLine:String, endingWith:String)->String? {
         
         let trimmedString = macroNutrientLine.replacingOccurrences(of: " ", with: "")
@@ -95,25 +104,8 @@ class ParsedNutritionLabelViewController: UIViewController {
 }
 
 extension StringProtocol {
+    //gets the index of a substring
     func index<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
         range(of: string, options: options)?.lowerBound
-    }
-    func endIndex<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
-        range(of: string, options: options)?.upperBound
-    }
-    func indices<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [Index] {
-        ranges(of: string, options: options).map(\.lowerBound)
-    }
-    func ranges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [Range<Index>] {
-        var result: [Range<Index>] = []
-        var startIndex = self.startIndex
-        while startIndex < endIndex,
-            let range = self[startIndex...]
-                .range(of: string, options: options) {
-                result.append(range)
-                startIndex = range.lowerBound < range.upperBound ? range.upperBound :
-                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
-        }
-        return result
     }
 }
