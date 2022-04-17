@@ -83,7 +83,7 @@ class ParsedNutritionLabelViewController: UIViewController {
         let trimmedString = macroNutrientLine.replacingOccurrences(of: " ", with: "")
 
         let range = NSRange(location: 0, length: trimmedString.utf16.count)
-        let regex = try! NSRegularExpression(pattern: "[0-9]+"+endingWith)
+        let regex = try! NSRegularExpression(pattern: "[0-9]*\\.*[0-9]+"+endingWith)
 
         let results = regex.matches(in: trimmedString,range: range)
         
