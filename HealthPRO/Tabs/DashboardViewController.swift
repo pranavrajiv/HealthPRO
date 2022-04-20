@@ -16,17 +16,6 @@ struct Result: Codable {
     var hourly: [Hourly]
     var daily: [Daily]
     
-    mutating func sortHourlyArray() {
-        hourly.sort { (hour1: Hourly, hour2: Hourly) -> Bool in
-            return hour1.dt < hour2.dt
-        }
-    }
-    
-    mutating func sortDailyArray() {
-        daily.sort { (day1, day2) -> Bool in
-            return day1.dt < day2.dt
-        }
-    }
 }
 struct Current: Codable {
     let dt: Int
@@ -114,8 +103,10 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.getLocation()
+        
+        //update weather every minute
+        _ = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(getLocation), userInfo: nil, repeats: true)
     }
     
     func getTheWeather(){
@@ -136,7 +127,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate  {
         currentCity.text = city
         todayDate.text = Date.getTodaysDate()
         currentWeather.text = currentWeatherHere.weather[0].description.capitalized
-        currentTemperature.text = currentWeatherHere.temp.description
+        currentTemperature.text = currentWeatherHere.temp.description+" F°"
         weatherImage.image = UIImage(named: currentWeatherHere.weather[0].icon)
     }
 
@@ -180,7 +171,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate  {
         task.resume()
     }
     
-    func getLocation() {
+    @objc func getLocation() {
        
         if (CLLocationManager.locationServicesEnabled()) {
             locationManger = CLLocationManager()
