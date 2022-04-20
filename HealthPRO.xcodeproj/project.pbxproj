@@ -25,6 +25,8 @@
 		F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760428040F7D00590F5C /* NutritionLabelViewController.swift */; };
 		F845760728040F8800590F5C /* DietViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760628040F8800590F5C /* DietViewController.swift */; };
 		F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760828040F9200590F5C /* ExerciseViewController.swift */; };
+		F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861AF77280FADB300A73F28 /* DashboardViewController.swift */; };
+		F861AF7C280FAF5B00A73F28 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F861AF7B280FAF5B00A73F28 /* Dashboard.storyboard */; };
 		F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B9152807F6DA00874872 /* CoreDataHandler.swift */; };
 		F861B919280801EE00874872 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B917280801EE00874872 /* User+CoreDataClass.swift */; };
 		F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */; };
@@ -71,6 +73,8 @@
 		F845760428040F7D00590F5C /* NutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionLabelViewController.swift; sourceTree = "<group>"; };
 		F845760628040F8800590F5C /* DietViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewController.swift; sourceTree = "<group>"; };
 		F845760828040F9200590F5C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		F861AF77280FADB300A73F28 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		F861AF7B280FAF5B00A73F28 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		F861B9152807F6DA00874872 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		F861B917280801EE00874872 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedNutritionLabelViewController.swift; sourceTree = "<group>"; };
@@ -162,14 +166,16 @@
 		F845760B2804108A00590F5C /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				F84575F02803E02E00590F5C /* Profile.storyboard */,
-				F845760228040F6500590F5C /* ProfileViewController.swift */,
-				F84575F22803E04700590F5C /* NutritionLabel.storyboard */,
-				F845760428040F7D00590F5C /* NutritionLabelViewController.swift */,
+				F861AF7B280FAF5B00A73F28 /* Dashboard.storyboard */,
+				F861AF77280FADB300A73F28 /* DashboardViewController.swift */,
 				F84575F42803E06A00590F5C /* Diet.storyboard */,
 				F845760628040F8800590F5C /* DietViewController.swift */,
 				F84575F62803E09100590F5C /* Exercise.storyboard */,
 				F845760828040F9200590F5C /* ExerciseViewController.swift */,
+				F84575F22803E04700590F5C /* NutritionLabel.storyboard */,
+				F845760428040F7D00590F5C /* NutritionLabelViewController.swift */,
+				F84575F02803E02E00590F5C /* Profile.storyboard */,
+				F845760228040F6500590F5C /* ProfileViewController.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 				F84575F72803E09100590F5C /* Exercise.storyboard in Resources */,
 				F84575F32803E04700590F5C /* NutritionLabel.storyboard in Resources */,
 				F84575F12803E02E00590F5C /* Profile.storyboard in Resources */,
+				F861AF7C280FAF5B00A73F28 /* Dashboard.storyboard in Resources */,
 				F84575C428020DB900590F5C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +324,7 @@
 				F861B919280801EE00874872 /* User+CoreDataClass.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
+				F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
 				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
@@ -502,9 +510,13 @@
 				DEVELOPMENT_TEAM = YQD9CG8P86;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthPRO/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan the document";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Biometric needed for login ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is needed to suggest Workouts";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -530,9 +542,13 @@
 				DEVELOPMENT_TEAM = YQD9CG8P86;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HealthPRO/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan the document";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Biometric needed for login ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is needed to suggest Workouts";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
