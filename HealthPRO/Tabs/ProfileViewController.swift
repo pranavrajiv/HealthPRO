@@ -9,21 +9,22 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var logoutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        logoutButton.addTarget(self, action: #selector(logoutButtonTouchUpInside), for: .touchUpInside)
         // Do any additional setup after loading the view.
     }
     
+    @objc private func logoutButtonTouchUpInside(){
+        UserDefaults.standard.set("", forKey: "LoginUserName")
+        UserDefaults.standard.synchronize()
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "loginVC")
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
+        
     }
-    */
 
 }

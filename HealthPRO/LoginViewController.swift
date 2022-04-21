@@ -37,6 +37,15 @@ class LoginViewController: UIViewController {
         //login button pressed
         if self.segCtrl.selectedSegmentIndex == 0 {
             loginRegisterButton.titleLabel?.text = "Login"
+            
+            if (self.emailTextField.text=="") {
+                // error
+                let ac = UIAlertController(title: "Login failure", message: "Email address empty", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(ac, animated: true)
+                return
+            }
+            
             let context = LAContext()
             var error: NSError?
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
@@ -45,10 +54,17 @@ class LoginViewController: UIViewController {
                     [weak self] success, authenticationError in
                     DispatchQueue.main.async {
                         if success {
-                            self?.openProfile()
+                            if self!.coreDataHandler.doesUserExist(id: self?.emailTextField.text ?? "") {
+                                self?.logInProfile()
+                            } else {
+                                let ac = UIAlertController(title: "Login failure", message: "Email address does not exist. Please register", preferredStyle: .alert)
+                                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                                self?.present(ac, animated: true)
+                            }
+                            
                         } else {
                             if self?.loginWithEmailPasswordSuccessful() == true {
-                                self?.openProfile()
+                                self?.logInProfile()
                             } else {
                                 // error
                                 let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
@@ -60,7 +76,7 @@ class LoginViewController: UIViewController {
                 }
             } else {
                 if self.loginWithEmailPasswordSuccessful() == true {
-                    self.openProfile()
+                    self.logInProfile()
                 } else {
                     // no biometric
                     let ac = UIAlertController(title: "Authentication failed", message: "Email or Password incorrect", preferredStyle: .alert)
@@ -93,7 +109,10 @@ class LoginViewController: UIViewController {
         return self.coreDataHandler.isValidLogin(id: self.emailTextField.text ?? "", passcode: self.passwordTextField.text ?? "")
     }
     
-    @objc private func openProfile() {
+    @objc private func logInProfile() {
+        UserDefaults.standard.set(emailTextField.text, forKey: "LoginUserName")
+        UserDefaults.standard.synchronize()
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: "tabBarVC") as? UITabBarController {
             controller.modalPresentationStyle = .fullScreen
