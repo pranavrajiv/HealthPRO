@@ -25,6 +25,7 @@
 		F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760428040F7D00590F5C /* NutritionLabelViewController.swift */; };
 		F845760728040F8800590F5C /* DietViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760628040F8800590F5C /* DietViewController.swift */; };
 		F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760828040F9200590F5C /* ExerciseViewController.swift */; };
+		F85C3516281209600068A5F5 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C3515281209600068A5F5 /* Weather.swift */; };
 		F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861AF77280FADB300A73F28 /* DashboardViewController.swift */; };
 		F861AF7C280FAF5B00A73F28 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F861AF7B280FAF5B00A73F28 /* Dashboard.storyboard */; };
 		F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B9152807F6DA00874872 /* CoreDataHandler.swift */; };
@@ -73,6 +74,7 @@
 		F845760428040F7D00590F5C /* NutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionLabelViewController.swift; sourceTree = "<group>"; };
 		F845760628040F8800590F5C /* DietViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewController.swift; sourceTree = "<group>"; };
 		F845760828040F9200590F5C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		F85C3515281209600068A5F5 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		F861AF77280FADB300A73F28 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		F861AF7B280FAF5B00A73F28 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		F861B9152807F6DA00874872 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */,
 				F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */,
 				F861B9152807F6DA00874872 /* CoreDataHandler.swift */,
+				F85C3515281209600068A5F5 /* Weather.swift */,
 				F84575C828020DBB00590F5C /* Assets.xcassets */,
 				F84575CA28020DBB00590F5C /* LaunchScreen.storyboard */,
 				F84575CD28020DBB00590F5C /* Info.plist */,
@@ -325,6 +328,7 @@
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
 				F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */,
+				F85C3516281209600068A5F5 /* Weather.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
 				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,

@@ -97,6 +97,7 @@
                         <outlet property="currentTemperature" destination="V6z-kK-e1x" id="EEv-gM-NzG"/>
                         <outlet property="currentWeather" destination="I2E-XX-e9t" id="SkV-ws-b32"/>
                         <outlet property="todayDate" destination="qY8-7i-l05" id="unu-RO-kTx"/>
+                        <outlet property="userLabel" destination="NKI-3e-KhB" id="7wH-i7-4ev"/>
                         <outlet property="weatherImage" destination="ofE-Xu-6jH" id="9lf-9y-LYg"/>
                     </connections>
                 </viewController>

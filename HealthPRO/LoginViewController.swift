@@ -11,9 +11,10 @@ import LocalAuthentication
 class LoginViewController: UIViewController {
     @IBOutlet weak var loginRegisterButton: UIButton!
     @IBOutlet weak var segCtrl: UISegmentedControl!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var coreDataHandler:CoreDataHandler!
+    var weatherTimer:Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,12 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
         segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
+    }
+    
+    //cleanup textfields when logging out and login back again
+    @objc public func cleanup() {
+        self.usernameTextField.text = ""
+        self.passwordTextField.text = ""
     }
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -38,7 +45,7 @@ class LoginViewController: UIViewController {
         if self.segCtrl.selectedSegmentIndex == 0 {
             loginRegisterButton.titleLabel?.text = "Login"
             
-            if (self.emailTextField.text=="") {
+            if (self.usernameTextField.text=="") {
                 // error
                 let ac = UIAlertController(title: "Login failure", message: "Email address empty", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -54,7 +61,7 @@ class LoginViewController: UIViewController {
                     [weak self] success, authenticationError in
                     DispatchQueue.main.async {
                         if success {
-                            if self!.coreDataHandler.doesUserExist(id: self?.emailTextField.text ?? "") {
+                            if self!.coreDataHandler.doesUserExist(id: self?.usernameTextField.text ?? "") {
                                 self?.logInProfile()
                             } else {
                                 let ac = UIAlertController(title: "Login failure", message: "Email address does not exist. Please register", preferredStyle: .alert)
@@ -89,7 +96,7 @@ class LoginViewController: UIViewController {
             //reset segment to login so that user can login after registration is complete
             self.segCtrl.selectedSegmentIndex = 0
             
-            if let loginId = self.emailTextField.text, let password = self.passwordTextField.text {
+            if let loginId = self.usernameTextField.text, let password = self.passwordTextField.text {
                 //check if user already added to Core Data
                 if(self.coreDataHandler.doesUserExist(id: loginId)) {
                   let ac = UIAlertController(title: "Registration Failed!!!", message: "User Already Exists", preferredStyle: .alert)
@@ -106,11 +113,11 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginWithEmailPasswordSuccessful()->Bool {
-        return self.coreDataHandler.isValidLogin(id: self.emailTextField.text ?? "", passcode: self.passwordTextField.text ?? "")
+        return self.coreDataHandler.isValidLogin(id: self.usernameTextField.text ?? "", passcode: self.passwordTextField.text ?? "")
     }
     
     @objc private func logInProfile() {
-        UserDefaults.standard.set(emailTextField.text, forKey: "LoginUserName")
+        UserDefaults.standard.set(usernameTextField.text, forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

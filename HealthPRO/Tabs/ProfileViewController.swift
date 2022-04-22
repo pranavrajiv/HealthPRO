@@ -13,17 +13,17 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         logoutButton.addTarget(self, action: #selector(logoutButtonTouchUpInside), for: .touchUpInside)
-        // Do any additional setup after loading the view.
     }
     
     @objc private func logoutButtonTouchUpInside(){
+
+        let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
+        viewController.weatherTimer.invalidate()
+        viewController.cleanup()
+        
         UserDefaults.standard.set("", forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "loginVC")
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         
     }
 
