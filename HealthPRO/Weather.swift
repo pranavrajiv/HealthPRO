@@ -15,7 +15,6 @@ struct Result: Codable {
     let current: Current
     var hourly: [Hourly]
     var daily: [Daily]
-    
 }
 struct Current: Codable {
     let dt: Int
