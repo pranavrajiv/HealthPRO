@@ -58,6 +58,47 @@
                                     <color key="baseBackgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                             </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKn-4J-SAE">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wNm-Lt-yVR">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dyG-a0-wbo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ny3-Xw-iSr">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting Started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ON-fX-o0l">
+                                                        <rect key="frame" x="65.333333333333343" y="130" width="283.66666666666663" height="40.666666666666657"/>
+                                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="32"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="3ON-fX-o0l" firstAttribute="top" secondItem="ny3-Xw-iSr" secondAttribute="top" constant="130" id="IMe-o8-QuO"/>
+                                                    <constraint firstItem="3ON-fX-o0l" firstAttribute="centerX" secondItem="ny3-Xw-iSr" secondAttribute="centerX" id="Zng-Ab-Hy7"/>
+                                                </constraints>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Qkn-FE-I8s">
+                                            <rect key="frame" x="188.66666666666666" y="349.66666666666669" width="37" height="37"/>
+                                            <color key="color" systemColor="linkColor"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Qkn-FE-I8s" firstAttribute="centerY" secondItem="wNm-Lt-yVR" secondAttribute="centerY" id="Tyz-l8-c0p"/>
+                                        <constraint firstItem="Qkn-FE-I8s" firstAttribute="centerX" secondItem="wNm-Lt-yVR" secondAttribute="centerX" id="YKX-Kq-vxA"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="systemUltraThinMaterialDark"/>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ido-a8-zyS"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -65,9 +106,13 @@
                             <constraint firstItem="8rN-RH-mhL" firstAttribute="top" secondItem="apQ-vl-e40" secondAttribute="bottom" constant="30" id="5OA-6c-a7Q"/>
                             <constraint firstItem="ido-a8-zyS" firstAttribute="trailing" secondItem="aEO-qz-Mvq" secondAttribute="trailing" constant="20" id="6nJ-Z7-ubx"/>
                             <constraint firstItem="OVP-cR-cX0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="97X-hZ-F2M"/>
+                            <constraint firstItem="fKn-4J-SAE" firstAttribute="trailing" secondItem="ido-a8-zyS" secondAttribute="trailing" id="B5b-yQ-0LW"/>
+                            <constraint firstItem="fKn-4J-SAE" firstAttribute="top" secondItem="ido-a8-zyS" secondAttribute="top" id="DQY-bc-6dC"/>
                             <constraint firstItem="ido-a8-zyS" firstAttribute="trailing" secondItem="8rN-RH-mhL" secondAttribute="trailing" constant="20" id="DX9-aC-Hdc"/>
                             <constraint firstItem="apQ-vl-e40" firstAttribute="top" secondItem="Je8-qJ-jO0" secondAttribute="bottom" constant="185" id="LWj-C0-n0W"/>
+                            <constraint firstItem="fKn-4J-SAE" firstAttribute="bottom" secondItem="ido-a8-zyS" secondAttribute="bottom" id="MiU-KX-L0i"/>
                             <constraint firstItem="Je8-qJ-jO0" firstAttribute="top" secondItem="ido-a8-zyS" secondAttribute="top" constant="13" id="NZL-K9-wEa"/>
+                            <constraint firstItem="fKn-4J-SAE" firstAttribute="leading" secondItem="ido-a8-zyS" secondAttribute="leading" id="WTa-vb-LyV"/>
                             <constraint firstItem="Je8-qJ-jO0" firstAttribute="centerX" secondItem="sn1-3F-YcK" secondAttribute="centerX" id="Wc3-pG-dYs"/>
                             <constraint firstItem="aEO-qz-Mvq" firstAttribute="top" secondItem="8rN-RH-mhL" secondAttribute="bottom" constant="20" id="Yvn-aI-FYH"/>
                             <constraint firstItem="OVP-cR-cX0" firstAttribute="top" secondItem="aEO-qz-Mvq" secondAttribute="bottom" constant="40" id="Zun-c1-Hqs"/>
@@ -77,6 +122,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Qkn-FE-I8s" id="cNg-37-LQ4"/>
+                        <outlet property="blurView" destination="fKn-4J-SAE" id="IM3-W6-6rt"/>
                         <outlet property="loginRegisterButton" destination="OVP-cR-cX0" id="U4G-Ij-FaP"/>
                         <outlet property="passwordTextField" destination="aEO-qz-Mvq" id="XXV-gS-sWx"/>
                         <outlet property="segCtrl" destination="apQ-vl-e40" id="lx7-Ll-0EX"/>
@@ -162,6 +209,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

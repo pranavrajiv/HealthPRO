@@ -60,25 +60,16 @@ import UIKit
     }
     
     //Get all Food from Core Data
-    @objc public func getAllFood() {
+    @objc public func getAllFood()->[Food] {
         do {
             let request = Food.fetchRequest()
-            //let predicate = NSPredicate(format:"loginId == %@",id )
-            //request.predicate = predicate
-            let foodItems = try context.fetch(request)//.first
-            
-            for foodItem in foodItems {
-                print(foodItem.foodID)
-                print(foodItem.foodName)
-                print(foodItem.carbohydrate)
-                print("\n\n")
-            }
-            
+            let foodItems = try context.fetch(request)
+            return foodItems
         } catch let error as NSError {
             print("Could not check valid login. \(error), \(error.userInfo)")
         }
+        return []
     }
-    
     
     
     //Add new user to Core Data

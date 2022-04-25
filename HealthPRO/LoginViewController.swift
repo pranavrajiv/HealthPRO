@@ -14,8 +14,20 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var segCtrl: UISegmentedControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    
     var coreDataHandler:CoreDataHandler!
     var weatherTimer:Timer!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.coreDataHandler.getAllFood().count == 0 {
+            self.firstLaunch()
+        }
+        self.afterFirstLaunch()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,23 +35,22 @@ class LoginViewController: UIViewController {
         
         if let launchCount = UserDefaults.standard.object(forKey: "LaunchCount") as? Int {
             UserDefaults.standard.set(launchCount+1, forKey: "LaunchCount")
-            // self.afterFirstLaunch()
         } else {
             UserDefaults.standard.set(1, forKey: "LaunchCount")
-            //self.firstLaunch()
         }
         UserDefaults.standard.synchronize()
         
         // Do any additional setup after loading the view.
         loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
         segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
-
+        
     }
     
     //cleanup textfields when logging out and login back again
     @objc public func cleanup() {
         self.usernameTextField.text = ""
         self.passwordTextField.text = ""
+        self.weatherTimer.invalidate()
     }
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -139,6 +150,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func firstLaunch() {
+        
         let url = Bundle.main.url(forResource: "nutrition", withExtension: "csv")!
         guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
 
@@ -148,10 +160,22 @@ class LoginViewController: UIViewController {
                _ = self.coreDataHandler.addFood(foodId: Int64(i), foodName: resultColumn, calories: Int64(calories), total_fat: total_fat, cholesterol: cholesterol, sodium: sodium, calcium: calcium, iron: iron, potassium: potassium, protein: protein, carbohydrate: carbohydrate, sugars: sugars, fiber: fiber)
             }
         }
+        self.activityIndicator.stopAnimating()
+        self.blurView.isHidden = true;
     }
     
     @objc private func afterFirstLaunch() {
-        self.coreDataHandler.getAllFood()
+        //let foodItems = self.coreDataHandler.getAllFood()
+        
+//        for foodItem in foodItems {
+//            print(foodItem.foodID)
+//            print(foodItem.foodName)
+//            print(foodItem.carbohydrate)
+//            print("\n\n")
+//        }
+        
+        self.activityIndicator.stopAnimating()
+        self.blurView.isHidden = true;
     }
     
     
