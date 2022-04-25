@@ -34,9 +34,8 @@ import UIKit
     }
     
     //Add new Food to Core Data
-    @objc public func addFood(foodId:Int64, foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
+    @objc public func addFood(foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
         let newFood = Food(context: context)
-        newFood.foodID = foodId
         newFood.foodName = foodName
         newFood.calories = calories
         newFood.total_fat = total_fat

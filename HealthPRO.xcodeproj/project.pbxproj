@@ -27,10 +27,10 @@
 		F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760828040F9200590F5C /* ExerciseViewController.swift */; };
 		F85C3516281209600068A5F5 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C3515281209600068A5F5 /* Weather.swift */; };
 		F85C354028161C100068A5F5 /* nutrition.csv in Resources */ = {isa = PBXBuildFile; fileRef = F85C353F28161C100068A5F5 /* nutrition.csv */; };
-		F85C35552816EF130068A5F5 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35512816EF130068A5F5 /* Food+CoreDataClass.swift */; };
-		F85C35562816EF130068A5F5 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35522816EF130068A5F5 /* Food+CoreDataProperties.swift */; };
-		F85C35572816EF130068A5F5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35532816EF130068A5F5 /* User+CoreDataClass.swift */; };
-		F85C35582816EF130068A5F5 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35542816EF130068A5F5 /* User+CoreDataProperties.swift */; };
+		F85C35A528173EAC0068A5F5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35A128173EAC0068A5F5 /* User+CoreDataClass.swift */; };
+		F85C35A628173EAC0068A5F5 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35A228173EAC0068A5F5 /* User+CoreDataProperties.swift */; };
+		F85C35A728173EAC0068A5F5 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35A328173EAC0068A5F5 /* Food+CoreDataClass.swift */; };
+		F85C35A828173EAC0068A5F5 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C35A428173EAC0068A5F5 /* Food+CoreDataProperties.swift */; };
 		F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861AF77280FADB300A73F28 /* DashboardViewController.swift */; };
 		F861AF7C280FAF5B00A73F28 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F861AF7B280FAF5B00A73F28 /* Dashboard.storyboard */; };
 		F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B9152807F6DA00874872 /* CoreDataHandler.swift */; };
@@ -80,10 +80,10 @@
 		F845760828040F9200590F5C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		F85C3515281209600068A5F5 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		F85C353F28161C100068A5F5 /* nutrition.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nutrition.csv; sourceTree = "<group>"; };
-		F85C35512816EF130068A5F5 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F85C35522816EF130068A5F5 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F85C35532816EF130068A5F5 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F85C35542816EF130068A5F5 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F85C35A128173EAC0068A5F5 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F85C35A228173EAC0068A5F5 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F85C35A328173EAC0068A5F5 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F85C35A428173EAC0068A5F5 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F861AF77280FADB300A73F28 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		F861AF7B280FAF5B00A73F28 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		F861B9152807F6DA00874872 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
@@ -119,10 +119,10 @@
 		F84575B028020DB900590F5C = {
 			isa = PBXGroup;
 			children = (
-				F85C35512816EF130068A5F5 /* Food+CoreDataClass.swift */,
-				F85C35522816EF130068A5F5 /* Food+CoreDataProperties.swift */,
-				F85C35532816EF130068A5F5 /* User+CoreDataClass.swift */,
-				F85C35542816EF130068A5F5 /* User+CoreDataProperties.swift */,
+				F85C35A128173EAC0068A5F5 /* User+CoreDataClass.swift */,
+				F85C35A228173EAC0068A5F5 /* User+CoreDataProperties.swift */,
+				F85C35A328173EAC0068A5F5 /* Food+CoreDataClass.swift */,
+				F85C35A428173EAC0068A5F5 /* Food+CoreDataProperties.swift */,
 				F84575BB28020DB900590F5C /* HealthPRO */,
 				F84575D528020DBB00590F5C /* HealthPROTests */,
 				F84575DF28020DBB00590F5C /* HealthPROUITests */,
@@ -341,22 +341,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F85C35552816EF130068A5F5 /* Food+CoreDataClass.swift in Sources */,
+				F85C35A728173EAC0068A5F5 /* Food+CoreDataClass.swift in Sources */,
 				F84575C128020DB900590F5C /* LoginViewController.swift in Sources */,
-				F85C35582816EF130068A5F5 /* User+CoreDataProperties.swift in Sources */,
 				F84575C728020DB900590F5C /* HealthPRO.xcdatamodeld in Sources */,
 				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
+				F85C35A528173EAC0068A5F5 /* User+CoreDataClass.swift in Sources */,
 				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
 				F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */,
 				F85C3516281209600068A5F5 /* Weather.swift in Sources */,
-				F85C35562816EF130068A5F5 /* Food+CoreDataProperties.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
+				F85C35A828173EAC0068A5F5 /* Food+CoreDataProperties.swift in Sources */,
+				F85C35A628173EAC0068A5F5 /* User+CoreDataProperties.swift in Sources */,
 				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,
-				F85C35572816EF130068A5F5 /* User+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
