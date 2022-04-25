@@ -69,6 +69,9 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc private func saveButtonTouchUp() {
+        let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
+        
+        _ = viewController.coreDataHandler.addFood(foodId: Int64(viewController.coreDataHandler.getAllFood().count), foodName: self.itemNameVal.text ?? "", calories: Int64(Int(macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calories"})?.text ?? "0") ?? 0), total_fat: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
         self.dismiss(animated: true)
     }
     
@@ -81,7 +84,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         
         for (macroKey, _) in macro {
             for (index, line) in lines.enumerated() {
-                print("\(index + 1). \(line)")
+                //print("\(index + 1). \(line)")
                 if  (macro[macroKey] == "") {
                     //some macros ends with a 'g' while others ends with a 'mg'
                     if let macroIndex = line.index(of: macroKey) {

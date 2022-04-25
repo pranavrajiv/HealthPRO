@@ -165,7 +165,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func afterFirstLaunch() {
-        //let foodItems = self.coreDataHandler.getAllFood()
+//        let foodItems = self.coreDataHandler.getAllFood()
         
 //        for foodItem in foodItems {
 //            print(foodItem.foodID)

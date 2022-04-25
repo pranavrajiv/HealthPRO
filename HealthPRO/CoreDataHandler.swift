@@ -44,19 +44,19 @@ import UIKit
         newFood.sodium = sodium
         newFood.calcium = calcium
         newFood.iron = iron
-        newFood.potassium = newFood.potassium
-        newFood.protein = newFood.protein
-        newFood.carbohydrate = newFood.carbohydrate
-        newFood.sugars = newFood.sugars
-        newFood.fiber = newFood.fiber
-
+        newFood.potassium = potassium
+        newFood.protein = protein
+        newFood.carbohydrate = carbohydrate
+        newFood.sugars = sugars
+        newFood.fiber = fiber
+        
         do {
             try context.save()
-            return true
         } catch let error as NSError {
             print("Could not add food. \(error), \(error.userInfo)")
+            return false
         }
-        return false
+        return true
     }
     
     //Get all Food from Core Data
@@ -64,6 +64,7 @@ import UIKit
         do {
             let request = Food.fetchRequest()
             let foodItems = try context.fetch(request)
+            
             return foodItems
         } catch let error as NSError {
             print("Could not check valid login. \(error), \(error.userInfo)")
