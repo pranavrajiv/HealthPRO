@@ -7,6 +7,7 @@
 
 import UIKit
 import LocalAuthentication
+import TabularData
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var loginRegisterButton: UIButton!
@@ -20,9 +21,19 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.coreDataHandler = CoreDataHandler.init()
         
+        if let launchCount = UserDefaults.standard.object(forKey: "LaunchCount") as? Int {
+            UserDefaults.standard.set(launchCount+1, forKey: "LaunchCount")
+            // self.afterFirstLaunch()
+        } else {
+            UserDefaults.standard.set(1, forKey: "LaunchCount")
+            //self.firstLaunch()
+        }
+        UserDefaults.standard.synchronize()
+        
         // Do any additional setup after loading the view.
         loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
         segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
+
     }
     
     //cleanup textfields when logging out and login back again
@@ -126,5 +137,23 @@ class LoginViewController: UIViewController {
             self.present(controller, animated: true, completion: nil)
         }
     }
+    
+    @objc private func firstLaunch() {
+        let url = Bundle.main.url(forResource: "nutrition", withExtension: "csv")!
+        guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
+
+        for i in 0...result.shape.rows - 1 {
+            print(i)
+            if let resultColumn = result.selecting(columnNames: "name").columns.first?[i] as? String,let calories = result.selecting(columnNames: "calories").columns.first?[i] as? Int,let total_fat = result.selecting(columnNames: "total_fat").columns.first?[i] as? String,let cholesterol = result.selecting(columnNames: "cholesterol").columns.first?[i] as? String,let sodium = result.selecting(columnNames: "sodium").columns.first?[i] as? String,let calcium = result.selecting(columnNames: "calcium").columns.first?[i] as? String,let iron = result.selecting(columnNames: "irom").columns.first?[i] as? String,let potassium = result.selecting(columnNames: "potassium").columns.first?[i] as? String,let protein = result.selecting(columnNames: "protein").columns.first?[i] as? String,let carbohydrate = result.selecting(columnNames: "carbohydrate").columns.first?[i] as? String,let sugars = result.selecting(columnNames: "sugars").columns.first?[i] as? String,let fiber = result.selecting(columnNames: "fiber").columns.first?[i] as? String {
+               _ = self.coreDataHandler.addFood(foodId: Int64(i), foodName: resultColumn, calories: Int64(calories), total_fat: total_fat, cholesterol: cholesterol, sodium: sodium, calcium: calcium, iron: iron, potassium: potassium, protein: protein, carbohydrate: carbohydrate, sugars: sugars, fiber: fiber)
+            }
+        }
+    }
+    
+    @objc private func afterFirstLaunch() {
+        self.coreDataHandler.getAllFood()
+    }
+    
+    
 }
 

@@ -33,6 +33,54 @@ import UIKit
         return false
     }
     
+    //Add new Food to Core Data
+    @objc public func addFood(foodId:Int64, foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
+        let newFood = Food(context: context)
+        newFood.foodID = foodId
+        newFood.foodName = foodName
+        newFood.calories = calories
+        newFood.total_fat = total_fat
+        newFood.cholesterol = cholesterol
+        newFood.sodium = sodium
+        newFood.calcium = calcium
+        newFood.iron = iron
+        newFood.potassium = newFood.potassium
+        newFood.protein = newFood.protein
+        newFood.carbohydrate = newFood.carbohydrate
+        newFood.sugars = newFood.sugars
+        newFood.fiber = newFood.fiber
+
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not add food. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    //Get all Food from Core Data
+    @objc public func getAllFood() {
+        do {
+            let request = Food.fetchRequest()
+            //let predicate = NSPredicate(format:"loginId == %@",id )
+            //request.predicate = predicate
+            let foodItems = try context.fetch(request)//.first
+            
+            for foodItem in foodItems {
+                print(foodItem.foodID)
+                print(foodItem.foodName)
+                print(foodItem.carbohydrate)
+                print("\n\n")
+            }
+            
+        } catch let error as NSError {
+            print("Could not check valid login. \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+    
     //Add new user to Core Data
     @objc public func addUser(id:String, password:String)->Bool {
         let newUser = User(context: context)
