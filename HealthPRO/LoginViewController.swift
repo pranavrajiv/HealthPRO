@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        //if no food entries are in core data, then populate it
         if self.coreDataHandler.getAllFood().count == 0 {
             self.initialLaunch()
         }
@@ -59,6 +60,7 @@ class LoginViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    //notifies when user switched between login and register
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             loginRegisterButton.titleLabel?.text = "Login"
@@ -68,6 +70,7 @@ class LoginViewController: UIViewController {
         loginRegisterButton.sizeToFit()
     }
 
+    //login/Register button pressed
     @objc private func loginOrRegisterProfile(_ sender: UIButton){
         //login button pressed
         if self.segCtrl.selectedSegmentIndex == 0 {
@@ -89,19 +92,21 @@ class LoginViewController: UIViewController {
                     [weak self] success, authenticationError in
                     DispatchQueue.main.async {
                         if success {
+                            //if user exists and biometric is success, then login
                             if self!.coreDataHandler.doesUserExist(id: self?.usernameTextField.text ?? "") {
                                 self?.logInProfile()
                             } else {
+                                //biometric success but user not present
                                 let ac = UIAlertController(title: "Login failure", message: "Email address does not exist. Please register", preferredStyle: .alert)
                                 ac.addAction(UIAlertAction(title: "OK", style: .default))
                                 self?.present(ac, animated: true)
                             }
                             
                         } else {
+                            //biometric unsuccessful but login with password successful
                             if self?.loginWithEmailPasswordSuccessful() == true {
                                 self?.logInProfile()
-                            } else {
-                                // error
+                            } else { // error. Biometric and login with password unsuccessful
                                 let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
                                 ac.addAction(UIAlertAction(title: "OK", style: .default))
                                 self?.present(ac, animated: true)
@@ -110,10 +115,10 @@ class LoginViewController: UIViewController {
                     }
                 }
             } else {
+                // no biometric but login with password successful
                 if self.loginWithEmailPasswordSuccessful() == true {
                     self.logInProfile()
-                } else {
-                    // no biometric
+                } else { // no biometric and login with password unsuccessful
                     let ac = UIAlertController(title: "Authentication failed", message: "Email or Password incorrect", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
                     self.present(ac, animated: true)
@@ -140,10 +145,12 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //fuction checks if user and password correct in coreData
     @objc private func loginWithEmailPasswordSuccessful()->Bool {
         return self.coreDataHandler.isValidLogin(id: self.usernameTextField.text ?? "", passcode: self.passwordTextField.text ?? "")
     }
     
+    //logs the user into their profile
     @objc private func logInProfile() {
         UserDefaults.standard.set(usernameTextField.text, forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
@@ -155,6 +162,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //does all the onboarding steps including coreData populations
     @objc private func initialLaunch() {
         
         let url = Bundle.main.url(forResource: "nutrition", withExtension: "csv")!
@@ -170,6 +178,7 @@ class LoginViewController: UIViewController {
         self.blurView.isHidden = true;
     }
     
+    //post onboarding steps
     @objc private func afterInitialLaunch() {
 //        let foodItems = self.coreDataHandler.getAllFood()
         
