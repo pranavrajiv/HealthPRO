@@ -24,9 +24,9 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if self.coreDataHandler.getAllFood().count == 0 {
-            self.firstLaunch()
+            self.initialLaunch()
         }
-        self.afterFirstLaunch()
+        self.afterInitialLaunch()
     }
     
     override func viewDidLoad() {
@@ -40,6 +40,9 @@ class LoginViewController: UIViewController {
         }
         UserDefaults.standard.synchronize()
         
+        //indicates that the app entered background
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cleanup), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
         // Do any additional setup after loading the view.
         loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
         segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
@@ -51,6 +54,9 @@ class LoginViewController: UIViewController {
         self.usernameTextField.text = ""
         self.passwordTextField.text = ""
         self.weatherTimer.invalidate()
+        UserDefaults.standard.set("", forKey: "LoginUserName")
+        UserDefaults.standard.synchronize()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -149,7 +155,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc private func firstLaunch() {
+    @objc private func initialLaunch() {
         
         let url = Bundle.main.url(forResource: "nutrition", withExtension: "csv")!
         guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
@@ -164,7 +170,7 @@ class LoginViewController: UIViewController {
         self.blurView.isHidden = true;
     }
     
-    @objc private func afterFirstLaunch() {
+    @objc private func afterInitialLaunch() {
 //        let foodItems = self.coreDataHandler.getAllFood()
         
 //        for foodItem in foodItems {

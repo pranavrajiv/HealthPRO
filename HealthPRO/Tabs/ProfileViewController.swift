@@ -16,14 +16,8 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func logoutButtonTouchUpInside(){
-
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
         viewController.cleanup()
-        
-        UserDefaults.standard.set("", forKey: "LoginUserName")
-        UserDefaults.standard.synchronize()
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-        
     }
 
 }
