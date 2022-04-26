@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F844AE0D28189838000FBCF1 /* activity.csv in Resources */ = {isa = PBXBuildFile; fileRef = F844AE0C28189838000FBCF1 /* activity.csv */; };
 		F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575BC28020DB900590F5C /* AppDelegate.swift */; };
 		F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575BE28020DB900590F5C /* SceneDelegate.swift */; };
 		F84575C128020DB900590F5C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575C028020DB900590F5C /* LoginViewController.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F844AE0C28189838000FBCF1 /* activity.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = activity.csv; sourceTree = "<group>"; };
 		F84575B928020DB900590F5C /* HealthPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84575BC28020DB900590F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F84575BE28020DB900590F5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		F85C353E28161BCF0068A5F5 /* pre-pop data */ = {
 			isa = PBXGroup;
 			children = (
+				F844AE0C28189838000FBCF1 /* activity.csv */,
 				F85C353F28161C100068A5F5 /* nutrition.csv */,
 			);
 			path = "pre-pop data";
@@ -308,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85C354028161C100068A5F5 /* nutrition.csv in Resources */,
+				F844AE0D28189838000FBCF1 /* activity.csv in Resources */,
 				F84575CC28020DBB00590F5C /* LaunchScreen.storyboard in Resources */,
 				F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */,
 				F84575C928020DBB00590F5C /* Assets.xcassets in Resources */,
