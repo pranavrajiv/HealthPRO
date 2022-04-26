@@ -98,9 +98,8 @@ class Weather: NSObject,CLLocationManagerDelegate  {
     let URL_BASE = "https://api.openweathermap.org/data/2.5"
     let session = URLSession(configuration: .default)
     var locationManger: CLLocationManager!
-   // var currentLocation: CLLocation?
+    var weatherInfoNowTimer:Timer!
     public weak var delegate:WeatherInfoReceivedDelegate?
-    
     
     //custom initializer
     public init(delegate:WeatherInfoReceivedDelegate)
@@ -115,10 +114,7 @@ class Weather: NSObject,CLLocationManagerDelegate  {
         }
         
         self.getLocation()
-        
-        let rootLoginVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
-        //update weather every minute
-        rootLoginVC.weatherTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(getLocation), userInfo: nil, repeats: true)
+        self.weatherInfoNowTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(getLocation), userInfo: nil, repeats: true)
     }
     
     

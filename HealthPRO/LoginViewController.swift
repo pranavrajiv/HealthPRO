@@ -9,7 +9,35 @@ import UIKit
 import LocalAuthentication
 import TabularData
 
-class LoginViewController: UIViewController {
+struct WeatherNow {
+    var currentWeather:Current!
+    var weatherInfo:Weather!
+    var currentCity: String!
+    var weatherInOneHour: String!
+    var weatherInTwoHours: String!
+    
+    init(theWeather:Weather) {
+        self.weatherInfo = theWeather
+    }
+    
+    mutating func updateCurrent(result:Result,currentCity:String) {
+        self.currentCity = currentCity
+        self.currentWeather = result.current
+        self.weatherInOneHour = result.hourly[1].weather[0].description.capitalized
+        self.weatherInTwoHours = result.hourly[2].weather[0].description.capitalized
+    }
+    mutating func cleanup() {
+        self.currentCity = ""
+        self.currentWeather = nil
+        self.weatherInOneHour = ""
+        self.weatherInTwoHours = ""
+        self.weatherInfo?.weatherInfoNowTimer.invalidate()
+        self.weatherInfo = nil
+    }
+}
+
+
+class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     @IBOutlet weak var loginRegisterButton: UIButton!
     @IBOutlet weak var segCtrl: UISegmentedControl!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -18,7 +46,16 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var blurView: UIVisualEffectView!
     
     var coreDataHandler:CoreDataHandler!
-    var weatherTimer:Timer!
+    var weatherInfoNow:WeatherNow!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //to make sure that all timer are invalidated first
+        if let _ = self.weatherInfoNow {
+            self.weatherInfoNow.cleanup()
+        }
+        self.weatherInfoNow = WeatherNow(theWeather: Weather.init(delegate: self))
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -42,7 +79,10 @@ class LoginViewController: UIViewController {
         UserDefaults.standard.synchronize()
         
         //indicates that the app entered background
-        NotificationCenter.default.addObserver(self, selector: #selector(self.cleanup), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationBecameActive), name: UIApplication.willEnterForegroundNotification, object: nil)
+        
+        //indicates that the app entered background
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWentToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
         // Do any additional setup after loading the view.
         loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
@@ -50,14 +90,40 @@ class LoginViewController: UIViewController {
         
     }
     
+    //application came back to foreground
+    @objc public func applicationBecameActive() {
+        //to make sure that all timer are invalidated first
+        if let _ = self.weatherInfoNow{
+            self.weatherInfoNow.cleanup()
+        }
+        self.weatherInfoNow = WeatherNow(theWeather: Weather.init(delegate: self))
+    }
+    
+    //application went to background
+    @objc public func applicationWentToBackground() {
+        self.cleanup()
+        //done because the cleanup function will call the self.viewWillAppear due to the self.dismiss action in it. Now we need to remove the initialized weatherInfoNow
+        if let _ = self.weatherInfoNow{
+            self.weatherInfoNow.cleanup()
+        }
+        self.weatherInfoNow  = nil
+    }
+    
     //cleanup textfields when logging out and login back again
     @objc public func cleanup() {
         self.usernameTextField.text = ""
         self.passwordTextField.text = ""
-        self.weatherTimer.invalidate()
+        self.weatherInfoNow.cleanup()
+        self.weatherInfoNow  = nil
         UserDefaults.standard.set("", forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    //delegate callback
+    func gotTheWeather(theResult:Result, city:String){
+        self.weatherInfoNow.updateCurrent(result: theResult, currentCity: city)
     }
     
     //notifies when user switched between login and register
