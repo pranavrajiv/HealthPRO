@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Activity" representedClassName="Activity" syncable="YES">
+        <attribute name="activityId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="activityName" optional="YES" attributeType="String"/>
+        <attribute name="caloriesPerHourPerLb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="Food" representedClassName="Food" syncable="YES">
         <attribute name="calcium" optional="YES" attributeType="String"/>
         <attribute name="calories" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -21,5 +26,6 @@
     <elements>
         <element name="Food" positionX="-63" positionY="0" width="128" height="209"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="Activity" positionX="-63" positionY="81" width="128" height="74"/>
     </elements>
 </model>

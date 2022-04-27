@@ -58,12 +58,39 @@ import UIKit
         return true
     }
     
+    //Add new activity to Core Data
+    @objc public func addActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double)->Bool {
+        
+        let newActivity = Activity(context: context)
+        newActivity.activityId = activityId
+        newActivity.activityName = activityName
+        newActivity.caloriesPerHourPerLb = caloriesPerHourPerLb
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add activity. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Get all Activities from Core Data
+    @objc public func getAllActivities()->[Activity] {
+        do {
+            let request = Activity.fetchRequest()
+            let activities = try context.fetch(request)
+            return activities
+        } catch let error as NSError {
+            print("Could not check valid login. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
     //Get all Food from Core Data
     @objc public func getAllFood()->[Food] {
         do {
             let request = Food.fetchRequest()
             let foodItems = try context.fetch(request)
-            
             return foodItems
         } catch let error as NSError {
             print("Could not check valid login. \(error), \(error.userInfo)")

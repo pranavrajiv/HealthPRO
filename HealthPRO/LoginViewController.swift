@@ -61,8 +61,8 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         super.viewDidAppear(animated)
         
         //if no food entries are in core data, then populate it
-        if self.coreDataHandler.getAllFood().count == 0 {
-            self.initialLaunch()
+        if self.coreDataHandler.getAllFood().count == 0 || self.coreDataHandler.getAllActivities().count == 0 {
+            self.gettingStarted()
         }
         self.afterInitialLaunch()
     }
@@ -229,29 +229,44 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     }
     
     //does all the onboarding steps including coreData populations
-    @objc private func initialLaunch() {
-        
+    @objc private func gettingStarted() {
+        self.populateFood()
+        self.populateActivity()
+    }
+    
+    @objc private func populateFood() {
         let url = Bundle.main.url(forResource: "nutrition", withExtension: "csv")!
         guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
 
         for i in 0...result.shape.rows - 1 {
             print(i)
-            if let resultColumn = result.selecting(columnNames: "name").columns.first?[i] as? String,let calories = result.selecting(columnNames: "calories").columns.first?[i] as? Int,let total_fat = result.selecting(columnNames: "total_fat").columns.first?[i] as? String,let cholesterol = result.selecting(columnNames: "cholesterol").columns.first?[i] as? String,let sodium = result.selecting(columnNames: "sodium").columns.first?[i] as? String,let calcium = result.selecting(columnNames: "calcium").columns.first?[i] as? String,let iron = result.selecting(columnNames: "irom").columns.first?[i] as? String,let potassium = result.selecting(columnNames: "potassium").columns.first?[i] as? String,let protein = result.selecting(columnNames: "protein").columns.first?[i] as? String,let carbohydrate = result.selecting(columnNames: "carbohydrate").columns.first?[i] as? String,let sugars = result.selecting(columnNames: "sugars").columns.first?[i] as? String,let fiber = result.selecting(columnNames: "fiber").columns.first?[i] as? String {
-               _ = self.coreDataHandler.addFood(foodName: resultColumn, calories: Int64(calories), total_fat: total_fat, cholesterol: cholesterol, sodium: sodium, calcium: calcium, iron: iron, potassium: potassium, protein: protein, carbohydrate: carbohydrate, sugars: sugars, fiber: fiber)
+            if let foodName = result.selecting(columnNames: "name").columns.first?[i] as? String,let calories = result.selecting(columnNames: "calories").columns.first?[i] as? Int,let total_fat = result.selecting(columnNames: "total_fat").columns.first?[i] as? String,let cholesterol = result.selecting(columnNames: "cholesterol").columns.first?[i] as? String,let sodium = result.selecting(columnNames: "sodium").columns.first?[i] as? String,let calcium = result.selecting(columnNames: "calcium").columns.first?[i] as? String,let iron = result.selecting(columnNames: "irom").columns.first?[i] as? String,let potassium = result.selecting(columnNames: "potassium").columns.first?[i] as? String,let protein = result.selecting(columnNames: "protein").columns.first?[i] as? String,let carbohydrate = result.selecting(columnNames: "carbohydrate").columns.first?[i] as? String,let sugars = result.selecting(columnNames: "sugars").columns.first?[i] as? String,let fiber = result.selecting(columnNames: "fiber").columns.first?[i] as? String {
+               _ = self.coreDataHandler.addFood(foodName: foodName, calories: Int64(calories), total_fat: total_fat, cholesterol: cholesterol, sodium: sodium, calcium: calcium, iron: iron, potassium: potassium, protein: protein, carbohydrate: carbohydrate, sugars: sugars, fiber: fiber)
             }
         }
-        self.activityIndicator.stopAnimating()
-        self.blurView.isHidden = true;
     }
+    
+    @objc private func populateActivity() {
+        let url = Bundle.main.url(forResource: "activity", withExtension: "csv")!
+        guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
+
+        for i in 0...result.shape.rows - 1 {
+            print(i)
+            if let activityName = result.selecting(columnNames: "Activity (1 hour)").columns.first?[i] as? String,let calories = result.selecting(columnNames: "Calories Per Lb").columns.first?[i] as? Double {
+               _ = self.coreDataHandler.addActivity(activityId: Int64(i), activityName: activityName, caloriesPerHourPerLb: Double(calories))
+            }
+        }
+    }
+    
     
     //post onboarding steps
     @objc private func afterInitialLaunch() {
-//        let foodItems = self.coreDataHandler.getAllFood()
-        
-//        for foodItem in foodItems {
-//            print(foodItem.foodID)
-//            print(foodItem.foodName)
-//            print(foodItem.carbohydrate)
+//        let activs = self.coreDataHandler.getAllActivities()
+//
+//        for activ in activs {
+//            print(activ.activityId)
+//            print(activ.activityName)
+//            print(activ.caloriesPerHourPerLb)
 //            print("\n\n")
 //        }
         
