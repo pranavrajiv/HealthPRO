@@ -50,9 +50,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="arc-1j-c5x">
                                 <rect key="frame" x="0.0" y="83" width="375" height="646"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="food name" id="CKG-TO-EU9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodTableViewCell" id="Qkd-v4-1Ng">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="88.666666030883789" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qkd-v4-1Ng" id="QWV-nr-nLW">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
@@ -77,6 +82,7 @@
                     <tabBarItem key="tabBarItem" title="Diet" image="leaf.fill" catalog="system" id="Anj-QK-5Pw"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="searchBarField" destination="CKG-TO-EU9" id="EkB-IB-mOh"/>
                         <outlet property="tableView" destination="arc-1j-c5x" id="hJc-nV-CGX"/>
                     </connections>
                 </viewController>

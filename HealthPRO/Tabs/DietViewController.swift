@@ -7,8 +7,9 @@
 
 import UIKit
 
-class DietViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
+class DietViewController: UIViewController, UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBarField: UISearchBar!
     var allFood:[Food]!
     var weight: Double!
     var age: Double!
@@ -27,6 +28,8 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        searchBarField.delegate = self
+        
         // Do any additional setup after loading the view.
         // TODO these variables should be pulled from the UI on the first
         // run, or the database on subsequent runs
@@ -42,26 +45,50 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         print(bmr)
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.allFood.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath)
-        cell.accessibilityLabel = indexPath.row.description
+        cell.accessibilityLabel = self.allFood[indexPath.row].foodId.description
         cell.textLabel?.text = self.allFood[indexPath.row].foodName
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark) {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        self.searchBarField.resignFirstResponder()
+
+        let secondViewController = ParsedNutritionLabelViewController.init(foodId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!))
+        secondViewController.modalPresentationStyle = .fullScreen
+        self.present(secondViewController, animated: true, completion: nil)
+        
     }
+
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText == "\n" ){
+            searchBar.resignFirstResponder()
+        }else if (searchText == "" ){
+            self.allFood = CoreDataHandler.init().getAllFood()
+        } else {
+            self.allFood = CoreDataHandler.init().getFilteredFood(text: searchText)
+        }
+        self.tableView.reloadData()
+    }
+                    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.searchTextField.text {
+            if searchText != "" {
+                self.allFood = CoreDataHandler.init().getFilteredFood(text: searchText)
+            } else {
+                self.allFood = CoreDataHandler.init().getAllFood()
+            }
+        }
+        searchBar.resignFirstResponder()
+        self.tableView.reloadData()
+    }
+  
     
     func standardize_weight_units() {
         // Convert all weights to kg for further processing

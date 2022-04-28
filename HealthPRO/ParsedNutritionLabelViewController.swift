@@ -15,6 +15,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     var ocrText: String = ""
+    var foodItem:Food!
     var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":"","Potassium":""]
     var activeTextField:UITextField!
 
@@ -22,13 +23,32 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         self.init()
         self.ocrText = ocrText
     }
+    convenience init( foodId: Int64 ) {
+        self.init()
+        self.foodItem = CoreDataHandler.init().getFoodForId(foodId: foodId)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.addTarget(self, action: #selector(saveButtonTouchUp), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonTouchUp), for: .touchUpInside)
-        self.processOcrText()
-        
+        if(self.ocrText != "") {
+            self.processOcrText()
+        } else {
+            itemNameVal.text = foodItem?.foodName
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Calories"})?.text = foodItem?.calories.description
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Total Fat"})?.text = foodItem?.total_fat
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Total Carb"})?.text = foodItem?.carbohydrate
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Cholesterol"})?.text = foodItem?.cholesterol
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Sodium"})?.text = foodItem?.sodium
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Dietary Fiber"})?.text = foodItem?.fiber
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Sugars"})?.text = foodItem?.sugars
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Protein"})?.text = foodItem?.protein
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Calcium"})?.text = foodItem?.calcium
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Iron"})?.text = foodItem?.iron
+            macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Potassium"})?.text = foodItem?.potassium
+        }
+       
         self.itemNameVal.delegate = self
         self.macroTextFieldCollections.forEach({$0.delegate = self})
     }

@@ -87,6 +87,34 @@ import UIKit
         }
         return []
     }
+
+    //Get filtered Food from Core Data
+    @objc public func getFilteredFood(text:String)->[Food] {
+        do {
+            let request = Food.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true)]
+            request.predicate = NSPredicate(format: "foodName CONTAINS %@", text)
+            let foodItems = try context.fetch(request)
+            return foodItems
+        } catch let error as NSError {
+            print("Could not check valid login. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
+    //Get Food for foodId from Core Data
+    @objc public func getFoodForId(foodId:Int64)->Food? {
+        do {
+            let request = Food.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true)]
+            request.predicate = NSPredicate(format: "foodId == %lld", foodId)
+            let foodItems = try context.fetch(request)
+            return foodItems.first
+        } catch let error as NSError {
+            print("Could not check valid login. \(error), \(error.userInfo)")
+        }
+        return nil
+    }
     
     //Get all Food from Core Data
     @objc public func getAllFood()->[Food] {
