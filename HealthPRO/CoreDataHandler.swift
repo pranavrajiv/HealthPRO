@@ -115,7 +115,21 @@ import UIKit
         }
         return []
     }
-
+    
+    //Get filtered Activity from Core Data
+    @objc public func getFilteredActivity(text:String)->[Activity] {
+        do {
+            let request = Activity.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
+            request.predicate = NSPredicate(format: "activityName CONTAINS[cd] %@", text)
+            let foodItems = try context.fetch(request)
+            return foodItems
+        } catch let error as NSError {
+            print("Could not get filtered Activity. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
     //Get filtered Food from Core Data
     @objc public func getFilteredFood(text:String)->[Food] {
         do {
