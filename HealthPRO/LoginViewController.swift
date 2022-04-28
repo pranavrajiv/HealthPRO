@@ -120,7 +120,6 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     //delegate callback
     func gotTheWeather(theResult:Result, city:String){
         self.weatherInfoNow.updateCurrent(result: theResult, currentCity: city)

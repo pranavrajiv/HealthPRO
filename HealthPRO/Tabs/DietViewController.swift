@@ -10,6 +10,7 @@ import UIKit
 class DietViewController: UIViewController, UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarField: UISearchBar!
+    @IBOutlet weak var addNewButton: UIButton!
     var allFood:[Food]!
     var weight: Double!
     var age: Double!
@@ -20,6 +21,7 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.searchBarField.searchTextField.text = ""
         self.allFood = CoreDataHandler.init().getAllFood()
         self.tableView.reloadData()
     }
@@ -29,6 +31,7 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         tableView.dataSource = self
         tableView.delegate = self
         searchBarField.delegate = self
+        addNewButton.addTarget(self, action: #selector(addNewButtonTouchUp), for: .touchUpInside)
         
         // Do any additional setup after loading the view.
         // TODO these variables should be pulled from the UI on the first
@@ -43,6 +46,12 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         standardize_weight_units()
         let bmr = calculate_bmr()
         print(bmr)
+    }
+    
+    @objc private func addNewButtonTouchUp() {
+        let secondViewController = ParsedNutritionLabelViewController.init()
+        secondViewController.modalPresentationStyle = .fullScreen
+        self.present(secondViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -32,8 +32,8 @@ import UIKit
         }
         return false
     }
-    
-    //Add new Food to Core Data
+   
+    //Update Food in Core Data
     @objc public func addFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
         let newFood = Food(context: context)
         newFood.foodId = foodId
@@ -57,6 +57,34 @@ import UIKit
             return false
         }
         return true
+    }
+    
+    //Update Food in Core Data
+    @objc public func updateFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
+        
+       do {
+            let request = Food.fetchRequest()
+            request.predicate = NSPredicate(format: "foodId == %lld", foodId)
+            let foodItems = try context.fetch(request)
+           foodItems.first!.foodName = foodName
+           foodItems.first!.calories = calories
+           foodItems.first!.total_fat = total_fat
+           foodItems.first!.cholesterol = cholesterol
+           foodItems.first!.sodium = sodium
+           foodItems.first!.calcium = calcium
+           foodItems.first!.iron = iron
+           foodItems.first!.potassium = potassium
+           foodItems.first!.protein = protein
+           foodItems.first!.carbohydrate = carbohydrate
+           foodItems.first!.sugars = sugars
+           foodItems.first!.fiber = fiber
+
+           try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not update food. \(error), \(error.userInfo)")
+        }
+        return false
     }
     
     //Add new activity to Core Data
@@ -83,7 +111,7 @@ import UIKit
             let activities = try context.fetch(request)
             return activities
         } catch let error as NSError {
-            print("Could not check valid login. \(error), \(error.userInfo)")
+            print("Could not get all activities. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -93,11 +121,11 @@ import UIKit
         do {
             let request = Food.fetchRequest()
             request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true)]
-            request.predicate = NSPredicate(format: "foodName CONTAINS %@", text)
+            request.predicate = NSPredicate(format: "foodName CONTAINS[cd] %@", text)
             let foodItems = try context.fetch(request)
             return foodItems
         } catch let error as NSError {
-            print("Could not check valid login. \(error), \(error.userInfo)")
+            print("Could not get filtered food. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -111,10 +139,28 @@ import UIKit
             let foodItems = try context.fetch(request)
             return foodItems.first
         } catch let error as NSError {
-            print("Could not check valid login. \(error), \(error.userInfo)")
+            print("Could not get a food item. \(error), \(error.userInfo)")
         }
         return nil
     }
+    
+    //Delete Food for foodId from Core Data
+    @objc public func deleteFoodForId(foodId:Int64)->Bool {
+        
+        do {
+            let request = Food.fetchRequest()
+            request.predicate = NSPredicate(format: "foodId == %lld", foodId)
+            let foodItems = try context.fetch(request)
+            context.delete(foodItems.first!)
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete food. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    
     
     //Get all Food from Core Data
     @objc public func getAllFood()->[Food] {
@@ -124,7 +170,7 @@ import UIKit
             let foodItems = try context.fetch(request)
             return foodItems
         } catch let error as NSError {
-            print("Could not check valid login. \(error), \(error.userInfo)")
+            print("Could not get all food. \(error), \(error.userInfo)")
         }
         return []
     }

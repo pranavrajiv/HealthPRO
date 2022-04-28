@@ -10,7 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParsedNutritionLabelViewController" customModule="HealthPRO" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="J6f-Ay-KyW" id="jrb-GG-Pdk"/>
+                <outlet property="cancelButton" destination="l45-Dz-6JT" id="1Ng-jI-cd5"/>
+                <outlet property="deleteButton" destination="J6f-Ay-KyW" id="jrb-GG-Pdk"/>
                 <outlet property="itemNameVal" destination="zUs-M3-BRu" id="ubL-dY-ijw"/>
                 <outlet property="saveButton" destination="0GH-V6-ppz" id="A4t-W1-XeY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -323,11 +324,18 @@
                         <constraint firstItem="wSE-py-dlN" firstAttribute="height" secondItem="4xm-ya-WnQ" secondAttribute="height" id="wzt-6x-c9Q"/>
                     </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l45-Dz-6JT">
+                    <rect key="frame" x="15" y="50" width="68.5" height="31"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Cancel"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Cancel" cornerStyle="capsule"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="J8r-Op-dUt" secondAttribute="trailing" constant="20" id="3aF-rC-TEG"/>
+                <constraint firstItem="l45-Dz-6JT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="5U7-JK-0Tx"/>
                 <constraint firstItem="A1V-kM-ykj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="IqC-fs-1Ia"/>
                 <constraint firstAttribute="bottom" secondItem="QdP-aj-GyN" secondAttribute="bottom" constant="20" id="Nzb-Ec-x9m"/>
                 <constraint firstItem="J8r-Op-dUt" firstAttribute="top" secondItem="A1V-kM-ykj" secondAttribute="bottom" constant="20" id="U3V-x5-BYX"/>
@@ -336,6 +344,7 @@
                 <constraint firstItem="QdP-aj-GyN" firstAttribute="top" secondItem="J8r-Op-dUt" secondAttribute="bottom" constant="20" id="ekL-OR-qGj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="A1V-kM-ykj" secondAttribute="trailing" constant="20" id="hnk-ft-mIk"/>
                 <constraint firstItem="J8r-Op-dUt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="kxN-It-vc5"/>
+                <constraint firstItem="l45-Dz-6JT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="t1K-Gs-Tkw"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="95.758928571428569"/>
         </view>
