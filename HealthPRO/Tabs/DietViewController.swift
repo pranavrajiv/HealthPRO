@@ -7,7 +7,9 @@
 
 import UIKit
 
-class DietViewController: UIViewController {
+class DietViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
+    @IBOutlet weak var tableView: UITableView!
+    var allFood:[Food]!
     var weight: Double!
     var age: Double!
     var height: Double!
@@ -15,8 +17,16 @@ class DietViewController: UIViewController {
     var height_units: String!
     var sex: String!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.allFood = CoreDataHandler.init().getAllFood()
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
         // Do any additional setup after loading the view.
         // TODO these variables should be pulled from the UI on the first
         // run, or the database on subsequent runs
@@ -31,6 +41,27 @@ class DietViewController: UIViewController {
         let bmr = calculate_bmr()
         print(bmr)
     }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.allFood.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath)
+        cell.accessibilityLabel = indexPath.row.description
+        cell.textLabel?.text = self.allFood[indexPath.row].foodName
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark) {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
+    }
+    
     
     func standardize_weight_units() {
         // Convert all weights to kg for further processing

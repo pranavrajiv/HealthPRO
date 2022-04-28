@@ -79,6 +79,7 @@ import UIKit
     @objc public func getAllActivities()->[Activity] {
         do {
             let request = Activity.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
             let activities = try context.fetch(request)
             return activities
         } catch let error as NSError {
@@ -91,6 +92,7 @@ import UIKit
     @objc public func getAllFood()->[Food] {
         do {
             let request = Food.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true)]
             let foodItems = try context.fetch(request)
             return foodItems
         } catch let error as NSError {
