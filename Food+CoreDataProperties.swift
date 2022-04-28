@@ -2,7 +2,7 @@
 //  Food+CoreDataProperties.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/26/22.
+//  Created by Pranav Rajiv on 4/28/22.
 //
 //
 
@@ -28,6 +28,7 @@ extension Food {
     @NSManaged public var sodium: String?
     @NSManaged public var sugars: String?
     @NSManaged public var total_fat: String?
+    @NSManaged public var foodId: Int64
 
 }
 
