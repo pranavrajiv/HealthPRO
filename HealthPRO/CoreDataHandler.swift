@@ -33,6 +33,98 @@ import UIKit
         return false
     }
    
+    //Add new activity to Core Data
+    @objc public func addActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double)->Bool {
+        
+        let newActivity = Activity(context: context)
+        newActivity.activityId = activityId
+        newActivity.activityName = activityName
+        newActivity.caloriesPerHourPerLb = caloriesPerHourPerLb
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add activity. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Update Activity in Core Data
+    @objc public func updateActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double)->Bool {
+        do {
+            let request = Activity.fetchRequest()
+            request.predicate = NSPredicate(format: "activityId == %lld", activityId)
+            let activityItems = try context.fetch(request)
+            activityItems.first!.activityName = activityName
+            activityItems.first!.caloriesPerHourPerLb = caloriesPerHourPerLb
+            try context.save()
+            
+        } catch let error as NSError {
+            print("Could not add activity. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Get all Activities from Core Data
+    @objc public func getAllActivities()->[Activity] {
+        do {
+            let request = Activity.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
+            let activities = try context.fetch(request)
+            return activities
+        } catch let error as NSError {
+            print("Could not get all activities. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
+    //Get filtered Activity from Core Data
+    @objc public func getFilteredActivity(text:String)->[Activity] {
+        do {
+            let request = Activity.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
+            request.predicate = NSPredicate(format: "activityName CONTAINS[cd] %@", text)
+            let foodItems = try context.fetch(request)
+            return foodItems
+        } catch let error as NSError {
+            print("Could not get filtered Activity. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
+    //Get Activity for activityId from Core Data
+    @objc public func getActivityForId(activityId:Int64)->Activity? {
+        do {
+            let request = Activity.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
+            request.predicate = NSPredicate(format: "activityId == %lld", activityId)
+            let activityItems = try context.fetch(request)
+            return activityItems.first
+        } catch let error as NSError {
+            print("Could not get activity item. \(error), \(error.userInfo)")
+        }
+        return nil
+    }
+    
+    //Delete Activity for activityId from Core Data
+    @objc public func deleteActivityForId(activityId:Int64)->Bool {
+        
+        do {
+            let request = Activity.fetchRequest()
+            request.predicate = NSPredicate(format: "activityId == %lld", activityId)
+            let activityItems = try context.fetch(request)
+            context.delete(activityItems.first!)
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete activity. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    
+    
     //Update Food in Core Data
     @objc public func addFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
         let newFood = Food(context: context)
@@ -87,48 +179,6 @@ import UIKit
         return false
     }
     
-    //Add new activity to Core Data
-    @objc public func addActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double)->Bool {
-        
-        let newActivity = Activity(context: context)
-        newActivity.activityId = activityId
-        newActivity.activityName = activityName
-        newActivity.caloriesPerHourPerLb = caloriesPerHourPerLb
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not add activity. \(error), \(error.userInfo)")
-            return false
-        }
-        return true
-    }
-    
-    //Get all Activities from Core Data
-    @objc public func getAllActivities()->[Activity] {
-        do {
-            let request = Activity.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
-            let activities = try context.fetch(request)
-            return activities
-        } catch let error as NSError {
-            print("Could not get all activities. \(error), \(error.userInfo)")
-        }
-        return []
-    }
-    
-    //Get filtered Activity from Core Data
-    @objc public func getFilteredActivity(text:String)->[Activity] {
-        do {
-            let request = Activity.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
-            request.predicate = NSPredicate(format: "activityName CONTAINS[cd] %@", text)
-            let foodItems = try context.fetch(request)
-            return foodItems
-        } catch let error as NSError {
-            print("Could not get filtered Activity. \(error), \(error.userInfo)")
-        }
-        return []
-    }
     
     //Get filtered Food from Core Data
     @objc public func getFilteredFood(text:String)->[Food] {
@@ -173,7 +223,6 @@ import UIKit
         }
         return false
     }
-    
     
     
     //Get all Food from Core Data

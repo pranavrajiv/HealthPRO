@@ -29,9 +29,9 @@ class ExerciseViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     @objc private func addNewButtonTouchUp() {
-//        let secondViewController = ParsedNutritionLabelViewController.init()
-//        secondViewController.modalPresentationStyle = .fullScreen
-//        self.present(secondViewController, animated: true, completion: nil)
+        let secondViewController = ActivityInfoViewController.init()
+        secondViewController.modalPresentationStyle = .fullScreen
+        self.present(secondViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,9 +48,9 @@ class ExerciseViewController: UIViewController,UITableViewDataSource,UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchBarField.resignFirstResponder()
 
-//        let secondViewController = ParsedNutritionLabelViewController.init(foodId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!))
-//        secondViewController.modalPresentationStyle = .fullScreen
-//        self.present(secondViewController, animated: true, completion: nil)
+        let secondViewController = ActivityInfoViewController.init(activityId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!))
+        secondViewController.modalPresentationStyle = .fullScreen
+        self.present(secondViewController, animated: true, completion: nil)
         
     }
     

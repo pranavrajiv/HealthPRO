@@ -25,9 +25,8 @@
                                         <color key="textColor" red="0.61479038120520235" green="0.0057555172588930137" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfa-h2-BZs">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfa-h2-BZs">
                                         <rect key="frame" x="282.33333333333331" y="9.6666666666666643" width="82.666666666666686" height="31"/>
-                                        <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Add New"/>
                                     </button>
                                 </subviews>
