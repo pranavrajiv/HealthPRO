@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F844AE0D28189838000FBCF1 /* activity.csv in Resources */ = {isa = PBXBuildFile; fileRef = F844AE0C28189838000FBCF1 /* activity.csv */; };
-		F844AE7C281A58F8000FBCF1 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AE76281A58F8000FBCF1 /* Activity+CoreDataClass.swift */; };
-		F844AE7D281A58F8000FBCF1 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AE77281A58F8000FBCF1 /* Activity+CoreDataProperties.swift */; };
-		F844AE7E281A58F8000FBCF1 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AE78281A58F8000FBCF1 /* Food+CoreDataClass.swift */; };
-		F844AE7F281A58F8000FBCF1 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AE79281A58F8000FBCF1 /* Food+CoreDataProperties.swift */; };
-		F844AE80281A58F8000FBCF1 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AE7A281A58F8000FBCF1 /* User+CoreDataClass.swift */; };
-		F844AE81281A58F8000FBCF1 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AE7B281A58F8000FBCF1 /* User+CoreDataProperties.swift */; };
 		F844AEF7281B492F000FBCF1 /* ActivityInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */; };
 		F844AEF8281B492F000FBCF1 /* ActivityInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F844AEF6281B492F000FBCF1 /* ActivityInfoViewController.xib */; };
 		F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84575BC28020DB900590F5C /* AppDelegate.swift */; };
@@ -41,6 +35,12 @@
 		F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B9152807F6DA00874872 /* CoreDataHandler.swift */; };
 		F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */; };
 		F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */; };
+		F88A6732281B645900758D11 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A672C281B645900758D11 /* Food+CoreDataClass.swift */; };
+		F88A6733281B645900758D11 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A672D281B645900758D11 /* Food+CoreDataProperties.swift */; };
+		F88A6734281B645900758D11 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A672E281B645900758D11 /* Activity+CoreDataClass.swift */; };
+		F88A6735281B645900758D11 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A672F281B645900758D11 /* Activity+CoreDataProperties.swift */; };
+		F88A6736281B645900758D11 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A6730281B645900758D11 /* User+CoreDataClass.swift */; };
+		F88A6737281B645900758D11 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A6731281B645900758D11 /* User+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,12 +62,6 @@
 
 /* Begin PBXFileReference section */
 		F844AE0C28189838000FBCF1 /* activity.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = activity.csv; sourceTree = "<group>"; };
-		F844AE76281A58F8000FBCF1 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F844AE77281A58F8000FBCF1 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F844AE78281A58F8000FBCF1 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F844AE79281A58F8000FBCF1 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F844AE7A281A58F8000FBCF1 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F844AE7B281A58F8000FBCF1 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInfoViewController.swift; sourceTree = "<group>"; };
 		F844AEF6281B492F000FBCF1 /* ActivityInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityInfoViewController.xib; sourceTree = "<group>"; };
 		F84575B928020DB900590F5C /* HealthPRO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthPRO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +93,12 @@
 		F861B9152807F6DA00874872 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedNutritionLabelViewController.swift; sourceTree = "<group>"; };
 		F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParsedNutritionLabelViewController.xib; sourceTree = "<group>"; };
+		F88A672C281B645900758D11 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F88A672D281B645900758D11 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F88A672E281B645900758D11 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F88A672F281B645900758D11 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F88A6730281B645900758D11 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F88A6731281B645900758D11 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,12 +129,12 @@
 		F84575B028020DB900590F5C = {
 			isa = PBXGroup;
 			children = (
-				F844AE76281A58F8000FBCF1 /* Activity+CoreDataClass.swift */,
-				F844AE77281A58F8000FBCF1 /* Activity+CoreDataProperties.swift */,
-				F844AE78281A58F8000FBCF1 /* Food+CoreDataClass.swift */,
-				F844AE79281A58F8000FBCF1 /* Food+CoreDataProperties.swift */,
-				F844AE7A281A58F8000FBCF1 /* User+CoreDataClass.swift */,
-				F844AE7B281A58F8000FBCF1 /* User+CoreDataProperties.swift */,
+				F88A672C281B645900758D11 /* Food+CoreDataClass.swift */,
+				F88A672D281B645900758D11 /* Food+CoreDataProperties.swift */,
+				F88A672E281B645900758D11 /* Activity+CoreDataClass.swift */,
+				F88A672F281B645900758D11 /* Activity+CoreDataProperties.swift */,
+				F88A6730281B645900758D11 /* User+CoreDataClass.swift */,
+				F88A6731281B645900758D11 /* User+CoreDataProperties.swift */,
 				F84575BB28020DB900590F5C /* HealthPRO */,
 				F84575D528020DBB00590F5C /* HealthPROTests */,
 				F84575DF28020DBB00590F5C /* HealthPROUITests */,
@@ -359,21 +359,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844AEF7281B492F000FBCF1 /* ActivityInfoViewController.swift in Sources */,
-				F844AE7E281A58F8000FBCF1 /* Food+CoreDataClass.swift in Sources */,
-				F844AE7D281A58F8000FBCF1 /* Activity+CoreDataProperties.swift in Sources */,
+				F88A6735281B645900758D11 /* Activity+CoreDataProperties.swift in Sources */,
 				F84575C128020DB900590F5C /* LoginViewController.swift in Sources */,
-				F844AE7C281A58F8000FBCF1 /* Activity+CoreDataClass.swift in Sources */,
 				F84575C728020DB900590F5C /* HealthPRO.xcdatamodeld in Sources */,
 				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
 				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
+				F88A6733281B645900758D11 /* Food+CoreDataProperties.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
-				F844AE81281A58F8000FBCF1 /* User+CoreDataProperties.swift in Sources */,
-				F844AE80281A58F8000FBCF1 /* User+CoreDataClass.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
+				F88A6734281B645900758D11 /* Activity+CoreDataClass.swift in Sources */,
+				F88A6737281B645900758D11 /* User+CoreDataProperties.swift in Sources */,
 				F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */,
 				F85C3516281209600068A5F5 /* Weather.swift in Sources */,
-				F844AE7F281A58F8000FBCF1 /* Food+CoreDataProperties.swift in Sources */,
+				F88A6732281B645900758D11 /* Food+CoreDataClass.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
+				F88A6736281B645900758D11 /* User+CoreDataClass.swift in Sources */,
 				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,

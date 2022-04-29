@@ -4,6 +4,7 @@
         <attribute name="activityId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="activityName" optional="YES" attributeType="String"/>
         <attribute name="caloriesPerHourPerLb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isIndoor" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Food" representedClassName="Food" syncable="YES">
         <attribute name="calcium" optional="YES" attributeType="String"/>
@@ -25,7 +26,7 @@
         <attribute name="passcode" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Activity" positionX="-63" positionY="81" width="128" height="74"/>
+        <element name="Activity" positionX="-63" positionY="81" width="128" height="89"/>
         <element name="Food" positionX="-63" positionY="0" width="128" height="224"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>

@@ -34,12 +34,13 @@ import UIKit
     }
    
     //Add new activity to Core Data
-    @objc public func addActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double)->Bool {
+    @objc public func addActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double,isIndoor:String)->Bool {
         
         let newActivity = Activity(context: context)
         newActivity.activityId = activityId
         newActivity.activityName = activityName
         newActivity.caloriesPerHourPerLb = caloriesPerHourPerLb
+        newActivity.isIndoor = isIndoor
         do {
             try context.save()
         } catch let error as NSError {
@@ -50,13 +51,14 @@ import UIKit
     }
     
     //Update Activity in Core Data
-    @objc public func updateActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double)->Bool {
+    @objc public func updateActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double,isIndoor:String)->Bool {
         do {
             let request = Activity.fetchRequest()
             request.predicate = NSPredicate(format: "activityId == %lld", activityId)
             let activityItems = try context.fetch(request)
             activityItems.first!.activityName = activityName
             activityItems.first!.caloriesPerHourPerLb = caloriesPerHourPerLb
+            activityItems.first!.isIndoor = isIndoor
             try context.save()
             
         } catch let error as NSError {
@@ -126,7 +128,7 @@ import UIKit
     
     
     //Update Food in Core Data
-    @objc public func addFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
+    @objc public func addFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String, protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
         let newFood = Food(context: context)
         newFood.foodId = foodId
         newFood.foodName = foodName
@@ -152,7 +154,7 @@ import UIKit
     }
     
     //Update Food in Core Data
-    @objc public func updateFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String,protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
+    @objc public func updateFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String, protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
         
        do {
             let request = Food.fetchRequest()

@@ -33,7 +33,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         if(self.activityItem != nil) {
             self.activityName.text = self.activityItem.activityName
             self.calories.text = self.activityItem.caloriesPerHourPerLb.description
-       //todo isIndoorButton
+            self.isIndoorButton.setTitle(self.activityItem.isIndoor, for: .normal)
         }
         self.activityName.delegate = self
         self.calories.delegate = self
@@ -81,9 +81,9 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         
         var movement:CGFloat = 0
         if up {//Move the keyboard up so that the textField is not covered
-            movement = -max(0,textFieldLocation.y - keyBoardFrame.origin.y + 5)
+            movement = -max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5)
         } else {//Move the keyboard down as much as it was moved up
-            movement = max(0,textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+            movement = max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
         }
         UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
             self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
@@ -124,11 +124,11 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         //new activity
         if (self.activityItem == nil) {
             let largestActivityID = viewController.coreDataHandler.getAllActivities().map { $0.activityId }.max()
-            _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID! + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber)
+            _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID! + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
         }
         else {
             //update activity
-            _ = viewController.coreDataHandler.updateActivity(activityId: self.activityItem.activityId, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber)
+            _ = viewController.coreDataHandler.updateActivity(activityId: self.activityItem.activityId, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber,isIndoor: self.isIndoorButton.titleLabel!.text!)
         }
         
         self.dismiss(animated: true)

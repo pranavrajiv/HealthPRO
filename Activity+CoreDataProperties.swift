@@ -19,6 +19,7 @@ extension Activity {
     @NSManaged public var activityId: Int64
     @NSManaged public var activityName: String?
     @NSManaged public var caloriesPerHourPerLb: Double
+    @NSManaged public var isIndoor: String?
 
 }
 

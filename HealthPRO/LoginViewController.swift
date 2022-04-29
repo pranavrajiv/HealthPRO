@@ -251,8 +251,8 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
 
         for i in 0...result.shape.rows - 1 {
             print(i)
-            if let activityName = result.selecting(columnNames: "Activity (1 hour)").columns.first?[i] as? String,let calories = result.selecting(columnNames: "Calories Per Lb").columns.first?[i] as? Double {
-               _ = self.coreDataHandler.addActivity(activityId: Int64(i), activityName: activityName, caloriesPerHourPerLb: Double(calories))
+            if let activityName = result.selecting(columnNames: "Activity (1 hour)").columns.first?[i] as? String,let calories = result.selecting(columnNames: "Calories Per Lb").columns.first?[i] as? Double,let isIndoor = result.selecting(columnNames: "Is Indoor").columns.first?[i] as? String {
+                _ = self.coreDataHandler.addActivity(activityId: Int64(i), activityName: activityName, caloriesPerHourPerLb: Double(calories), isIndoor: isIndoor)
             }
         }
     }
@@ -260,15 +260,6 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     
     //post onboarding steps
     @objc private func afterInitialLaunch() {
-//        let activs = self.coreDataHandler.getAllActivities()
-//
-//        for activ in activs {
-//            print(activ.activityId)
-//            print(activ.activityName)
-//            print(activ.caloriesPerHourPerLb)
-//            print("\n\n")
-//        }
-        
         self.activityIndicator.stopAnimating()
         self.blurView.isHidden = true;
     }
