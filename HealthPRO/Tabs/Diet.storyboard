@@ -27,7 +27,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfa-h2-BZs">
                                         <rect key="frame" x="282.33333333333331" y="9.6666666666666643" width="82.666666666666686" height="31"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Add New"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Add New" cornerStyle="capsule"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>

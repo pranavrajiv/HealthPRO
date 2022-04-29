@@ -41,6 +41,8 @@
 		F88A6735281B645900758D11 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A672F281B645900758D11 /* Activity+CoreDataProperties.swift */; };
 		F88A6736281B645900758D11 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A6730281B645900758D11 /* User+CoreDataClass.swift */; };
 		F88A6737281B645900758D11 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A6731281B645900758D11 /* User+CoreDataProperties.swift */; };
+		F88A675D281BA6F300758D11 /* LogNutritionAndActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */; };
+		F88A675E281BA6F300758D11 /* LogNutritionAndActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F88A675C281BA6F300758D11 /* LogNutritionAndActivityViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,8 @@
 		F88A672F281B645900758D11 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F88A6730281B645900758D11 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F88A6731281B645900758D11 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNutritionAndActivityViewController.swift; sourceTree = "<group>"; };
+		F88A675C281BA6F300758D11 /* LogNutritionAndActivityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogNutritionAndActivityViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,8 @@
 				F84575C028020DB900590F5C /* LoginViewController.swift */,
 				F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */,
 				F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */,
+				F88A675C281BA6F300758D11 /* LogNutritionAndActivityViewController.xib */,
+				F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */,
 				F844AEF6281B492F000FBCF1 /* ActivityInfoViewController.xib */,
 				F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */,
 				F85C353E28161BCF0068A5F5 /* pre-pop data */,
@@ -324,6 +330,7 @@
 			files = (
 				F85C354028161C100068A5F5 /* nutrition.csv in Resources */,
 				F844AE0D28189838000FBCF1 /* activity.csv in Resources */,
+				F88A675E281BA6F300758D11 /* LogNutritionAndActivityViewController.xib in Resources */,
 				F84575CC28020DBB00590F5C /* LaunchScreen.storyboard in Resources */,
 				F844AEF8281B492F000FBCF1 /* ActivityInfoViewController.xib in Resources */,
 				F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */,
@@ -365,6 +372,7 @@
 				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
 				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
 				F88A6733281B645900758D11 /* Food+CoreDataProperties.swift in Sources */,
+				F88A675D281BA6F300758D11 /* LogNutritionAndActivityViewController.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
 				F88A6734281B645900758D11 /* Activity+CoreDataClass.swift in Sources */,

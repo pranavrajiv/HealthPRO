@@ -19,6 +19,8 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     var foodItem:Food!
     var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":"","Potassium":""]
     var activeTextField:UITextField!
+    //stores current parent so that the parent can be dismissed if deleting an item
+    private var presentingController: UIViewController?
 
     convenience init( ocrText: String ) {
         self.init()
@@ -54,6 +56,12 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
        
         self.itemNameVal.delegate = self
         self.macroTextFieldCollections.forEach({$0.delegate = self})
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presentingController = presentingViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,8 +135,13 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     @objc private func deleteButtonTouchUp() {
         if let food = self.foodItem {
             _ = CoreDataHandler.init().deleteFoodForId(foodId: food.foodId)
+            
+            self.dismiss(animated: false, completion: {
+                     self.presentingController?.dismiss(animated: false)
+            })
+        } else {
+            self.dismiss(animated: true)
         }
-        self.dismiss(animated: true)
     }
 
     @objc private func processOcrText() {
@@ -201,12 +214,20 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = (textField.accessibilityIdentifier == $0.accessibilityIdentifier)})
         self.activeTextField = textField
         
+        self.saveButton.isUserInteractionEnabled = false
+        self.deleteButton.isUserInteractionEnabled = false
+        self.cancelButton.isUserInteractionEnabled = false
+        
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.itemNameVal.isUserInteractionEnabled = true
         self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = true})
         self.activeTextField = textField
+        
+        self.saveButton.isUserInteractionEnabled = true
+        self.deleteButton.isUserInteractionEnabled = true
+        self.cancelButton.isUserInteractionEnabled = true
     }
 }
 

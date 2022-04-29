@@ -68,10 +68,9 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchBarField.resignFirstResponder()
 
-        let secondViewController = ParsedNutritionLabelViewController.init(foodId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!))
+        let secondViewController = LogNutritionAndActivityViewController.init(id: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Food")
         secondViewController.modalPresentationStyle = .fullScreen
         self.present(secondViewController, animated: true, completion: nil)
-        
     }
 
     

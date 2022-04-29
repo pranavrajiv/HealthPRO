@@ -17,6 +17,8 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     @IBOutlet weak var calories: UITextField!
     var activeTextField:UITextField!
     var activityItem:Activity!
+    //stores current parent so that the parent can be dismissed if deleting an item
+    private var presentingController: UIViewController?
     
     convenience init( activityId: Int64 ) {
         self.init()
@@ -38,6 +40,12 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         self.activityName.delegate = self
         self.calories.delegate = self
         
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presentingController = presentingViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,12 +103,23 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         self.calories.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.calories.accessibilityIdentifier)
         self.activeTextField = textField
         
+        self.saveButton.isUserInteractionEnabled = false
+        self.deleteButton.isUserInteractionEnabled = false
+        self.cancelButton.isUserInteractionEnabled = false
+        self.isIndoorButton.isUserInteractionEnabled = false
+        
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activityName.isUserInteractionEnabled = true
         self.calories.isUserInteractionEnabled = true
         self.activeTextField = textField
+        
+        self.saveButton.isUserInteractionEnabled = true
+        self.deleteButton.isUserInteractionEnabled = true
+        self.cancelButton.isUserInteractionEnabled = true
+        self.isIndoorButton.isUserInteractionEnabled = true
+        
     }
     
     @objc private func saveButtonTouchUp() {
@@ -138,11 +157,18 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         self.dismiss(animated: true)
     }
     
+    
     @objc private func deleteButtonTouchUp() {
-        if let activ = self.activityItem {
-            _ = CoreDataHandler.init().deleteActivityForId(activityId: activ.activityId)
+        if let currentActivity = self.activityItem {
+            _ = CoreDataHandler.init().deleteActivityForId(activityId: currentActivity.activityId)
+            
+            self.dismiss(animated: false, completion: {
+                     self.presentingController?.dismiss(animated: false)
+            })
+        } else {
+            self.dismiss(animated: true)
         }
-        self.dismiss(animated: true)
+        
     }
     
     @objc private func isIndoorButtonTouchUp(_ sender: UIButton) {
