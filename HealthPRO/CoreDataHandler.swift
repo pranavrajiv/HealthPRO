@@ -125,6 +125,33 @@ import UIKit
         return false
     }
     
+    //Log user activity into Core Data
+    @objc public func logUserActivity(activityId:Int64, timeStamp:String, duration:Double)->Bool {
+        let logActivity = ActivityHistory(context: context)
+        logActivity.timeStamp = timeStamp
+        logActivity.duration = duration
+        logActivity.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+        logActivity.activityRelationship = self.getActivityForId(activityId: activityId)
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add food. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Get all activity history from Core Data
+    @objc public func getAllActivityHistory()->[ActivityHistory] {
+        do {
+            let request = ActivityHistory.fetchRequest()
+            let activityHistory = try context.fetch(request)
+            return activityHistory
+        } catch let error as NSError {
+            print("Could not get Activity History. \(error), \(error.userInfo)")
+        }
+        return []
+    }
     
     
     //Update Food in Core Data
@@ -226,6 +253,34 @@ import UIKit
         return false
     }
     
+    //Log user food into Core Data
+    @objc public func logUserFood(foodId:Int64, timeStamp:String, servingSize:Double)->Bool {
+        let logFood = FoodHistory(context: context)
+        logFood.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+        logFood.foodRelationship = self.getFoodForId(foodId: foodId)
+        logFood.timeStamp = timeStamp
+        logFood.serviceSize = servingSize
+       
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add food. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Get all food history from Core Data
+    @objc public func getAllFoodHistory()->[FoodHistory] {
+        do {
+            let request = FoodHistory.fetchRequest()
+            let foodHistory = try context.fetch(request)
+            return foodHistory
+        } catch let error as NSError {
+            print("Could not get Food History. \(error), \(error.userInfo)")
+        }
+        return []
+    }
     
     //Get all Food from Core Data
     @objc public func getAllFood()->[Food] {
@@ -240,6 +295,19 @@ import UIKit
         return []
     }
     
+    //Get User from Core Data
+    @objc public func getUser(id:String)->User? {
+        do {
+            let request = User.fetchRequest()
+            let predicate = NSPredicate(format:"loginId == %@",id )
+            request.predicate = predicate
+            let usr = try context.fetch(request).first
+                return usr
+        } catch let error as NSError {
+            print("Could not fetch user. \(error), \(error.userInfo)")
+        }
+        return nil
+    }
     
     //Add new user to Core Data
     @objc public func addUser(id:String, password:String)->Bool {

@@ -100,7 +100,6 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc private func saveButtonTouchUp() {
-
         if((self.itemNameVal.text == nil) || (self.itemNameVal.text == "")){
             let ac = UIAlertController(title: "Error", message: "Food Item name empty. Please enter a name before saving", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))

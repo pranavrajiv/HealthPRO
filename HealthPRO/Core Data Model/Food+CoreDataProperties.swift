@@ -2,7 +2,7 @@
 //  Food+CoreDataProperties.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/28/22.
+//  Created by Pranav Rajiv on 4/29/22.
 //
 //
 
@@ -29,6 +29,24 @@ extension Food {
     @NSManaged public var sodium: String?
     @NSManaged public var sugars: String?
     @NSManaged public var total_fat: String?
+    @NSManaged public var activityHistoryRelationship: NSSet?
+
+}
+
+// MARK: Generated accessors for activityHistoryRelationship
+extension Food {
+
+    @objc(addActivityHistoryRelationshipObject:)
+    @NSManaged public func addToActivityHistoryRelationship(_ value: FoodHistory)
+
+    @objc(removeActivityHistoryRelationshipObject:)
+    @NSManaged public func removeFromActivityHistoryRelationship(_ value: FoodHistory)
+
+    @objc(addActivityHistoryRelationship:)
+    @NSManaged public func addToActivityHistoryRelationship(_ values: NSSet)
+
+    @objc(removeActivityHistoryRelationship:)
+    @NSManaged public func removeFromActivityHistoryRelationship(_ values: NSSet)
 
 }
 

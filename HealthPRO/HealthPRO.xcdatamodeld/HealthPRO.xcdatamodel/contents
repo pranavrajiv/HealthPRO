@@ -5,6 +5,13 @@
         <attribute name="activityName" optional="YES" attributeType="String"/>
         <attribute name="caloriesPerHourPerLb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isIndoor" optional="YES" attributeType="String"/>
+        <relationship name="activityHistoryRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ActivityHistory" inverseName="activityRelationship" inverseEntity="ActivityHistory"/>
+    </entity>
+    <entity name="ActivityHistory" representedClassName="ActivityHistory" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="String"/>
+        <relationship name="activityRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="activityHistoryRelationship" inverseEntity="Activity"/>
+        <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipActivity" inverseEntity="User"/>
     </entity>
     <entity name="Food" representedClassName="Food" syncable="YES">
         <attribute name="calcium" optional="YES" attributeType="String"/>
@@ -20,14 +27,25 @@
         <attribute name="sodium" optional="YES" attributeType="String"/>
         <attribute name="sugars" optional="YES" attributeType="String"/>
         <attribute name="total_fat" optional="YES" attributeType="String"/>
+        <relationship name="activityHistoryRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodHistory" inverseName="foodRelationship" inverseEntity="FoodHistory"/>
+    </entity>
+    <entity name="FoodHistory" representedClassName="FoodHistory" syncable="YES">
+        <attribute name="serviceSize" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="String"/>
+        <relationship name="foodRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="activityHistoryRelationship" inverseEntity="Food"/>
+        <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipFood" inverseEntity="User"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="loginId" optional="YES" attributeType="String"/>
         <attribute name="passcode" optional="YES" attributeType="String"/>
+        <relationship name="userHistoryRelationshipActivity" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ActivityHistory" inverseName="userRelationship" inverseEntity="ActivityHistory"/>
+        <relationship name="userHistoryRelationshipFood" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodHistory" inverseName="userRelationship" inverseEntity="FoodHistory"/>
     </entity>
     <elements>
-        <element name="Activity" positionX="-63" positionY="81" width="128" height="89"/>
-        <element name="Food" positionX="-63" positionY="0" width="128" height="224"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="Activity" positionX="-63" positionY="81" width="128" height="104"/>
+        <element name="Food" positionX="-63" positionY="0" width="128" height="239"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="ActivityHistory" positionX="-63" positionY="90" width="128" height="89"/>
+        <element name="FoodHistory" positionX="-45" positionY="99" width="128" height="89"/>
     </elements>
 </model>

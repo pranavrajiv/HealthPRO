@@ -57,15 +57,25 @@ class LogNutritionAndActivityViewController: UIViewController {
         NotificationCenter.default.removeObserver(UIResponder.keyboardWillHideNotification)
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.dismissButton.isUserInteractionEnabled = false
+        self.logItButton.isUserInteractionEnabled = false
+        self.editButton.isUserInteractionEnabled = false
+        self.datePicker.isUserInteractionEnabled = false
+        
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.dismissButton.isUserInteractionEnabled = true
+        self.logItButton.isUserInteractionEnabled = true
+        self.editButton.isUserInteractionEnabled = true
+        self.datePicker.isUserInteractionEnabled = true
+    }
+    
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             animateTextField(up: false, keyBoardFrame: keyboardRectangle)
-            
-            self.dismissButton.isUserInteractionEnabled = true
-            self.logItButton.isUserInteractionEnabled = true
-            self.editButton.isUserInteractionEnabled = true
-            self.datePicker.isUserInteractionEnabled = true
         }
     }
     
@@ -73,11 +83,6 @@ class LogNutritionAndActivityViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             animateTextField(up: true, keyBoardFrame: keyboardRectangle)
-            
-            self.dismissButton.isUserInteractionEnabled = false
-            self.logItButton.isUserInteractionEnabled = false
-            self.editButton.isUserInteractionEnabled = false
-            self.datePicker.isUserInteractionEnabled = false
         }
     }
     
@@ -137,6 +142,12 @@ class LogNutritionAndActivityViewController: UIViewController {
         if let calorieNum = Double(calorieHoursString!.filter("0123456789.".contains)) {
             calorieNumber = calorieNum
         }
+        if self.logType == "Activity" {
+            _ = CoreDataHandler.init().logUserActivity(activityId: self.itemId, timeStamp: self.datePicker.date.description, duration: calorieNumber)
+        } else {
+            _ = CoreDataHandler.init().logUserFood(foodId: self.itemId, timeStamp: self.datePicker.date.description, servingSize: calorieNumber)
+        }
+        
         self.dismiss(animated: true)
     }
     
