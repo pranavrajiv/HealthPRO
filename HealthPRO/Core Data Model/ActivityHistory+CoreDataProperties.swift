@@ -16,8 +16,9 @@ extension ActivityHistory {
         return NSFetchRequest<ActivityHistory>(entityName: "ActivityHistory")
     }
 
-    @NSManaged public var timeStamp: String?
     @NSManaged public var duration: Double
+    @NSManaged public var timeStamp: Date?
+    @NSManaged public var activityHistoryId: Int64
     @NSManaged public var activityRelationship: Activity?
     @NSManaged public var userRelationship: User?
 

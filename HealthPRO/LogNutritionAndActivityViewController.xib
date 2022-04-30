@@ -10,9 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogNutritionAndActivityViewController" customModule="HealthPRO" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="FJI-cx-MC7" id="eQN-ci-U0R"/>
                 <outlet property="datePicker" destination="nis-da-gMN" id="U91-dR-v2z"/>
-                <outlet property="dismissButton" destination="yFK-VP-Afu" id="FuB-dZ-lS2"/>
-                <outlet property="editButton" destination="FJI-cx-MC7" id="eQN-ci-U0R"/>
+                <outlet property="editButton" destination="yFK-VP-Afu" id="FuB-dZ-lS2"/>
                 <outlet property="hrsAndServingLabel" destination="9Tj-t4-JsL" id="S4a-6r-eLp"/>
                 <outlet property="hrsAndServingTextField" destination="sSa-b0-0vt" id="3ux-tl-o4M"/>
                 <outlet property="itemName" destination="Uwg-Ti-kfu" id="I4M-xg-NHe"/>
@@ -41,13 +41,6 @@
                     <color key="textColor" red="0.26468662193203951" green="0.2803417140715676" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJI-cx-MC7">
-                    <rect key="frame" x="276.66666666666669" y="54" width="88.333333333333314" height="32"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Edit Item" cornerStyle="capsule">
-                        <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                    </buttonConfiguration>
-                </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="TiR-KO-jUl">
                     <rect key="frame" x="10" y="555.66666666666663" width="355" height="118"/>
                     <subviews>
@@ -78,7 +71,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFK-VP-Afu">
                                     <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="44"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="filled" title="Dismiss" cornerStyle="capsule">
+                                    <buttonConfiguration key="configuration" style="filled" title="Edit Item" cornerStyle="capsule">
                                         <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                                         <color key="baseBackgroundColor" red="0.51068292150000005" green="0.40716481780000002" blue="0.93939012290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </buttonConfiguration>
@@ -103,12 +96,19 @@
                     </constraints>
                 </stackView>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="nis-da-gMN">
-                    <rect key="frame" x="20" y="111" width="335" height="350"/>
+                    <rect key="frame" x="20" y="110.66666666666669" width="335" height="350"/>
                     <color key="backgroundColor" red="0.94805461229999999" green="0.84250881730000005" blue="0.6734042013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="350" id="bsq-1g-Ni0"/>
                     </constraints>
                 </datePicker>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJI-cx-MC7">
+                    <rect key="frame" x="10" y="54" width="74" height="32"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Cancel" cornerStyle="capsule">
+                        <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                    </buttonConfiguration>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.56947345274713557" green="0.86087566614151001" blue="0.58302733827891895" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -118,16 +118,16 @@
                 <constraint firstItem="TiR-KO-jUl" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CzK-Bm-b6J"/>
                 <constraint firstItem="nis-da-gMN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Ji5-yR-qkU"/>
                 <constraint firstItem="ndZ-gx-vhC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="MgX-Px-a8P"/>
-                <constraint firstItem="FJI-cx-MC7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Q27-f5-mZI"/>
                 <constraint firstItem="Uwg-Ti-kfu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Qj7-uV-1Kq"/>
                 <constraint firstItem="TiR-KO-jUl" firstAttribute="top" secondItem="Uwg-Ti-kfu" secondAttribute="bottom" constant="25" id="Tc2-rM-cxb"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FJI-cx-MC7" secondAttribute="trailing" constant="10" id="Wus-Tt-YnM"/>
                 <constraint firstItem="TiR-KO-jUl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="etG-xt-6Y1"/>
+                <constraint firstItem="FJI-cx-MC7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="gGp-q5-uVN"/>
                 <constraint firstItem="ndZ-gx-vhC" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="guk-dW-0vK"/>
                 <constraint firstItem="Uwg-Ti-kfu" firstAttribute="top" secondItem="nis-da-gMN" secondAttribute="bottom" constant="20" id="k4q-7h-I7L"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TiR-KO-jUl" secondAttribute="trailing" constant="10" id="nhM-Kh-gMs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nis-da-gMN" secondAttribute="trailing" constant="20" id="q14-6o-LlF"/>
                 <constraint firstItem="Uwg-Ti-kfu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="t9f-Jq-U9L"/>
+                <constraint firstItem="FJI-cx-MC7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="x5c-rJ-itw"/>
                 <constraint firstItem="nis-da-gMN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xGE-ny-f7I"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uwg-Ti-kfu" secondAttribute="trailing" constant="10" id="xro-Qm-bfO"/>
             </constraints>

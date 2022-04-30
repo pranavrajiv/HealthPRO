@@ -12,10 +12,11 @@ class LogNutritionAndActivityViewController: UIViewController {
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var logItButton: UIButton!
-    @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var hrsAndServingLabel: UILabel!
     @IBOutlet weak var hrsAndServingTextField: UITextField!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    var historyId:Int64!
     
     var logType:String!
     var itemId:Int64!
@@ -24,6 +25,19 @@ class LogNutritionAndActivityViewController: UIViewController {
         self.init()
         self.logType = type
         self.itemId = id
+    }
+    
+    convenience init(historyId: Int64, type:String) {
+        self.init()
+        self.logType = type
+        self.historyId = historyId
+        
+        if self.logType == "Activity" {
+            self.itemId = CoreDataHandler.init().getAllActivityHistory().first(where: {$0.activityHistoryId == historyId})?.activityRelationship?.activityId
+        } else {
+            self.itemId = CoreDataHandler.init().getAllFoodHistory().first(where: {$0.foodHistoryId == historyId})?.foodRelationship?.foodId
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -37,10 +51,22 @@ class LogNutritionAndActivityViewController: UIViewController {
             self.hrsAndServingLabel.text = "Serving Size"
         }
         
+        self.cancelButton.addTarget(self, action: #selector(self.cancelButtonTouchUp), for: .touchUpInside)
         self.editButton.addTarget(self, action: #selector(self.editButtonTouchUpInside), for: .touchUpInside)
-        self.dismissButton.addTarget(self, action: #selector(self.cancelButtonTouchUp), for: .touchUpInside)
         self.logItButton.addTarget(self, action: #selector(self.logButtonTouchUp), for: .touchUpInside)
         
+        if (self.historyId != nil) {
+            self.logItButton.setTitle("Update History", for: .normal)
+            self.editButton.setTitle("Delete History", for: .normal)
+            
+            if self.logType == "Activity" {
+                self.hrsAndServingTextField.text = CoreDataHandler.init().getAllActivityHistory().first(where: {$0.activityHistoryId == historyId})?.duration.description
+                self.datePicker.date = (CoreDataHandler.init().getAllActivityHistory().first(where: {$0.activityHistoryId == historyId})?.timeStamp)!
+            } else {
+                self.hrsAndServingTextField.text = CoreDataHandler.init().getAllFoodHistory().first(where: {$0.foodHistoryId == historyId})?.serviceSize.description
+                self.datePicker.date = (CoreDataHandler.init().getAllFoodHistory().first(where: {$0.foodHistoryId == historyId})?.timeStamp)!
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,26 +83,15 @@ class LogNutritionAndActivityViewController: UIViewController {
         NotificationCenter.default.removeObserver(UIResponder.keyboardWillHideNotification)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.dismissButton.isUserInteractionEnabled = false
-        self.logItButton.isUserInteractionEnabled = false
-        self.editButton.isUserInteractionEnabled = false
-        self.datePicker.isUserInteractionEnabled = false
-        
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.dismissButton.isUserInteractionEnabled = true
-        self.logItButton.isUserInteractionEnabled = true
-        self.editButton.isUserInteractionEnabled = true
-        self.datePicker.isUserInteractionEnabled = true
-    }
-    
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             animateTextField(up: false, keyBoardFrame: keyboardRectangle)
         }
+        self.editButton.isUserInteractionEnabled = true
+        self.logItButton.isUserInteractionEnabled = true
+        self.cancelButton.isUserInteractionEnabled = true
+        self.datePicker.isUserInteractionEnabled = true
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -84,6 +99,11 @@ class LogNutritionAndActivityViewController: UIViewController {
             let keyboardRectangle = keyboardFrame.cgRectValue
             animateTextField(up: true, keyBoardFrame: keyboardRectangle)
         }
+        self.editButton.isUserInteractionEnabled = false
+        self.logItButton.isUserInteractionEnabled = false
+        self.cancelButton.isUserInteractionEnabled = false
+        self.datePicker.isUserInteractionEnabled = false
+        
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
@@ -108,15 +128,25 @@ class LogNutritionAndActivityViewController: UIViewController {
         super.touchesBegan(touches, with: event)
     }
 
+    
     @objc private func editButtonTouchUpInside() {
-        if self.logType == "Activity" {
-            let secondViewController = ActivityInfoViewController.init(activityId:self.itemId)
-            secondViewController.modalPresentationStyle = .fullScreen
-            self.present(secondViewController, animated: true, completion: nil)
-        } else {
-            let secondViewController = ParsedNutritionLabelViewController.init(foodId: self.itemId)
-            secondViewController.modalPresentationStyle = .fullScreen
-            self.present(secondViewController, animated: true, completion: nil)
+        if (self.historyId != nil) {
+            if self.logType == "Activity" {
+                _ = CoreDataHandler.init().deleteActivityHistoryForId(activityHistoryId: self.historyId)
+            } else {
+                _ = CoreDataHandler.init().deleteFoodHistoryForId(foodHistoryId: self.historyId)
+            }
+            self.dismiss(animated: true, completion: nil)
+        }else {
+            if self.logType == "Activity" {
+                let secondViewController = ActivityInfoViewController.init(activityId:self.itemId)
+                secondViewController.modalPresentationStyle = .fullScreen
+                self.present(secondViewController, animated: true, completion: nil)
+            } else {
+                let secondViewController = ParsedNutritionLabelViewController.init(foodId: self.itemId)
+                secondViewController.modalPresentationStyle = .fullScreen
+                self.present(secondViewController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -127,7 +157,7 @@ class LogNutritionAndActivityViewController: UIViewController {
     @objc private func logButtonTouchUp() {
         
         if (self.hrsAndServingTextField.text=="") {
-            let ac = UIAlertController(title: "Log Error", message: "Please enter serving size", preferredStyle: .alert)
+            let ac = UIAlertController(title: "Error", message: "Please enter serving size", preferredStyle: .alert)
             if self.logType == "Activity" {
                 ac.message = "Please enter the hours worked out"
             }
@@ -136,16 +166,35 @@ class LogNutritionAndActivityViewController: UIViewController {
             return
         }
         
-        //TODO log the history
         let calorieHoursString = self.hrsAndServingTextField.text
         var calorieNumber = 0.0
         if let calorieNum = Double(calorieHoursString!.filter("0123456789.".contains)) {
             calorieNumber = calorieNum
         }
-        if self.logType == "Activity" {
-            _ = CoreDataHandler.init().logUserActivity(activityId: self.itemId, timeStamp: self.datePicker.date.description, duration: calorieNumber)
-        } else {
-            _ = CoreDataHandler.init().logUserFood(foodId: self.itemId, timeStamp: self.datePicker.date.description, servingSize: calorieNumber)
+        if (self.historyId != nil) {
+            if self.logType == "Activity" {
+                _ = CoreDataHandler.init().updateActivityHistory(historyId: self.historyId, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
+            } else {
+                _ = CoreDataHandler.init().updateFoodHistory(historyId: self.historyId,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
+            }
+        }
+        else
+        {
+            if self.logType == "Activity" {
+                var historyId:Int64 = -1
+                if let largestActivityHistoryId = CoreDataHandler.init().getAllActivityHistory().map({$0.activityHistoryId}).max() {
+                    historyId = largestActivityHistoryId
+                }
+                _ = CoreDataHandler.init().logUserActivity(historyId:historyId + 1, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
+              
+            } else {
+                var historyId:Int64 = -1
+                if let largestFoodHistoryId = CoreDataHandler.init().getAllFoodHistory().map({$0.foodHistoryId}).max() {
+                    historyId = largestFoodHistoryId
+                }
+                _ = CoreDataHandler.init().logUserFood(historyId:historyId + 1,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
+            }
+            
         }
         
         self.dismiss(animated: true)

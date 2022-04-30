@@ -16,10 +16,11 @@ extension FoodHistory {
         return NSFetchRequest<FoodHistory>(entityName: "FoodHistory")
     }
 
-    @NSManaged public var timeStamp: String?
     @NSManaged public var serviceSize: Double
-    @NSManaged public var userRelationship: User?
+    @NSManaged public var timeStamp: Date?
+    @NSManaged public var foodHistoryId: Int64
     @NSManaged public var foodRelationship: Food?
+    @NSManaged public var userRelationship: User?
 
 }
 

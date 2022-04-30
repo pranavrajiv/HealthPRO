@@ -18,6 +18,15 @@ class DashboardViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //TODO Temporary button added pragmatically to prevent merge conflicts in nib file that can arise due to implementation of the charts in this VC
+        let myButton = UIButton(type: .system)
+        myButton.tintColor = UIColor.black
+        myButton.backgroundColor = UIColor.systemBlue
+        myButton.frame = CGRect(x: 10, y: 38, width: 100, height: 45)
+        myButton.setTitle("Show History", for: .normal)
+        myButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
+        self.view.addSubview(myButton)
+        
         self.getTheWeather()
         
         if let _ = self.weatherUpdateTimer {
@@ -25,6 +34,15 @@ class DashboardViewController: UIViewController{
         }
         
         self.weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(getTheWeather), userInfo: nil, repeats: true)
+    }
+    
+    @objc func viewHistoryButtonTouchUpInside() {
+        
+        let storyboard = UIStoryboard(name: "UserHistoryViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "userHistoryVC")
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

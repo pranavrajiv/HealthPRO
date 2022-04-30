@@ -142,8 +142,12 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         
         //new activity
         if (self.activityItem == nil) {
-            let largestActivityID = viewController.coreDataHandler.getAllActivities().map { $0.activityId }.max()
-            _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID! + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
+             var largestActivityID:Int64 = -1
+            if let activityID = viewController.coreDataHandler.getAllActivities().map({ $0.activityId }).max() {
+                largestActivityID = activityID
+             }
+            
+            _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
         }
         else {
             //update activity

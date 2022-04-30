@@ -8,8 +8,9 @@
         <relationship name="activityHistoryRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ActivityHistory" inverseName="activityRelationship" inverseEntity="ActivityHistory"/>
     </entity>
     <entity name="ActivityHistory" representedClassName="ActivityHistory" syncable="YES">
+        <attribute name="activityHistoryId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="timeStamp" optional="YES" attributeType="String"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="activityRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="activityHistoryRelationship" inverseEntity="Activity"/>
         <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipActivity" inverseEntity="User"/>
     </entity>
@@ -30,8 +31,9 @@
         <relationship name="activityHistoryRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodHistory" inverseName="foodRelationship" inverseEntity="FoodHistory"/>
     </entity>
     <entity name="FoodHistory" representedClassName="FoodHistory" syncable="YES">
+        <attribute name="foodHistoryId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="serviceSize" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="timeStamp" optional="YES" attributeType="String"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="foodRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="activityHistoryRelationship" inverseEntity="Food"/>
         <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipFood" inverseEntity="User"/>
     </entity>
@@ -43,9 +45,9 @@
     </entity>
     <elements>
         <element name="Activity" positionX="-63" positionY="81" width="128" height="104"/>
+        <element name="ActivityHistory" positionX="-63" positionY="90" width="128" height="104"/>
         <element name="Food" positionX="-63" positionY="0" width="128" height="239"/>
+        <element name="FoodHistory" positionX="-45" positionY="99" width="128" height="104"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="89"/>
-        <element name="ActivityHistory" positionX="-63" positionY="90" width="128" height="89"/>
-        <element name="FoodHistory" positionX="-45" positionY="99" width="128" height="89"/>
     </elements>
 </model>

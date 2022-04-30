@@ -37,16 +37,18 @@
 		F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */; };
 		F88A675D281BA6F300758D11 /* LogNutritionAndActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */; };
 		F88A675E281BA6F300758D11 /* LogNutritionAndActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F88A675C281BA6F300758D11 /* LogNutritionAndActivityViewController.xib */; };
-		F8B4C1F5281C6F22005810C9 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1EB281C6F22005810C9 /* Activity+CoreDataClass.swift */; };
-		F8B4C1F6281C6F22005810C9 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1EC281C6F22005810C9 /* Activity+CoreDataProperties.swift */; };
-		F8B4C1F7281C6F22005810C9 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1ED281C6F22005810C9 /* Food+CoreDataClass.swift */; };
-		F8B4C1F8281C6F22005810C9 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1EE281C6F22005810C9 /* Food+CoreDataProperties.swift */; };
-		F8B4C1F9281C6F22005810C9 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1EF281C6F22005810C9 /* User+CoreDataClass.swift */; };
-		F8B4C1FA281C6F22005810C9 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1F0281C6F22005810C9 /* User+CoreDataProperties.swift */; };
-		F8B4C1FB281C6F22005810C9 /* ActivityHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1F1281C6F22005810C9 /* ActivityHistory+CoreDataClass.swift */; };
-		F8B4C1FC281C6F22005810C9 /* ActivityHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1F2281C6F22005810C9 /* ActivityHistory+CoreDataProperties.swift */; };
-		F8B4C1FD281C6F22005810C9 /* FoodHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1F3281C6F22005810C9 /* FoodHistory+CoreDataClass.swift */; };
-		F8B4C1FE281C6F22005810C9 /* FoodHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C1F4281C6F22005810C9 /* FoodHistory+CoreDataProperties.swift */; };
+		F8B4C218281CB61C005810C9 /* UserHistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */; };
+		F8B4C21A281CB8FF005810C9 /* UserHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C219281CB8FF005810C9 /* UserHistoryViewController.swift */; };
+		F8B4C225281CE150005810C9 /* ActivityHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C21B281CE150005810C9 /* ActivityHistory+CoreDataClass.swift */; };
+		F8B4C226281CE150005810C9 /* ActivityHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C21C281CE150005810C9 /* ActivityHistory+CoreDataProperties.swift */; };
+		F8B4C227281CE150005810C9 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C21D281CE150005810C9 /* Food+CoreDataClass.swift */; };
+		F8B4C228281CE150005810C9 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C21E281CE150005810C9 /* Food+CoreDataProperties.swift */; };
+		F8B4C229281CE150005810C9 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C21F281CE150005810C9 /* Activity+CoreDataClass.swift */; };
+		F8B4C22A281CE150005810C9 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C220281CE150005810C9 /* Activity+CoreDataProperties.swift */; };
+		F8B4C22B281CE150005810C9 /* FoodHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C221281CE150005810C9 /* FoodHistory+CoreDataClass.swift */; };
+		F8B4C22C281CE150005810C9 /* FoodHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C222281CE150005810C9 /* FoodHistory+CoreDataProperties.swift */; };
+		F8B4C22D281CE150005810C9 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C223281CE150005810C9 /* User+CoreDataClass.swift */; };
+		F8B4C22E281CE150005810C9 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C224281CE150005810C9 /* User+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,16 +103,18 @@
 		F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParsedNutritionLabelViewController.xib; sourceTree = "<group>"; };
 		F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNutritionAndActivityViewController.swift; sourceTree = "<group>"; };
 		F88A675C281BA6F300758D11 /* LogNutritionAndActivityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogNutritionAndActivityViewController.xib; sourceTree = "<group>"; };
-		F8B4C1EB281C6F22005810C9 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B4C1EC281C6F22005810C9 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B4C1ED281C6F22005810C9 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B4C1EE281C6F22005810C9 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B4C1EF281C6F22005810C9 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B4C1F0281C6F22005810C9 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B4C1F1281C6F22005810C9 /* ActivityHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B4C1F2281C6F22005810C9 /* ActivityHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B4C1F3281C6F22005810C9 /* FoodHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B4C1F4281C6F22005810C9 /* FoodHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserHistoryViewController.storyboard; sourceTree = "<group>"; };
+		F8B4C219281CB8FF005810C9 /* UserHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryViewController.swift; sourceTree = "<group>"; };
+		F8B4C21B281CE150005810C9 /* ActivityHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8B4C21C281CE150005810C9 /* ActivityHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8B4C21D281CE150005810C9 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8B4C21E281CE150005810C9 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8B4C21F281CE150005810C9 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8B4C220281CE150005810C9 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8B4C221281CE150005810C9 /* FoodHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8B4C222281CE150005810C9 /* FoodHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8B4C223281CE150005810C9 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8B4C224281CE150005810C9 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +177,8 @@
 				F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */,
 				F844AEF6281B492F000FBCF1 /* ActivityInfoViewController.xib */,
 				F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */,
+				F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */,
+				F8B4C219281CB8FF005810C9 /* UserHistoryViewController.swift */,
 				F85C353E28161BCF0068A5F5 /* pre-pop data */,
 				F861B9152807F6DA00874872 /* CoreDataHandler.swift */,
 				F85C3515281209600068A5F5 /* Weather.swift */,
@@ -230,16 +236,16 @@
 		F8B4C1B6281C6396005810C9 /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				F8B4C1EB281C6F22005810C9 /* Activity+CoreDataClass.swift */,
-				F8B4C1EC281C6F22005810C9 /* Activity+CoreDataProperties.swift */,
-				F8B4C1ED281C6F22005810C9 /* Food+CoreDataClass.swift */,
-				F8B4C1EE281C6F22005810C9 /* Food+CoreDataProperties.swift */,
-				F8B4C1EF281C6F22005810C9 /* User+CoreDataClass.swift */,
-				F8B4C1F0281C6F22005810C9 /* User+CoreDataProperties.swift */,
-				F8B4C1F1281C6F22005810C9 /* ActivityHistory+CoreDataClass.swift */,
-				F8B4C1F2281C6F22005810C9 /* ActivityHistory+CoreDataProperties.swift */,
-				F8B4C1F3281C6F22005810C9 /* FoodHistory+CoreDataClass.swift */,
-				F8B4C1F4281C6F22005810C9 /* FoodHistory+CoreDataProperties.swift */,
+				F8B4C21B281CE150005810C9 /* ActivityHistory+CoreDataClass.swift */,
+				F8B4C21C281CE150005810C9 /* ActivityHistory+CoreDataProperties.swift */,
+				F8B4C21D281CE150005810C9 /* Food+CoreDataClass.swift */,
+				F8B4C21E281CE150005810C9 /* Food+CoreDataProperties.swift */,
+				F8B4C21F281CE150005810C9 /* Activity+CoreDataClass.swift */,
+				F8B4C220281CE150005810C9 /* Activity+CoreDataProperties.swift */,
+				F8B4C221281CE150005810C9 /* FoodHistory+CoreDataClass.swift */,
+				F8B4C222281CE150005810C9 /* FoodHistory+CoreDataProperties.swift */,
+				F8B4C223281CE150005810C9 /* User+CoreDataClass.swift */,
+				F8B4C224281CE150005810C9 /* User+CoreDataProperties.swift */,
 			);
 			path = "Core Data Model";
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				F84575F32803E04700590F5C /* NutritionLabel.storyboard in Resources */,
 				F84575F12803E02E00590F5C /* Profile.storyboard in Resources */,
 				F861AF7C280FAF5B00A73F28 /* Dashboard.storyboard in Resources */,
+				F8B4C218281CB61C005810C9 /* UserHistoryViewController.storyboard in Resources */,
 				F84575C428020DB900590F5C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,29 +393,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844AEF7281B492F000FBCF1 /* ActivityInfoViewController.swift in Sources */,
-				F8B4C1F5281C6F22005810C9 /* Activity+CoreDataClass.swift in Sources */,
-				F8B4C1FB281C6F22005810C9 /* ActivityHistory+CoreDataClass.swift in Sources */,
 				F84575C128020DB900590F5C /* LoginViewController.swift in Sources */,
-				F8B4C1FE281C6F22005810C9 /* FoodHistory+CoreDataProperties.swift in Sources */,
-				F8B4C1F9281C6F22005810C9 /* User+CoreDataClass.swift in Sources */,
 				F84575C728020DB900590F5C /* HealthPRO.xcdatamodeld in Sources */,
 				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
-				F8B4C1FD281C6F22005810C9 /* FoodHistory+CoreDataClass.swift in Sources */,
+				F8B4C228281CE150005810C9 /* Food+CoreDataProperties.swift in Sources */,
 				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
-				F8B4C1F7281C6F22005810C9 /* Food+CoreDataClass.swift in Sources */,
 				F88A675D281BA6F300758D11 /* LogNutritionAndActivityViewController.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
-				F8B4C1FC281C6F22005810C9 /* ActivityHistory+CoreDataProperties.swift in Sources */,
+				F8B4C22E281CE150005810C9 /* User+CoreDataProperties.swift in Sources */,
+				F8B4C226281CE150005810C9 /* ActivityHistory+CoreDataProperties.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
+				F8B4C21A281CB8FF005810C9 /* UserHistoryViewController.swift in Sources */,
+				F8B4C225281CE150005810C9 /* ActivityHistory+CoreDataClass.swift in Sources */,
 				F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */,
 				F85C3516281209600068A5F5 /* Weather.swift in Sources */,
+				F8B4C22D281CE150005810C9 /* User+CoreDataClass.swift in Sources */,
+				F8B4C22B281CE150005810C9 /* FoodHistory+CoreDataClass.swift in Sources */,
+				F8B4C22A281CE150005810C9 /* Activity+CoreDataProperties.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
-				F8B4C1F6281C6F22005810C9 /* Activity+CoreDataProperties.swift in Sources */,
 				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
+				F8B4C229281CE150005810C9 /* Activity+CoreDataClass.swift in Sources */,
+				F8B4C227281CE150005810C9 /* Food+CoreDataClass.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,
-				F8B4C1FA281C6F22005810C9 /* User+CoreDataProperties.swift in Sources */,
-				F8B4C1F8281C6F22005810C9 /* Food+CoreDataProperties.swift in Sources */,
+				F8B4C22C281CE150005810C9 /* FoodHistory+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

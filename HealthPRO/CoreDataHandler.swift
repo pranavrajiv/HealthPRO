@@ -126,8 +126,9 @@ import UIKit
     }
     
     //Log user activity into Core Data
-    @objc public func logUserActivity(activityId:Int64, timeStamp:String, duration:Double)->Bool {
+    @objc public func logUserActivity(historyId:Int64,activityId:Int64, timeStamp:Date, duration:Double)->Bool {
         let logActivity = ActivityHistory(context: context)
+        logActivity.activityHistoryId = historyId
         logActivity.timeStamp = timeStamp
         logActivity.duration = duration
         logActivity.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
@@ -146,12 +147,49 @@ import UIKit
         do {
             let request = ActivityHistory.fetchRequest()
             let activityHistory = try context.fetch(request)
-            return activityHistory
+            return activityHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
         } catch let error as NSError {
             print("Could not get Activity History. \(error), \(error.userInfo)")
         }
         return []
     }
+    
+    //Delete Activity History for activityId from Core Data
+    @objc public func deleteActivityHistoryForId(activityHistoryId:Int64)->Bool {
+        
+        do {
+            let request = ActivityHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "activityHistoryId == %lld", activityHistoryId)
+            let activityHistoryItems = try context.fetch(request)
+            context.delete(activityHistoryItems.first!)
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete activity history. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    //Update user activity history into Core Data
+    @objc public func updateActivityHistory(historyId:Int64,activityId:Int64, timeStamp:Date, duration:Double)->Bool {
+        do {
+            let request = ActivityHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "activityHistoryId == %lld", historyId)
+            let activityHistoryItems = try context.fetch(request)
+            activityHistoryItems.first!.timeStamp = timeStamp
+            activityHistoryItems.first!.duration = duration
+            activityHistoryItems.first!.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+            activityHistoryItems.first!.activityRelationship = self.getActivityForId(activityId: activityId)
+            
+            try context.save()
+            } catch let error as NSError {
+                print("Could not update activity history. \(error), \(error.userInfo)")
+                return false
+            }
+            return true
+    }
+    
+    
     
     
     //Update Food in Core Data
@@ -253,9 +291,46 @@ import UIKit
         return false
     }
     
+    //Delete Food History for foodId from Core Data
+    @objc public func deleteFoodHistoryForId(foodHistoryId:Int64)->Bool {
+        
+        do {
+            let request = FoodHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "foodHistoryId == %lld", foodHistoryId)
+            let foodHistoryItems = try context.fetch(request)
+            context.delete(foodHistoryItems.first!)
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete food history. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    //Update user food history into Core Data
+    @objc public func updateFoodHistory(historyId:Int64,foodId:Int64, timeStamp:Date, servingSize:Double)->Bool {
+        do {
+            let request = FoodHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "foodHistoryId == %lld", historyId)
+            let foodHistoryItems = try context.fetch(request)
+            foodHistoryItems.first!.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+            foodHistoryItems.first!.foodRelationship = self.getFoodForId(foodId: foodId)
+            foodHistoryItems.first!.timeStamp = timeStamp
+            foodHistoryItems.first!.serviceSize = servingSize
+            
+            try context.save()
+            
+        } catch let error as NSError {
+            print("Could not update food history. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
     //Log user food into Core Data
-    @objc public func logUserFood(foodId:Int64, timeStamp:String, servingSize:Double)->Bool {
+    @objc public func logUserFood(historyId:Int64,foodId:Int64, timeStamp:Date, servingSize:Double)->Bool {
         let logFood = FoodHistory(context: context)
+        logFood.foodHistoryId = historyId
         logFood.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
         logFood.foodRelationship = self.getFoodForId(foodId: foodId)
         logFood.timeStamp = timeStamp
@@ -275,7 +350,7 @@ import UIKit
         do {
             let request = FoodHistory.fetchRequest()
             let foodHistory = try context.fetch(request)
-            return foodHistory
+            return foodHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
         } catch let error as NSError {
             print("Could not get Food History. \(error), \(error.userInfo)")
         }
