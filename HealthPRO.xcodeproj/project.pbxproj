@@ -601,6 +601,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan the document";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Biometric needed for login ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is needed to suggest Workouts";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to access photo library to scan image";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -633,6 +634,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan the document";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Biometric needed for login ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location is needed to suggest Workouts";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to access photo library to scan image";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

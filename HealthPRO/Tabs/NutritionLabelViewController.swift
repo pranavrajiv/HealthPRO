@@ -9,7 +9,7 @@ import UIKit
 import Vision
 import VisionKit
 
-class NutritionLabelViewController: UIViewController {
+class NutritionLabelViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var processButton: UIButton!
@@ -22,15 +22,46 @@ class NutritionLabelViewController: UIViewController {
         super.viewDidLoad()
         self.processButton.isHidden = true
         self.clearButton.isHidden = true
-        scanButton.addTarget(self, action: #selector(scanDocument), for: .touchUpInside)
+        
+        let camera = UIAction(title: "Camera", image: UIImage(systemName: "camera.fill")) { (action) in
+            #if !targetEnvironment(simulator)
+            self.scanDocument()
+            #endif
+        }
+        let photoLibrary = UIAction(title: "Photo Library", image: UIImage(systemName: "photo.fill")) { (action) in
+            self.openPhotoLibrary()
+        }
+        let menu = UIMenu(title: "Scan Options", options: .displayInline, children: [camera , photoLibrary])
+        scanButton.menu = menu
+        scanButton.showsMenuAsPrimaryAction = true
+        
         processButton.addTarget(self, action: #selector(processButtonTouchUp), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearButtonTouchUp), for: .touchUpInside)
         configureOCR()
         
         #if targetEnvironment(simulator)
-        self.scanButton.isUserInteractionEnabled = false
-        self.simulateScanLabel(UIImage.init(named:"nutritionLabelSample")!)
+        self.populateScanLabel(UIImage.init(named:"nutritionLabelSample")!)
         #endif
+    }
+    
+    @objc private func openPhotoLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.populateScanLabel(image)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func scanDocument() {
@@ -68,7 +99,7 @@ class NutritionLabelViewController: UIViewController {
         }
     }
     
-    @objc private func simulateScanLabel(_ image:UIImage) {
+    @objc private func populateScanLabel(_ image:UIImage) {
         scanImageView.image = image
         self.processButton.isHidden  = false
         self.clearButton.isHidden = false
