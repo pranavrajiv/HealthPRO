@@ -121,7 +121,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
            
             
             var largestFoodId:Int64 = -1
-            if let foodID = viewController.coreDataHandler.getAllFood().map { $0.foodId }.max() {
+            if let foodID = viewController.coreDataHandler.getAllFood().map({ $0.foodId }).max() {
                 largestFoodId = foodID
             }
             _ = viewController.coreDataHandler.addFood(foodId:largestFoodId + 1,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
