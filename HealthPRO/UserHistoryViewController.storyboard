@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,20 +13,20 @@
             <objects>
                 <viewController storyboardIdentifier="userHistoryVC" id="Y6W-OH-hqX" customClass="UserHistoryViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J2t-Mu-9ny">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WaU-ie-WpQ">
-                                <rect key="frame" x="0.0" y="33" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="33" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgS-h8-pg6">
-                                        <rect key="frame" x="119.5" y="8.5" width="175" height="33"/>
+                                        <rect key="frame" x="100" y="8.6666666666666643" width="175" height="33"/>
                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="26"/>
                                         <color key="textColor" red="0.61479038119999996" green="0.0057555172590000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmu-z0-1gU">
-                                        <rect key="frame" x="10" y="9.5" width="68.5" height="31"/>
+                                        <rect key="frame" x="10" y="9.6666666666666643" width="68.666666666666671" height="31"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Cancel" cornerStyle="capsule"/>
                                     </button>
                                 </subviews>
@@ -42,41 +42,54 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="75J-sg-Fxr">
-                                <rect key="frame" x="0.0" y="205" width="414" height="657"/>
+                                <rect key="frame" x="0.0" y="205" width="375" height="573"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyTableViewCell" id="sAe-cX-i9A">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sAe-cX-i9A" id="vY1-Nk-Zhk">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O22-Qu-O0Z">
-                                <rect key="frame" x="141.5" y="154" width="131" height="32"/>
+                                <rect key="frame" x="122" y="154" width="131" height="32"/>
                                 <segments>
                                     <segment title="Food"/>
                                     <segment title="Activity"/>
                                 </segments>
                             </segmentedControl>
                             <datePicker contentMode="center" placeholderIntrinsicWidth="112" placeholderIntrinsicHeight="31" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="iCn-91-Ooe">
-                                <rect key="frame" x="151" y="102" width="112" height="31"/>
+                                <rect key="frame" x="131.66666666666666" y="102" width="112" height="31"/>
                             </datePicker>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l6O-hq-5B2">
+                                <rect key="frame" x="306" y="113" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show ALL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGl-lU-gdH">
+                                <rect key="frame" x="300" y="91" width="65" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rjG-G3-Eee"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
                             <constraint firstItem="O22-Qu-O0Z" firstAttribute="centerX" secondItem="J2t-Mu-9ny" secondAttribute="centerX" id="5kj-FG-vG3"/>
+                            <constraint firstItem="UGl-lU-gdH" firstAttribute="top" secondItem="WaU-ie-WpQ" secondAttribute="bottom" constant="8" symbolic="YES" id="8nq-ZF-Czd"/>
                             <constraint firstItem="WaU-ie-WpQ" firstAttribute="top" secondItem="J2t-Mu-9ny" secondAttribute="top" constant="33" id="C5X-pK-5No"/>
                             <constraint firstItem="iCn-91-Ooe" firstAttribute="centerX" secondItem="J2t-Mu-9ny" secondAttribute="centerX" id="GWp-q0-8sy"/>
                             <constraint firstItem="iCn-91-Ooe" firstAttribute="top" secondItem="WaU-ie-WpQ" secondAttribute="bottom" constant="19" id="LTJ-ng-b3f"/>
                             <constraint firstItem="WaU-ie-WpQ" firstAttribute="trailing" secondItem="rjG-G3-Eee" secondAttribute="trailing" id="N9e-4Y-wn1"/>
                             <constraint firstItem="WaU-ie-WpQ" firstAttribute="leading" secondItem="rjG-G3-Eee" secondAttribute="leading" id="P50-WB-8Fn"/>
+                            <constraint firstItem="rjG-G3-Eee" firstAttribute="trailing" secondItem="l6O-hq-5B2" secondAttribute="trailing" constant="20" id="R8f-v6-lJf"/>
                             <constraint firstItem="75J-sg-Fxr" firstAttribute="top" secondItem="O22-Qu-O0Z" secondAttribute="bottom" constant="20" id="RZS-aQ-kP4"/>
+                            <constraint firstItem="l6O-hq-5B2" firstAttribute="top" secondItem="WaU-ie-WpQ" secondAttribute="bottom" constant="30" id="Wke-YE-uOA"/>
                             <constraint firstItem="75J-sg-Fxr" firstAttribute="leading" secondItem="rjG-G3-Eee" secondAttribute="leading" id="aT3-JF-lEd"/>
+                            <constraint firstItem="rjG-G3-Eee" firstAttribute="trailing" secondItem="UGl-lU-gdH" secondAttribute="trailing" constant="10" id="fSb-CV-Fip"/>
                             <constraint firstItem="rjG-G3-Eee" firstAttribute="bottom" secondItem="75J-sg-Fxr" secondAttribute="bottom" id="gTU-Fb-ibu"/>
                             <constraint firstItem="O22-Qu-O0Z" firstAttribute="centerX" secondItem="J2t-Mu-9ny" secondAttribute="centerX" id="hXC-JU-n6t"/>
                             <constraint firstItem="O22-Qu-O0Z" firstAttribute="top" secondItem="iCn-91-Ooe" secondAttribute="bottom" constant="21" id="kCH-a5-84t"/>
@@ -88,6 +101,7 @@
                         <outlet property="dismissButton" destination="nmu-z0-1gU" id="5NS-jV-K1U"/>
                         <outlet property="historyTableView" destination="75J-sg-Fxr" id="M6E-cC-Tvu"/>
                         <outlet property="segmentedControl" destination="O22-Qu-O0Z" id="CED-SD-y0i"/>
+                        <outlet property="showAllSwitch" destination="l6O-hq-5B2" id="YWb-kC-hIP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

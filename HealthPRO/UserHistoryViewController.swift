@@ -9,6 +9,7 @@ import UIKit
 
 class UserHistoryViewController: UIViewController, UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate  {
 
+    @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var historyTableView: UITableView!
@@ -19,13 +20,12 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             
-            let formatter = DateFormatter()
-            formatter.dateStyle = .short
-            
-//            print(formatter.string(from: self.datePicker.date))
-            
-            self.userActivityHistory = CoreDataHandler.init().getAllActivityHistory().filter({formatter.string(from: self.datePicker.date) == formatter.string(from: $0.timeStamp!) })
-            self.userFoodHistory = CoreDataHandler.init().getAllFoodHistory().filter({formatter.string(from: self.datePicker.date) == formatter.string(from: $0.timeStamp!)})
+            if self.showAllSwitch.isOn {
+                self.userActivityHistory = CoreDataHandler.init().getAllActivityHistory()
+                self.userFoodHistory = CoreDataHandler.init().getAllFoodHistory()
+            } else {
+                self.datePickerChanged()
+            }
             self.historyTableView.reloadData()
         }
         
@@ -34,6 +34,8 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
             self.dismissButton.addTarget(self, action: #selector(dismissButtonTouchUp), for: .touchUpInside)
             self.segmentedControl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
             self.datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
+            self.showAllSwitch.addTarget(self, action: #selector(showAllSwitchChanged), for: .valueChanged)
+            self.showAllSwitch.isOn = false
             self.historyTableView.delegate = self
             self.historyTableView.dataSource = self
             // Do any additional setup after loading the view.
@@ -41,6 +43,18 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
 
         @objc private func dismissButtonTouchUp() {
             self.dismiss(animated: true)
+        }
+    
+        @objc private func showAllSwitchChanged() {
+            if self.showAllSwitch.isOn {
+                self.datePicker.isHidden = true
+                self.userActivityHistory = CoreDataHandler.init().getAllActivityHistory()
+                self.userFoodHistory = CoreDataHandler.init().getAllFoodHistory()
+            } else {
+                self.datePicker.isHidden = false
+                self.datePickerChanged()
+            }
+            self.historyTableView.reloadData()
         }
     
         @objc private func datePickerChanged() {
