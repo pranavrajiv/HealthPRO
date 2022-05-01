@@ -15,7 +15,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     @IBOutlet weak var activityName: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var calories: UITextField!
-    var activeTextField:UITextField!
+    var activeTextField:UITextField?
     var activityItem:Activity!
     //stores current parent so that the parent can be dismissed if deleting an item
     private var presentingController: UIViewController?
@@ -83,19 +83,21 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
-        let textFieldLocation = self.activeTextField.superview!.convert(CGPoint(x: self.activeTextField.frame.maxX, y: self.activeTextField.frame.maxY), to: self.view)
-        
-        let movementDuration: Double = 0.3
-        
-        var movement:CGFloat = 0
-        if up {//Move the keyboard up so that the textField is not covered
-            movement = -max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5)
-        } else {//Move the keyboard down as much as it was moved up
-            movement = max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+        if let currentActiveTextField = self.activeTextField,let currentActiveTextFieldSuperView = currentActiveTextField.superview {
+            let textFieldLocation = currentActiveTextFieldSuperView.convert(CGPoint(x: currentActiveTextField.frame.maxX, y: currentActiveTextField.frame.maxY), to: self.view)
+            
+            let movementDuration: Double = 0.3
+            
+            var movement:CGFloat = 0
+            if up {//Move the keyboard up so that the textField is not covered
+                movement = -max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5)
+            } else {//Move the keyboard down as much as it was moved up
+                movement = max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+            }
+            UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
+                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+            }, completion: nil)
         }
-        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
-            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        }, completion: nil)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

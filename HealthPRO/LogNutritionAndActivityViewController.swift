@@ -107,21 +107,22 @@ class LogNutritionAndActivityViewController: UIViewController {
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
-        let textFieldLocation = self.hrsAndServingTextField.superview!.convert(CGPoint(x: self.hrsAndServingTextField.frame.maxX, y: self.hrsAndServingTextField.frame.maxY), to: self.view)
-        
-        let movementDuration: Double = 0.3
-        
-        var movement:CGFloat = 0
-        if up {//Move the keyboard up so that the textField is not covered
-            movement = -max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5)
-        } else {//Move the keyboard down as much as it was moved up
-            movement = max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+        if let currentActiveTextFieldSuperView = self.hrsAndServingTextField.superview {
+            let textFieldLocation = currentActiveTextFieldSuperView.convert(CGPoint(x: self.hrsAndServingTextField.frame.maxX, y: self.hrsAndServingTextField.frame.maxY), to: self.view)
+            
+            let movementDuration: Double = 0.3
+            
+            var movement:CGFloat = 0
+            if up {//Move the keyboard up so that the textField is not covered
+                movement = -max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5)
+            } else {//Move the keyboard down as much as it was moved up
+                movement = max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+            }
+            UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
+                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+            }, completion: nil)
         }
-        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
-            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        }, completion: nil)
     }
-    
     //Dismiss the keyboard when touched outside the screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
