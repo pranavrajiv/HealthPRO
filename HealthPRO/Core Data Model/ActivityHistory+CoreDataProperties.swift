@@ -2,7 +2,7 @@
 //  ActivityHistory+CoreDataProperties.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/29/22.
+//  Created by Pranav Rajiv on 4/30/22.
 //
 //
 
@@ -16,9 +16,9 @@ extension ActivityHistory {
         return NSFetchRequest<ActivityHistory>(entityName: "ActivityHistory")
     }
 
+    @NSManaged public var activityHistoryId: Int64
     @NSManaged public var duration: Double
     @NSManaged public var timeStamp: Date?
-    @NSManaged public var activityHistoryId: Int64
     @NSManaged public var activityRelationship: Activity?
     @NSManaged public var userRelationship: User?
 

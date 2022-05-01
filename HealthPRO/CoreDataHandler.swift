@@ -131,7 +131,7 @@ import UIKit
         logActivity.activityHistoryId = historyId
         logActivity.timeStamp = timeStamp
         logActivity.duration = duration
-        logActivity.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+        logActivity.userRelationship = self.getUser()
         logActivity.activityRelationship = self.getActivityForId(activityId: activityId)
         do {
             try context.save()
@@ -178,7 +178,7 @@ import UIKit
             let activityHistoryItems = try context.fetch(request)
             activityHistoryItems.first!.timeStamp = timeStamp
             activityHistoryItems.first!.duration = duration
-            activityHistoryItems.first!.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+            activityHistoryItems.first!.userRelationship = self.getUser()
             activityHistoryItems.first!.activityRelationship = self.getActivityForId(activityId: activityId)
             
             try context.save()
@@ -313,7 +313,7 @@ import UIKit
             let request = FoodHistory.fetchRequest()
             request.predicate = NSPredicate(format: "foodHistoryId == %lld", historyId)
             let foodHistoryItems = try context.fetch(request)
-            foodHistoryItems.first!.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+            foodHistoryItems.first!.userRelationship = self.getUser()
             foodHistoryItems.first!.foodRelationship = self.getFoodForId(foodId: foodId)
             foodHistoryItems.first!.timeStamp = timeStamp
             foodHistoryItems.first!.serviceSize = servingSize
@@ -331,7 +331,7 @@ import UIKit
     @objc public func logUserFood(historyId:Int64,foodId:Int64, timeStamp:Date, servingSize:Double)->Bool {
         let logFood = FoodHistory(context: context)
         logFood.foodHistoryId = historyId
-        logFood.userRelationship = self.getUser(id: UserDefaults.standard.string(forKey: "LoginUserName")!)
+        logFood.userRelationship = self.getUser()
         logFood.foodRelationship = self.getFoodForId(foodId: foodId)
         logFood.timeStamp = timeStamp
         logFood.serviceSize = servingSize
@@ -371,8 +371,9 @@ import UIKit
     }
     
     //Get User from Core Data
-    @objc public func getUser(id:String)->User? {
+    @objc public func getUser()->User? {
         do {
+            let id = UserDefaults.standard.string(forKey: "LoginUserName")!
             let request = User.fetchRequest()
             let predicate = NSPredicate(format:"loginId == %@",id )
             request.predicate = predicate
@@ -384,11 +385,35 @@ import UIKit
         return nil
     }
     
+    //Update user into Core Data
+    @objc public func updateUser(weight:Double,height:Double, gender:String,emailAddress:String,contactNumber:String,age:Double)->Bool {
+        do {
+            let request = User.fetchRequest()
+            let id = UserDefaults.standard.string(forKey: "LoginUserName")!
+            request.predicate = NSPredicate(format: "loginId == %@",id)
+            let currentUser = try context.fetch(request)
+            currentUser.first!.weight = weight
+            currentUser.first!.height = height
+            currentUser.first!.gender = gender
+            currentUser.first!.emailAddress = emailAddress
+            currentUser.first!.contactNumber = contactNumber
+            currentUser.first!.age = age
+            
+            try context.save()
+            
+        } catch let error as NSError {
+            print("Could not update user. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
     //Add new user to Core Data
     @objc public func addUser(id:String, password:String)->Bool {
         let newUser = User(context: context)
         newUser.loginId = id
         newUser.passcode = password
+        newUser.dateCreated = Date()
         do {
             try context.save()
             return true
@@ -402,7 +427,7 @@ import UIKit
     @objc public func isValidLogin(id:String, passcode:String)->Bool {
         do {
             let request = User.fetchRequest()
-            let predicate = NSPredicate(format:"loginId == %@",id )
+            let predicate = NSPredicate(format:"loginId == %@",id)
             request.predicate = predicate
             let usr = try context.fetch(request).first
             if usr?.passcode == passcode {

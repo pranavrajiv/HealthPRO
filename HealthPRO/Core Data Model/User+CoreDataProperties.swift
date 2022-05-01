@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/29/22.
+//  Created by Pranav Rajiv on 4/30/22.
 //
 //
 
@@ -18,6 +18,13 @@ extension User {
 
     @NSManaged public var loginId: String?
     @NSManaged public var passcode: String?
+    @NSManaged public var age: Double
+    @NSManaged public var gender: String?
+    @NSManaged public var height: Double
+    @NSManaged public var weight: Double
+    @NSManaged public var contactNumber: String?
+    @NSManaged public var emailAddress: String?
+    @NSManaged public var dateCreated: Date?
     @NSManaged public var userHistoryRelationshipActivity: NSSet?
     @NSManaged public var userHistoryRelationshipFood: NSSet?
 

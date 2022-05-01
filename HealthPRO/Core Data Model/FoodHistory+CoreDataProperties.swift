@@ -2,7 +2,7 @@
 //  FoodHistory+CoreDataProperties.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/29/22.
+//  Created by Pranav Rajiv on 4/30/22.
 //
 //
 
@@ -16,9 +16,9 @@ extension FoodHistory {
         return NSFetchRequest<FoodHistory>(entityName: "FoodHistory")
     }
 
+    @NSManaged public var foodHistoryId: Int64
     @NSManaged public var serviceSize: Double
     @NSManaged public var timeStamp: Date?
-    @NSManaged public var foodHistoryId: Int64
     @NSManaged public var foodRelationship: Food?
     @NSManaged public var userRelationship: User?
 
