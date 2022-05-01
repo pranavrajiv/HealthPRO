@@ -175,7 +175,7 @@ class LogNutritionAndActivityViewController: UIViewController {
         if (self.historyId != nil) {
             if self.logType == "Activity" {
                 _ = CoreDataHandler.init().updateActivityHistory(historyId: self.historyId, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
-            } else {
+            } else { //food
                 _ = CoreDataHandler.init().updateFoodHistory(historyId: self.historyId,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
             }
         }
