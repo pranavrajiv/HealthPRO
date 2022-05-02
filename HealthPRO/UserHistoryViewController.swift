@@ -78,14 +78,26 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "historyTableViewCell", for: indexPath)
-            if self.segmentedControl.selectedSegmentIndex == 0 {
-                cell.accessibilityLabel = self.userFoodHistory[indexPath.row].foodHistoryId.description
-                cell.textLabel?.text = self.userFoodHistory[indexPath.row].foodRelationship?.foodName
-            } else {
-                cell.accessibilityLabel = self.userActivityHistory[indexPath.row].activityHistoryId.description
-                cell.textLabel?.text = self.userActivityHistory[indexPath.row].activityRelationship?.activityName
+            if let historyDate = cell.contentView.subviews.compactMap({ $0 as? UILabel }).first {
+                if self.segmentedControl.selectedSegmentIndex == 0 {
+                    cell.accessibilityLabel = self.userFoodHistory[indexPath.row].foodHistoryId.description
+                    cell.textLabel?.text = self.userFoodHistory[indexPath.row].foodRelationship?.foodName
+                    historyDate.text = formatter.string(from: self.userFoodHistory[indexPath.row].timeStamp!)
+                    
+                } else {
+                    cell.accessibilityLabel = self.userActivityHistory[indexPath.row].activityHistoryId.description
+                    cell.textLabel?.text = self.userActivityHistory[indexPath.row].activityRelationship?.activityName
+                    historyDate.text = formatter.string(from: self.userActivityHistory[indexPath.row].timeStamp!)
+                }
+                
+                historyDate.isHidden = !self.showAllSwitch.isOn
+                
             }
+            
             return cell
         }
         

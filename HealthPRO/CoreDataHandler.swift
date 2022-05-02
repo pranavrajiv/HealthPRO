@@ -146,6 +146,7 @@ import UIKit
     @objc public func getAllActivityHistory()->[ActivityHistory] {
         do {
             let request = ActivityHistory.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
             let activityHistory = try context.fetch(request)
             return activityHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
         } catch let error as NSError {
@@ -349,6 +350,7 @@ import UIKit
     @objc public func getAllFoodHistory()->[FoodHistory] {
         do {
             let request = FoodHistory.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
             let foodHistory = try context.fetch(request)
             return foodHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
         } catch let error as NSError {
