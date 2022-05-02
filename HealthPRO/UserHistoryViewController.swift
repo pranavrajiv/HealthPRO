@@ -82,26 +82,39 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
             formatter.dateStyle = .short
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "historyTableViewCell", for: indexPath)
-            if let historyDate = cell.contentView.subviews.compactMap({ $0 as? UILabel }).first {
-                if self.segmentedControl.selectedSegmentIndex == 0 {
-                    cell.accessibilityLabel = self.userFoodHistory[indexPath.row].foodHistoryId.description
-                    cell.textLabel?.text = self.userFoodHistory[indexPath.row].foodRelationship?.foodName
-                    historyDate.text = formatter.string(from: self.userFoodHistory[indexPath.row].timeStamp!)
-                    
-                } else {
-                    cell.accessibilityLabel = self.userActivityHistory[indexPath.row].activityHistoryId.description
-                    cell.textLabel?.text = self.userActivityHistory[indexPath.row].activityRelationship?.activityName
-                    historyDate.text = formatter.string(from: self.userActivityHistory[indexPath.row].timeStamp!)
+            let uiLabels = cell.contentView.subviews.compactMap({ $0 as? UILabel })
+                
+                for cellLabel in uiLabels {
+                    if self.segmentedControl.selectedSegmentIndex == 0 {
+                        
+                        if cellLabel.accessibilityLabel == "historyDate" {
+                            cellLabel.text = formatter.string(from: self.userFoodHistory[indexPath.row].timeStamp!)
+                            cellLabel.isHidden = !self.showAllSwitch.isOn
+                            
+                        } else {
+                            cellLabel.accessibilityLabel = self.userFoodHistory[indexPath.row].foodHistoryId.description
+                            cellLabel.text = self.userFoodHistory[indexPath.row].foodRelationship?.foodName
+                        }
+                        
+                    } else {
+                        if cellLabel.accessibilityLabel == "historyDate" {
+                            cellLabel.text = formatter.string(from: self.userActivityHistory[indexPath.row].timeStamp!)
+                            cellLabel.isHidden = !self.showAllSwitch.isOn
+                            
+                            
+                        } else {
+                            cellLabel.accessibilityLabel = self.userActivityHistory[indexPath.row].activityHistoryId.description
+                            cellLabel.text = self.userActivityHistory[indexPath.row].activityRelationship?.activityName
+                        }
+                    }
                 }
-                
-                historyDate.isHidden = !self.showAllSwitch.isOn
-                
-            }
+            
             
             return cell
         }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
             var secondViewController = LogNutritionAndActivityViewController.init(historyId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Activity")
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 secondViewController = LogNutritionAndActivityViewController.init(historyId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Food")
