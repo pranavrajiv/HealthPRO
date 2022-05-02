@@ -86,35 +86,43 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
                 
                 for cellLabel in uiLabels {
                     if self.segmentedControl.selectedSegmentIndex == 0 {
-                        
-                        if cellLabel.accessibilityLabel == "historyDate" {
+                        if cellLabel.accessibilityLabel == "historyDateAccessibilityLabel" {
                             cellLabel.text = formatter.string(from: self.userFoodHistory[indexPath.row].timeStamp!)
-                            cellLabel.isHidden = !self.showAllSwitch.isOn
-                            
+                            for constraints in cellLabel.constraints {
+                                if constraints.identifier == "dateCreatedConstraint" {
+                                    if !self.showAllSwitch.isOn {
+                                        constraints.constant = 0
+                                    } else {
+                                        constraints.constant = 65
+                                    }
+                                }
+                            }
                         } else {
-                            cellLabel.accessibilityLabel = self.userFoodHistory[indexPath.row].foodHistoryId.description
+                            cell.accessibilityLabel = self.userFoodHistory[indexPath.row].foodHistoryId.description
                             cellLabel.text = self.userFoodHistory[indexPath.row].foodRelationship?.foodName
                         }
-                        
                     } else {
-                        if cellLabel.accessibilityLabel == "historyDate" {
+                        if cellLabel.accessibilityLabel == "historyDateAccessibilityLabel" {
                             cellLabel.text = formatter.string(from: self.userActivityHistory[indexPath.row].timeStamp!)
-                            cellLabel.isHidden = !self.showAllSwitch.isOn
-                            
-                            
+                            for constraints in cellLabel.constraints {
+                                if constraints.identifier == "dateCreatedConstraint" {
+                                    if !self.showAllSwitch.isOn {
+                                        constraints.constant = 0
+                                    } else {
+                                        constraints.constant = 65
+                                    }
+                                }
+                            }
                         } else {
-                            cellLabel.accessibilityLabel = self.userActivityHistory[indexPath.row].activityHistoryId.description
+                            cell.accessibilityLabel = self.userActivityHistory[indexPath.row].activityHistoryId.description
                             cellLabel.text = self.userActivityHistory[indexPath.row].activityRelationship?.activityName
                         }
                     }
                 }
-            
-            
             return cell
         }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            
             var secondViewController = LogNutritionAndActivityViewController.init(historyId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Activity")
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 secondViewController = LogNutritionAndActivityViewController.init(historyId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Food")
@@ -123,7 +131,5 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
             secondViewController.modalPresentationStyle = .fullScreen
             self.present(secondViewController, animated: true, completion: nil)
         }
-        
-        
 
     }
