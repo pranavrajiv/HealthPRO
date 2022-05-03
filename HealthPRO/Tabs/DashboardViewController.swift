@@ -41,8 +41,7 @@ class DashboardViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
-        
+    
         self.getTheWeather()
         
         if let _ = self.weatherUpdateTimer {
@@ -67,6 +66,23 @@ class DashboardViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
+        
+        let ac = UIAlertController(title: "Update Weight", message: "Enter your current weight", preferredStyle: .alert)
+        ac.addTextField { (textField) in
+            textField.placeholder = "lbs"
+        }
+        ac.addAction(UIAlertAction(title: "Log", style: .default, handler: { action in
+            if let weightText = ac.textFields?.first?.text {
+                if weightText != "" {
+                    self.logUserWeight(weight:weightText)
+                }
+            }
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
+        
+        
         graphView.addSubview(lineChartView)
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
@@ -74,6 +90,10 @@ class DashboardViewController: UIViewController{
         setData()
     }
     
+    @objc private func logUserWeight(weight:String){
+            
+    }
+                                   
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         print(entry)
     }
