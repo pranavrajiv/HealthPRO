@@ -69,8 +69,8 @@ class DashboardViewController: UIViewController{
         self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
         
         if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let ac = UIAlertController(title: "Update Weight", message: "Enter your current weight", preferredStyle: .alert)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                let ac = UIAlertController(title: "Log Today's Weight", message: "Enter your current weight", preferredStyle: .alert)
                 ac.addTextField { (textField) in
                     textField.placeholder = "lbs"
                     textField.textAlignment = .center
@@ -108,13 +108,6 @@ class DashboardViewController: UIViewController{
             }
             _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: Date(), weight: weightDouble)
         }
-        
-        
-//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 4 , timeStamp:  Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 124.5)
-//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 5 , timeStamp:  Calendar.current.date(byAdding: .day, value: -1, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 134.5)
-//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 6, timeStamp:  Calendar.current.date(byAdding: .day, value: -2, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 144.5)
-//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 7, timeStamp:  Calendar.current.date(byAdding: .day, value: -3, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 154.5)
-//
         
     }
                                    

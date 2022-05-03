@@ -100,6 +100,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuB-CA-qLs">
+                                <rect key="frame" x="10" y="103" width="98" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Log Weight" cornerStyle="capsule"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rjG-G3-Eee"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -107,11 +112,13 @@
                             <constraint firstItem="O22-Qu-O0Z" firstAttribute="centerX" secondItem="J2t-Mu-9ny" secondAttribute="centerX" id="5kj-FG-vG3"/>
                             <constraint firstItem="UGl-lU-gdH" firstAttribute="top" secondItem="WaU-ie-WpQ" secondAttribute="bottom" constant="8" symbolic="YES" id="8nq-ZF-Czd"/>
                             <constraint firstItem="WaU-ie-WpQ" firstAttribute="top" secondItem="J2t-Mu-9ny" secondAttribute="top" constant="33" id="C5X-pK-5No"/>
+                            <constraint firstItem="SuB-CA-qLs" firstAttribute="leading" secondItem="rjG-G3-Eee" secondAttribute="leading" constant="10" id="Ej9-Mo-dju"/>
                             <constraint firstItem="iCn-91-Ooe" firstAttribute="centerX" secondItem="J2t-Mu-9ny" secondAttribute="centerX" id="GWp-q0-8sy"/>
                             <constraint firstItem="iCn-91-Ooe" firstAttribute="top" secondItem="WaU-ie-WpQ" secondAttribute="bottom" constant="19" id="LTJ-ng-b3f"/>
                             <constraint firstItem="WaU-ie-WpQ" firstAttribute="trailing" secondItem="rjG-G3-Eee" secondAttribute="trailing" id="N9e-4Y-wn1"/>
                             <constraint firstItem="WaU-ie-WpQ" firstAttribute="leading" secondItem="rjG-G3-Eee" secondAttribute="leading" id="P50-WB-8Fn"/>
                             <constraint firstItem="rjG-G3-Eee" firstAttribute="trailing" secondItem="l6O-hq-5B2" secondAttribute="trailing" constant="20" id="R8f-v6-lJf"/>
+                            <constraint firstItem="SuB-CA-qLs" firstAttribute="top" secondItem="WaU-ie-WpQ" secondAttribute="bottom" constant="20" id="REV-Kp-eXd"/>
                             <constraint firstItem="75J-sg-Fxr" firstAttribute="top" secondItem="O22-Qu-O0Z" secondAttribute="bottom" constant="20" id="RZS-aQ-kP4"/>
                             <constraint firstItem="l6O-hq-5B2" firstAttribute="top" secondItem="WaU-ie-WpQ" secondAttribute="bottom" constant="30" id="Wke-YE-uOA"/>
                             <constraint firstItem="75J-sg-Fxr" firstAttribute="leading" secondItem="rjG-G3-Eee" secondAttribute="leading" id="aT3-JF-lEd"/>
@@ -126,6 +133,7 @@
                         <outlet property="datePicker" destination="iCn-91-Ooe" id="JuO-0G-DJz"/>
                         <outlet property="dismissButton" destination="nmu-z0-1gU" id="5NS-jV-K1U"/>
                         <outlet property="historyTableView" destination="75J-sg-Fxr" id="M6E-cC-Tvu"/>
+                        <outlet property="logWeight" destination="SuB-CA-qLs" id="dCs-xt-Qwi"/>
                         <outlet property="segmentedControl" destination="O22-Qu-O0Z" id="CED-SD-y0i"/>
                         <outlet property="showAllSwitch" destination="l6O-hq-5B2" id="YWb-kC-hIP"/>
                     </connections>
