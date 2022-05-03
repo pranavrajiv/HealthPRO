@@ -16,13 +16,14 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var userActivityHistory:[ActivityHistory]!
     var userFoodHistory:[FoodHistory]!
-    
+    var userWeightHistory:[WeightHistory]!
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             
             if self.showAllSwitch.isOn {
                 self.userActivityHistory = CoreDataHandler.init().getAllActivityHistory()
                 self.userFoodHistory = CoreDataHandler.init().getAllFoodHistory()
+                self.userWeightHistory = CoreDataHandler.init().getAllWeightHistory()
             } else {
                 self.datePickerChanged()
             }
@@ -50,6 +51,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
                 self.datePicker.isHidden = true
                 self.userActivityHistory = CoreDataHandler.init().getAllActivityHistory()
                 self.userFoodHistory = CoreDataHandler.init().getAllFoodHistory()
+                self.userWeightHistory = CoreDataHandler.init().getAllWeightHistory()
             } else {
                 self.datePicker.isHidden = false
                 self.datePickerChanged()
@@ -62,6 +64,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
             formatter.dateStyle = .short
             self.userActivityHistory = CoreDataHandler.init().getAllActivityHistory().filter({formatter.string(from: self.datePicker.date) == formatter.string(from: $0.timeStamp!)})
             self.userFoodHistory = CoreDataHandler.init().getAllFoodHistory().filter({formatter.string(from: self.datePicker.date) == formatter.string(from: $0.timeStamp!)})
+            self.userWeightHistory = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: self.datePicker.date) == formatter.string(from: $0.timeStamp!)})
             self.historyTableView.reloadData()
         }
     
@@ -73,10 +76,12 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 return self.userFoodHistory.count
+            } else if self.segmentedControl.selectedSegmentIndex == 1 {
+                return self.userActivityHistory.count
             }
-            return self.userActivityHistory.count
+            return self.self.userWeightHistory.count
         }
-        
+
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let formatter = DateFormatter()
             formatter.dateStyle = .short
@@ -101,7 +106,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
                             cell.accessibilityLabel = self.userFoodHistory[indexPath.row].foodHistoryId.description
                             cellLabel.text = self.userFoodHistory[indexPath.row].foodRelationship?.foodName
                         }
-                    } else {
+                    } else if self.segmentedControl.selectedSegmentIndex == 1  {
                         if cellLabel.accessibilityLabel == "historyDateAccessibilityLabel" {
                             cellLabel.text = formatter.string(from: self.userActivityHistory[indexPath.row].timeStamp!)
                             for constraints in cellLabel.constraints {
@@ -117,6 +122,22 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
                             cell.accessibilityLabel = self.userActivityHistory[indexPath.row].activityHistoryId.description
                             cellLabel.text = self.userActivityHistory[indexPath.row].activityRelationship?.activityName
                         }
+                    } else {
+                        if cellLabel.accessibilityLabel == "historyDateAccessibilityLabel" {
+                            cellLabel.text = formatter.string(from: self.userWeightHistory[indexPath.row].timeStamp!)
+                            for constraints in cellLabel.constraints {
+                                if constraints.identifier == "dateCreatedConstraint" {
+                                    if !self.showAllSwitch.isOn {
+                                        constraints.constant = 0
+                                    } else {
+                                        constraints.constant = 65
+                                    }
+                                }
+                            }
+                        } else {
+                            cell.accessibilityLabel = self.userWeightHistory[indexPath.row].weightHistoryId.description
+                            cellLabel.text = self.userWeightHistory[indexPath.row].weight.description + " lbs"
+                        }
                     }
                 }
             return cell
@@ -126,8 +147,9 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
             var secondViewController = LogNutritionAndActivityViewController.init(historyId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Activity")
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 secondViewController = LogNutritionAndActivityViewController.init(historyId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Food")
+            } else if self.segmentedControl.selectedSegmentIndex == 2 {
+                secondViewController = LogNutritionAndActivityViewController.init(historyId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Weight")
             }
-           
             secondViewController.modalPresentationStyle = .fullScreen
             self.present(secondViewController, animated: true, completion: nil)
         }

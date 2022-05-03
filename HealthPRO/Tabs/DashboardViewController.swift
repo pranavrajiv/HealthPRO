@@ -108,6 +108,14 @@ class DashboardViewController: UIViewController{
             }
             _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: Date(), weight: weightDouble)
         }
+        
+        
+//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 4 , timeStamp:  Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 124.5)
+//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 5 , timeStamp:  Calendar.current.date(byAdding: .day, value: -1, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 134.5)
+//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 6, timeStamp:  Calendar.current.date(byAdding: .day, value: -2, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 144.5)
+//                _ = CoreDataHandler.init().logUserWeightHistory(historyId: 7, timeStamp:  Calendar.current.date(byAdding: .day, value: -3, to: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!)!, weight: 154.5)
+//
+        
     }
                                    
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
@@ -165,15 +173,14 @@ class DashboardViewController: UIViewController{
     
     @objc func getTheWeather() {
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
-        let currentWeatherHere = viewController.weatherInfoNow.currentWeather
-        currentCity.text = viewController.weatherInfoNow.currentCity
         todayDate.text = Date.getTodaysDate()
-        currentWeather.text = currentWeatherHere?.weather[0].description.capitalized
-        currentTemperature.text = currentWeatherHere?.temp.description ?? ""
-        if let _ = currentWeatherHere {
-            currentTemperature.text! += " F°"
+        currentCity.text = viewController.weatherInfoNow.currentCity
+        if let currentWeatherHere  = viewController.weatherInfoNow.currentWeather {
+            currentWeather.text = currentWeatherHere.weather[0].description.capitalized
+            currentTemperature.text = currentWeatherHere.temp.description + " F°"
+            weatherImage.image = UIImage(named: currentWeatherHere.weather[0].icon)
         }
-        weatherImage.image = UIImage(named: currentWeatherHere?.weather[0].icon ?? "")
+        
     }
     
 }

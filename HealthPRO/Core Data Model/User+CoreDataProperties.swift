@@ -29,7 +29,7 @@ extension User {
     @NSManaged public var activityPreference: String?
     @NSManaged public var userHistoryRelationshipActivity: NSSet?
     @NSManaged public var userHistoryRelationshipFood: NSSet?
-    @NSManaged public var userHistoryRelationshipWeight: WeightHistory?
+    @NSManaged public var userHistoryRelationshipWeight: NSSet?
 
 }
 
@@ -64,6 +64,23 @@ extension User {
 
     @objc(removeUserHistoryRelationshipFood:)
     @NSManaged public func removeFromUserHistoryRelationshipFood(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for userHistoryRelationshipWeight
+extension User {
+
+    @objc(addUserHistoryRelationshipWeightObject:)
+    @NSManaged public func addToUserHistoryRelationshipWeight(_ value: WeightHistory)
+
+    @objc(removeUserHistoryRelationshipWeightObject:)
+    @NSManaged public func removeFromUserHistoryRelationshipWeight(_ value: WeightHistory)
+
+    @objc(addUserHistoryRelationshipWeight:)
+    @NSManaged public func addToUserHistoryRelationshipWeight(_ values: NSSet)
+
+    @objc(removeUserHistoryRelationshipWeight:)
+    @NSManaged public func removeFromUserHistoryRelationshipWeight(_ values: NSSet)
 
 }
 

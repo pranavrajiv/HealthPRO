@@ -51,7 +51,7 @@
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="userHistoryRelationshipActivity" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ActivityHistory" inverseName="userRelationship" inverseEntity="ActivityHistory"/>
         <relationship name="userHistoryRelationshipFood" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodHistory" inverseName="userRelationship" inverseEntity="FoodHistory"/>
-        <relationship name="userHistoryRelationshipWeight" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeightHistory" inverseName="userRelationship" inverseEntity="WeightHistory"/>
+        <relationship name="userHistoryRelationshipWeight" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WeightHistory" inverseName="userRelationship" inverseEntity="WeightHistory"/>
     </entity>
     <entity name="WeightHistory" representedClassName="WeightHistory" syncable="YES">
         <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
