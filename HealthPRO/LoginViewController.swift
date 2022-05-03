@@ -135,7 +135,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         loginRegisterButton.sizeToFit()
     }
 
-    //login/Register button pressed
+    //login/Register button pressed 
     @objc private func loginOrRegisterProfile(_ sender: UIButton){
         //login button pressed
         if self.segCtrl.selectedSegmentIndex == 0 {
