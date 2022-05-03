@@ -35,7 +35,7 @@ struct WeatherNow {
         self.weatherInfo = nil
     }
 }
-
+//Rajesh Comment 
 
 class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     @IBOutlet weak var loginRegisterButton: UIButton!
@@ -135,7 +135,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         loginRegisterButton.sizeToFit()
     }
 
-    //login/Register button pressed
+    //login/Register button pressed 
     @objc private func loginOrRegisterProfile(_ sender: UIButton){
         //login button pressed
         if self.segCtrl.selectedSegmentIndex == 0 {

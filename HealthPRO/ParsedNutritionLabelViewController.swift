@@ -18,7 +18,9 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     var ocrText: String = ""
     var foodItem:Food!
     var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":"","Potassium":""]
-    var activeTextField:UITextField!
+    var activeTextField:UITextField?
+    //stores current parent so that the parent can be dismissed if deleting an item
+    private var presentingController: UIViewController?
 
     convenience init( ocrText: String ) {
         self.init()
@@ -54,6 +56,12 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
        
         self.itemNameVal.delegate = self
         self.macroTextFieldCollections.forEach({$0.delegate = self})
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presentingController = presentingViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +100,6 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc private func saveButtonTouchUp() {
-
         if((self.itemNameVal.text == nil) || (self.itemNameVal.text == "")){
             let ac = UIAlertController(title: "Error", message: "Food Item name empty. Please enter a name before saving", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -111,8 +118,13 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         
         //new food
         if (self.foodItem == nil) {
-            let largestFoodID = viewController.coreDataHandler.getAllFood().map { $0.foodId }.max()
-            _ = viewController.coreDataHandler.addFood(foodId:largestFoodID! + 1,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
+           
+            
+            var largestFoodId:Int64 = -1
+            if let foodID = viewController.coreDataHandler.getAllFood().map({ $0.foodId }).max() {
+                largestFoodId = foodID
+            }
+            _ = viewController.coreDataHandler.addFood(foodId:largestFoodId + 1,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
         } else {
             //update food
             _ = viewController.coreDataHandler.updateFood(foodId:self.foodItem.foodId,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
@@ -127,8 +139,13 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     @objc private func deleteButtonTouchUp() {
         if let food = self.foodItem {
             _ = CoreDataHandler.init().deleteFoodForId(foodId: food.foodId)
+            
+            self.dismiss(animated: false, completion: {
+                     self.presentingController?.dismiss(animated: false)
+            })
+        } else {
+            self.dismiss(animated: true)
         }
-        self.dismiss(animated: true)
     }
 
     @objc private func processOcrText() {
@@ -181,25 +198,30 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
-        let textFieldLocation = self.activeTextField.superview!.convert(CGPoint(x: self.activeTextField.frame.maxX, y: self.activeTextField.frame.maxY), to: self.view)
-        
-        let movementDuration: Double = 0.3
-        
-        var movement:CGFloat = 0
-        if up {//Move the keyboard up so that the textField is not covered
-            movement = -max(0,textFieldLocation.y - keyBoardFrame.origin.y + 5)
-        } else {//Move the keyboard down as much as it was moved up
-            movement = max(0,textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+        if let currentActiveTextField = self.activeTextField,let currentActiveTextFieldSuperView = currentActiveTextField.superview {
+            let textFieldLocation = currentActiveTextFieldSuperView.convert(CGPoint(x: currentActiveTextField.frame.maxX, y: currentActiveTextField.frame.maxY), to: self.view)
+            
+            let movementDuration: Double = 0.3
+            
+            var movement:CGFloat = 0
+            if up {//Move the keyboard up so that the textField is not covered
+                movement = -max(0,textFieldLocation.y - keyBoardFrame.origin.y + 5)
+            } else {//Move the keyboard down as much as it was moved up
+                movement = max(0,textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+            }
+            UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
+                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+            }, completion: nil)
         }
-        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
-            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        }, completion: nil)
     }
-
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.itemNameVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.itemNameVal.accessibilityIdentifier)
         self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = (textField.accessibilityIdentifier == $0.accessibilityIdentifier)})
         self.activeTextField = textField
+        
+        self.saveButton.isUserInteractionEnabled = false
+        self.deleteButton.isUserInteractionEnabled = false
+        self.cancelButton.isUserInteractionEnabled = false
         
     }
 
@@ -207,6 +229,10 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         self.itemNameVal.isUserInteractionEnabled = true
         self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = true})
         self.activeTextField = textField
+        
+        self.saveButton.isUserInteractionEnabled = true
+        self.deleteButton.isUserInteractionEnabled = true
+        self.cancelButton.isUserInteractionEnabled = true
     }
 }
 

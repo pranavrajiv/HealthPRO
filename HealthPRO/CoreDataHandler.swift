@@ -125,6 +125,72 @@ import UIKit
         return false
     }
     
+    //Log user activity into Core Data
+    @objc public func logUserActivity(historyId:Int64,activityId:Int64, timeStamp:Date, duration:Double)->Bool {
+        let logActivity = ActivityHistory(context: context)
+        logActivity.activityHistoryId = historyId
+        logActivity.timeStamp = timeStamp
+        logActivity.duration = duration
+        logActivity.userRelationship = self.getUser()
+        logActivity.activityRelationship = self.getActivityForId(activityId: activityId)
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add food. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Get all activity history from Core Data
+    @objc public func getAllActivityHistory()->[ActivityHistory] {
+        do {
+            let request = ActivityHistory.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
+            let activityHistory = try context.fetch(request)
+            return activityHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
+        } catch let error as NSError {
+            print("Could not get Activity History. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
+    //Delete Activity History for activityId from Core Data
+    @objc public func deleteActivityHistoryForId(activityHistoryId:Int64)->Bool {
+        
+        do {
+            let request = ActivityHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "activityHistoryId == %lld", activityHistoryId)
+            let activityHistoryItems = try context.fetch(request)
+            context.delete(activityHistoryItems.first!)
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete activity history. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    //Update user activity history into Core Data
+    @objc public func updateActivityHistory(historyId:Int64,activityId:Int64, timeStamp:Date, duration:Double)->Bool {
+        do {
+            let request = ActivityHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "activityHistoryId == %lld", historyId)
+            let activityHistoryItems = try context.fetch(request)
+            activityHistoryItems.first!.timeStamp = timeStamp
+            activityHistoryItems.first!.duration = duration
+            activityHistoryItems.first!.userRelationship = self.getUser()
+            activityHistoryItems.first!.activityRelationship = self.getActivityForId(activityId: activityId)
+            
+            try context.save()
+            } catch let error as NSError {
+                print("Could not update activity history. \(error), \(error.userInfo)")
+                return false
+            }
+            return true
+    }
+    
+    
     
     
     //Update Food in Core Data
@@ -226,6 +292,72 @@ import UIKit
         return false
     }
     
+    //Delete Food History for foodId from Core Data
+    @objc public func deleteFoodHistoryForId(foodHistoryId:Int64)->Bool {
+        
+        do {
+            let request = FoodHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "foodHistoryId == %lld", foodHistoryId)
+            let foodHistoryItems = try context.fetch(request)
+            context.delete(foodHistoryItems.first!)
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete food history. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    //Update user food history into Core Data
+    @objc public func updateFoodHistory(historyId:Int64,foodId:Int64, timeStamp:Date, servingSize:Double)->Bool {
+        do {
+            let request = FoodHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "foodHistoryId == %lld", historyId)
+            let foodHistoryItems = try context.fetch(request)
+            foodHistoryItems.first!.userRelationship = self.getUser()
+            foodHistoryItems.first!.foodRelationship = self.getFoodForId(foodId: foodId)
+            foodHistoryItems.first!.timeStamp = timeStamp
+            foodHistoryItems.first!.serviceSize = servingSize
+            
+            try context.save()
+            
+        } catch let error as NSError {
+            print("Could not update food history. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Log user food into Core Data
+    @objc public func logUserFood(historyId:Int64,foodId:Int64, timeStamp:Date, servingSize:Double)->Bool {
+        let logFood = FoodHistory(context: context)
+        logFood.foodHistoryId = historyId
+        logFood.userRelationship = self.getUser()
+        logFood.foodRelationship = self.getFoodForId(foodId: foodId)
+        logFood.timeStamp = timeStamp
+        logFood.serviceSize = servingSize
+       
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add food. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Get all food history from Core Data
+    @objc public func getAllFoodHistory()->[FoodHistory] {
+        do {
+            let request = FoodHistory.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
+            let foodHistory = try context.fetch(request)
+            return foodHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
+        } catch let error as NSError {
+            print("Could not get Food History. \(error), \(error.userInfo)")
+        }
+        return []
+    }
     
     //Get all Food from Core Data
     @objc public func getAllFood()->[Food] {
@@ -240,12 +372,50 @@ import UIKit
         return []
     }
     
+    //Get User from Core Data
+    @objc public func getUser()->User? {
+        do {
+            let id = UserDefaults.standard.string(forKey: "LoginUserName")!
+            let request = User.fetchRequest()
+            let predicate = NSPredicate(format:"loginId == %@",id )
+            request.predicate = predicate
+            let usr = try context.fetch(request).first
+                return usr
+        } catch let error as NSError {
+            print("Could not fetch user. \(error), \(error.userInfo)")
+        }
+        return nil
+    }
+    
+    //Update user into Core Data
+    @objc public func updateUser(weight:Double,height:Double, gender:String,emailAddress:String,contactNumber:String,age:Double)->Bool {
+        do {
+            let request = User.fetchRequest()
+            let id = UserDefaults.standard.string(forKey: "LoginUserName")!
+            request.predicate = NSPredicate(format: "loginId == %@",id)
+            let currentUser = try context.fetch(request)
+            currentUser.first!.weight = weight
+            currentUser.first!.height = height
+            currentUser.first!.gender = gender
+            currentUser.first!.emailAddress = emailAddress
+            currentUser.first!.contactNumber = contactNumber
+            currentUser.first!.age = age
+            
+            try context.save()
+            
+        } catch let error as NSError {
+            print("Could not update user. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
     
     //Add new user to Core Data
     @objc public func addUser(id:String, password:String)->Bool {
         let newUser = User(context: context)
         newUser.loginId = id
         newUser.passcode = password
+        newUser.dateCreated = Date()
         do {
             try context.save()
             return true
@@ -259,7 +429,7 @@ import UIKit
     @objc public func isValidLogin(id:String, passcode:String)->Bool {
         do {
             let request = User.fetchRequest()
-            let predicate = NSPredicate(format:"loginId == %@",id )
+            let predicate = NSPredicate(format:"loginId == %@",id)
             request.predicate = predicate
             let usr = try context.fetch(request).first
             if usr?.passcode == passcode {

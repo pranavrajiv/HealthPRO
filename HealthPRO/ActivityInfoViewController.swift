@@ -15,8 +15,10 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     @IBOutlet weak var activityName: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var calories: UITextField!
-    var activeTextField:UITextField!
+    var activeTextField:UITextField?
     var activityItem:Activity!
+    //stores current parent so that the parent can be dismissed if deleting an item
+    private var presentingController: UIViewController?
     
     convenience init( activityId: Int64 ) {
         self.init()
@@ -38,6 +40,12 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         self.activityName.delegate = self
         self.calories.delegate = self
         
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presentingController = presentingViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,19 +83,21 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
-        let textFieldLocation = self.activeTextField.superview!.convert(CGPoint(x: self.activeTextField.frame.maxX, y: self.activeTextField.frame.maxY), to: self.view)
-        
-        let movementDuration: Double = 0.3
-        
-        var movement:CGFloat = 0
-        if up {//Move the keyboard up so that the textField is not covered
-            movement = -max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5)
-        } else {//Move the keyboard down as much as it was moved up
-            movement = max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+        if let currentActiveTextField = self.activeTextField,let currentActiveTextFieldSuperView = currentActiveTextField.superview {
+            let textFieldLocation = currentActiveTextFieldSuperView.convert(CGPoint(x: currentActiveTextField.frame.maxX, y: currentActiveTextField.frame.maxY), to: self.view)
+            
+            let movementDuration: Double = 0.3
+            
+            var movement:CGFloat = 0
+            if up {//Move the keyboard up so that the textField is not covered
+                movement = -max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5)
+            } else {//Move the keyboard down as much as it was moved up
+                movement = max(0, textFieldLocation.y - keyBoardFrame.origin.y + 5 + keyBoardFrame.height)
+            }
+            UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
+                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+            }, completion: nil)
         }
-        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
-            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        }, completion: nil)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -95,12 +105,23 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         self.calories.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.calories.accessibilityIdentifier)
         self.activeTextField = textField
         
+        self.saveButton.isUserInteractionEnabled = false
+        self.deleteButton.isUserInteractionEnabled = false
+        self.cancelButton.isUserInteractionEnabled = false
+        self.isIndoorButton.isUserInteractionEnabled = false
+        
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activityName.isUserInteractionEnabled = true
         self.calories.isUserInteractionEnabled = true
         self.activeTextField = textField
+        
+        self.saveButton.isUserInteractionEnabled = true
+        self.deleteButton.isUserInteractionEnabled = true
+        self.cancelButton.isUserInteractionEnabled = true
+        self.isIndoorButton.isUserInteractionEnabled = true
+        
     }
     
     @objc private func saveButtonTouchUp() {
@@ -123,8 +144,12 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         
         //new activity
         if (self.activityItem == nil) {
-            let largestActivityID = viewController.coreDataHandler.getAllActivities().map { $0.activityId }.max()
-            _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID! + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
+             var largestActivityID:Int64 = -1
+            if let activityID = viewController.coreDataHandler.getAllActivities().map({ $0.activityId }).max() {
+                largestActivityID = activityID
+             }
+            
+            _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
         }
         else {
             //update activity
@@ -138,11 +163,18 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         self.dismiss(animated: true)
     }
     
+    
     @objc private func deleteButtonTouchUp() {
-        if let activ = self.activityItem {
-            _ = CoreDataHandler.init().deleteActivityForId(activityId: activ.activityId)
+        if let currentActivity = self.activityItem {
+            _ = CoreDataHandler.init().deleteActivityForId(activityId: currentActivity.activityId)
+            
+            self.dismiss(animated: false, completion: {
+                     self.presentingController?.dismiss(animated: false)
+            })
+        } else {
+            self.dismiss(animated: true)
         }
-        self.dismiss(animated: true)
+        
     }
     
     @objc private func isIndoorButtonTouchUp(_ sender: UIButton) {

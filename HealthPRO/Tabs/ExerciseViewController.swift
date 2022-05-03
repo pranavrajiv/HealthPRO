@@ -48,10 +48,10 @@ class ExerciseViewController: UIViewController,UITableViewDataSource,UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchBarField.resignFirstResponder()
 
-        let secondViewController = ActivityInfoViewController.init(activityId: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!))
+        let secondViewController = LogNutritionAndActivityViewController.init(id: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Activity")
         secondViewController.modalPresentationStyle = .fullScreen
         self.present(secondViewController, animated: true, completion: nil)
-        
+              
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
