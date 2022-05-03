@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -77,6 +78,11 @@
                                     <constraint firstItem="CAE-ql-mdi" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="wqW-oy-pzj"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQu-cW-szz">
+                                <rect key="frame" x="20" y="483" width="374" height="330"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.5106829214574784" green="0.4071648177618758" blue="0.93939012289047241" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -96,6 +102,7 @@
                         <outlet property="currentCity" destination="DbN-sJ-Yso" id="trb-pD-8r6"/>
                         <outlet property="currentTemperature" destination="V6z-kK-e1x" id="EEv-gM-NzG"/>
                         <outlet property="currentWeather" destination="I2E-XX-e9t" id="SkV-ws-b32"/>
+                        <outlet property="graphView" destination="hQu-cW-szz" id="usr-V5-Dt3"/>
                         <outlet property="todayDate" destination="qY8-7i-l05" id="unu-RO-kTx"/>
                         <outlet property="userLabel" destination="NKI-3e-KhB" id="7wH-i7-4ev"/>
                         <outlet property="weatherImage" destination="ofE-Xu-6jH" id="9lf-9y-LYg"/>
@@ -108,5 +115,8 @@
     </scenes>
     <resources>
         <image name="book.fill" catalog="system" width="128" height="95"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
