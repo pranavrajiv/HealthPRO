@@ -372,6 +372,89 @@ import UIKit
         return []
     }
     
+    //Delete Weight History for weightHistoryId from Core Data
+    @objc public func deleteWeightHistoryForId(weightHistoryId:Int64)->Bool {
+        
+        do {
+            let request = WeightHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "weightHistoryId == %lld", weightHistoryId)
+            let weightHistoryItems = try context.fetch(request)
+            context.delete(weightHistoryItems.first!)
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not delete weight history. \(error), \(error.userInfo)")
+        }
+        return false
+    }
+    
+    
+    //Log user weight history into Core Data
+    @objc public func logUserWeightHistory(historyId:Int64,timeStamp:Date,weight:Double)->Bool {
+        let logWeight = WeightHistory(context: context)
+        logWeight.weightHistoryId = historyId
+        logWeight.userRelationship = self.getUser()
+        logWeight.weight = weight
+        logWeight.timeStamp = timeStamp
+       
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add user weight. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    //Get all weight history from Core Data
+    @objc public func getAllWeightHistory()->[WeightHistory] {
+        do {
+            let request = WeightHistory.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: true)]
+            let weightHistory = try context.fetch(request)
+            return weightHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
+        } catch let error as NSError {
+            print("Could not get Weight History. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
+    //Update user Weight history into Core Data
+    @objc public func updateWeightHistory(historyId:Int64, timeStamp:Date, weight:Double)->Bool {
+        do {
+            let request = WeightHistory.fetchRequest()
+            request.predicate = NSPredicate(format: "weightHistoryId == %lld", historyId)
+            let weightHistoryItems = try context.fetch(request)
+            weightHistoryItems.first!.timeStamp = timeStamp
+            weightHistoryItems.first!.weight = weight
+            weightHistoryItems.first!.userRelationship = self.getUser()
+
+            try context.save()
+            } catch let error as NSError {
+                print("Could not update Weight history. \(error), \(error.userInfo)")
+                return false
+            }
+            return true
+    }
+    
+    //Get user Weight history for a Date from CoreData
+    @objc public func doesWeightHistoryExist(forDate:Date)->Bool {
+        do {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            
+            let request = WeightHistory.fetchRequest()
+            let weightHistoryItems = try context.fetch(request)
+            let userWeightHistoryItems = weightHistoryItems.filter({$0.userRelationship?.loginId == self.getUser()?.loginId})
+            
+            return userWeightHistoryItems.contains(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: forDate)})
+
+            } catch let error as NSError {
+                print("Could not fetch Weight history. \(error), \(error.userInfo)")
+                return false
+            }
+    }
+    
     //Get User from Core Data
     @objc public func getUser()->User? {
         do {
@@ -388,7 +471,7 @@ import UIKit
     }
     
     //Update user into Core Data
-    @objc public func updateUser(weight:Double,height:Double, gender:String,emailAddress:String,contactNumber:String,age:Double)->Bool {
+    @objc public func updateUser(weight:Double,height:Double, gender:String,emailAddress:String,contactNumber:String,birthYear:Int)->Bool {
         do {
             let request = User.fetchRequest()
             let id = UserDefaults.standard.string(forKey: "LoginUserName")!
@@ -399,7 +482,7 @@ import UIKit
             currentUser.first!.gender = gender
             currentUser.first!.emailAddress = emailAddress
             currentUser.first!.contactNumber = contactNumber
-            currentUser.first!.age = age
+            currentUser.first!.birthYear = Int64(birthYear)
             
             try context.save()
             

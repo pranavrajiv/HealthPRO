@@ -81,10 +81,11 @@
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O22-Qu-O0Z">
-                                <rect key="frame" x="122" y="154" width="131" height="32"/>
+                                <rect key="frame" x="89" y="154" width="197" height="32"/>
                                 <segments>
                                     <segment title="Food"/>
                                     <segment title="Activity"/>
+                                    <segment title="Weight"/>
                                 </segments>
                             </segmentedControl>
                             <datePicker contentMode="center" placeholderIntrinsicWidth="112" placeholderIntrinsicHeight="31" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="iCn-91-Ooe">

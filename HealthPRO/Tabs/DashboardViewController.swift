@@ -68,21 +68,31 @@ class DashboardViewController: UIViewController{
         super.viewDidLoad()
         self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
         
-        let ac = UIAlertController(title: "Update Weight", message: "Enter your current weight", preferredStyle: .alert)
-        ac.addTextField { (textField) in
-            textField.placeholder = "lbs"
-        }
-        ac.addAction(UIAlertAction(title: "Log", style: .default, handler: { action in
-            if let weightText = ac.textFields?.first?.text {
-                if weightText != "" {
-                    self.logUserWeight(weight:weightText)
+        if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                let ac = UIAlertController(title: "Update Weight", message: "Enter your current weight", preferredStyle: .alert)
+                ac.addTextField { (textField) in
+                    textField.placeholder = "lbs"
+                    textField.textAlignment = .center
+                    textField.isEnabled = false
                 }
+                ac.addAction(UIAlertAction(title: "Log", style: .default, handler: { action in
+                    if let weightText = ac.textFields?.first?.text {
+                        if weightText != "" {
+                            self.logUserWeight(weight:weightText)
+                        }
+                    }
+                }))
+                ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                self.present(ac, animated: true, completion: {
+                    if let getTextfield  = ac.textFields?.first{
+                            getTextfield.resignFirstResponder()
+                            getTextfield.isEnabled = true
+                    }
+                })
             }
-        }))
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        self.present(ac, animated: true)
-        
-        
+        }
+       
         graphView.addSubview(lineChartView)
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
@@ -91,7 +101,13 @@ class DashboardViewController: UIViewController{
     }
     
     @objc private func logUserWeight(weight:String){
-            
+        if let weightDouble = Double(weight) {
+            var historyId:Int64 = -1
+            if let largestWeightHistoryId = CoreDataHandler.init().getAllWeightHistory().map({$0.weightHistoryId}).max() {
+                historyId = largestWeightHistoryId
+            }
+            _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: Date(), weight: weightDouble)
+        }
     }
                                    
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {

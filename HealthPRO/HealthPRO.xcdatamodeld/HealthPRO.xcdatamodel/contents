@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Activity" representedClassName="Activity" syncable="YES">
         <attribute name="activityId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="activityName" optional="YES" attributeType="String"/>
@@ -38,10 +38,12 @@
         <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipFood" inverseEntity="User"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
-        <attribute name="age" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="activityPreference" optional="YES" attributeType="String"/>
+        <attribute name="birthYear" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="contactNumber" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="emailAddress" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="foodPreference" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="loginId" optional="YES" attributeType="String"/>
@@ -49,12 +51,20 @@
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="userHistoryRelationshipActivity" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ActivityHistory" inverseName="userRelationship" inverseEntity="ActivityHistory"/>
         <relationship name="userHistoryRelationshipFood" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodHistory" inverseName="userRelationship" inverseEntity="FoodHistory"/>
+        <relationship name="userHistoryRelationshipWeight" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeightHistory" inverseName="userRelationship" inverseEntity="WeightHistory"/>
+    </entity>
+    <entity name="WeightHistory" representedClassName="WeightHistory" syncable="YES">
+        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="weightHistoryId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipWeight" inverseEntity="User"/>
     </entity>
     <elements>
         <element name="Activity" positionX="-63" positionY="81" width="128" height="104"/>
         <element name="ActivityHistory" positionX="-63" positionY="90" width="128" height="104"/>
         <element name="Food" positionX="-63" positionY="0" width="128" height="239"/>
         <element name="FoodHistory" positionX="-45" positionY="99" width="128" height="104"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="194"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="239"/>
+        <element name="WeightHistory" positionX="-54" positionY="108" width="128" height="89"/>
     </elements>
 </model>

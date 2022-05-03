@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/30/22.
+//  Created by Pranav Rajiv on 5/3/22.
 //
 //
 
@@ -16,17 +16,20 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
-    @NSManaged public var loginId: String?
-    @NSManaged public var passcode: String?
-    @NSManaged public var age: Double
+    @NSManaged public var birthYear: Int64
+    @NSManaged public var contactNumber: String?
+    @NSManaged public var dateCreated: Date?
+    @NSManaged public var emailAddress: String?
     @NSManaged public var gender: String?
     @NSManaged public var height: Double
+    @NSManaged public var loginId: String?
+    @NSManaged public var passcode: String?
     @NSManaged public var weight: Double
-    @NSManaged public var contactNumber: String?
-    @NSManaged public var emailAddress: String?
-    @NSManaged public var dateCreated: Date?
+    @NSManaged public var foodPreference: String?
+    @NSManaged public var activityPreference: String?
     @NSManaged public var userHistoryRelationshipActivity: NSSet?
     @NSManaged public var userHistoryRelationshipFood: NSSet?
+    @NSManaged public var userHistoryRelationshipWeight: WeightHistory?
 
 }
 
