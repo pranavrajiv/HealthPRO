@@ -35,7 +35,7 @@ struct WeatherNow {
         self.weatherInfo = nil
     }
 }
-//Rajesh Comment
+//Rajesh Comment 
 
 class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     @IBOutlet weak var loginRegisterButton: UIButton!
