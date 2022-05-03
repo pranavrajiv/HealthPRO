@@ -10,13 +10,14 @@ import Charts
 import TinyConstraints
 
 class DashboardViewController: UIViewController{
-    @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var todayDate: UILabel!
     @IBOutlet weak var currentCity: UILabel!
     @IBOutlet weak var currentTemperature: UILabel!
     @IBOutlet weak var currentWeather: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var graphView: UIView!
+    @IBOutlet weak var historyButton: UIButton!
+    @IBOutlet weak var suggestionsButton: UIButton!
     var weatherUpdateTimer:Timer!
     
     lazy var lineChartView: LineChartView = {
@@ -40,14 +41,7 @@ class DashboardViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //TODO Temporary button added pragmatically to prevent merge conflicts in nib file that can arise due to implementation of the charts in this VC
-        let myButton = UIButton(type: .system)
-        myButton.tintColor = UIColor.black
-        myButton.backgroundColor = UIColor.systemBlue
-        myButton.frame = CGRect(x: 10, y: 38, width: 100, height: 45)
-        myButton.setTitle("Show History", for: .normal)
-        myButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
-        self.view.addSubview(myButton)
+        self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
         
         self.getTheWeather()
         
@@ -73,8 +67,6 @@ class DashboardViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.userLabel.text = "Hello: " +  UserDefaults.standard.string(forKey: "LoginUserName")!
-        //self.theWeatherInfo = Weather.init(delegate: self)
         graphView.addSubview(lineChartView)
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
