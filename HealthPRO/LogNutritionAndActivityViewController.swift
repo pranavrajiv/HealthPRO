@@ -45,10 +45,8 @@ class LogNutritionAndActivityViewController: UIViewController {
         super.viewDidLoad()
 
         if self.logType == "Activity" {
-            self.itemName.text = CoreDataHandler.init().getActivityForId(activityId: self.itemId)?.activityName
             self.hrsAndServingLabel.text = "Hours Active"
         } else {
-            self.itemName.text = CoreDataHandler.init().getFoodForId(foodId: self.itemId)?.foodName
             self.hrsAndServingLabel.text = "Serving Size"
         }
         
@@ -72,10 +70,13 @@ class LogNutritionAndActivityViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil
-        )
-        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillDisappear),name: UIResponder.keyboardWillHideNotification,object: nil
-        )
+        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillDisappear),name: UIResponder.keyboardWillHideNotification,object: nil)
+        if self.logType == "Activity" {
+            self.itemName.text = CoreDataHandler.init().getActivityForId(activityId: self.itemId)?.activityName
+        } else {
+            self.itemName.text = CoreDataHandler.init().getFoodForId(foodId: self.itemId)?.foodName
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
