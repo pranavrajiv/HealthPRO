@@ -35,7 +35,7 @@ struct WeatherNow {
         self.weatherInfo = nil
     }
 }
-//Rajesh Comment 
+
 
 class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     @IBOutlet weak var loginRegisterButton: UIButton!
@@ -143,7 +143,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
             
             if (self.usernameTextField.text=="") {
                 // error
-                let ac = UIAlertController(title: "Login failure", message: "Email address empty", preferredStyle: .alert)
+                let ac = UIAlertController(title: "Login failure", message: "Username empty", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(ac, animated: true)
                 return
@@ -184,7 +184,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
                 if self.loginWithEmailPasswordSuccessful() == true {
                     self.logInProfile()
                 } else { // no biometric and login with password unsuccessful
-                    let ac = UIAlertController(title: "Authentication failed", message: "Email or Password incorrect", preferredStyle: .alert)
+                    let ac = UIAlertController(title: "Authentication failed", message: "Username or Password incorrect", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
                     self.present(ac, animated: true)
                 }
@@ -194,7 +194,12 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
             //reset segment to login so that user can login after registration is complete
             self.segCtrl.selectedSegmentIndex = 0
             
-            if let loginId = self.usernameTextField.text, let password = self.passwordTextField.text {
+            if self.usernameTextField.text == "" || self.passwordTextField.text == "" {
+                let ac = UIAlertController(title: "Registration Failed!!!", message: "Username or Password cannot be blank", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(ac, animated: true)
+                
+            } else  if let loginId = self.usernameTextField.text, let password = self.passwordTextField.text {
                 //check if user already added to Core Data
                 if(self.coreDataHandler.doesUserExist(id: loginId)) {
                   let ac = UIAlertController(title: "Registration Failed!!!", message: "User Already Exists", preferredStyle: .alert)
@@ -202,6 +207,8 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
                   self.present(ac, animated: true)
                     
                 } else if(self.coreDataHandler.addUser(id: loginId, password: password)) {
+                    self.usernameTextField.text = ""
+                    self.passwordTextField.text = ""
                     let ac = UIAlertController(title: "Registration Complete", message: "Successfully Registered. Please login", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
                     self.present(ac, animated: true)
