@@ -17,6 +17,8 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     @IBOutlet weak var calories: UITextField!
     var activeTextField:UITextField?
     var activityItem:Activity!
+    var isKeyboardUp:Bool = false
+    
     //stores current parent so that the parent can be dismissed if deleting an item
     private var presentingController: UIViewController?
     
@@ -83,6 +85,10 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
+        if up == self.isKeyboardUp  {
+            return
+        }
+        self.isKeyboardUp = up
         if let currentActiveTextField = self.activeTextField,let currentActiveTextFieldSuperView = currentActiveTextField.superview {
             let textFieldLocation = currentActiveTextFieldSuperView.convert(CGPoint(x: currentActiveTextField.frame.maxX, y: currentActiveTextField.frame.maxY), to: self.view)
             

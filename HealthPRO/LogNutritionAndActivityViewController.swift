@@ -17,6 +17,7 @@ class LogNutritionAndActivityViewController: UIViewController {
     @IBOutlet weak var hrsAndServingTextField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
     var historyId:Int64!
+    var isKeyboardUp:Bool = false
     
     var logType:String!
     var itemId:Int64!
@@ -107,6 +108,11 @@ class LogNutritionAndActivityViewController: UIViewController {
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
+        if up == self.isKeyboardUp {
+            return
+        }
+        self.isKeyboardUp = up
+        
         if let currentActiveTextFieldSuperView = self.hrsAndServingTextField.superview {
             let textFieldLocation = currentActiveTextFieldSuperView.convert(CGPoint(x: self.hrsAndServingTextField.frame.maxX, y: self.hrsAndServingTextField.frame.maxY), to: self.view)
             

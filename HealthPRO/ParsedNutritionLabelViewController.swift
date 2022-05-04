@@ -19,6 +19,8 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     var foodItem:Food!
     var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":"","Potassium":""]
     var activeTextField:UITextField?
+    var isKeyboardUp:Bool = false
+    
     //stores current parent so that the parent can be dismissed if deleting an item
     private var presentingController: UIViewController?
 
@@ -198,6 +200,11 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     }
     
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
+        if up == self.isKeyboardUp {
+            return
+        }
+        self.isKeyboardUp = up
+        
         if let currentActiveTextField = self.activeTextField,let currentActiveTextFieldSuperView = currentActiveTextField.superview {
             let textFieldLocation = currentActiveTextFieldSuperView.convert(CGPoint(x: currentActiveTextField.frame.maxX, y: currentActiveTextField.frame.maxY), to: self.view)
             
