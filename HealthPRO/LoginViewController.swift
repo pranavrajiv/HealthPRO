@@ -84,9 +84,11 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         //indicates that the app entered background
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWentToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
-        // Do any additional setup after loading the view.
-        loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
-        segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
+        self.loginRegisterButton.setTitle("Login", for: .normal)
+        self.loginRegisterButton.titleLabel?.font = loginRegisterButton.titleLabel?.font.withSize(35)
+        self.loginRegisterButton.layer.cornerRadius = 25
+        self.loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
+        self.segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
         
     }
     
@@ -128,9 +130,9 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     //notifies when user switched between login and register
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            loginRegisterButton.titleLabel?.text = "Login"
+            self.loginRegisterButton.setTitle("Login", for: .normal)
         } else {
-            loginRegisterButton.titleLabel?.text = "Register"
+            self.loginRegisterButton.setTitle("Register", for: .normal)
         }
         loginRegisterButton.sizeToFit()
     }
@@ -191,9 +193,8 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
             }
         } else {//register button pressed
             
-            //reset segment to login so that user can login after registration is complete
-            self.segCtrl.selectedSegmentIndex = 0
-            
+            self.loginRegisterButton.setTitle("Register", for: .normal)
+
             if self.usernameTextField.text == "" || self.passwordTextField.text == "" {
                 let ac = UIAlertController(title: "Registration Failed!!!", message: "Username or Password cannot be blank", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -209,6 +210,8 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
                 } else if(self.coreDataHandler.addUser(id: loginId, password: password)) {
                     self.usernameTextField.text = ""
                     self.passwordTextField.text = ""
+                    self.segCtrl.selectedSegmentIndex = 0
+                    self.loginRegisterButton.setTitle("Login", for: .normal)
                     let ac = UIAlertController(title: "Registration Complete", message: "Successfully Registered. Please login", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
                     self.present(ac, animated: true)
@@ -217,7 +220,13 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         }
     }
     
-    //fuction checks if user and password correct in coreData
+    //Dismiss the keyboard when touched outside the screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
+    
+    //function checks if user and password correct in coreData
     @objc private func loginWithEmailPasswordSuccessful()->Bool {
         return self.coreDataHandler.isValidLogin(id: self.usernameTextField.text ?? "", passcode: self.passwordTextField.text ?? "")
     }
