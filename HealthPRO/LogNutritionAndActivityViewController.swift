@@ -53,6 +53,7 @@ class LogNutritionAndActivityViewController: UIViewController {
         self.cancelButton.addTarget(self, action: #selector(self.cancelButtonTouchUp), for: .touchUpInside)
         self.editButton.addTarget(self, action: #selector(self.editButtonTouchUpInside), for: .touchUpInside)
         self.logItButton.addTarget(self, action: #selector(self.logButtonTouchUp), for: .touchUpInside)
+        self.datePicker.maximumDate = Date()
         
         if (self.historyId != nil) {
             self.logItButton.setTitle("Update History", for: .normal)

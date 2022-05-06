@@ -37,6 +37,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
             self.logWeight.addTarget(self, action: #selector(logUserWeight), for: .touchUpInside)
             self.dismissButton.addTarget(self, action: #selector(dismissButtonTouchUp), for: .touchUpInside)
             self.segmentedControl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
+            self.datePicker.maximumDate = Date()
             self.datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
             self.showAllSwitch.addTarget(self, action: #selector(showAllSwitchChanged), for: .valueChanged)
             self.showAllSwitch.isOn = false
@@ -82,6 +83,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
         }))
         
         self.weightDatePicker = UIDatePicker()
+        self.weightDatePicker.maximumDate = Date()
         weightDatePicker.preferredDatePickerStyle = .compact
         weightDatePicker.datePickerMode = .date
         weightDatePicker.frame = CGRect(x: weightDatePicker.frame.origin.x - 15, y: 50, width: weightDatePicker.frame.size.width, height: weightDatePicker.frame.size.height)
@@ -131,6 +133,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
         }))
 
         self.weightDatePicker = UIDatePicker()
+        self.weightDatePicker.maximumDate = Date()
         self.weightDatePicker.date = (CoreDataHandler.init().getAllWeightHistory().first(where: {$0.weightHistoryId == weightHistoryId})?.timeStamp)!
         self.weightDatePicker.preferredDatePickerStyle = .compact
         self.weightDatePicker.datePickerMode = .date
