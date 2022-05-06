@@ -31,7 +31,7 @@
                                     <backgroundConfiguration key="background"/>
                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBlueColor"/>
                                 </buttonConfiguration>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="25P-Qp-mtL">
@@ -44,7 +44,7 @@
                                             <backgroundConfiguration key="background"/>
                                             <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="20"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                            <color key="baseBackgroundColor" systemColor="systemBlueColor"/>
                                         </buttonConfiguration>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcJ-Pw-hgk">
@@ -58,14 +58,14 @@
                                             <backgroundConfiguration key="background"/>
                                             <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="20"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                            <color key="baseBackgroundColor" systemColor="systemBlueColor"/>
                                         </buttonConfiguration>
                                     </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                        <color key="backgroundColor" red="0.50980392156862742" green="0.40784313725490196" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JWy-KR-RCT" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="0mP-Lp-6B9"/>
                             <constraint firstItem="25P-Qp-mtL" firstAttribute="top" secondItem="JWy-KR-RCT" secondAttribute="bottom" constant="44" id="7qv-fa-TGq"/>
@@ -93,14 +93,11 @@
     </scenes>
     <resources>
         <image name="scanner.fill" catalog="system" width="128" height="93"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
