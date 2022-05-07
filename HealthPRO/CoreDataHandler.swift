@@ -32,7 +32,26 @@ import UIKit
         }
         return false
     }
-   
+
+    //Add suggestions to Core Data
+    @objc public func addSuggestion(suggestionId:Int64,suggestionTag:String, suggestionText:String,userPreference:String,weather:String)->Bool {
+        
+        let newSuggestion = Suggestion(context: context)
+        newSuggestion.suggestionId = suggestionId
+        newSuggestion.suggestionTag = suggestionTag
+        newSuggestion.suggestionText = suggestionText
+        newSuggestion.preference = userPreference
+        newSuggestion.weather = weather
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not add suggestion. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
+    
     //Add new activity to Core Data
     @objc public func addActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double,isIndoor:String)->Bool {
         

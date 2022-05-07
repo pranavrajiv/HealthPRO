@@ -247,10 +247,11 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         }
     }
     
-    //does all the onboarding steps including coreData populations
+    //does all the onboarding steps including coreData populations from .csv payloads
     @objc private func gettingStarted() {
         self.populateFood()
         self.populateActivity()
+        self.populateSuggestions()
     }
     
     @objc private func populateFood() {
@@ -277,6 +278,20 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         }
     }
     
+    @objc private func populateSuggestions() {
+        let url = Bundle.main.url(forResource: "suggestions", withExtension: "csv")!
+        guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
+
+        for i in 0...result.shape.rows - 1 {
+            print(i)
+            if let tag = result.selecting(columnNames: "tag").columns.first?[i] as? String,
+               let suggestionText = result.selecting(columnNames: "suggestion").columns.first?[i] as? String,
+               let userPreference = result.selecting(columnNames: "preference").columns.first?[i] as? String,
+               let weather = result.selecting(columnNames: "weather").columns.first?[i] as? String {
+                _ = self.coreDataHandler.addSuggestion(suggestionId: Int64(i), suggestionTag: tag, suggestionText: suggestionText, userPreference:userPreference, weather: weather)
+            }
+        }
+    }
     
     //post onboarding steps
     @objc private func afterInitialLaunch() {
