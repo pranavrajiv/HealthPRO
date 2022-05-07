@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qq-i2-MrD">
-                                <rect key="frame" x="266" y="68" width="89" height="31"/>
+                                <rect key="frame" x="267.33333333333331" y="68" width="87.666666666666686" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="person.fill" catalog="system" title="Logout" cornerStyle="capsule"/>
                             </button>
@@ -156,6 +156,11 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Edit Profile" cornerStyle="capsule"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxw-xl-Bwa">
+                                <rect key="frame" x="20" y="68" width="86" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="clock" catalog="system" title="Usage" cornerStyle="capsule"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
@@ -169,6 +174,7 @@
                             <constraint firstItem="yC0-Kx-jQa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="JUv-wY-S4W"/>
                             <constraint firstItem="UQj-P4-uSo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="KuF-8Q-vP0"/>
                             <constraint firstItem="8R1-Ik-8Uz" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="OWw-dB-2GR"/>
+                            <constraint firstItem="zxw-xl-Bwa" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="QLn-hX-Dfz"/>
                             <constraint firstItem="dAu-LX-W0l" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="193" id="Vco-Cy-vOF"/>
                             <constraint firstItem="UQj-P4-uSo" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="WAD-tn-g1O"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UQj-P4-uSo" secondAttribute="trailing" constant="20" id="WxQ-xo-jUH"/>
@@ -180,12 +186,14 @@
                             <constraint firstItem="iei-dt-2e5" firstAttribute="top" secondItem="yC0-Kx-jQa" secondAttribute="bottom" constant="80" id="nfB-g1-CEd"/>
                             <constraint firstItem="1qq-i2-MrD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="rnu-As-wAv"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8R1-Ik-8Uz" secondAttribute="trailing" constant="20" id="sgs-kl-kpq"/>
+                            <constraint firstItem="zxw-xl-Bwa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="sl6-ko-pcj"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="NzO-dK-2FA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="logoutButton" destination="1qq-i2-MrD" id="qKK-1r-Msm"/>
+                        <outlet property="usageButton" destination="zxw-xl-Bwa" id="ZOm-0o-zQz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -196,6 +204,7 @@
     <resources>
         <image name="Banner 1" width="2048" height="1365"/>
         <image name="User Avatar_Male" width="512" height="512"/>
+        <image name="clock" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

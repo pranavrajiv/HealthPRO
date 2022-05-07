@@ -470,8 +470,25 @@ import UIKit
         return nil
     }
     
+    //update app usage time into Core Data
+    @objc public func updateUserAppUsageTime(usageTime:Int64)->Bool {
+        do {
+            let request = User.fetchRequest()
+            let id = UserDefaults.standard.string(forKey: "LoginUserName")!
+            request.predicate = NSPredicate(format: "loginId == %@",id)
+            let currentUser = try context.fetch(request)
+            currentUser.first!.usageTImeSeconds = usageTime
+            try context.save()
+            
+        } catch let error as NSError {
+            print("Could not update app user time. \(error), \(error.userInfo)")
+            return false
+        }
+        return true
+    }
+    
     //Update user into Core Data
-    @objc public func updateUser(weight:Double,height:Double, gender:String,emailAddress:String,contactNumber:String,birthYear:Int)->Bool {
+    @objc public func updateUser(weight:Double,height:Double, gender:String, emailAddress:String, contactNumber:String, birthYear:Int)->Bool {
         do {
             let request = User.fetchRequest()
             let id = UserDefaults.standard.string(forKey: "LoginUserName")!

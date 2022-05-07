@@ -47,6 +47,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     
     var coreDataHandler:CoreDataHandler!
     var weatherInfoNow:WeatherNow!
+    var appStartTimeStamp:Date!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -76,6 +77,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         } else {
             UserDefaults.standard.set(1, forKey: "LaunchCount")
         }
+        
         UserDefaults.standard.synchronize()
         
         //indicates that the app entered background
@@ -117,6 +119,8 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         self.passwordTextField.text = ""
         self.weatherInfoNow.cleanup()
         self.weatherInfoNow  = nil
+        _ = self.coreDataHandler.updateUserAppUsageTime(usageTime: Int64(Date().timeIntervalSince(self.appStartTimeStamp))+(self.coreDataHandler.getUser()?.usageTImeSeconds ?? 0))
+        self.appStartTimeStamp = nil
         UserDefaults.standard.set("", forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
         self.dismiss(animated: true, completion: nil)
@@ -235,7 +239,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     @objc private func logInProfile() {
         UserDefaults.standard.set(usernameTextField.text, forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
-
+        self.appStartTimeStamp = Date()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: "tabBarVC") as? UITabBarController {
             controller.modalPresentationStyle = .fullScreen
