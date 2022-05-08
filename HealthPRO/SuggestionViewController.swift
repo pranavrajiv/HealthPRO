@@ -8,7 +8,7 @@
 import UIKit
 
 class SuggestionsViewController: UIViewController{
-    @IBOutlet weak var todayDate: UILabel!
+    //@IBOutlet weak var todayDate: UILabel!
     //@IBOutlet weak var weatherImage: UIImageView!
     //@IBOutlet weak var historyButton: UIButton!
     var weatherUpdateTimer:Timer!
@@ -31,7 +31,8 @@ class SuggestionsViewController: UIViewController{
             self.weatherUpdateTimer.invalidate()
         }
         
-        self.weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(getTheWeather), userInfo: nil, repeats: true)
+        //Uncomment this line once the close button is implemented for this VC otherwise there is a chance for a memory leak due to the timers not getting invalidated
+        //self.weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(getTheWeather), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,9 +47,11 @@ class SuggestionsViewController: UIViewController{
     
     @objc func getTheWeather() -> String {
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
-
-        let currentWeatherHere:String  = viewController.weatherInfoNow.currentWeather.weather[0].description.capitalized
         
-        return currentWeatherHere
+        if let currentWeatherHere  = viewController.weatherInfoNow.currentWeather {
+            return currentWeatherHere.weather[0].description.capitalized
+        }
+        
+        return ""
     }
 }

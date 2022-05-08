@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F2B6EEA28273E5000E382BD /* SuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B6EE928273E5000E382BD /* SuggestionsViewController.swift */; };
-		9F2B6EEE28273FA400E382BD /* SuggestionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F2B6EED28273FA400E382BD /* SuggestionViewController.storyboard */; };
 		B95FFF87281CC995007D39A0 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = B95FFF86281CC995007D39A0 /* TinyConstraints */; };
 		B9979EF7281B98DE00C3A8C7 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B9979EF6281B98DE00C3A8C7 /* Charts */; };
 		F844AE0D28189838000FBCF1 /* activity.csv in Resources */ = {isa = PBXBuildFile; fileRef = F844AE0C28189838000FBCF1 /* activity.csv */; };
@@ -53,6 +51,8 @@
 		F8B23276282619DF007970B5 /* WeightHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2326A282619DF007970B5 /* WeightHistory+CoreDataProperties.swift */; };
 		F8B23277282619DF007970B5 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2326B282619DF007970B5 /* Activity+CoreDataClass.swift */; };
 		F8B23278282619DF007970B5 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2326C282619DF007970B5 /* Activity+CoreDataProperties.swift */; };
+		F8B2328128274F37007970B5 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2327F28274F37007970B5 /* SuggestionViewController.swift */; };
+		F8B232842827507F007970B5 /* SuggestionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B232832827507F007970B5 /* SuggestionViewController.storyboard */; };
 		F8B4C218281CB61C005810C9 /* UserHistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */; };
 		F8B4C21A281CB8FF005810C9 /* UserHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4C219281CB8FF005810C9 /* UserHistoryViewController.swift */; };
 /* End PBXBuildFile section */
@@ -75,8 +75,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9F2B6EE928273E5000E382BD /* SuggestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsViewController.swift; sourceTree = "<group>"; };
-		9F2B6EED28273FA400E382BD /* SuggestionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SuggestionViewController.storyboard; sourceTree = "<group>"; };
 		F844AE0C28189838000FBCF1 /* activity.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = activity.csv; sourceTree = "<group>"; };
 		F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInfoViewController.swift; sourceTree = "<group>"; };
 		F844AEF6281B492F000FBCF1 /* ActivityInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityInfoViewController.xib; sourceTree = "<group>"; };
@@ -123,6 +121,8 @@
 		F8B2326A282619DF007970B5 /* WeightHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeightHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F8B2326B282619DF007970B5 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F8B2326C282619DF007970B5 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8B2327F28274F37007970B5 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
+		F8B232832827507F007970B5 /* SuggestionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SuggestionViewController.storyboard; sourceTree = "<group>"; };
 		F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserHistoryViewController.storyboard; sourceTree = "<group>"; };
 		F8B4C219281CB8FF005810C9 /* UserHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,8 +191,8 @@
 				F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */,
 				F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */,
 				F8B4C219281CB8FF005810C9 /* UserHistoryViewController.swift */,
-				9F2B6EED28273FA400E382BD /* SuggestionViewController.storyboard */,
-				9F2B6EE928273E5000E382BD /* SuggestionsViewController.swift */,
+				F8B232832827507F007970B5 /* SuggestionViewController.storyboard */,
+				F8B2327F28274F37007970B5 /* SuggestionViewController.swift */,
 				F85C353E28161BCF0068A5F5 /* pre-pop data */,
 				F861B9152807F6DA00874872 /* CoreDataHandler.swift */,
 				F85C3515281209600068A5F5 /* Weather.swift */,
@@ -391,7 +391,7 @@
 				F84575F12803E02E00590F5C /* Profile.storyboard in Resources */,
 				F861AF7C280FAF5B00A73F28 /* Dashboard.storyboard in Resources */,
 				F8B4C218281CB61C005810C9 /* UserHistoryViewController.storyboard in Resources */,
-				9F2B6EEE28273FA400E382BD /* SuggestionViewController.storyboard in Resources */,
+				F8B232842827507F007970B5 /* SuggestionViewController.storyboard in Resources */,
 				F84575C428020DB900590F5C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,10 +437,10 @@
 				F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */,
 				F85C3516281209600068A5F5 /* Weather.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
-				9F2B6EEA28273E5000E382BD /* SuggestionsViewController.swift in Sources */,
 				F8B2326E282619DF007970B5 /* User+CoreDataProperties.swift in Sources */,
 				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
+				F8B2328128274F37007970B5 /* SuggestionViewController.swift in Sources */,
 				F8B23272282619DF007970B5 /* ActivityHistory+CoreDataProperties.swift in Sources */,
 				F8B23275282619DF007970B5 /* WeightHistory+CoreDataClass.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,

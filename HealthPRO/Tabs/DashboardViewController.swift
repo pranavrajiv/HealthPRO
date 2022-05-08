@@ -51,6 +51,14 @@ class DashboardViewController: UIViewController{
         self.weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(getTheWeather), userInfo: nil, repeats: true)
     }
     
+    @objc func suggestionButtonTouchUpInside() {
+        let storyboard = UIStoryboard(name: "SuggestionViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "suggestionVC")
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
+        
+    }
+    
     @objc func viewHistoryButtonTouchUpInside() {
         
         let storyboard = UIStoryboard(name: "UserHistoryViewController", bundle: nil)
@@ -67,6 +75,7 @@ class DashboardViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
+        self.suggestionsButton.addTarget(self, action: #selector(suggestionButtonTouchUpInside), for: .touchUpInside)
         
         if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
