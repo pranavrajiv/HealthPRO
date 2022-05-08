@@ -51,7 +51,20 @@ import UIKit
         return true
     }
     
-    
+    //Get Preferenced Suggestions from Core Data
+    @objc public func getPreferencedSuggestions(pref:String)->[Suggestion] {
+        do {
+            let request = Suggestion.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "suggestionId", ascending: true)]
+            request.predicate = NSPredicate(format: "preference CONTAINS[cd] %@", pref)
+            let matchingSuggestions = try context.fetch(request)
+            return matchingSuggestions
+        } catch let error as NSError {
+            print("Could not get suggestions. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+
     //Add new activity to Core Data
     @objc public func addActivity(activityId:Int64,activityName:String, caloriesPerHourPerLb:Double,isIndoor:String)->Bool {
         
