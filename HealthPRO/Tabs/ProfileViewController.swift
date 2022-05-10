@@ -18,8 +18,14 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func logoutButtonTouchUpInside(){
-        let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
-        viewController.cleanup()
+        
+        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Logout", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
+            viewController.cleanup()
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
     }
     
     @objc private func usageButtonTouchUpInside(){

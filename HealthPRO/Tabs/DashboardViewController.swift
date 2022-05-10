@@ -95,8 +95,8 @@ class DashboardViewController: UIViewController{
                 ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                 self.present(ac, animated: true, completion: {
                     if let getTextfield  = ac.textFields?.first{
-                            getTextfield.resignFirstResponder()
-                            getTextfield.isEnabled = true
+                        getTextfield.resignFirstResponder()
+                        getTextfield.isEnabled = true
                     }
                 })
             }

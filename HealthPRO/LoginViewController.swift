@@ -216,6 +216,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
                 } else if(self.coreDataHandler.addUser(id: loginId, password: password)) {
                     self.usernameTextField.text = ""
                     self.passwordTextField.text = ""
+                    self.usernameTextField.becomeFirstResponder()
                     self.segCtrl.selectedSegmentIndex = 0
                     self.loginRegisterButton.setTitle("Login", for: .normal)
                     let ac = UIAlertController(title: "Registration Complete", message: "Successfully Registered. Please login", preferredStyle: .alert)

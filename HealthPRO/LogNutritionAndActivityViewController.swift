@@ -140,12 +140,17 @@ class LogNutritionAndActivityViewController: UIViewController {
     
     @objc private func editButtonTouchUpInside() {
         if (self.historyId != nil) {
-            if self.logType == "Activity" {
-                _ = CoreDataHandler.init().deleteActivityHistoryForId(activityHistoryId: self.historyId)
-            } else {
-                _ = CoreDataHandler.init().deleteFoodHistoryForId(foodHistoryId: self.historyId)
-            }
-            self.dismiss(animated: true, completion: nil)
+            let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Delete", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                if self.logType == "Activity" {
+                    _ = CoreDataHandler.init().deleteActivityHistoryForId(activityHistoryId: self.historyId)
+                } else {
+                    _ = CoreDataHandler.init().deleteFoodHistoryForId(foodHistoryId: self.historyId)
+                }
+                self.dismiss(animated: true, completion: nil)
+            }))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(ac, animated: true)
         }else {
             if self.logType == "Activity" {
                 let secondViewController = ActivityInfoViewController.init(activityId:self.itemId)
@@ -175,38 +180,45 @@ class LogNutritionAndActivityViewController: UIViewController {
             return
         }
         
-        let calorieHoursString = self.hrsAndServingTextField.text
-        var calorieNumber = 0.0
-        if let calorieNum = Double(calorieHoursString!.filter("0123456789.".contains)) {
-            calorieNumber = calorieNum
-        }
-        if (self.historyId != nil) {
-            if self.logType == "Activity" {
-                _ = CoreDataHandler.init().updateActivityHistory(historyId: self.historyId, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
-            } else {
-                _ = CoreDataHandler.init().updateFoodHistory(historyId: self.historyId,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
+        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Save", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            let calorieHoursString = self.hrsAndServingTextField.text
+            var calorieNumber = 0.0
+            if let calorieNum = Double(calorieHoursString!.filter("0123456789.".contains)) {
+                calorieNumber = calorieNum
             }
-        }
-        else
-        {
-            if self.logType == "Activity" {
-                var historyId:Int64 = -1
-                if let largestActivityHistoryId = CoreDataHandler.init().getAllActivityHistory().map({$0.activityHistoryId}).max() {
-                    historyId = largestActivityHistoryId
+            if (self.historyId != nil) {
+                if self.logType == "Activity" {
+                    _ = CoreDataHandler.init().updateActivityHistory(historyId: self.historyId, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
+                } else {
+                    _ = CoreDataHandler.init().updateFoodHistory(historyId: self.historyId,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
                 }
-                _ = CoreDataHandler.init().logUserActivity(historyId:historyId + 1, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
-              
-            } else {
-                var historyId:Int64 = -1
-                if let largestFoodHistoryId = CoreDataHandler.init().getAllFoodHistory().map({$0.foodHistoryId}).max() {
-                    historyId = largestFoodHistoryId
+            }
+            else
+            {
+                if self.logType == "Activity" {
+                    var historyId:Int64 = -1
+                    if let largestActivityHistoryId = CoreDataHandler.init().getAllActivityHistory().map({$0.activityHistoryId}).max() {
+                        historyId = largestActivityHistoryId
+                    }
+                    _ = CoreDataHandler.init().logUserActivity(historyId:historyId + 1, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
+                  
+                } else {
+                    var historyId:Int64 = -1
+                    if let largestFoodHistoryId = CoreDataHandler.init().getAllFoodHistory().map({$0.foodHistoryId}).max() {
+                        historyId = largestFoodHistoryId
+                    }
+                    _ = CoreDataHandler.init().logUserFood(historyId:historyId + 1,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
                 }
-                _ = CoreDataHandler.init().logUserFood(historyId:historyId + 1,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
+                
             }
             
-        }
-        
-        self.dismiss(animated: true)
+            self.dismiss(animated: true)
+            
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
+    
     }
     
 
