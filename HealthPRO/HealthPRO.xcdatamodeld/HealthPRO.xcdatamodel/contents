@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Activity" representedClassName="Activity" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
         <attribute name="activityId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="activityName" optional="YES" attributeType="String"/>
         <attribute name="caloriesPerHourPerLb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isIndoor" optional="YES" attributeType="String"/>
         <relationship name="activityHistoryRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ActivityHistory" inverseName="activityRelationship" inverseEntity="ActivityHistory"/>
     </entity>
-    <entity name="ActivityHistory" representedClassName="ActivityHistory" syncable="YES">
+    <entity name="ActivityHistory" representedClassName="ActivityHistory" syncable="YES" codeGenerationType="class">
         <attribute name="activityHistoryId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="activityRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="activityHistoryRelationship" inverseEntity="Activity"/>
         <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipActivity" inverseEntity="User"/>
     </entity>
-    <entity name="Food" representedClassName="Food" syncable="YES">
+    <entity name="Food" representedClassName="Food" syncable="YES" codeGenerationType="class">
         <attribute name="calcium" optional="YES" attributeType="String"/>
         <attribute name="calories" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="carbohydrate" optional="YES" attributeType="String"/>
@@ -30,7 +30,7 @@
         <attribute name="total_fat" optional="YES" attributeType="String"/>
         <relationship name="activityHistoryRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodHistory" inverseName="foodRelationship" inverseEntity="FoodHistory"/>
     </entity>
-    <entity name="FoodHistory" representedClassName="FoodHistory" syncable="YES">
+    <entity name="FoodHistory" representedClassName="FoodHistory" syncable="YES" codeGenerationType="class">
         <attribute name="foodHistoryId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="serviceSize" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -44,7 +44,7 @@
         <attribute name="suggestionText" optional="YES" attributeType="String"/>
         <attribute name="weather" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="User" representedClassName="User" syncable="YES">
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="activityPreference" optional="YES" attributeType="String"/>
         <attribute name="birthYear" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="contactNumber" optional="YES" attributeType="String" defaultValueString=""/>
@@ -61,7 +61,7 @@
         <relationship name="userHistoryRelationshipFood" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodHistory" inverseName="userRelationship" inverseEntity="FoodHistory"/>
         <relationship name="userHistoryRelationshipWeight" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WeightHistory" inverseName="userRelationship" inverseEntity="WeightHistory"/>
     </entity>
-    <entity name="WeightHistory" representedClassName="WeightHistory" syncable="YES">
+    <entity name="WeightHistory" representedClassName="WeightHistory" syncable="YES" codeGenerationType="class">
         <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weightHistoryId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -72,8 +72,8 @@
         <element name="ActivityHistory" positionX="-63" positionY="90" width="128" height="104"/>
         <element name="Food" positionX="-63" positionY="0" width="128" height="239"/>
         <element name="FoodHistory" positionX="-45" positionY="99" width="128" height="104"/>
+        <element name="Suggestion" positionX="-54" positionY="108" width="128" height="104"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="WeightHistory" positionX="-54" positionY="108" width="128" height="89"/>
-        <element name="Suggestion" positionX="-54" positionY="108" width="128" height="104"/>
     </elements>
 </model>

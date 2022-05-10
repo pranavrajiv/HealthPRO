@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B95FFF87281CC995007D39A0 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = B95FFF86281CC995007D39A0 /* TinyConstraints */; };
 		B9979EF7281B98DE00C3A8C7 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B9979EF6281B98DE00C3A8C7 /* Charts */; };
+		F8353102282A324A00D0E37E /* suggestions.csv in Resources */ = {isa = PBXBuildFile; fileRef = F8353101282A324A00D0E37E /* suggestions.csv */; };
 		F844AE0D28189838000FBCF1 /* activity.csv in Resources */ = {isa = PBXBuildFile; fileRef = F844AE0C28189838000FBCF1 /* activity.csv */; };
 		F844AEF7281B492F000FBCF1 /* ActivityInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */; };
 		F844AEF8281B492F000FBCF1 /* ActivityInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F844AEF6281B492F000FBCF1 /* ActivityInfoViewController.xib */; };
@@ -39,18 +40,6 @@
 		F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */; };
 		F88A675D281BA6F300758D11 /* LogNutritionAndActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */; };
 		F88A675E281BA6F300758D11 /* LogNutritionAndActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F88A675C281BA6F300758D11 /* LogNutritionAndActivityViewController.xib */; };
-		F8B2326D282619DF007970B5 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23261282619DF007970B5 /* User+CoreDataClass.swift */; };
-		F8B2326E282619DF007970B5 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23262282619DF007970B5 /* User+CoreDataProperties.swift */; };
-		F8B2326F282619DF007970B5 /* FoodHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23263282619DF007970B5 /* FoodHistory+CoreDataClass.swift */; };
-		F8B23270282619DF007970B5 /* FoodHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23264282619DF007970B5 /* FoodHistory+CoreDataProperties.swift */; };
-		F8B23271282619DF007970B5 /* ActivityHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23265282619DF007970B5 /* ActivityHistory+CoreDataClass.swift */; };
-		F8B23272282619DF007970B5 /* ActivityHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23266282619DF007970B5 /* ActivityHistory+CoreDataProperties.swift */; };
-		F8B23273282619DF007970B5 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23267282619DF007970B5 /* Food+CoreDataClass.swift */; };
-		F8B23274282619DF007970B5 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23268282619DF007970B5 /* Food+CoreDataProperties.swift */; };
-		F8B23275282619DF007970B5 /* WeightHistory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B23269282619DF007970B5 /* WeightHistory+CoreDataClass.swift */; };
-		F8B23276282619DF007970B5 /* WeightHistory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2326A282619DF007970B5 /* WeightHistory+CoreDataProperties.swift */; };
-		F8B23277282619DF007970B5 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2326B282619DF007970B5 /* Activity+CoreDataClass.swift */; };
-		F8B23278282619DF007970B5 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2326C282619DF007970B5 /* Activity+CoreDataProperties.swift */; };
 		F8B2328128274F37007970B5 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2327F28274F37007970B5 /* SuggestionViewController.swift */; };
 		F8B232842827507F007970B5 /* SuggestionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B232832827507F007970B5 /* SuggestionViewController.storyboard */; };
 		F8B4C218281CB61C005810C9 /* UserHistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */; };
@@ -75,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F8353101282A324A00D0E37E /* suggestions.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = suggestions.csv; sourceTree = "<group>"; };
 		F844AE0C28189838000FBCF1 /* activity.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = activity.csv; sourceTree = "<group>"; };
 		F844AEF5281B492F000FBCF1 /* ActivityInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInfoViewController.swift; sourceTree = "<group>"; };
 		F844AEF6281B492F000FBCF1 /* ActivityInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityInfoViewController.xib; sourceTree = "<group>"; };
@@ -109,18 +99,6 @@
 		F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParsedNutritionLabelViewController.xib; sourceTree = "<group>"; };
 		F88A675B281BA6F300758D11 /* LogNutritionAndActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNutritionAndActivityViewController.swift; sourceTree = "<group>"; };
 		F88A675C281BA6F300758D11 /* LogNutritionAndActivityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogNutritionAndActivityViewController.xib; sourceTree = "<group>"; };
-		F8B23261282619DF007970B5 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B23262282619DF007970B5 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B23263282619DF007970B5 /* FoodHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B23264282619DF007970B5 /* FoodHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B23265282619DF007970B5 /* ActivityHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B23266282619DF007970B5 /* ActivityHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B23267282619DF007970B5 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B23268282619DF007970B5 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B23269282619DF007970B5 /* WeightHistory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeightHistory+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B2326A282619DF007970B5 /* WeightHistory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeightHistory+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F8B2326B282619DF007970B5 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F8B2326C282619DF007970B5 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F8B2327F28274F37007970B5 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		F8B232832827507F007970B5 /* SuggestionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SuggestionViewController.storyboard; sourceTree = "<group>"; };
 		F8B4C217281CB61C005810C9 /* UserHistoryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserHistoryViewController.storyboard; sourceTree = "<group>"; };
@@ -243,6 +221,7 @@
 			children = (
 				F844AE0C28189838000FBCF1 /* activity.csv */,
 				F85C353F28161C100068A5F5 /* nutrition.csv */,
+				F8353101282A324A00D0E37E /* suggestions.csv */,
 			);
 			path = "pre-pop data";
 			sourceTree = "<group>";
@@ -250,18 +229,6 @@
 		F8B4C1B6281C6396005810C9 /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				F8B23261282619DF007970B5 /* User+CoreDataClass.swift */,
-				F8B23262282619DF007970B5 /* User+CoreDataProperties.swift */,
-				F8B23263282619DF007970B5 /* FoodHistory+CoreDataClass.swift */,
-				F8B23264282619DF007970B5 /* FoodHistory+CoreDataProperties.swift */,
-				F8B23265282619DF007970B5 /* ActivityHistory+CoreDataClass.swift */,
-				F8B23266282619DF007970B5 /* ActivityHistory+CoreDataProperties.swift */,
-				F8B23267282619DF007970B5 /* Food+CoreDataClass.swift */,
-				F8B23268282619DF007970B5 /* Food+CoreDataProperties.swift */,
-				F8B23269282619DF007970B5 /* WeightHistory+CoreDataClass.swift */,
-				F8B2326A282619DF007970B5 /* WeightHistory+CoreDataProperties.swift */,
-				F8B2326B282619DF007970B5 /* Activity+CoreDataClass.swift */,
-				F8B2326C282619DF007970B5 /* Activity+CoreDataProperties.swift */,
 			);
 			path = "Core Data Model";
 			sourceTree = "<group>";
@@ -382,6 +349,7 @@
 				F844AE0D28189838000FBCF1 /* activity.csv in Resources */,
 				F88A675E281BA6F300758D11 /* LogNutritionAndActivityViewController.xib in Resources */,
 				F84575CC28020DBB00590F5C /* LaunchScreen.storyboard in Resources */,
+				F8353102282A324A00D0E37E /* suggestions.csv in Resources */,
 				F844AEF8281B492F000FBCF1 /* ActivityInfoViewController.xib in Resources */,
 				F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */,
 				F84575C928020DBB00590F5C /* Assets.xcassets in Resources */,
@@ -418,33 +386,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844AEF7281B492F000FBCF1 /* ActivityInfoViewController.swift in Sources */,
-				F8B23274282619DF007970B5 /* Food+CoreDataProperties.swift in Sources */,
-				F8B23270282619DF007970B5 /* FoodHistory+CoreDataProperties.swift in Sources */,
 				F84575C128020DB900590F5C /* LoginViewController.swift in Sources */,
-				F8B2326F282619DF007970B5 /* FoodHistory+CoreDataClass.swift in Sources */,
 				F84575C728020DB900590F5C /* HealthPRO.xcdatamodeld in Sources */,
-				F8B23276282619DF007970B5 /* WeightHistory+CoreDataProperties.swift in Sources */,
 				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
 				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
 				F88A675D281BA6F300758D11 /* LogNutritionAndActivityViewController.swift in Sources */,
-				F8B2326D282619DF007970B5 /* User+CoreDataClass.swift in Sources */,
-				F8B23271282619DF007970B5 /* ActivityHistory+CoreDataClass.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
-				F8B23277282619DF007970B5 /* Activity+CoreDataClass.swift in Sources */,
 				F8B4C21A281CB8FF005810C9 /* UserHistoryViewController.swift in Sources */,
-				F8B23273282619DF007970B5 /* Food+CoreDataClass.swift in Sources */,
 				F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */,
 				F85C3516281209600068A5F5 /* Weather.swift in Sources */,
 				F861B9162807F6DA00874872 /* CoreDataHandler.swift in Sources */,
-				F8B2326E282619DF007970B5 /* User+CoreDataProperties.swift in Sources */,
 				F861B92E280B774800874872 /* ParsedNutritionLabelViewController.swift in Sources */,
 				F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */,
 				F8B2328128274F37007970B5 /* SuggestionViewController.swift in Sources */,
-				F8B23272282619DF007970B5 /* ActivityHistory+CoreDataProperties.swift in Sources */,
-				F8B23275282619DF007970B5 /* WeightHistory+CoreDataClass.swift in Sources */,
 				F84575BF28020DB900590F5C /* SceneDelegate.swift in Sources */,
-				F8B23278282619DF007970B5 /* Activity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
