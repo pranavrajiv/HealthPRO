@@ -104,7 +104,7 @@ import UIKit
     @objc public func getAllActivities()->[Activity] {
         do {
             let request = Activity.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))]
             let activities = try context.fetch(request)
             return activities
         } catch let error as NSError {
@@ -117,7 +117,7 @@ import UIKit
     @objc public func getFilteredActivity(text:String)->[Activity] {
         do {
             let request = Activity.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))]
             request.predicate = NSPredicate(format: "activityName CONTAINS[cd] %@", text)
             let foodItems = try context.fetch(request)
             return foodItems
@@ -131,7 +131,7 @@ import UIKit
     @objc public func getActivityForId(activityId:Int64)->Activity? {
         do {
             let request = Activity.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "activityName", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))]
             request.predicate = NSPredicate(format: "activityId == %lld", activityId)
             let activityItems = try context.fetch(request)
             return activityItems.first
@@ -284,7 +284,7 @@ import UIKit
     @objc public func getFilteredFood(text:String)->[Food] {
         do {
             let request = Food.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))]
             request.predicate = NSPredicate(format: "foodName CONTAINS[cd] %@", text)
             let foodItems = try context.fetch(request)
             return foodItems
@@ -298,7 +298,7 @@ import UIKit
     @objc public func getFoodForId(foodId:Int64)->Food? {
         do {
             let request = Food.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))]
             request.predicate = NSPredicate(format: "foodId == %lld", foodId)
             let foodItems = try context.fetch(request)
             return foodItems.first
@@ -395,7 +395,7 @@ import UIKit
     @objc public func getAllFood()->[Food] {
         do {
             let request = Food.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "foodName", ascending: true, selector: #selector(NSString.caseInsensitiveCompare))]
             let foodItems = try context.fetch(request)
             return foodItems
         } catch let error as NSError {

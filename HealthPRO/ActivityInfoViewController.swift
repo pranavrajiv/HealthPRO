@@ -139,30 +139,37 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
             return
         }
         
+        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Save", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
         
-        let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
-        
-        let calorieString = self.calories.text
-        var calorieNumber = 0.0
-        if let calorieNum = Double(calorieString!.filter("0123456789.".contains)) {
-            calorieNumber = calorieNum
-        }
-        
-        //new activity
-        if (self.activityItem == nil) {
-             var largestActivityID:Int64 = -1
-            if let activityID = viewController.coreDataHandler.getAllActivities().map({ $0.activityId }).max() {
-                largestActivityID = activityID
-             }
+            let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
             
-            _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
-        }
-        else {
-            //update activity
-            _ = viewController.coreDataHandler.updateActivity(activityId: self.activityItem.activityId, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber,isIndoor: self.isIndoorButton.titleLabel!.text!)
-        }
+            let calorieString = self.calories.text
+            var calorieNumber = 0.0
+            if let calorieNum = Double(calorieString!.filter("0123456789.".contains)) {
+                calorieNumber = calorieNum
+            }
+            
+            //new activity
+            if (self.activityItem == nil) {
+                 var largestActivityID:Int64 = -1
+                if let activityID = viewController.coreDataHandler.getAllActivities().map({ $0.activityId }).max() {
+                    largestActivityID = activityID
+                 }
+                
+                _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
+            }
+            else {
+                //update activity
+                _ = viewController.coreDataHandler.updateActivity(activityId: self.activityItem.activityId, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber,isIndoor: self.isIndoorButton.titleLabel!.text!)
+            }
+            
+            self.dismiss(animated: true)
         
-        self.dismiss(animated: true)
+        }))
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
     }
     
     @objc private func cancelButtonTouchUp() {
@@ -171,15 +178,22 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
     
     
     @objc private func deleteButtonTouchUp() {
-        if let currentActivity = self.activityItem {
-            _ = CoreDataHandler.init().deleteActivityForId(activityId: currentActivity.activityId)
+        
+        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Delete", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             
-            self.dismiss(animated: false, completion: {
-                     self.presentingController?.dismiss(animated: false)
-            })
-        } else {
-            self.dismiss(animated: true)
-        }
+            if let currentActivity = self.activityItem {
+                _ = CoreDataHandler.init().deleteActivityForId(activityId: currentActivity.activityId)
+                
+                self.dismiss(animated: false, completion: {
+                         self.presentingController?.dismiss(animated: false)
+                })
+            } else {
+                self.dismiss(animated: true)
+            }
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
         
     }
     
@@ -191,6 +205,5 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         }
         sender.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .bold)
     }
-    
     
 }

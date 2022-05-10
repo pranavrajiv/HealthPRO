@@ -110,44 +110,66 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         }
         
         
-        let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
-        
-        let calorieString = macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calories"})?.text
-        var calorieNumber = 0
-        if let calorieNum = Int(calorieString?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() ?? "0") {
-            calorieNumber = calorieNum
-        }
-        
-        //new food
-        if (self.foodItem == nil) {
-           
+        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Save", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             
-            var largestFoodId:Int64 = -1
-            if let foodID = viewController.coreDataHandler.getAllFood().map({ $0.foodId }).max() {
-                largestFoodId = foodID
+            let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
+            
+            let calorieString = self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calories"})?.text
+            var calorieNumber = 0
+            if let calorieNum = Int(calorieString?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() ?? "0") {
+                calorieNumber = calorieNum
             }
-            _ = viewController.coreDataHandler.addFood(foodId:largestFoodId + 1,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
-        } else {
-            //update food
-            _ = viewController.coreDataHandler.updateFood(foodId:self.foodItem.foodId,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
-        }
-        
-        self.dismiss(animated: true)
+            
+            //new food
+            if (self.foodItem == nil) {
+                var largestFoodId:Int64 = -1
+                if let foodID = viewController.coreDataHandler.getAllFood().map({ $0.foodId }).max() {
+                    largestFoodId = foodID
+                }
+                _ = viewController.coreDataHandler.addFood(foodId:largestFoodId + 1,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
+            } else {
+                //update food
+                _ = viewController.coreDataHandler.updateFood(foodId:self.foodItem.foodId,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
+            }
+            self.dismiss(animated: true)
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
     }
     
     @objc private func cancelButtonTouchUp() {
-        self.dismiss(animated: true)
-    }
-    @objc private func deleteButtonTouchUp() {
-        if let food = self.foodItem {
-            _ = CoreDataHandler.init().deleteFoodForId(foodId: food.foodId)
+        if(self.ocrText != "") {
+            let ac = UIAlertController(title: "Confirmation", message: "Information not saved. Please press 'Confirm' if you would like to Cancel", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { action in
+                self.dismiss(animated: true)
+            }))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(ac, animated: true)
             
-            self.dismiss(animated: false, completion: {
-                     self.presentingController?.dismiss(animated: false)
-            })
-        } else {
+        }else  {
             self.dismiss(animated: true)
         }
+    }
+    @objc private func deleteButtonTouchUp() {
+
+        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Delete", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        
+            if let food = self.foodItem {
+                _ = CoreDataHandler.init().deleteFoodForId(foodId: food.foodId)
+                
+                self.dismiss(animated: false, completion: {
+                         self.presentingController?.dismiss(animated: false)
+                })
+            } else {
+                self.dismiss(animated: true)
+            }
+            
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
+
     }
 
     @objc private func processOcrText() {

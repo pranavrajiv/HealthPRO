@@ -157,7 +157,6 @@
 			children = (
 				F84575BC28020DB900590F5C /* AppDelegate.swift */,
 				F84575BE28020DB900590F5C /* SceneDelegate.swift */,
-				F8B4C1B6281C6396005810C9 /* Core Data Model */,
 				F845760B2804108A00590F5C /* Tabs */,
 				F84575C228020DB900590F5C /* Main.storyboard */,
 				F84575C028020DB900590F5C /* LoginViewController.swift */,
@@ -224,13 +223,6 @@
 				F8353101282A324A00D0E37E /* suggestions.csv */,
 			);
 			path = "pre-pop data";
-			sourceTree = "<group>";
-		};
-		F8B4C1B6281C6396005810C9 /* Core Data Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Core Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
