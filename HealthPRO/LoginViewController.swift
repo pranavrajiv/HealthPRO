@@ -119,7 +119,9 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         self.passwordTextField.text = ""
         self.weatherInfoNow.cleanup()
         self.weatherInfoNow  = nil
-        _ = self.coreDataHandler.updateUserAppUsageTime(usageTime: Int64(Date().timeIntervalSince(self.appStartTimeStamp))+(self.coreDataHandler.getUser()?.usageTImeSeconds ?? 0))
+        if let _ = self.appStartTimeStamp {
+            _ = self.coreDataHandler.updateUserAppUsageTime(usageTime: Int64(Date().timeIntervalSince(self.appStartTimeStamp))+(self.coreDataHandler.getUser()?.usageTImeSeconds ?? 0))
+        }
         self.appStartTimeStamp = nil
         UserDefaults.standard.set("", forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
