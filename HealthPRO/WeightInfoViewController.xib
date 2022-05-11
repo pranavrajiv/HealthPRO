@@ -75,7 +75,7 @@
                     </constraints>
                 </stackView>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="fRH-CP-kf7">
-                    <rect key="frame" x="120" y="82" width="135" height="31"/>
+                    <rect key="frame" x="120" y="88" width="135" height="31"/>
                 </datePicker>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -86,7 +86,7 @@
                 <constraint firstItem="Djo-Uu-5yy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="5S6-y6-ydA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fRH-CP-kf7" secondAttribute="trailing" constant="120" id="8Tg-me-2ZI"/>
                 <constraint firstItem="DNU-ti-uYC" firstAttribute="top" secondItem="35s-pV-99b" secondAttribute="bottom" constant="20" id="CAO-8I-adr"/>
-                <constraint firstItem="fRH-CP-kf7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="38" id="Coj-7d-S4U"/>
+                <constraint firstItem="fRH-CP-kf7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="44" id="Coj-7d-S4U"/>
                 <constraint firstItem="LdW-h0-fIr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="HH2-07-i9o"/>
                 <constraint firstItem="35s-pV-99b" firstAttribute="top" secondItem="LdW-h0-fIr" secondAttribute="bottom" constant="10" id="IP0-tn-jyn"/>
                 <constraint firstItem="DNU-ti-uYC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Khy-gi-dFP"/>
