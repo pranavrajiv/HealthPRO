@@ -18,7 +18,8 @@ class WeightInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.weightLabelHeading.text = "Log Today's Weight"
-        self.weightLabel.text = "Enter your current weight"
+        self.weightLabel.isHidden = true
+        //self.weightLabel.text = "Enter your current weight"
         self.weightTextField.placeholder = "lbs"
         self.button1.setTitle("Log it", for: .normal)
         self.button2.setTitle("Cancel", for: .normal)
@@ -32,10 +33,10 @@ class WeightInfoViewController: UIViewController {
     }
 
     @objc func button1TouchUpInside() {
-        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Log int", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Log in", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-            if let weightDouble = Double(self.weightLabel.text!) {
+            if let weightTextFieldText = self.weightTextField.text, let weightDouble = Double(weightTextFieldText) {
                 var historyId:Int64 = -1
                 if let largestWeightHistoryId = CoreDataHandler.init().getAllWeightHistory().map({$0.weightHistoryId}).max() {
                     historyId = largestWeightHistoryId
@@ -47,14 +48,10 @@ class WeightInfoViewController: UIViewController {
         self.present(ac, animated: true)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //Dismiss the keyboard when touched outside the screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
-    */
 
 }

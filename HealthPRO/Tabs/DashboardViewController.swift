@@ -52,37 +52,10 @@ class DashboardViewController: UIViewController{
     }
     
     @objc func suggestionButtonTouchUpInside() {
-                
-        let controller = WeightInfoViewController.init()
-        controller.modalPresentationStyle = .popover
-        
-        var popover = controller.popoverPresentationController
-
-            if let popover = controller.popoverPresentationController {
-                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-               
-                popover.sourceView = self.view
-
-               // the position of the popover where it's showed
-                popover.sourceRect = CGRect(x: 20, y: 300, width: 0, height: 0)
-
-               // the size you want to display
-                controller.preferredContentSize = CGSize(width: self.view.frame.width - 40, height: 200)
-               popover.delegate = self
-            }
-
+        let storyboard = UIStoryboard(name: "SuggestionViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "suggestionVC")
+        controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true, completion: nil)
-
-        
-        
-        
-        
-        
-//        let storyboard = UIStoryboard(name: "SuggestionViewController", bundle: nil)
-//        let controller = storyboard.instantiateViewController(withIdentifier: "suggestionVC")
-//        controller.modalPresentationStyle = .fullScreen
-//        self.present(controller, animated: true, completion: nil)
-        
     }
     
     @objc func viewHistoryButtonTouchUpInside() {
@@ -103,29 +76,25 @@ class DashboardViewController: UIViewController{
         self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
         self.suggestionsButton.addTarget(self, action: #selector(suggestionButtonTouchUpInside), for: .touchUpInside)
         
+        //show weight logger
         if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                let ac = UIAlertController(title: "Log Today's Weight", message: "Enter your current weight", preferredStyle: .alert)
-                ac.addTextField { (textField) in
-                    textField.placeholder = "lbs"
-                    textField.textAlignment = .center
-                    textField.isEnabled = false
-                }
-                ac.addAction(UIAlertAction(title: "Log", style: .default, handler: { action in
-                    if let weightText = ac.textFields?.first?.text {
-                        if weightText != "" {
-                            self.logUserWeight(weight:weightText)
-                        }
-                    }
-                }))
-                ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                self.present(ac, animated: true, completion: {
-                    if let getTextfield  = ac.textFields?.first{
-                        getTextfield.resignFirstResponder()
-                        getTextfield.isEnabled = true
-                    }
-                })
+            let controller = WeightInfoViewController.init()
+            controller.modalPresentationStyle = .popover
+            
+            if let popover = controller.popoverPresentationController {
+                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+               
+                popover.sourceView = self.view
+
+               // the position of the popover where it's showed
+                popover.sourceRect = CGRect(x: 20, y: 400, width: 0, height: 0)
+
+               // the size you want to display
+                controller.preferredContentSize = CGSize(width: self.view.frame.width - 40, height: 200)
+               popover.delegate = self
             }
+
+            self.present(controller, animated: true, completion: nil)
         }
        
         graphView.addSubview(lineChartView)
@@ -134,17 +103,7 @@ class DashboardViewController: UIViewController{
         lineChartView.heightToWidth(of: graphView)
         setData()
     }
-    
-    @objc private func logUserWeight(weight:String){
-        if let weightDouble = Double(weight) {
-            var historyId:Int64 = -1
-            if let largestWeightHistoryId = CoreDataHandler.init().getAllWeightHistory().map({$0.weightHistoryId}).max() {
-                historyId = largestWeightHistoryId
-            }
-            _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: Date(), weight: weightDouble)
-        }
-        
-    }
+
                                    
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         print(entry)
