@@ -28,26 +28,12 @@ class WeightInfoViewController: UIViewController {
     var titleMsg = ""
     var delegate:WeightDelegate?
     
-    convenience init(popOverHeading:String,popOverMessage:String,button1Label:String,button3Label:String) {
+
+    convenience init(popOverHeading:String,popOverMessage:String,button1Label:String,button2Label:String,button3Label:String,delegate:WeightDelegate? = nil,weightHistoryId:Int64) {
         self.init()
+        self.titleLabel = popOverHeading
+        self.b1Label = button1Label
         self.titleMsg = popOverMessage
-        self.titleLabel = popOverHeading
-        self.b1Label = button1Label
-        self.b3Label = button3Label
-    }
-    
-    convenience init(popOverHeading:String,button1Label:String,button3Label:String,delegate:WeightDelegate) {
-        self.init()
-        self.titleLabel = popOverHeading
-        self.b1Label = button1Label
-        self.b3Label = button3Label
-        self.delegate = delegate
-    }
-    
-    convenience init(popOverHeading:String,button1Label:String,button2Label:String,button3Label:String,delegate:WeightDelegate,weightHistoryId:Int64) {
-        self.init()
-        self.titleLabel = popOverHeading
-        self.b1Label = button1Label
         self.b2Label = button2Label
         self.b3Label = button3Label
         self.delegate = delegate

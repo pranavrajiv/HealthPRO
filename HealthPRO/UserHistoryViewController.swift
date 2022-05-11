@@ -48,7 +48,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
         }
     
     @objc private func logUserWeight(){
-        let controller = WeightInfoViewController.init(popOverHeading: "Log Weight History", button1Label: "Log", button3Label: "Cancel",delegate: self)
+        let controller = WeightInfoViewController.init(popOverHeading: "Log Weight History",popOverMessage: "", button1Label: "Log", button2Label: "", button3Label: "Cancel",delegate: self, weightHistoryId: -1)
         controller.modalPresentationStyle = .popover
         
         if let popover = controller.popoverPresentationController {
@@ -68,7 +68,7 @@ class UserHistoryViewController: UIViewController, UITableViewDataSource,UITable
     
     @objc private func updateUserWeight(weightHistoryId:Int64) {
         
-        let controller = WeightInfoViewController.init(popOverHeading: "Update Weight History", button1Label: "Update", button2Label: "Delete", button3Label: "Cancel",delegate: self,weightHistoryId: weightHistoryId)
+        let controller = WeightInfoViewController.init(popOverHeading: "Update Weight History",popOverMessage: "", button1Label: "Update", button2Label: "Delete", button3Label: "Cancel",delegate: self,weightHistoryId: weightHistoryId)
         controller.modalPresentationStyle = .popover
         
         if let popover = controller.popoverPresentationController {
