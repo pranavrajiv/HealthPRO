@@ -36,11 +36,10 @@ class WeightInfoViewController: UIViewController {
         self.b3Label = button3Label
     }
     
-    convenience init(popOverHeading:String,button1Label:String,button2Label:String,button3Label:String,delegate:WeightDelegate) {
+    convenience init(popOverHeading:String,button1Label:String,button3Label:String,delegate:WeightDelegate) {
         self.init()
         self.titleLabel = popOverHeading
         self.b1Label = button1Label
-        self.b2Label = button2Label
         self.b3Label = button3Label
         self.delegate = delegate
     }
@@ -59,6 +58,9 @@ class WeightInfoViewController: UIViewController {
         super.viewWillAppear(animated)
         self.weightLabelHeading.text =  self.titleLabel
         self.weightLabel.text =  self.titleMsg
+        self.button1.setTitle(self.b1Label, for: .normal)
+        self.button2.setTitle(self.b2Label, for: .normal)
+        self.button3.setTitle(self.b3Label, for: .normal)
         
         if self.b2Label == "" {
             self.button2.isHidden = true
@@ -76,12 +78,7 @@ class WeightInfoViewController: UIViewController {
             self.weightTextField.text = CoreDataHandler.init().getAllWeightHistory().first(where: {$0.weightHistoryId == weightHistoryId})?.weight.description
         }
         
-        
-        self.button1.setTitle(self.b1Label, for: .normal)
-        self.button2.setTitle(self.b2Label, for: .normal)
-        self.button3.setTitle(self.b3Label, for: .normal)
     }
-    
     
     
     override func viewDidLoad() {
@@ -91,19 +88,19 @@ class WeightInfoViewController: UIViewController {
         self.button1.addTarget(self, action: #selector(button1TouchUpInside), for: .touchUpInside)
         self.button2.addTarget(self, action: #selector(button2TouchUpInside), for: .touchUpInside)
         self.button3.addTarget(self, action: #selector(button3TouchUpInside), for: .touchUpInside)
-        
     }
 
     @objc func button1TouchUpInside() {
         let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to "+self.b1Label, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-            if self.weightHistoryId == -1 {
-                self.logWeight()
-            } else {
-                self.updateWeight()
+            if(self.weightTextField.text != "") {
+                if self.weightHistoryId == -1 {
+                    self.logWeight()
+                } else {
+                    self.updateWeight()
+                }
             }
-            
             self.dismiss(animated: true, completion: nil)
         }))
         self.present(ac, animated: true)
@@ -132,7 +129,6 @@ class WeightInfoViewController: UIViewController {
     
     
     @objc private func updateWeight(){
-        
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         if let alreadyExistingHistoryId = CoreDataHandler.init().getAllWeightHistory().first(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: self.dateSelector.date)})?.weightHistoryId{
@@ -161,7 +157,6 @@ class WeightInfoViewController: UIViewController {
                 }
                 _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: self.dateSelector.date, weight: weightDouble)
             }
-            
             self.delegate?.weightInfoUpdated()
         }
     }
