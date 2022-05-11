@@ -78,7 +78,7 @@ class DashboardViewController: UIViewController{
         
         //show weight logger
         if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
-            let controller = WeightInfoViewController.init(popOverHeading: "Log Daily Weight", popOverMessage: "Enter Today's Weight", button1Label: "Log It", button3Label: "Cancel")
+            let controller = WeightInfoViewController.init(popOverHeading: "Log Daily Weight", popOverMessage: "Enter Today's Weight", button1Label: "Log", button3Label: "Cancel")
             controller.modalPresentationStyle = .popover
             
             if let popover = controller.popoverPresentationController {
@@ -93,7 +93,6 @@ class DashboardViewController: UIViewController{
                 controller.preferredContentSize = CGSize(width: self.view.frame.width - 40, height: 200)
                popover.delegate = self
             }
-
             self.present(controller, animated: true, completion: nil)
         }
        
