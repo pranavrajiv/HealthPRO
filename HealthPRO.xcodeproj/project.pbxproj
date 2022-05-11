@@ -31,6 +31,8 @@
 		F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760428040F7D00590F5C /* NutritionLabelViewController.swift */; };
 		F845760728040F8800590F5C /* DietViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760628040F8800590F5C /* DietViewController.swift */; };
 		F845760928040F9200590F5C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F845760828040F9200590F5C /* ExerciseViewController.swift */; };
+		F84C0378282B2D0100CA6699 /* WeightInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84C0376282B2D0100CA6699 /* WeightInfoViewController.swift */; };
+		F84C0379282B2D0100CA6699 /* WeightInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F84C0377282B2D0100CA6699 /* WeightInfoViewController.xib */; };
 		F85C3516281209600068A5F5 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C3515281209600068A5F5 /* Weather.swift */; };
 		F85C354028161C100068A5F5 /* nutrition.csv in Resources */ = {isa = PBXBuildFile; fileRef = F85C353F28161C100068A5F5 /* nutrition.csv */; };
 		F861AF79280FADB300A73F28 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861AF77280FADB300A73F28 /* DashboardViewController.swift */; };
@@ -90,6 +92,8 @@
 		F845760428040F7D00590F5C /* NutritionLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionLabelViewController.swift; sourceTree = "<group>"; };
 		F845760628040F8800590F5C /* DietViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewController.swift; sourceTree = "<group>"; };
 		F845760828040F9200590F5C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		F84C0376282B2D0100CA6699 /* WeightInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightInfoViewController.swift; sourceTree = "<group>"; };
+		F84C0377282B2D0100CA6699 /* WeightInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightInfoViewController.xib; sourceTree = "<group>"; };
 		F85C3515281209600068A5F5 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		F85C353F28161C100068A5F5 /* nutrition.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nutrition.csv; sourceTree = "<group>"; };
 		F861AF77280FADB300A73F28 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				F84575BE28020DB900590F5C /* SceneDelegate.swift */,
 				F845760B2804108A00590F5C /* Tabs */,
 				F84575C228020DB900590F5C /* Main.storyboard */,
+				F84C0376282B2D0100CA6699 /* WeightInfoViewController.swift */,
+				F84C0377282B2D0100CA6699 /* WeightInfoViewController.xib */,
 				F84575C028020DB900590F5C /* LoginViewController.swift */,
 				F861B92D280B774800874872 /* ParsedNutritionLabelViewController.xib */,
 				F861B92C280B774800874872 /* ParsedNutritionLabelViewController.swift */,
@@ -343,6 +349,7 @@
 				F84575CC28020DBB00590F5C /* LaunchScreen.storyboard in Resources */,
 				F8353102282A324A00D0E37E /* suggestions.csv in Resources */,
 				F844AEF8281B492F000FBCF1 /* ActivityInfoViewController.xib in Resources */,
+				F84C0379282B2D0100CA6699 /* WeightInfoViewController.xib in Resources */,
 				F861B92F280B774800874872 /* ParsedNutritionLabelViewController.xib in Resources */,
 				F84575C928020DBB00590F5C /* Assets.xcassets in Resources */,
 				F84575F52803E06A00590F5C /* Diet.storyboard in Resources */,
@@ -383,6 +390,7 @@
 				F845760328040F6500590F5C /* ProfileViewController.swift in Sources */,
 				F845760728040F8800590F5C /* DietViewController.swift in Sources */,
 				F88A675D281BA6F300758D11 /* LogNutritionAndActivityViewController.swift in Sources */,
+				F84C0378282B2D0100CA6699 /* WeightInfoViewController.swift in Sources */,
 				F84575BD28020DB900590F5C /* AppDelegate.swift in Sources */,
 				F845760528040F7D00590F5C /* NutritionLabelViewController.swift in Sources */,
 				F8B4C21A281CB8FF005810C9 /* UserHistoryViewController.swift in Sources */,

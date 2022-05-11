@@ -52,10 +52,36 @@ class DashboardViewController: UIViewController{
     }
     
     @objc func suggestionButtonTouchUpInside() {
-        let storyboard = UIStoryboard(name: "SuggestionViewController", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "suggestionVC")
-        controller.modalPresentationStyle = .fullScreen
+                
+        let controller = WeightInfoViewController.init()
+        controller.modalPresentationStyle = .popover
+        
+        var popover = controller.popoverPresentationController
+
+            if let popover = controller.popoverPresentationController {
+                popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+               
+                popover.sourceView = self.view
+
+               // the position of the popover where it's showed
+                popover.sourceRect = CGRect(x: 20, y: 300, width: 0, height: 0)
+
+               // the size you want to display
+                controller.preferredContentSize = CGSize(width: self.view.frame.width - 40, height: 200)
+               popover.delegate = self
+            }
+
         self.present(controller, animated: true, completion: nil)
+
+        
+        
+        
+        
+        
+//        let storyboard = UIStoryboard(name: "SuggestionViewController", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "suggestionVC")
+//        controller.modalPresentationStyle = .fullScreen
+//        self.present(controller, animated: true, completion: nil)
         
     }
     
@@ -187,3 +213,17 @@ class DashboardViewController: UIViewController{
     
 }
 
+extension DashboardViewController: UIPopoverPresentationControllerDelegate {
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+
+    }
+
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+}
