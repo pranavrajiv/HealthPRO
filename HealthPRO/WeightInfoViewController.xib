@@ -12,6 +12,7 @@
                 <outlet property="button1" destination="h4z-0Z-pYJ" id="vYZ-bp-5dB"/>
                 <outlet property="button2" destination="2fD-s3-YhC" id="H4R-bF-gTQ"/>
                 <outlet property="button3" destination="zZ7-oJ-jKp" id="YnP-ZE-am5"/>
+                <outlet property="dateSelector" destination="fRH-CP-kf7" id="Drj-2m-cyk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="weightLabel" destination="LdW-h0-fIr" id="RGW-wE-hDg"/>
                 <outlet property="weightLabelHeading" destination="Djo-Uu-5yy" id="w6g-ef-KDl"/>

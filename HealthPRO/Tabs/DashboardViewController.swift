@@ -78,7 +78,7 @@ class DashboardViewController: UIViewController{
         
         //show weight logger
         if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
-            let controller = WeightInfoViewController.init()
+            let controller = WeightInfoViewController.init(popOverHeading: "Log Daily Weight", popOverMessage: "Enter Today's Weight", button1Label: "Log It", button3Label: "Cancel")
             controller.modalPresentationStyle = .popover
             
             if let popover = controller.popoverPresentationController {
