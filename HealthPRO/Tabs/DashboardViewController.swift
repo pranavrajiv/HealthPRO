@@ -19,6 +19,7 @@ class DashboardViewController: UIViewController{
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var suggestionsButton: UIButton!
     var weatherUpdateTimer:Timer!
+    var userWeightHistory:[WeightHistory]!
     
     lazy var lineChartView: LineChartView = {
         let chartView = LineChartView()
@@ -95,12 +96,16 @@ class DashboardViewController: UIViewController{
             }
             self.present(controller, animated: true, completion: nil)
         }
-       
+        // Add the lineChartView to the graphView as a subview; this allows
+        // us to sidestep the compatibility issues between Charts and Xcode 13 that don't permit using Storyboard for the UI
         graphView.addSubview(lineChartView)
+        // Here we'll use TinyConstraints to set the view constraints on our graph. Since we can't use
+        // Storyboard proper to set limits, we'll instead use code-based constraints
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
         lineChartView.heightToWidth(of: graphView)
         setData()
+                    
     }
 
                                    
@@ -109,21 +114,48 @@ class DashboardViewController: UIViewController{
     }
     
     func setData() {
+        // ALEX TEST
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        // Get all of the user's weight history, including weights and timestamps
+        userWeightHistory = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: Date.now) == formatter.string(from: $0.timeStamp!)})
+        var yValues: [ChartDataEntry] = []
+        for entry in userWeightHistory{
+            print(entry.weight)
+            print(entry.timeStamp!)
+            yValues.append(ChartDataEntry(x: 0.0, y: 10.0))
+            yValues.append(ChartDataEntry(x: 1.0, y: 5.0))
+            yValues.append(ChartDataEntry(x: 2.0, y: 7.0))
+            yValues.append(ChartDataEntry(x: 3.0, y: 5.0))
+            yValues.append(ChartDataEntry(x: 4.0, y: 10.0))
+            yValues.append(ChartDataEntry(x: 5.0, y: 6.0))
+            yValues.append(ChartDataEntry(x: 6.0, y: 5.0))
+        }
+        // Set the Y axis label
         let set1 = LineChartDataSet(entries: yValues, label: "Weight")
         set1.mode = .cubicBezier
+        // Prevent the graph from drawing circles around each data point
         set1.drawCirclesEnabled = false
+        // Set the line width
         set1.lineWidth = 3
+        // Set the line color
         set1.setColor(.white)
+        // Fill in the area underneath the line chart
+        set1.drawFilledEnabled = true
+        // Set the under-line fill color
         set1.fill = Fill(color: .white)
+        // Set the fill transparency
         set1.fillAlpha = 0.8
         let data = LineChartData(dataSet: set1)
+        // Don't display each data point's value on the graph
         data.setDrawValues(false)
         lineChartView.data = data
-        set1.drawFilledEnabled = true
+        // Disable the horizontal line highlighter when users tap on the graph
         set1.drawHorizontalHighlightIndicatorEnabled = false
+        // When users tap on the graph, make the vertical highlighter line red
         set1.highlightColor = .systemRed
     }
-    
+/*
     let yValues: [ChartDataEntry] = [
         ChartDataEntry(x: 0.0, y: 10.0),
         ChartDataEntry(x: 1.0, y: 5.0),
@@ -155,7 +187,7 @@ class DashboardViewController: UIViewController{
         ChartDataEntry(x: 27.0, y: 25.0),
         ChartDataEntry(x: 28.0, y: 27.0),
     ]
-    
+ */
     
     @objc func getTheWeather() {
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
