@@ -118,7 +118,7 @@ class DashboardViewController: UIViewController{
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         // Get all of the user's weight history, including weights and timestamps
-        userWeightHistory = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: Date.now) == formatter.string(from: $0.timeStamp!)})
+        userWeightHistory = CoreDataHandler.init().getAllWeightHistory()
         var dataEntry: [ChartDataEntry] = []
         for entry in userWeightHistory{
             // Convert timestamp to epoch time
@@ -131,12 +131,6 @@ class DashboardViewController: UIViewController{
                 // Append both the weight and date to the graph data
                 dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
             }
-            dataEntry.append(ChartDataEntry(x: 1652850000.0, y: 155.0))
-            dataEntry.append(ChartDataEntry(x: 1652936400.0, y: 160.0))
-            dataEntry.append(ChartDataEntry(x: 1653022800.0, y: 150.0))
-            dataEntry.append(ChartDataEntry(x: 1653109200.0, y: 145.0))
-            dataEntry.append(ChartDataEntry(x: 1653195600.0, y: 150.0))
-            dataEntry.append(ChartDataEntry(x: 1653282000.0, y: 145.0))
         }
         // Set the Y axis label
         let set1 = LineChartDataSet(entries: dataEntry, label: "Weight")
