@@ -115,27 +115,23 @@ class DashboardViewController: UIViewController{
     }
     
     func setData() {
-        // ALEX TEST
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         // Get all of the user's weight history, including weights and timestamps
         userWeightHistory = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: Date.now) == formatter.string(from: $0.timeStamp!)})
         var dataEntry: [ChartDataEntry] = []
         for entry in userWeightHistory{
-            //dataEntry.append(ChartDataEntry(x: entry.timeStamp!, y: entry.weight))
-            //let myTimeInterval = entry.timeStamp!.timeIntervalSince1970
-            //let myDouble = Double(myTimeInterval)
-            //let myDate = Date(timeIntervalSince1970: myDouble)
-            //print(String(myDate))
+            // Convert timestamp to epoch time
+            let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
+            // Append both the weight and date to the graph data
+            // dataEntry.append(ChartDataEntry(x: Double(dateAsDouble), y: Double(entry.weight)))
             print(entry.weight)
-            print(entry.timeStamp!)
-            dataEntry.append(ChartDataEntry(x: 0.0, y: 10.0))
-            dataEntry.append(ChartDataEntry(x: 1.0, y: 5.0))
-            dataEntry.append(ChartDataEntry(x: 2.0, y: 7.0))
-            dataEntry.append(ChartDataEntry(x: 3.0, y: 5.0))
-            dataEntry.append(ChartDataEntry(x: 4.0, y: 10.0))
-            dataEntry.append(ChartDataEntry(x: 5.0, y: 6.0))
-            dataEntry.append(ChartDataEntry(x: 6.0, y: 5.0))
+            dataEntry.append(ChartDataEntry(x: 1651363200.0, y: 10.0))
+            dataEntry.append(ChartDataEntry(x: 1651449600.0, y: 5.0))
+            dataEntry.append(ChartDataEntry(x: 1651536000.0, y: 7.0))
+            dataEntry.append(ChartDataEntry(x: 1651622400.0, y: 5.0))
+            dataEntry.append(ChartDataEntry(x: 1651708800.0, y: 10.0))
+            dataEntry.append(ChartDataEntry(x: 1651795200.0, y: 6.0))
         }
         // Set the Y axis label
         let set1 = LineChartDataSet(entries: dataEntry, label: "Weight")
@@ -160,6 +156,8 @@ class DashboardViewController: UIViewController{
         set1.drawHorizontalHighlightIndicatorEnabled = false
         // When users tap on the graph, make the vertical highlighter line red
         set1.highlightColor = .systemRed
+        // TEST
+        lineChartView.xAxis.valueFormatter = ChartFormatter()
     }
     
     @objc func getTheWeather() {
@@ -174,6 +172,22 @@ class DashboardViewController: UIViewController{
         
     }
     
+}
+
+public class ChartFormatter: NSObject, IAxisValueFormatter {
+
+    var weightData = [String]()
+
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        //print("String for value desc \(value)")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd"
+        let date = dateFormatter.string(from: Date(timeIntervalSince1970: value))
+        return date
+    }
+    public func setValues(values: [String]) {
+        self.weightData = values
+    }
 }
 
 extension DashboardViewController: UIPopoverPresentationControllerDelegate {
