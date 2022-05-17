@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 import Charts
 import TinyConstraints
 
@@ -19,6 +20,7 @@ class DashboardViewController: UIViewController{
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var suggestionsButton: UIButton!
     var weatherUpdateTimer:Timer!
+    var userWeightHistory:[WeightHistory]!
     
     lazy var lineChartView: LineChartView = {
         let chartView = LineChartView()
@@ -32,7 +34,7 @@ class DashboardViewController: UIViewController{
         yAxis.labelPosition = .outsideChart
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.labelFont = .boldSystemFont(ofSize: 12)
-        chartView.xAxis.setLabelCount(6, force: false)
+        //chartView.xAxis.setLabelCount(6, force: true)
         chartView.xAxis.labelTextColor = .white
         chartView.xAxis.axisLineColor = .systemBlue
         chartView.animate(xAxisDuration: 2.5)
@@ -95,12 +97,16 @@ class DashboardViewController: UIViewController{
             }
             self.present(controller, animated: true, completion: nil)
         }
-       
+        // Add the lineChartView to the graphView as a subview; this allows
+        // us to sidestep the compatibility issues between Charts and Xcode 13 that don't permit using Storyboard for the UI
         graphView.addSubview(lineChartView)
+        // Here we'll use TinyConstraints to set the view constraints on our graph. Since we can't use
+        // Storyboard proper to set limits, we'll instead use code-based constraints
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
         lineChartView.heightToWidth(of: graphView)
         setData()
+                    
     }
 
                                    
@@ -109,53 +115,55 @@ class DashboardViewController: UIViewController{
     }
     
     func setData() {
-        let set1 = LineChartDataSet(entries: yValues, label: "Weight")
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        // Get all of the user's weight history, including weights and timestamps
+        userWeightHistory = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: Date.now) == formatter.string(from: $0.timeStamp!)})
+        var dataEntry: [ChartDataEntry] = []
+        for entry in userWeightHistory{
+            // Convert timestamp to epoch time
+            let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
+            let myDate = Date(timeIntervalSince1970: dateAsDouble)
+            formatter.dateFormat = "YYYY-MM-dd"
+            let strDate = formatter.string(from: myDate)
+            if let roundedDate = formatter.date(from: strDate) {
+                let finalDate = roundedDate.timeIntervalSince1970
+                // Append both the weight and date to the graph data
+                dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
+            }
+            dataEntry.append(ChartDataEntry(x: 1652850000.0, y: 155.0))
+            dataEntry.append(ChartDataEntry(x: 1652936400.0, y: 160.0))
+            dataEntry.append(ChartDataEntry(x: 1653022800.0, y: 150.0))
+            dataEntry.append(ChartDataEntry(x: 1653109200.0, y: 145.0))
+            dataEntry.append(ChartDataEntry(x: 1653195600.0, y: 150.0))
+            dataEntry.append(ChartDataEntry(x: 1653282000.0, y: 145.0))
+        }
+        // Set the Y axis label
+        let set1 = LineChartDataSet(entries: dataEntry, label: "Weight")
         set1.mode = .cubicBezier
-        set1.drawCirclesEnabled = false
+        // Prevent the graph from drawing circles around each data point
+        //set1.drawCirclesEnabled = false
+        // Set the line width
         set1.lineWidth = 3
+        // Set the line color
         set1.setColor(.white)
+        // Fill in the area underneath the line chart
+        set1.drawFilledEnabled = true
+        // Set the under-line fill color
         set1.fill = Fill(color: .white)
+        // Set the fill transparency
         set1.fillAlpha = 0.8
         let data = LineChartData(dataSet: set1)
-        data.setDrawValues(false)
+        // Don't display each data point's value on the graph
+        //data.setDrawValues(false)
         lineChartView.data = data
-        set1.drawFilledEnabled = true
-        set1.drawHorizontalHighlightIndicatorEnabled = false
-        set1.highlightColor = .systemRed
+        // Display dates in a human-readable format instead of epoch time
+        lineChartView.xAxis.valueFormatter = ChartFormatter()
+        // Disable user interaction with the chart
+        lineChartView.isUserInteractionEnabled = false
+        // Show a date for every entry on the graph to ensure they are aligned correctly
+        lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
     }
-    
-    let yValues: [ChartDataEntry] = [
-        ChartDataEntry(x: 0.0, y: 10.0),
-        ChartDataEntry(x: 1.0, y: 5.0),
-        ChartDataEntry(x: 2.0, y: 7.0),
-        ChartDataEntry(x: 3.0, y: 5.0),
-        ChartDataEntry(x: 4.0, y: 10.0),
-        ChartDataEntry(x: 5.0, y: 6.0),
-        ChartDataEntry(x: 6.0, y: 5.0),
-        ChartDataEntry(x: 7.0, y: 7.0),
-        ChartDataEntry(x: 8.0, y: 8.0),
-        ChartDataEntry(x: 9.0, y: 12.0),
-        ChartDataEntry(x: 10.0, y: 13.0),
-        ChartDataEntry(x: 11.0, y: 5.0),
-        ChartDataEntry(x: 12.0, y: 7.0),
-        ChartDataEntry(x: 13.0, y: 3.0),
-        ChartDataEntry(x: 14.0, y: 15.0),
-        ChartDataEntry(x: 15.0, y: 6.0),
-        ChartDataEntry(x: 16.0, y: 6.0),
-        ChartDataEntry(x: 17.0, y: 7.0),
-        ChartDataEntry(x: 18.0, y: 3.0),
-        ChartDataEntry(x: 19.0, y: 12.0),
-        ChartDataEntry(x: 20.0, y: 13.0),
-        ChartDataEntry(x: 21.0, y: 15.0),
-        ChartDataEntry(x: 22.0, y: 13.0),
-        ChartDataEntry(x: 23.0, y: 15.0),
-        ChartDataEntry(x: 24.0, y: 10.0),
-        ChartDataEntry(x: 25.0, y: 10.0),
-        ChartDataEntry(x: 26.0, y: 24.0),
-        ChartDataEntry(x: 27.0, y: 25.0),
-        ChartDataEntry(x: 28.0, y: 27.0),
-    ]
-    
     
     @objc func getTheWeather() {
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
@@ -167,6 +175,24 @@ class DashboardViewController: UIViewController{
             weatherImage.image = UIImage(named: currentWeatherHere.weather[0].icon)
         }
         
+    }
+    
+}
+
+// Format dates as human-readable strings once they have been loaded into the chart data
+public class ChartFormatter: NSObject, IAxisValueFormatter {
+
+    var weightData = [String]()
+
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd"
+        let date = dateFormatter.string(from: Date(timeIntervalSince1970: value))
+        return date
+    }
+    
+    public func setValues(values: [String]) {
+        self.weightData = values
     }
     
 }
