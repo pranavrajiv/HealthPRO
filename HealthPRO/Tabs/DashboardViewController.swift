@@ -34,7 +34,7 @@ class DashboardViewController: UIViewController{
         yAxis.labelPosition = .outsideChart
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.labelFont = .boldSystemFont(ofSize: 12)
-        chartView.xAxis.setLabelCount(6, force: false)
+        //chartView.xAxis.setLabelCount(6, force: true)
         chartView.xAxis.labelTextColor = .white
         chartView.xAxis.axisLineColor = .systemBlue
         chartView.animate(xAxisDuration: 2.5)
@@ -123,21 +123,26 @@ class DashboardViewController: UIViewController{
         for entry in userWeightHistory{
             // Convert timestamp to epoch time
             let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
-            // Append both the weight and date to the graph data
-            // dataEntry.append(ChartDataEntry(x: Double(dateAsDouble), y: Double(entry.weight)))
-            print(entry.weight)
-            dataEntry.append(ChartDataEntry(x: 1651363200.0, y: 10.0))
-            dataEntry.append(ChartDataEntry(x: 1651449600.0, y: 5.0))
-            dataEntry.append(ChartDataEntry(x: 1651536000.0, y: 7.0))
-            dataEntry.append(ChartDataEntry(x: 1651622400.0, y: 5.0))
-            dataEntry.append(ChartDataEntry(x: 1651708800.0, y: 10.0))
-            dataEntry.append(ChartDataEntry(x: 1651795200.0, y: 6.0))
+            let myDate = Date(timeIntervalSince1970: dateAsDouble)
+            formatter.dateFormat = "YYYY-MM-dd"
+            let strDate = formatter.string(from: myDate)
+            if let roundedDate = formatter.date(from: strDate) {
+                let finalDate = roundedDate.timeIntervalSince1970
+                // Append both the weight and date to the graph data
+                dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
+            }
+            dataEntry.append(ChartDataEntry(x: 1652850000.0, y: 155.0))
+            dataEntry.append(ChartDataEntry(x: 1652936400.0, y: 160.0))
+            dataEntry.append(ChartDataEntry(x: 1653022800.0, y: 150.0))
+            dataEntry.append(ChartDataEntry(x: 1653109200.0, y: 145.0))
+            dataEntry.append(ChartDataEntry(x: 1653195600.0, y: 150.0))
+            dataEntry.append(ChartDataEntry(x: 1653282000.0, y: 145.0))
         }
         // Set the Y axis label
         let set1 = LineChartDataSet(entries: dataEntry, label: "Weight")
         set1.mode = .cubicBezier
         // Prevent the graph from drawing circles around each data point
-        set1.drawCirclesEnabled = false
+        //set1.drawCirclesEnabled = false
         // Set the line width
         set1.lineWidth = 3
         // Set the line color
@@ -150,14 +155,14 @@ class DashboardViewController: UIViewController{
         set1.fillAlpha = 0.8
         let data = LineChartData(dataSet: set1)
         // Don't display each data point's value on the graph
-        data.setDrawValues(false)
+        //data.setDrawValues(false)
         lineChartView.data = data
-        // Disable the horizontal line highlighter when users tap on the graph
-        set1.drawHorizontalHighlightIndicatorEnabled = false
-        // When users tap on the graph, make the vertical highlighter line red
-        set1.highlightColor = .systemRed
-        // TEST
+        // Display dates in a human-readable format instead of epoch time
         lineChartView.xAxis.valueFormatter = ChartFormatter()
+        // Disable user interaction with the chart
+        lineChartView.isUserInteractionEnabled = false
+        // Show a date for every entry on the graph to ensure they are aligned correctly
+        lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
     }
     
     @objc func getTheWeather() {
@@ -174,20 +179,22 @@ class DashboardViewController: UIViewController{
     
 }
 
+// Format dates as human-readable strings once they have been loaded into the chart data
 public class ChartFormatter: NSObject, IAxisValueFormatter {
 
     var weightData = [String]()
 
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        //print("String for value desc \(value)")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd"
         let date = dateFormatter.string(from: Date(timeIntervalSince1970: value))
         return date
     }
+    
     public func setValues(values: [String]) {
         self.weightData = values
     }
+    
 }
 
 extension DashboardViewController: UIPopoverPresentationControllerDelegate {
