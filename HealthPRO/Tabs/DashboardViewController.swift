@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 import Charts
 import TinyConstraints
 
@@ -119,20 +120,25 @@ class DashboardViewController: UIViewController{
         formatter.dateStyle = .short
         // Get all of the user's weight history, including weights and timestamps
         userWeightHistory = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: Date.now) == formatter.string(from: $0.timeStamp!)})
-        var yValues: [ChartDataEntry] = []
+        var dataEntry: [ChartDataEntry] = []
         for entry in userWeightHistory{
+            //dataEntry.append(ChartDataEntry(x: entry.timeStamp!, y: entry.weight))
+            //let myTimeInterval = entry.timeStamp!.timeIntervalSince1970
+            //let myDouble = Double(myTimeInterval)
+            //let myDate = Date(timeIntervalSince1970: myDouble)
+            //print(String(myDate))
             print(entry.weight)
             print(entry.timeStamp!)
-            yValues.append(ChartDataEntry(x: 0.0, y: 10.0))
-            yValues.append(ChartDataEntry(x: 1.0, y: 5.0))
-            yValues.append(ChartDataEntry(x: 2.0, y: 7.0))
-            yValues.append(ChartDataEntry(x: 3.0, y: 5.0))
-            yValues.append(ChartDataEntry(x: 4.0, y: 10.0))
-            yValues.append(ChartDataEntry(x: 5.0, y: 6.0))
-            yValues.append(ChartDataEntry(x: 6.0, y: 5.0))
+            dataEntry.append(ChartDataEntry(x: 0.0, y: 10.0))
+            dataEntry.append(ChartDataEntry(x: 1.0, y: 5.0))
+            dataEntry.append(ChartDataEntry(x: 2.0, y: 7.0))
+            dataEntry.append(ChartDataEntry(x: 3.0, y: 5.0))
+            dataEntry.append(ChartDataEntry(x: 4.0, y: 10.0))
+            dataEntry.append(ChartDataEntry(x: 5.0, y: 6.0))
+            dataEntry.append(ChartDataEntry(x: 6.0, y: 5.0))
         }
         // Set the Y axis label
-        let set1 = LineChartDataSet(entries: yValues, label: "Weight")
+        let set1 = LineChartDataSet(entries: dataEntry, label: "Weight")
         set1.mode = .cubicBezier
         // Prevent the graph from drawing circles around each data point
         set1.drawCirclesEnabled = false
@@ -155,39 +161,6 @@ class DashboardViewController: UIViewController{
         // When users tap on the graph, make the vertical highlighter line red
         set1.highlightColor = .systemRed
     }
-/*
-    let yValues: [ChartDataEntry] = [
-        ChartDataEntry(x: 0.0, y: 10.0),
-        ChartDataEntry(x: 1.0, y: 5.0),
-        ChartDataEntry(x: 2.0, y: 7.0),
-        ChartDataEntry(x: 3.0, y: 5.0),
-        ChartDataEntry(x: 4.0, y: 10.0),
-        ChartDataEntry(x: 5.0, y: 6.0),
-        ChartDataEntry(x: 6.0, y: 5.0),
-        ChartDataEntry(x: 7.0, y: 7.0),
-        ChartDataEntry(x: 8.0, y: 8.0),
-        ChartDataEntry(x: 9.0, y: 12.0),
-        ChartDataEntry(x: 10.0, y: 13.0),
-        ChartDataEntry(x: 11.0, y: 5.0),
-        ChartDataEntry(x: 12.0, y: 7.0),
-        ChartDataEntry(x: 13.0, y: 3.0),
-        ChartDataEntry(x: 14.0, y: 15.0),
-        ChartDataEntry(x: 15.0, y: 6.0),
-        ChartDataEntry(x: 16.0, y: 6.0),
-        ChartDataEntry(x: 17.0, y: 7.0),
-        ChartDataEntry(x: 18.0, y: 3.0),
-        ChartDataEntry(x: 19.0, y: 12.0),
-        ChartDataEntry(x: 20.0, y: 13.0),
-        ChartDataEntry(x: 21.0, y: 15.0),
-        ChartDataEntry(x: 22.0, y: 13.0),
-        ChartDataEntry(x: 23.0, y: 15.0),
-        ChartDataEntry(x: 24.0, y: 10.0),
-        ChartDataEntry(x: 25.0, y: 10.0),
-        ChartDataEntry(x: 26.0, y: 24.0),
-        ChartDataEntry(x: 27.0, y: 25.0),
-        ChartDataEntry(x: 28.0, y: 27.0),
-    ]
- */
     
     @objc func getTheWeather() {
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
