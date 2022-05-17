@@ -51,6 +51,7 @@ class DashboardViewController: UIViewController{
         }
         
         self.weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(getTheWeather), userInfo: nil, repeats: true)
+        setData()
     }
     
     @objc func suggestionButtonTouchUpInside() {
@@ -105,8 +106,6 @@ class DashboardViewController: UIViewController{
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
         lineChartView.heightToWidth(of: graphView)
-        setData()
-                    
     }
 
                                    
