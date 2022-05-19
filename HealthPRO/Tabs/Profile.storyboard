@@ -11,7 +11,7 @@
         <!--Profile-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="HEALTH_PRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +109,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UQj-P4-uSo">
-                                <rect key="frame" x="20" y="549.33333333333337" width="335" height="56"/>
+                                <rect key="frame" x="20" y="529.33333333333337" width="335" height="56"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="E2x-Sj-Tu1">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
@@ -151,25 +151,69 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qt5-mS-f5c">
-                                <rect key="frame" x="140.66666666666666" y="655.33333333333337" width="94" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Edit Profile" cornerStyle="capsule"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="z3M-oh-Q1A">
+                                <rect key="frame" x="30" y="605.33333333333337" width="315" height="56"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OVu-FE-DP6">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="17"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Preference" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxO-Wc-cvT">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Preference" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkH-7t-yrV">
+                                                <rect key="frame" x="165" y="0.0" width="150" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="CkH-7t-yrV" firstAttribute="width" secondItem="kxO-Wc-cvT" secondAttribute="width" id="CLi-wU-5Oe"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="g3w-Ro-Gfn">
+                                        <rect key="frame" x="0.0" y="22" width="315" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="xxx-xxx-xxxx" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aze-ku-uey">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="john.doe@xyz.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="giT-gH-a1k">
+                                                <rect key="frame" x="165" y="0.0" width="150" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="giT-gH-a1k" firstAttribute="width" secondItem="Aze-ku-uey" secondAttribute="width" id="2pr-ut-FIT"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxw-xl-Bwa">
                                 <rect key="frame" x="20" y="68" width="86" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="clock" catalog="system" title="Usage" cornerStyle="capsule"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qt5-mS-f5c">
+                                <rect key="frame" x="140.66666666666666" y="685.33333333333337" width="94" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Edit Profile" cornerStyle="capsule"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
                             <constraint firstItem="Qt5-mS-f5c" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0Wv-VY-HoZ"/>
-                            <constraint firstItem="Qt5-mS-f5c" firstAttribute="top" secondItem="UQj-P4-uSo" secondAttribute="bottom" constant="50" id="0jb-rc-kaO"/>
+                            <constraint firstItem="Qt5-mS-f5c" firstAttribute="top" secondItem="UQj-P4-uSo" secondAttribute="bottom" constant="100" id="0jb-rc-kaO"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1qq-i2-MrD" secondAttribute="trailing" constant="20" id="2Oi-iE-3kR"/>
                             <constraint firstItem="iei-dt-2e5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="5WV-P8-nB6"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yC0-Kx-jQa" secondAttribute="trailing" constant="20" id="5aI-bB-e48"/>
+                            <constraint firstItem="z3M-oh-Q1A" firstAttribute="top" secondItem="UQj-P4-uSo" secondAttribute="bottom" constant="20" id="EjK-tM-wue"/>
                             <constraint firstItem="yC0-Kx-jQa" firstAttribute="top" secondItem="1qq-i2-MrD" secondAttribute="bottom" constant="8" symbolic="YES" id="Igm-zZ-AN1"/>
                             <constraint firstItem="yC0-Kx-jQa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="JUv-wY-S4W"/>
                             <constraint firstItem="UQj-P4-uSo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="KuF-8Q-vP0"/>
@@ -181,8 +225,9 @@
                             <constraint firstItem="8R1-Ik-8Uz" firstAttribute="top" secondItem="iei-dt-2e5" secondAttribute="bottom" constant="20" id="hwn-jo-kal"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="dAu-LX-W0l" secondAttribute="trailing" constant="110" id="i8F-Ec-xHm"/>
                             <constraint firstItem="dAu-LX-W0l" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="110" id="kTQ-Qt-wAA"/>
-                            <constraint firstItem="UQj-P4-uSo" firstAttribute="top" secondItem="8R1-Ik-8Uz" secondAttribute="bottom" constant="40" id="lP5-t6-erA"/>
+                            <constraint firstItem="UQj-P4-uSo" firstAttribute="top" secondItem="8R1-Ik-8Uz" secondAttribute="bottom" constant="20" id="lP5-t6-erA"/>
                             <constraint firstItem="8R1-Ik-8Uz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="lYS-fc-gO7"/>
+                            <constraint firstItem="z3M-oh-Q1A" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="n3L-FQ-7eR"/>
                             <constraint firstItem="iei-dt-2e5" firstAttribute="top" secondItem="yC0-Kx-jQa" secondAttribute="bottom" constant="80" id="nfB-g1-CEd"/>
                             <constraint firstItem="1qq-i2-MrD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="rnu-As-wAv"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8R1-Ik-8Uz" secondAttribute="trailing" constant="20" id="sgs-kl-kpq"/>
