@@ -81,7 +81,8 @@ class DashboardViewController: UIViewController{
         
         //show weight logger
         if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
-            let controller = WeightInfoViewController.init(popOverHeading: "Log Daily Weight", popOverMessage: "Enter Today's Weight", button1Label: "Log",button2Label: "", button3Label: "Cancel", weightHistoryId: -1)
+            let controller = WeightInfoViewController.init(popOverHeading: "Log Daily Weight", popOverMessage: "Enter Today's Weight", button1Label: "Log",button2Label: "", button3Label: "Cancel",delegate: self ,weightHistoryId: -1)
+            
             controller.modalPresentationStyle = .popover
             
             if let popover = controller.popoverPresentationController {
@@ -190,8 +191,12 @@ public class ChartFormatter: NSObject, IAxisValueFormatter {
     
 }
 
-extension DashboardViewController: UIPopoverPresentationControllerDelegate {
+extension DashboardViewController: UIPopoverPresentationControllerDelegate,WeightDelegate {
 
+    @objc func weightInfoUpdated() {
+        self.setData()
+    }
+    
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }

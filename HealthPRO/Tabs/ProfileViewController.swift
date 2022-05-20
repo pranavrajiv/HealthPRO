@@ -49,23 +49,9 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc private func saveData() {
-//        let user = CoreDataHandler.init().getUser()
-        
-        
-//        CoreDataHandler.init().updateUser(weight: Double(self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text), height: <#T##Double#>, gender: <#T##String#>, emailAddress: <#T##String#>, contactNumber: <#T##String#>, birthYear: <#T##Int#>, foodPreference: <#T##String#>, activityPreference: <#T##String#>)
-//
-//
-//
-//
-//        self.userName.text = user?.loginId
-//        self.foodPreferenceButton.setTitle(user?.foodPreference == "" ? "Low Carb" : user?.foodPreference, for: .normal)
-//        self.activityPreferenceButton.setTitle(user?.activityPreference == "" ? "Indoor" : user?.activityPreference, for: .normal)
-//         = user?.weight.description
-//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"}))?.text = user?.birthYear.description
-//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"}))?.text = user?.height.description
-//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"}))?.text = user?.gender
-//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text = user?.contactNumber
-//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text = user?.emailAddress
+        if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"),let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"})?.text), let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
+            _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
+        }
     }
     
     
@@ -76,6 +62,8 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         
         if self.editButton.titleLabel?.text == "Save Info" {
             self.saveData()
+        } else {
+            self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.becomeFirstResponder()
         }
         self.editButton.setTitle(self.editButton.titleLabel?.text == "Edit Profile" ? "Save Info" : "Edit Profile", for: .normal)
     }
@@ -170,15 +158,11 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
         self.textFieldCollection.forEach({$0.isUserInteractionEnabled = (textField.accessibilityIdentifier == $0.accessibilityIdentifier) ? true : false })
-//        self.saveButton.isUserInteractionEnabled = false
-//        self.deleteButton.isUserInteractionEnabled = false
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activeTextField = textField
         self.textFieldCollection.forEach({$0.isUserInteractionEnabled = true})
-//        self.saveButton.isUserInteractionEnabled = true
-//        self.deleteButton.isUserInteractionEnabled = true
     }
     
     
