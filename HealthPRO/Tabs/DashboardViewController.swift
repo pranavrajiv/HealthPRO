@@ -153,6 +153,10 @@ class DashboardViewController: UIViewController{
         lineChartView.data = data
         // Display dates in a human-readable format instead of epoch time
         lineChartView.xAxis.valueFormatter = ChartFormatter()
+        
+        //rotate x axis label
+        lineChartView.xAxis.labelRotationAngle = 90.0
+        
         // Disable user interaction with the chart
         lineChartView.isUserInteractionEnabled = false
         // Show a date for every entry on the graph to ensure they are aligned correctly
