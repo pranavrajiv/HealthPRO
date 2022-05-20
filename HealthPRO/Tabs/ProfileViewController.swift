@@ -9,14 +9,42 @@ import UIKit
 
 class ProfileViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var usageButton: UIButton!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet var textFieldCollection: [UITextField]!
+    @IBOutlet weak var foodPreferenceButton: UIButton!
+    @IBOutlet weak var activityPreferenceButton: UIButton!
     var activeTextField:UITextField?
     var isKeyboardUp:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.logoutButton.addTarget(self, action: #selector(logoutButtonTouchUpInside), for: .touchUpInside)
         self.usageButton.addTarget(self, action: #selector(usageButtonTouchUpInside), for: .touchUpInside)
+        self.editButton.addTarget(self, action: #selector(editButtonTouchUpInside), for: .touchUpInside)
+        self.foodPreferenceButton.addTarget(self, action: #selector(foodPreferenceButtonTouchUpInside), for: .touchUpInside)
+        self.activityPreferenceButton.addTarget(self, action: #selector(activityPreferenceButtonTouchUpInside), for: .touchUpInside)
+        self.textFieldCollection.forEach({$0.delegate = self})
+        self.textFieldCollection.forEach({$0.isEnabled = false})
+        self.foodPreferenceButton.isUserInteractionEnabled = false
+        self.activityPreferenceButton.isUserInteractionEnabled = false
+    }
+    
+    @objc private func editButtonTouchUpInside(){
+        self.textFieldCollection.forEach({$0.isEnabled = !$0.isEnabled})
+        self.foodPreferenceButton.isUserInteractionEnabled = !self.foodPreferenceButton.isUserInteractionEnabled
+        self.activityPreferenceButton.isUserInteractionEnabled = !self.activityPreferenceButton.isUserInteractionEnabled
+        self.editButton.setTitle(self.editButton.titleLabel?.text == "Edit Profile" ? "Save Info" : "Edit Profile", for: .normal)
+    }
+    
+    @objc private func foodPreferenceButtonTouchUpInside(){
+        self.foodPreferenceButton.setTitle(self.foodPreferenceButton.titleLabel?.text == "Low Carb" ? "Low Fat" : "Low Carb", for: .normal)
+    }
+    
+    @objc private func activityPreferenceButtonTouchUpInside(){
+        self.activityPreferenceButton.setTitle(self.activityPreferenceButton.titleLabel?.text == "Indoor" ? "Outdoor" : "Indoor", for: .normal)
+        
     }
     
     @objc private func logoutButtonTouchUpInside(){
@@ -99,12 +127,14 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
+        self.textFieldCollection.forEach({$0.isUserInteractionEnabled = (textField.accessibilityIdentifier == $0.accessibilityIdentifier) ? true : false })
 //        self.saveButton.isUserInteractionEnabled = false
 //        self.deleteButton.isUserInteractionEnabled = false
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activeTextField = textField
+        self.textFieldCollection.forEach({$0.isUserInteractionEnabled = true})
 //        self.saveButton.isUserInteractionEnabled = true
 //        self.deleteButton.isUserInteractionEnabled = true
     }
