@@ -29,12 +29,54 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         self.textFieldCollection.forEach({$0.isEnabled = false})
         self.foodPreferenceButton.isUserInteractionEnabled = false
         self.activityPreferenceButton.isUserInteractionEnabled = false
+        
+        self.populateData()
     }
+    
+   
+    
+    @objc private func populateData() {
+        let user = CoreDataHandler.init().getUser()
+        self.userName.text = user?.loginId
+        self.foodPreferenceButton.setTitle(user?.foodPreference == "" ? "Low Carb" : user?.foodPreference, for: .normal)
+        self.activityPreferenceButton.setTitle(user?.activityPreference == "" ? "Indoor" : user?.activityPreference, for: .normal)
+        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"}))?.text = user?.weight.description
+        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"}))?.text = user?.birthYear.description
+        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"}))?.text = user?.height.description
+        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"}))?.text = user?.gender
+        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text = user?.contactNumber
+        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text = user?.emailAddress
+    }
+    
+    @objc private func saveData() {
+//        let user = CoreDataHandler.init().getUser()
+        
+        
+//        CoreDataHandler.init().updateUser(weight: Double(self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text), height: <#T##Double#>, gender: <#T##String#>, emailAddress: <#T##String#>, contactNumber: <#T##String#>, birthYear: <#T##Int#>, foodPreference: <#T##String#>, activityPreference: <#T##String#>)
+//
+//
+//
+//
+//        self.userName.text = user?.loginId
+//        self.foodPreferenceButton.setTitle(user?.foodPreference == "" ? "Low Carb" : user?.foodPreference, for: .normal)
+//        self.activityPreferenceButton.setTitle(user?.activityPreference == "" ? "Indoor" : user?.activityPreference, for: .normal)
+//         = user?.weight.description
+//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"}))?.text = user?.birthYear.description
+//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"}))?.text = user?.height.description
+//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"}))?.text = user?.gender
+//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text = user?.contactNumber
+//        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text = user?.emailAddress
+    }
+    
     
     @objc private func editButtonTouchUpInside(){
         self.textFieldCollection.forEach({$0.isEnabled = !$0.isEnabled})
         self.foodPreferenceButton.isUserInteractionEnabled = !self.foodPreferenceButton.isUserInteractionEnabled
         self.activityPreferenceButton.isUserInteractionEnabled = !self.activityPreferenceButton.isUserInteractionEnabled
+        
+        if self.editButton.titleLabel?.text == "Save Info" {
+            self.saveData()
+        }
         self.editButton.setTitle(self.editButton.titleLabel?.text == "Edit Profile" ? "Save Info" : "Edit Profile", for: .normal)
     }
     
