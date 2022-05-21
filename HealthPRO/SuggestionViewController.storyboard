@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,20 +11,107 @@
         <!--Suggestions View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="suggestionVC" id="Y6W-OH-hqX" customClass="SuggestionsViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="suggestionVC" id="Y6W-OH-hqX" customClass="SuggestionsViewController" customModule="HEALTH_PRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggestions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTW-Uq-ZR5">
+                                <rect key="frame" x="0.0" y="44" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aSX-n2-vMo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCe-7c-5QY">
+                                <rect key="frame" x="10" y="54" width="68.666666666666671" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Cancel" cornerStyle="capsule"/>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FZb-CH-cQv">
+                                <rect key="frame" x="10" y="114.00000000000001" width="355" height="195.33333333333337"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmo-IB-bCf" userLabel="SuggestionActivity">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwq-UI-yrB" userLabel="SuggestionA">
+                                        <rect key="frame" x="0.0" y="36" width="355" height="159.33333333333334"/>
+                                        <string key="text">Chicken &amp; Cauliflower-Rice Casserole: Get your veggies and your protein fix in this easy casserole. Riced cauliflower stands in for traditional rice, super low in carbs!</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.29274317620000001" green="0.583107084" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suggestion" translatesAutoresizingMaskIntoConstraints="NO" id="Vm1-IX-hve">
+                                <rect key="frame" x="112.66666666666669" y="339.33333333333331" width="150" height="133.33333333333331"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Vm1-IX-hve" secondAttribute="height" multiplier="9:8" id="Jw4-VU-40r"/>
+                                    <constraint firstAttribute="width" constant="150" id="mHO-UE-Za3"/>
+                                </constraints>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JBi-s7-m2l">
+                                <rect key="frame" x="10" y="502.66666666666669" width="355" height="195.33333333333331"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrc-88-tcq" userLabel="SuggestionFood">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kV9-GE-Qo9" userLabel="SuggestionF">
+                                        <rect key="frame" x="0.0" y="35.999999999999943" width="355" height="159.33333333333334"/>
+                                        <string key="text">Chicken &amp; Cauliflower-Rice Casserole: Get your veggies and your protein fix in this easy casserole. Riced cauliflower stands in for traditional rice, super low in carbs!</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.50980392159999999" green="0.40784313729999999" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HCe-7c-5QY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="3r6-hC-lvx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yTW-Uq-ZR5" secondAttribute="trailing" id="4Vq-Ti-7pA"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="JBi-s7-m2l" secondAttribute="bottom" constant="80" id="A4m-78-Oaa"/>
+                            <constraint firstItem="yTW-Uq-ZR5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Eb8-1U-Vye"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="JBi-s7-m2l" secondAttribute="trailing" constant="10" id="Emt-gm-zQq"/>
+                            <constraint firstItem="Vm1-IX-hve" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="IkC-nX-mnh"/>
+                            <constraint firstItem="JBi-s7-m2l" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="JWl-9n-4dY"/>
+                            <constraint firstItem="JBi-s7-m2l" firstAttribute="height" secondItem="FZb-CH-cQv" secondAttribute="height" id="Jh8-1q-GbY"/>
+                            <constraint firstItem="Vm1-IX-hve" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="NG9-nM-t7X"/>
+                            <constraint firstItem="HCe-7c-5QY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="O5m-x8-leO"/>
+                            <constraint firstItem="JBi-s7-m2l" firstAttribute="width" secondItem="FZb-CH-cQv" secondAttribute="width" id="Prm-yQ-7p5"/>
+                            <constraint firstItem="yTW-Uq-ZR5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Wla-FB-dEP"/>
+                            <constraint firstItem="yTW-Uq-ZR5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="dgK-RZ-8IA"/>
+                            <constraint firstItem="FZb-CH-cQv" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="qbT-8c-Qix"/>
+                            <constraint firstItem="JBi-s7-m2l" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="tqm-DA-UXY"/>
+                            <constraint firstItem="JBi-s7-m2l" firstAttribute="top" secondItem="Vm1-IX-hve" secondAttribute="bottom" constant="30" id="uBD-7t-eDN"/>
+                            <constraint firstItem="FZb-CH-cQv" firstAttribute="top" secondItem="yTW-Uq-ZR5" secondAttribute="bottom" constant="20" id="ySw-jV-tZH"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activitySuggestion" destination="Dwq-UI-yrB" id="xAf-Wm-LOf"/>
+                        <outlet property="cancelButton" destination="HCe-7c-5QY" id="47n-ff-lo3"/>
+                        <outlet property="foodSuggestion" destination="kV9-GE-Qo9" id="7pI-gw-dvA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-190" y="34"/>
+            <point key="canvasLocation" x="-192.80000000000001" y="33.251231527093594"/>
         </scene>
     </scenes>
     <resources>
+        <image name="suggestion" width="240" height="240"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
