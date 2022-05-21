@@ -86,6 +86,12 @@ class WeightInfoViewController: UIViewController {
                 } else {
                     self.updateWeight()
                 }
+                
+                if let weightDouble = CoreDataHandler.init().getAllWeightHistory().last?.weight {
+                    if let user = CoreDataHandler.init().getUser() {
+                        _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
+                    }
+                }
             }
             self.dismiss(animated: true, completion: nil)
         }))
@@ -143,6 +149,7 @@ class WeightInfoViewController: UIViewController {
                 }
                 _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: self.dateSelector.date, weight: weightDouble)
             }
+        
             self.delegate?.weightInfoUpdated()
         }
     }

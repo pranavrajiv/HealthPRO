@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var activityPreferenceButton: UIButton!
     var activeTextField:UITextField?
     var isKeyboardUp:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.logoutButton.addTarget(self, action: #selector(logoutButtonTouchUpInside), for: .touchUpInside)
@@ -29,11 +30,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         self.textFieldCollection.forEach({$0.isEnabled = false})
         self.foodPreferenceButton.isUserInteractionEnabled = false
         self.activityPreferenceButton.isUserInteractionEnabled = false
-        
-        self.populateData()
     }
-    
-   
     
     @objc private func populateData() {
         let user = CoreDataHandler.init().getUser()
@@ -53,7 +50,6 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
             _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
         }
     }
-    
     
     @objc private func editButtonTouchUpInside(){
         self.textFieldCollection.forEach({$0.isEnabled = !$0.isEnabled})
@@ -101,6 +97,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
             self.present(ac, animated: true)
         }
     }
+    
     //Dismiss the keyboard when touched outside the screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -109,6 +106,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.populateData()
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillDisappear),name: UIResponder.keyboardWillHideNotification,object: nil)
     }
