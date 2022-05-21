@@ -48,6 +48,21 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     @objc private func saveData() {
         if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"),let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"})?.text), let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
             _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
+
+            //add weight history entry
+            if(CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
+                
+                let formatter = DateFormatter()
+                formatter.dateStyle = .short
+                _  = CoreDataHandler.init().updateWeightHistory(historyId: CoreDataHandler.init().getAllWeightHistory().first(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: Date())})!.weightHistoryId, timeStamp: Date(), weight: weight)
+            } else {
+                var historyId:Int64 = -1
+                if let largestWeightHistoryId = CoreDataHandler.init().getAllWeightHistory().map({$0.weightHistoryId}).max() {
+                    historyId = largestWeightHistoryId
+                }
+                _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: Date(), weight: weight)
+            }
+            
         }
     }
     
