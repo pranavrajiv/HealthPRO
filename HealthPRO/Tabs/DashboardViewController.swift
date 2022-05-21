@@ -24,19 +24,19 @@ class DashboardViewController: UIViewController{
     
     lazy var lineChartView: LineChartView = {
         let chartView = LineChartView()
-        chartView.backgroundColor = .systemBlue
+        chartView.backgroundColor = .white
         chartView.rightAxis.enabled = false
         let yAxis = chartView.leftAxis
         yAxis.labelFont = .boldSystemFont(ofSize: 12)
         yAxis.setLabelCount(6, force: false)
-        yAxis.labelTextColor = .white
-        yAxis.axisLineColor = .white
+        yAxis.labelTextColor = .black
+        yAxis.axisLineColor = .black
         yAxis.labelPosition = .outsideChart
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.labelFont = .boldSystemFont(ofSize: 12)
         //chartView.xAxis.setLabelCount(6, force: true)
-        chartView.xAxis.labelTextColor = .white
-        chartView.xAxis.axisLineColor = .systemBlue
+        chartView.xAxis.labelTextColor = .black
+        chartView.xAxis.axisLineColor = .black
         chartView.animate(xAxisDuration: 2.5)
         return chartView
     }()
@@ -119,7 +119,18 @@ class DashboardViewController: UIViewController{
         formatter.dateStyle = .short
         // Get all of the user's weight history, including weights and timestamps
         userWeightHistory = CoreDataHandler.init().getAllWeightHistory()
+        // Calculate the maximum and minimum safe weights to plot alongside the user's logged weights
+        let user = CoreDataHandler.init().getUser()
+        let userHeightInches = user?.height.description
+        let userHeightMeters = Double(userHeightInches!)! * 0.0254
+        let userHeightMetersSquared = Double(userHeightMeters) * Double(userHeightMeters)
+        let minimumSafeWeightKilograms = 18.5 * Double(userHeightMetersSquared)
+        let maximumSafeWeightKilograms = 24.9 * Double(userHeightMetersSquared)
+        let minimumSafeWeightPounds = 2.20462 * Double(minimumSafeWeightKilograms)
+        let maximumSafeWeightPounds = 2.20462 * Double(maximumSafeWeightKilograms)
         var dataEntry: [ChartDataEntry] = []
+        var upperWeightEntry: [ChartDataEntry] = []
+        var lowerWeightEntry: [ChartDataEntry] = []
         for entry in userWeightHistory{
             // Convert timestamp to epoch time
             let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
@@ -130,33 +141,32 @@ class DashboardViewController: UIViewController{
                 let finalDate = roundedDate.timeIntervalSince1970
                 // Append both the weight and date to the graph data
                 dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
+                // Append the date and upper weight limit to the graph data
+                upperWeightEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(maximumSafeWeightPounds)))
+                // Append the date and upper weight limit to the graph data
+                lowerWeightEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(minimumSafeWeightPounds)))
             }
         }
-        // Set the Y axis label
-        let set1 = LineChartDataSet(entries: dataEntry, label: "Weight")
+        // Set the Y axis label and load dataEntry into the first line chart dataset
+        let set1 = LineChartDataSet(entries: dataEntry, label: "Logged Weight")
+        let lowerTargetLine = ChartLimitLine(limit: minimumSafeWeightPounds, label: "Minimum healthy weight")
+        let upperTargetLine = ChartLimitLine(limit: maximumSafeWeightPounds, label: "Maximum healthy weight")
         set1.mode = .cubicBezier
-        // Prevent the graph from drawing circles around each data point
-        //set1.drawCirclesEnabled = false
-        // Set the line width
         set1.lineWidth = 3
-        // Set the line color
-        set1.setColor(.white)
-        // Fill in the area underneath the line chart
-        set1.drawFilledEnabled = true
-        // Set the under-line fill color
-        set1.fill = Fill(color: .white)
-        // Set the fill transparency
-        set1.fillAlpha = 0.8
+        set1.setColor(.black)
         let data = LineChartData(dataSet: set1)
-        // Don't display each data point's value on the graph
-        //data.setDrawValues(false)
+        // Don't display the upper and lower safe weights if the user hasn't set their height yet
+        if Double(userHeightInches!) != 0.0 {
+            lineChartView.leftAxis.addLimitLine(lowerTargetLine)
+            lineChartView.leftAxis.addLimitLine(upperTargetLine)
+            lineChartView.leftAxis.axisMinimum = minimumSafeWeightPounds - 10.0
+            lineChartView.leftAxis.axisMaximum = maximumSafeWeightPounds + 10.0
+        }
         lineChartView.data = data
         // Display dates in a human-readable format instead of epoch time
         lineChartView.xAxis.valueFormatter = ChartFormatter()
-        
-        //rotate x axis label
+        //Rotate x axis label to prevent clipping off the side of the graph
         lineChartView.xAxis.labelRotationAngle = 90.0
-        
         // Disable user interaction with the chart
         lineChartView.isUserInteractionEnabled = false
         // Show a date for every entry on the graph to ensure they are aligned correctly
