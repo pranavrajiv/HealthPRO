@@ -168,7 +168,7 @@ class DashboardViewController: UIViewController{
         todayDate.text = Date.getTodaysDate()
         currentCity.text = viewController.weatherInfoNow.currentCity
         if let currentWeatherHere  = viewController.weatherInfoNow.currentWeather {
-            currentWeather.text = currentWeatherHere.weather[0].description.capitalized
+            currentWeather.text = currentWeatherHere.weather[0].description.uppercased()
             currentTemperature.text = currentWeatherHere.temp.description + " F°"
             weatherImage.image = UIImage(named: currentWeatherHere.weather[0].icon)
         }

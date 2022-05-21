@@ -23,8 +23,8 @@ struct WeatherNow {
     mutating func updateCurrent(result:Result,currentCity:String) {
         self.currentCity = currentCity
         self.currentWeather = result.current
-        self.weatherInOneHour = result.hourly[1].weather[0].description.capitalized
-        self.weatherInTwoHours = result.hourly[2].weather[0].description.capitalized
+        self.weatherInOneHour = result.hourly[1].weather[0].description.uppercased()
+        self.weatherInTwoHours = result.hourly[2].weather[0].description.uppercased()
     }
     mutating func cleanup() {
         self.currentCity = ""
