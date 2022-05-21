@@ -252,7 +252,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     
     //does all the onboarding steps including coreData populations from .csv payloads
     @objc private func gettingStarted() {
-        self.populateFood()
+       self.populateFood()
         self.populateActivity()
         self.populateSuggestions()
     }

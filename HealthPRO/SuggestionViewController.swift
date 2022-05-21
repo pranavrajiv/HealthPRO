@@ -19,12 +19,26 @@ class SuggestionsViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.cancelButton.addTarget(self, action: #selector(cancelButtonTouchUp), for: .touchUpInside)
-    
+        self.activitySuggestion.text = ""
+        self.foodSuggestion.text = ""
         
         //let currentWeatherHere:String = self.getTheWeather()
         var outdoorOkay = true;
         
-        var suggestions:[Suggestion] = CoreDataHandler.init().getAllSuggestions()
+        let suggestions:[Suggestion] = CoreDataHandler.init().getAllSuggestions()
+    
+        let user = CoreDataHandler.init().getUser()
+        if user?.foodPreference == "" {
+            self.foodSuggestion.text = suggestions.filter({$0.type == "food"})[Int.random(in: 0..<suggestions.filter({$0.type == "food"}).count)].suggestionText
+        } else {
+            self.foodSuggestion.text = suggestions.filter({$0.preference == user?.foodPreference})[Int.random(in: 0..<suggestions.filter({$0.preference == user?.foodPreference}).count)].suggestionText
+        }
+        
+        if user?.activityPreference == "" {
+            self.activitySuggestion.text = suggestions.filter({$0.type == "activity"})[Int.random(in: 0..<suggestions.filter({$0.type == "activity"}).count)].suggestionText
+        } else {
+            self.activitySuggestion.text = suggestions.filter({$0.preference == user?.activityPreference})[Int.random(in: 0..<suggestions.filter({$0.preference == user?.activityPreference}).count)].suggestionText
+        }
         
 //        if (currentWeatherHere.contains("SNOW") || currentWeatherHere.contains("RAIN")) {
 //            outdoorOkay = false;

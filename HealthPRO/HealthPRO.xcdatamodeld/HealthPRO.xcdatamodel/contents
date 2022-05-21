@@ -46,12 +46,12 @@
         <attribute name="weather" optional="YES" attributeType="String" defaultValueString=""/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="activityPreference" optional="YES" attributeType="String"/>
+        <attribute name="activityPreference" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="birthYear" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="contactNumber" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="emailAddress" optional="YES" attributeType="String" defaultValueString=""/>
-        <attribute name="foodPreference" optional="YES" attributeType="String"/>
+        <attribute name="foodPreference" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="gender" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="loginId" optional="YES" attributeType="String"/>

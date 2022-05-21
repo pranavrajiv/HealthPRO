@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         let user = CoreDataHandler.init().getUser()
         self.userName.text = user?.loginId
         self.foodPreferenceButton.setTitle(user?.foodPreference == "" ? "Low Carb" : user?.foodPreference, for: .normal)
-        self.activityPreferenceButton.setTitle(user?.activityPreference == "" ? "Indoor" : user?.activityPreference, for: .normal)
+        self.activityPreferenceButton.setTitle(user?.activityPreference == "" ? "Cardio" : user?.activityPreference, for: .normal)
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"}))?.text = user?.weight.description
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"}))?.text = user?.birthYear.description
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"}))?.text = user?.height.description
@@ -73,7 +73,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc private func activityPreferenceButtonTouchUpInside(){
-        self.activityPreferenceButton.setTitle(self.activityPreferenceButton.titleLabel?.text == "Indoor" ? "Outdoor" : "Indoor", for: .normal)
+        self.activityPreferenceButton.setTitle(self.activityPreferenceButton.titleLabel?.text == "Cardio" ? "Strength" : "Cardio", for: .normal)
         
     }
     

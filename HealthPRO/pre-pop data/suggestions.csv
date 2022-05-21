@@ -1,25 +1,25 @@
 ﻿tag,suggestion,preference,weather,type
-jump_rope,"You can try jumping rope for a great indoor cardio exercise. Even without a real rope, it can get your heart working.",cardio,indoor,activity
-burpees,"For a high intensity indoor cardio option, burpees engage your entire body from head to toe. Give them a try!",cardio,indoor,activity
-jumping_jacks,"For a high intensity indoor cardio option, jumping jacks engage your entire body from head to toe. Give them a try!",cardio,indoor,activity
-dancing,Getting in your daily exercise doesn't have to be a chore. Spending a few minutes dancing to music can be a great indoor cardio activity.,cardio,indoor,activity
-stair_climb,"If you have some stairs in your home, a stair climb is a great indoor cardio activity!",cardio,indoor,activity
-swimming,You can try swimming at an ourdoor pool for a great aerobic workout.,cardio,outdoor,activity
-rollerblading,A pair of rollerblades are great for getting cardio workouts outdoors with a bit more excitement than a simple jog!,cardio,outdoor,activity
-push_ups,Push-ups are a classic strength training technique and super easy to do at home. Even just a few reps can add up over time!,strength,indoor,activity
-step_up,Step-ups are an easy strength training techinque to try at home. Adding weights in your hands makes this even more effective!,strength,indoor,activity
-tightrope_walk,"For some outdoor strength training, find a fallen log or curb to balance on for a tightrope walk!",strength,outdoor,activity
-bench_push up,"If you're training outside, find a bench and use it to try some inclined push-ups to work a different set of mucsles!",strength,outdoor,activity
-bench_dip,"If you're training outside, find a bench and try some dips! Face away from the bench and use your arms to lower and raise the rest of your body.",strength,outdoor,activity
-chicken_broccoli,Portobello Chicken Cutlets with Broccoli: Adding nutty Gruyère atop the chicken at the very end and popping it under the broiler makes this dish delicious!,low_carb,indoor,food
-steak_greenbean,"Lemon-Garlic Steak & Green Beans: For a steak that's deliciously tender, flavorful and not too fatty, we reach for strip (also known as New York strip or shell steak).",low_carb,indoor,food
-chicken_cauliflower,"Chicken & Cauliflower-Rice Casserole: Get your veggies and your protein fix in this easy casserole. Riced cauliflower stands in for traditional rice, super low in carbs!",low_carb,indoor,food
-broccoli_quiche,Crustless Broccoli-Cheddar Quiche: This simple quiche is as easy to make as it is delicious! The egg mixture gets poured directly into the pie pan.,low_carb,indoor,food
-veggie_frittata,"Frittata with Asparagus, Leek & Ricotta: Serve this spring-vegetable  frittata with an arugula salad and a hunk of crusty bread. Tip: This cooks quickly!",low_carb,indoor,food
-salmon_asparagus,"Roasted Salmon & Asparagus with Sauce Gribiche: Gribiche is a classic French sauce made with pantry items including Dijon mustard, parsley and hard-boiled eggs.",low_carb,indoor,food
-chicken_pho,Chicken Broth with Pho:  This chicken alternative with noodles is insanely delicious and easy to make!,low_fat,indoor,food
-blackened_chicken,"Blackened Chicken: Just toss the pan in the over before cooking on the stovetop for an easy, delicious meal.",low_fat,indoor,food
-slow_cook_turkey,"Slow Cooker Turkey Breast: All you need to do is mix up a simple brown sugar rub, coat the meat, and let your slow cooker do the rest!",low_fat,indoor,food
-air_fried_fish,Air Fryer Fish: An  air fryer fish is the perfect substitute to traditional frying. Skipping the frying means no unnecessary oil and it takes less time!,low_fat,indoor,food
-grilled_mushroom,"Grilled Balsamic Mushrooms: Mushrooms are often viewed as a lame side dish for vegetarians, but when tossed in an amazing glaze, they're for everyone!",low_fat,indoor,food
-chicken_curry,"Chicken and Sweet Potato Curry: A creamy dish that's low on fats, smells amazing and is a fantastic comfort food dish!",low_fat,indoor,food
+jump_rope,"You can try jumping rope for a great indoor cardio exercise. Even without a real rope, it can get your heart working.",Cardio,indoor,activity
+burpees,"For a high intensity indoor cardio option, burpees engage your entire body from head to toe. Give them a try!",Cardio,indoor,activity
+jumping_jacks,"For a high intensity indoor cardio option, jumping jacks engage your entire body from head to toe. Give them a try!",Cardio,indoor,activity
+dancing,Getting in your daily exercise doesn't have to be a chore. Spending a few minutes dancing to music can be a great indoor cardio activity.,Cardio,indoor,activity
+stair_climb,"If you have some stairs in your home, a stair climb is a great indoor cardio activity!",Cardio,indoor,activity
+swimming,You can try swimming at an ourdoor pool for a great aerobic workout.,Cardio,outdoor,activity
+rollerblading,A pair of rollerblades are great for getting cardio workouts outdoors with a bit more excitement than a simple jog!,Cardio,outdoor,activity
+push_ups,Push-ups are a classic strength training technique and super easy to do at home. Even just a few reps can add up over time!,Strength,indoor,activity
+step_up,Step-ups are an easy strength training techinque to try at home. Adding weights in your hands makes this even more effective!,Strength,indoor,activity
+tightrope_walk,"For some outdoor strength training, find a fallen log or curb to balance on for a tightrope walk!",Strength,outdoor,activity
+bench_push up,"If you're training outside, find a bench and use it to try some inclined push-ups to work a different set of mucsles!",Strength,outdoor,activity
+bench_dip,"If you're training outside, find a bench and try some dips! Face away from the bench and use your arms to lower and raise the rest of your body.",Strength,outdoor,activity
+chicken_broccoli,Portobello Chicken Cutlets with Broccoli: Adding nutty Gruyère atop the chicken at the very end and popping it under the broiler makes this dish delicious!,Low Carb,none,food
+steak_greenbean,"Lemon-Garlic Steak & Green Beans: For a steak that's deliciously tender, flavorful and not too fatty, we reach for strip (also known as New York strip or shell steak).",Low Carb,none,food
+chicken_cauliflower,"Chicken & Cauliflower-Rice Casserole: Get your veggies and your protein fix in this easy casserole. Riced cauliflower stands in for traditional rice, super low in carbs!",Low Carb,none,food
+broccoli_quiche,Crustless Broccoli-Cheddar Quiche: This simple quiche is as easy to make as it is delicious! The egg mixture gets poured directly into the pie pan.,Low Carb,none,food
+veggie_frittata,"Frittata with Asparagus, Leek & Ricotta: Serve this spring-vegetable  frittata with an arugula salad and a hunk of crusty bread. Tip: This cooks quickly!",Low Carb,none,food
+salmon_asparagus,"Roasted Salmon & Asparagus with Sauce Gribiche: Gribiche is a classic French sauce made with pantry items including Dijon mustard, parsley and hard-boiled eggs.",Low Carb,none,food
+chicken_pho,Chicken Broth with Pho:  This chicken alternative with noodles is insanely delicious and easy to make!,Low Fat,none,food
+blackened_chicken,"Blackened Chicken: Just toss the pan in the over before cooking on the stovetop for an easy, delicious meal.",Low Fat,none,food
+slow_cook_turkey,"Slow Cooker Turkey Breast: All you need to do is mix up a simple brown sugar rub, coat the meat, and let your slow cooker do the rest!",Low Fat,none,food
+air_fried_fish,Air Fryer Fish: An  air fryer fish is the perfect substitute to traditional frying. Skipping the frying means no unnecessary oil and it takes less time!,Low Fat,none,food
+grilled_mushroom,"Grilled Balsamic Mushrooms: Mushrooms are often viewed as a lame side dish for vegetarians, but when tossed in an amazing glaze, they're for everyone!",Low Fat,none,food
+chicken_curry,"Chicken and Sweet Potato Curry: A creamy dish that's low on fats, smells amazing and is a fantastic comfort food dish!",Low Fat,none,food

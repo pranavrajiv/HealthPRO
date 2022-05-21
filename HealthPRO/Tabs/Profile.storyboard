@@ -193,7 +193,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGD-jn-7N2">
                                                 <rect key="frame" x="137.33333333333334" y="0.0" width="122.33333333333334" height="31"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Indoor" cornerStyle="capsule">
+                                                <buttonConfiguration key="configuration" style="filled" title="Cardio" cornerStyle="capsule">
                                                     <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
                                                 </buttonConfiguration>
                                             </button>
