@@ -38,11 +38,12 @@
         <relationship name="userRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userHistoryRelationshipFood" inverseEntity="User"/>
     </entity>
     <entity name="Suggestion" representedClassName="Suggestion" syncable="YES" codeGenerationType="class">
-        <attribute name="preference" optional="YES" attributeType="String"/>
+        <attribute name="preference" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="suggestionId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="suggestionTag" optional="YES" attributeType="String"/>
-        <attribute name="suggestionText" optional="YES" attributeType="String"/>
-        <attribute name="weather" optional="YES" attributeType="String"/>
+        <attribute name="suggestionTag" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="suggestionText" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="type" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="weather" optional="YES" attributeType="String" defaultValueString=""/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="activityPreference" optional="YES" attributeType="String"/>
@@ -72,7 +73,7 @@
         <element name="ActivityHistory" positionX="-63" positionY="90" width="128" height="104"/>
         <element name="Food" positionX="-63" positionY="0" width="128" height="239"/>
         <element name="FoodHistory" positionX="-45" positionY="99" width="128" height="104"/>
-        <element name="Suggestion" positionX="-54" positionY="108" width="128" height="104"/>
+        <element name="Suggestion" positionX="-54" positionY="108" width="128" height="119"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="WeightHistory" positionX="-54" positionY="108" width="128" height="89"/>
     </elements>

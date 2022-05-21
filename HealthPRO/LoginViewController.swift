@@ -290,8 +290,9 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
             if let tag = result.selecting(columnNames: "tag").columns.first?[i] as? String,
                let suggestionText = result.selecting(columnNames: "suggestion").columns.first?[i] as? String,
                let userPreference = result.selecting(columnNames: "preference").columns.first?[i] as? String,
+               let type = result.selecting(columnNames: "type").columns.first?[i] as? String,
                let weather = result.selecting(columnNames: "weather").columns.first?[i] as? String {
-                _ = self.coreDataHandler.addSuggestion(suggestionId: Int64(i), suggestionTag: tag, suggestionText: suggestionText, userPreference:userPreference, weather: weather)
+                _ = self.coreDataHandler.addSuggestion(suggestionId: Int64(i), suggestionTag: tag, suggestionText: suggestionText, userPreference:userPreference, weather: weather,type:type)
             }
         }
     }

@@ -34,7 +34,7 @@ import UIKit
     }
 
     //Add suggestions to Core Data
-    @objc public func addSuggestion(suggestionId:Int64,suggestionTag:String, suggestionText:String,userPreference:String,weather:String)->Bool {
+    @objc public func addSuggestion(suggestionId:Int64,suggestionTag:String, suggestionText:String,userPreference:String,weather:String,type:String)->Bool {
         
         let newSuggestion = Suggestion(context: context)
         newSuggestion.suggestionId = suggestionId
@@ -42,6 +42,7 @@ import UIKit
         newSuggestion.suggestionText = suggestionText
         newSuggestion.preference = userPreference
         newSuggestion.weather = weather
+        newSuggestion.type = type
         do {
             try context.save()
         } catch let error as NSError {
@@ -51,6 +52,19 @@ import UIKit
         return true
     }
     
+    //Get All Suggestions from Core Data
+    @objc public func getAllSuggestions()->[Suggestion] {
+        do {
+            let request = Suggestion.fetchRequest()
+
+            let matchingSuggestions = try context.fetch(request)
+            return matchingSuggestions
+        } catch let error as NSError {
+            print("Could not get suggestions. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+
     //Get Preferenced Suggestions from Core Data
     @objc public func getPreferencedSuggestions(pref:String)->[Suggestion] {
         do {

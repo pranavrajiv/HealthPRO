@@ -24,6 +24,8 @@ class SuggestionsViewController: UIViewController{
         //let currentWeatherHere:String = self.getTheWeather()
         var outdoorOkay = true;
         
+        var suggestions:[Suggestion] = CoreDataHandler.init().getAllSuggestions()
+        
 //        if (currentWeatherHere.contains("SNOW") || currentWeatherHere.contains("RAIN")) {
 //            outdoorOkay = false;
 //        }
