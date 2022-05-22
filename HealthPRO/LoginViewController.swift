@@ -86,6 +86,11 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         //indicates that the app entered background
         NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWentToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
+        //used to log into error file
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LogError"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(logTheError),name: NSNotification.Name("LogError"),object: nil)
+        
+        
         self.loginRegisterButton.setTitle("Login", for: .normal)
         self.loginRegisterButton.titleLabel?.font = loginRegisterButton.titleLabel?.font.withSize(35)
         self.loginRegisterButton.layer.cornerRadius = 25
@@ -93,6 +98,35 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         self.segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
         
     }
+    
+    //Used to Log into Error file any unexpected errors
+    @objc func logTheError(notification:NSNotification) {
+        if let data = notification.userInfo as? [String: String], let message = data["message"] {
+            let fileManager = FileManager.default
+            do {
+                if let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    let locationOfFile = documentDirectory.appendingPathComponent("Health_Pro_Error.txt")
+                    if !fileManager.fileExists(atPath: locationOfFile.path) {
+                        fileManager.createFile(atPath: locationOfFile.path, contents: nil, attributes: nil)
+                    }
+                    var contentsOfFile =  try String(contentsOf: locationOfFile, encoding: .utf8)
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
+                    contentsOfFile += dateFormatter.string(from: Date()) + " ----->>>>> " + message + "\n"
+                    
+                    do {
+                        try contentsOfFile.write(to: locationOfFile, atomically: true, encoding: .utf8)
+                    } catch {
+                        print(error)
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     
     //application came back to foreground
     @objc public func applicationBecameActive() {
@@ -240,6 +274,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     
     //logs the user into their profile
     @objc private func logInProfile() {
+        
         UserDefaults.standard.set(usernameTextField.text, forKey: "LoginUserName")
         UserDefaults.standard.synchronize()
         self.appStartTimeStamp = Date()
@@ -259,7 +294,14 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     
     @objc private func populateFood() {
         let url = Bundle.main.url(forResource: "nutrition", withExtension: "csv")!
-        guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
+        guard let result = try? DataFrame(contentsOfCSVFile: url) else {
+            
+            var notificationInfo: [AnyHashable: Any] = [:]
+            notificationInfo["message"] = "Unable to populate Food into CoreData"
+            NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
+            
+            return
+        }
 
         for i in 0...result.shape.rows - 1 {
             print(i)
@@ -271,7 +313,15 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     
     @objc private func populateActivity() {
         let url = Bundle.main.url(forResource: "activity", withExtension: "csv")!
-        guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
+        guard let result = try? DataFrame(contentsOfCSVFile: url) else {
+            
+            var notificationInfo: [AnyHashable: Any] = [:]
+            notificationInfo["message"] = "Unable to populate Activity into CoreData"
+            NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
+            
+            return
+            
+        }
 
         for i in 0...result.shape.rows - 1 {
             print(i)
@@ -283,7 +333,15 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     
     @objc private func populateSuggestions() {
         let url = Bundle.main.url(forResource: "suggestions", withExtension: "csv")!
-        guard let result = try? DataFrame(contentsOfCSVFile: url) else {return}
+        guard let result = try? DataFrame(contentsOfCSVFile: url) else {
+            
+            var notificationInfo: [AnyHashable: Any] = [:]
+            notificationInfo["message"] = "Unable to populate Suggestions into CoreData"
+            NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
+            
+            return
+            
+        }
 
         for i in 0...result.shape.rows - 1 {
             print(i)
@@ -301,6 +359,25 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     @objc private func afterInitialLaunch() {
         self.activityIndicator.stopAnimating()
         self.blurView.isHidden = true;
+        
+        if self.coreDataHandler.getAllFood().count == 0 {
+            var notificationInfo: [AnyHashable: Any] = [:]
+            notificationInfo["message"] = "Food List Empty"
+            NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
+        }
+        
+        if self.coreDataHandler.getAllActivities().count == 0 {
+            var notificationInfo: [AnyHashable: Any] = [:]
+            notificationInfo["message"] = "Activity List Empty"
+            NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
+        }
+        
+        if self.coreDataHandler.getAllSuggestions().count == 0 {
+            var notificationInfo: [AnyHashable: Any] = [:]
+            notificationInfo["message"] = "Suggestion List Empty"
+            NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
+        }
+        
     }
     
     
