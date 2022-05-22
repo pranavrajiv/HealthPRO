@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B93D03C82839B7CF004445DD /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B93D03C72839B7CF004445DD /* Charts */; };
 		B95FFF87281CC995007D39A0 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = B95FFF86281CC995007D39A0 /* TinyConstraints */; };
 		B9979EF7281B98DE00C3A8C7 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B9979EF6281B98DE00C3A8C7 /* Charts */; };
 		F844AE0D28189838000FBCF1 /* activity.csv in Resources */ = {isa = PBXBuildFile; fileRef = F844AE0C28189838000FBCF1 /* activity.csv */; };
@@ -115,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9979EF7281B98DE00C3A8C7 /* Charts in Frameworks */,
+				B93D03C82839B7CF004445DD /* Charts in Frameworks */,
 				B95FFF87281CC995007D39A0 /* TinyConstraints in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +252,7 @@
 			packageProductDependencies = (
 				B9979EF6281B98DE00C3A8C7 /* Charts */,
 				B95FFF86281CC995007D39A0 /* TinyConstraints */,
+				B93D03C72839B7CF004445DD /* Charts */,
 			);
 			productName = HealthPRO;
 			productReference = F84575B928020DB900590F5C /* HEALTH PRO.app */;
@@ -326,6 +329,7 @@
 			packageReferences = (
 				B9979EF5281B98DE00C3A8C7 /* XCRemoteSwiftPackageReference "Charts" */,
 				B95FFF85281CC995007D39A0 /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+				B93D03C62839B7CF004445DD /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = F84575BA28020DB900590F5C /* Products */;
 			projectDirPath = "";
@@ -778,6 +782,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B93D03C62839B7CF004445DD /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		B95FFF85281CC995007D39A0 /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roberthein/TinyConstraints.git";
@@ -797,6 +809,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B93D03C72839B7CF004445DD /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9979EF5281B98DE00C3A8C7 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
 		B95FFF86281CC995007D39A0 /* TinyConstraints */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B95FFF85281CC995007D39A0 /* XCRemoteSwiftPackageReference "TinyConstraints" */;

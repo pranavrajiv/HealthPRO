@@ -21,6 +21,8 @@ class DashboardViewController: UIViewController{
     @IBOutlet weak var suggestionsButton: UIButton!
     var weatherUpdateTimer:Timer!
     var userWeightHistory:[WeightHistory]!
+    var userActivityHistory:[ActivityHistory]!
+    var userFoodHistory:[FoodHistory]!
     
     lazy var lineChartView: LineChartView = {
         let chartView = LineChartView()
@@ -117,6 +119,120 @@ class DashboardViewController: UIViewController{
     func setData() {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
+        // Get all of the user's activity and food history, including weights and timestamps
+        userActivityHistory = CoreDataHandler.init().getAllActivityHistory()
+        userFoodHistory = CoreDataHandler.init().getAllFoodHistory()
+        // Calculate the maximum and minimum safe weights to plot alongside the user's logged weights
+        let user = CoreDataHandler.init().getUser()
+        let userHeightInches = user?.height.description
+        let userBirthYear = Int((user?.birthYear.description)!)
+        let currentYear = Int(Calendar.current.component(.year, from: Date()))
+        let userAge = currentYear - userBirthYear!
+        let userHeightCentimeters = round(Double(userHeightInches!)! * 2.54)
+        var dataEntry: [ChartDataEntry] = []
+        var calorieDictionary: [TimeInterval: Double] = [:]
+        for entry in userFoodHistory {
+            // Convert timestamp to epoch time
+            let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
+            let myDate = Date(timeIntervalSince1970: dateAsDouble)
+            formatter.dateFormat = "YYYY-MM-dd"
+            let strDate = formatter.string(from: myDate)
+            if let roundedDate = formatter.date(from: strDate) {
+                let finalDate = roundedDate.timeIntervalSince1970
+                let numServings = entry.serviceSize
+                let foodHistoryId = entry.foodHistoryId
+                // Use entry history ID to get entry ID
+                let foodId = (CoreDataHandler.init().getAllFoodHistory().first(where: {$0.foodHistoryId == foodHistoryId})?.foodRelationship?.foodId)!
+                let foodEntry = CoreDataHandler.init().getFoodForId(foodId: foodId)
+                let numCaloriesPerServing = (foodEntry?.calories)!
+                // Calculate the number of calories consumed by multiplying the number of portions consumed by the number of calories
+                // per portion
+                let caloriesConsumed = Double(numServings) * Double(numCaloriesPerServing)
+                if calorieDictionary[finalDate] != nil {
+                    calorieDictionary[finalDate] = calorieDictionary[finalDate]! + caloriesConsumed
+                } else {
+                    calorieDictionary[finalDate] = caloriesConsumed
+                }
+            }
+        }
+        for entry in userActivityHistory {
+            // Convert timestamp to epoch time
+            let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
+            let myDate = Date(timeIntervalSince1970: dateAsDouble)
+            formatter.dateFormat = "YYYY-MM-dd"
+            let strDate = formatter.string(from: myDate)
+            if let roundedDate = formatter.date(from: strDate) {
+                let finalDate = roundedDate.timeIntervalSince1970
+                let activityDuration = entry.duration
+                let activityHistoryId = entry.activityHistoryId
+                // Use entry history ID to get entry ID
+                let activityId = (CoreDataHandler.init().getAllActivityHistory().first(where: {$0.activityHistoryId == activityHistoryId})?.activityRelationship?.activityId)!
+                let activityEntry = CoreDataHandler.init().getActivityForId(activityId: activityId)
+                let caloriesPerHourPerLb = (activityEntry?.caloriesPerHourPerLb)!
+                let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: roundedDate) == formatter.string(from: $0.timeStamp!)})[0].weight
+                // Calculate the number of calories burned by multiplying the user's weight on that day by the activity by calories
+                // per hour per pound by the activity duration in hours
+                let caloriesBurned = Double(caloriesPerHourPerLb) * Double(activityDuration) * Double(userWeightOnDate)
+                if calorieDictionary[finalDate] != nil {
+                    calorieDictionary[finalDate] = calorieDictionary[finalDate]! - caloriesBurned
+                } else {
+                    calorieDictionary[finalDate] = 0.0 - caloriesBurned
+                }
+            }
+        }
+        var count = calorieDictionary.startIndex
+        while count < calorieDictionary.endIndex {
+            let (key, value) = calorieDictionary[count]
+            let userHeightComponent = 6.25 * userHeightCentimeters
+            let userAgeComponent = 5.0 * Double(userAge)
+            var userGenderComponent = -161.0
+            if user?.gender == "M" {
+                userGenderComponent = 5.0
+            }
+            let entryDate = Date(timeIntervalSince1970: key)
+            let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)})[0].weight
+            let userWeightInKg = round(Double(userWeightOnDate) * 0.453592)
+            let userWeightComponent = 10.0 * Double(userWeightInKg)
+            let basalMetabolicRate = userWeightComponent + userHeightComponent - userAgeComponent + userGenderComponent
+            print("----------------------------------------------------")
+            print(basalMetabolicRate)
+            print(userWeightComponent)
+            print(userHeightComponent)
+            print(userAgeComponent)
+            print(userGenderComponent)
+            let newValue = value - basalMetabolicRate
+            calorieDictionary.updateValue(newValue, forKey: key)
+            calorieDictionary.formIndex(after: &count)
+        }
+        let sortedKeys = calorieDictionary.keys.sorted(by: <)
+        let sortedValues = calorieDictionary.values.sorted(by: <)
+        var countVar = 0
+        while countVar < sortedKeys.count {
+            dataEntry.append(ChartDataEntry(x: Double(sortedKeys[countVar]), y: Double(sortedValues[countVar])))
+            countVar = countVar + 1
+        }
+        // Append both the weight and date to the graph data
+        // dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
+        // Set the Y axis label and load dataEntry into the first line chart dataset
+        let set1 = LineChartDataSet(entries: dataEntry, label: "Net Calories")
+        set1.mode = .cubicBezier
+        set1.lineWidth = 3
+        set1.setColor(.black)
+        let data = LineChartData(dataSet: set1)
+        lineChartView.data = data
+        // Display dates in a human-readable format instead of epoch time
+        lineChartView.xAxis.valueFormatter = ChartFormatter()
+        //Rotate x axis label to prevent clipping off the side of the graph
+        lineChartView.xAxis.labelRotationAngle = 90.0
+        // Disable user interaction with the chart
+        lineChartView.isUserInteractionEnabled = false
+        // Show a date for every entry on the graph to ensure they are aligned correctly
+        lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
+    }
+    
+    func setWeightData() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
         // Get all of the user's weight history, including weights and timestamps
         userWeightHistory = CoreDataHandler.init().getAllWeightHistory()
         // Calculate the maximum and minimum safe weights to plot alongside the user's logged weights
@@ -129,8 +245,6 @@ class DashboardViewController: UIViewController{
         let minimumSafeWeightPounds = 2.20462 * Double(minimumSafeWeightKilograms)
         let maximumSafeWeightPounds = 2.20462 * Double(maximumSafeWeightKilograms)
         var dataEntry: [ChartDataEntry] = []
-        var upperWeightEntry: [ChartDataEntry] = []
-        var lowerWeightEntry: [ChartDataEntry] = []
         for entry in userWeightHistory{
             // Convert timestamp to epoch time
             let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
@@ -141,10 +255,6 @@ class DashboardViewController: UIViewController{
                 let finalDate = roundedDate.timeIntervalSince1970
                 // Append both the weight and date to the graph data
                 dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
-                // Append the date and upper weight limit to the graph data
-                upperWeightEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(maximumSafeWeightPounds)))
-                // Append the date and upper weight limit to the graph data
-                lowerWeightEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(minimumSafeWeightPounds)))
             }
         }
         // Set the Y axis label and load dataEntry into the first line chart dataset
