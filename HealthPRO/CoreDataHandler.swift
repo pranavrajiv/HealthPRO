@@ -17,6 +17,13 @@ import UIKit
         self.context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
     
+    @objc public func logToErrorFile(message:String)
+    {
+        var notificationInfo: [AnyHashable: Any] = [:]
+        notificationInfo["message"] = message
+        NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
+    }
+    
     //check is user already exists in Core Data
     @objc public func doesUserExist(id:String)->Bool {
         do {
@@ -29,6 +36,7 @@ import UIKit
             }
         } catch  let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
+            self.logToErrorFile(message: "Could not fetch. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -46,7 +54,7 @@ import UIKit
         do {
             try context.save()
         } catch let error as NSError {
-            print("Could not add suggestion. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add suggestion. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -60,21 +68,7 @@ import UIKit
             let matchingSuggestions = try context.fetch(request)
             return matchingSuggestions
         } catch let error as NSError {
-            print("Could not get suggestions. \(error), \(error.userInfo)")
-        }
-        return []
-    }
-
-    //Get Preferenced Suggestions from Core Data
-    @objc public func getPreferencedSuggestions(pref:String)->[Suggestion] {
-        do {
-            let request = Suggestion.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(key: "suggestionId", ascending: true)]
-            request.predicate = NSPredicate(format: "preference CONTAINS[cd] %@", pref)
-            let matchingSuggestions = try context.fetch(request)
-            return matchingSuggestions
-        } catch let error as NSError {
-            print("Could not get suggestions. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get suggestions. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -90,7 +84,7 @@ import UIKit
         do {
             try context.save()
         } catch let error as NSError {
-            print("Could not add activity. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add activity. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -108,7 +102,7 @@ import UIKit
             try context.save()
             
         } catch let error as NSError {
-            print("Could not add activity. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add activity. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -122,7 +116,7 @@ import UIKit
             let activities = try context.fetch(request)
             return activities
         } catch let error as NSError {
-            print("Could not get all activities. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get all activities. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -136,7 +130,7 @@ import UIKit
             let foodItems = try context.fetch(request)
             return foodItems
         } catch let error as NSError {
-            print("Could not get filtered Activity. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get filtered Activity. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -150,7 +144,7 @@ import UIKit
             let activityItems = try context.fetch(request)
             return activityItems.first
         } catch let error as NSError {
-            print("Could not get activity item. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get activity item. \(error), \(error.userInfo)")
         }
         return nil
     }
@@ -166,7 +160,7 @@ import UIKit
             try context.save()
             return true
         } catch let error as NSError {
-            print("Could not delete activity. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not delete activity. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -182,7 +176,7 @@ import UIKit
         do {
             try context.save()
         } catch let error as NSError {
-            print("Could not add food. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add food. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -196,7 +190,7 @@ import UIKit
             let activityHistory = try context.fetch(request)
             return activityHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
         } catch let error as NSError {
-            print("Could not get Activity History. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get Activity History. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -212,7 +206,7 @@ import UIKit
             try context.save()
             return true
         } catch let error as NSError {
-            print("Could not delete activity history. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not delete activity history. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -230,14 +224,11 @@ import UIKit
             
             try context.save()
             } catch let error as NSError {
-                print("Could not update activity history. \(error), \(error.userInfo)")
+                self.logToErrorFile(message:"Could not update activity history. \(error), \(error.userInfo)")
                 return false
             }
             return true
     }
-    
-    
-    
     
     //Update Food in Core Data
     @objc public func addFood(foodId:Int64,foodName:String, calories:Int64, total_fat:String,cholesterol:String,sodium:String,calcium:String,iron:String,potassium:String, protein:String,carbohydrate:String,sugars:String,fiber:String)->Bool {
@@ -259,7 +250,7 @@ import UIKit
         do {
             try context.save()
         } catch let error as NSError {
-            print("Could not add food. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add food. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -288,7 +279,7 @@ import UIKit
            try context.save()
             return true
         } catch let error as NSError {
-            print("Could not update food. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not update food. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -303,7 +294,7 @@ import UIKit
             let foodItems = try context.fetch(request)
             return foodItems
         } catch let error as NSError {
-            print("Could not get filtered food. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get filtered food. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -317,7 +308,7 @@ import UIKit
             let foodItems = try context.fetch(request)
             return foodItems.first
         } catch let error as NSError {
-            print("Could not get a food item. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get a food item. \(error), \(error.userInfo)")
         }
         return nil
     }
@@ -333,7 +324,7 @@ import UIKit
             try context.save()
             return true
         } catch let error as NSError {
-            print("Could not delete food. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not delete food. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -349,7 +340,7 @@ import UIKit
             try context.save()
             return true
         } catch let error as NSError {
-            print("Could not delete food history. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not delete food history. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -368,7 +359,7 @@ import UIKit
             try context.save()
             
         } catch let error as NSError {
-            print("Could not update food history. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not update food history. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -386,7 +377,7 @@ import UIKit
         do {
             try context.save()
         } catch let error as NSError {
-            print("Could not add food. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add food. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -400,7 +391,7 @@ import UIKit
             let foodHistory = try context.fetch(request)
             return foodHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
         } catch let error as NSError {
-            print("Could not get Food History. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get Food History. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -413,7 +404,7 @@ import UIKit
             let foodItems = try context.fetch(request)
             return foodItems
         } catch let error as NSError {
-            print("Could not get all food. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get all food. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -429,7 +420,7 @@ import UIKit
             try context.save()
             return true
         } catch let error as NSError {
-            print("Could not delete weight history. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not delete weight history. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -446,7 +437,7 @@ import UIKit
         do {
             try context.save()
         } catch let error as NSError {
-            print("Could not add user weight. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add user weight. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -460,7 +451,7 @@ import UIKit
             let weightHistory = try context.fetch(request)
             return weightHistory.filter({$0.userRelationship?.loginId == UserDefaults.standard.string(forKey: "LoginUserName")!})
         } catch let error as NSError {
-            print("Could not get Weight History. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not get Weight History. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -477,7 +468,7 @@ import UIKit
 
             try context.save()
             } catch let error as NSError {
-                print("Could not update Weight history. \(error), \(error.userInfo)")
+                self.logToErrorFile(message:"Could not update Weight history. \(error), \(error.userInfo)")
                 return false
             }
             return true
@@ -496,7 +487,7 @@ import UIKit
             return userWeightHistoryItems.contains(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: forDate)})
 
             } catch let error as NSError {
-                print("Could not fetch Weight history. \(error), \(error.userInfo)")
+                self.logToErrorFile(message:"Could not fetch Weight history. \(error), \(error.userInfo)")
                 return false
             }
     }
@@ -511,7 +502,7 @@ import UIKit
             let usr = try context.fetch(request).first
                 return usr
         } catch let error as NSError {
-            print("Could not fetch user. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not fetch user. \(error), \(error.userInfo)")
         }
         return nil
     }
@@ -527,7 +518,7 @@ import UIKit
             try context.save()
             
         } catch let error as NSError {
-            print("Could not update app user time. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not update app user time. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -551,7 +542,7 @@ import UIKit
             try context.save()
             
         } catch let error as NSError {
-            print("Could not update user. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not update user. \(error), \(error.userInfo)")
             return false
         }
         return true
@@ -567,7 +558,7 @@ import UIKit
             try context.save()
             return true
         } catch let error as NSError {
-            print("Could not add user. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not add user. \(error), \(error.userInfo)")
         }
         return false
     }
@@ -583,7 +574,7 @@ import UIKit
                 return true
             }
         } catch let error as NSError {
-            print("Could not check valid login. \(error), \(error.userInfo)")
+            self.logToErrorFile(message:"Could not check valid login. \(error), \(error.userInfo)")
         }
         return false
     }

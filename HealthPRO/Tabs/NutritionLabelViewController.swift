@@ -96,6 +96,9 @@ class NutritionLabelViewController: UIViewController,UIImagePickerControllerDele
             try requestHandler.perform([self.ocrRequest])
         } catch {
             print(error)
+            var notificationInfo: [AnyHashable: Any] = [:]
+            notificationInfo["message"] = "Could not perform OCR request due to the following Error: "+error.localizedDescription
+            NotificationCenter.default.post(name: NSNotification.Name("LogError"), object: nil, userInfo: notificationInfo)
         }
     }
     
