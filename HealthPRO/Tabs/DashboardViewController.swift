@@ -306,8 +306,8 @@ class DashboardViewController: UIViewController{
         // Show a date for every entry on the graph to ensure they are aligned correctly
         lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
         let sortedData = valueData.sorted(by: <)
-        lineChartView.leftAxis.axisMinimum = Double(sortedData.first!) - 100.0
-        lineChartView.leftAxis.axisMaximum = Double(sortedData.last!) + 100.0
+        lineChartView.leftAxis.axisMinimum = Double(sortedData.first!) - 20.0
+        lineChartView.leftAxis.axisMaximum = Double(sortedData.last!) + 20.0
     }
     
     @objc func getTheWeather() {

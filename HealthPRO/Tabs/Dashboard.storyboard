@@ -69,17 +69,28 @@
                                             <constraint firstAttribute="width" constant="125" id="dqU-tz-iaL"/>
                                         </constraints>
                                     </imageView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gup-RO-lnA">
+                                        <rect key="frame" x="92" y="179" width="191" height="32"/>
+                                        <segments>
+                                            <segment title="Weight"/>
+                                            <segment title="Net Calories"/>
+                                        </segments>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.70904682860179069" green="0.83757579326629639" blue="0.69825926702289298" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="ofE-Xu-6jH" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="2Vw-Zw-aMR"/>
+                                    <constraint firstItem="gup-RO-lnA" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="Kg4-2N-IS2"/>
+                                    <constraint firstAttribute="bottom" secondItem="gup-RO-lnA" secondAttribute="bottom" id="NPl-Lh-AQO"/>
+                                    <constraint firstAttribute="trailing" secondItem="gup-RO-lnA" secondAttribute="trailing" constant="92" id="T8J-bo-BMJ"/>
                                     <constraint firstItem="ofE-Xu-6jH" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="top" constant="100" id="YkM-nB-UkU"/>
                                     <constraint firstItem="CAE-ql-mdi" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="top" constant="10" id="Ymx-Sj-qsy"/>
+                                    <constraint firstItem="gup-RO-lnA" firstAttribute="leading" secondItem="YYY-Pv-nSU" secondAttribute="leading" constant="92" id="cBJ-be-EB6"/>
                                     <constraint firstItem="CAE-ql-mdi" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="wqW-oy-pzj"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQu-cW-szz">
-                                <rect key="frame" x="0.0" y="361" width="375" height="348"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQu-cW-szz">
+                                <rect key="frame" x="0.0" y="335" width="375" height="374"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbe-af-tvN">
@@ -92,13 +103,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Suggestions" cornerStyle="capsule"/>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gup-RO-lnA">
-                                <rect key="frame" x="92" y="322" width="191" height="32"/>
-                                <segments>
-                                    <segment title="Weight"/>
-                                    <segment title="Net Calories"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.50980392156862742" green="0.40784313725490196" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -106,8 +110,6 @@
                             <constraint firstItem="kbe-af-tvN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="5" id="1jl-mL-Dta"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="YYY-Pv-nSU" secondAttribute="trailing" id="7zj-mu-c0V"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hQu-cW-szz" secondAttribute="bottom" constant="20" id="DLe-7T-kPL"/>
-                            <constraint firstItem="gup-RO-lnA" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="EUn-za-EXL"/>
-                            <constraint firstItem="gup-RO-lnA" firstAttribute="top" secondItem="ofE-Xu-6jH" secondAttribute="bottom" constant="3" id="FL5-cv-oeG"/>
                             <constraint firstItem="hQu-cW-szz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Fhr-Xg-cuB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NKI-3e-KhB" secondAttribute="trailing" id="Goo-JN-qNn"/>
                             <constraint firstItem="NKI-3e-KhB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Hpn-4F-nXV"/>
@@ -115,11 +117,10 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hQu-cW-szz" secondAttribute="trailing" id="OSf-rO-aM6"/>
                             <constraint firstItem="kbe-af-tvN" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ZYS-uq-J6W"/>
                             <constraint firstItem="NKI-3e-KhB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ZaW-oE-1W6"/>
+                            <constraint firstItem="hQu-cW-szz" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="bottom" constant="31" id="Znt-ur-qMt"/>
                             <constraint firstItem="YYY-Pv-nSU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="aEr-t4-Mj4"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="D85-dZ-6LA" secondAttribute="trailing" constant="5" id="itl-mO-ub6"/>
                             <constraint firstItem="D85-dZ-6LA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="o7N-sj-sUk"/>
-                            <constraint firstItem="hQu-cW-szz" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="bottom" id="oMz-gy-mdZ"/>
-                            <constraint firstItem="hQu-cW-szz" firstAttribute="top" secondItem="gup-RO-lnA" secondAttribute="bottom" constant="1" id="vEc-dN-6A5"/>
                             <constraint firstItem="YYY-Pv-nSU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="x3G-se-hMO"/>
                         </constraints>
                     </view>
