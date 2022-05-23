@@ -19,6 +19,7 @@ class DashboardViewController: UIViewController{
     @IBOutlet weak var graphView: UIView!
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var suggestionsButton: UIButton!
+    @IBOutlet weak var graphViewButton: UISegmentedControl!
     var weatherUpdateTimer:Timer!
     var userWeightHistory:[WeightHistory]!
     var userActivityHistory:[ActivityHistory]!
@@ -53,7 +54,20 @@ class DashboardViewController: UIViewController{
         }
         
         self.weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(getTheWeather), userInfo: nil, repeats: true)
-        setData()
+        if graphViewButton.selectedSegmentIndex == 0 {
+            setWeightData()
+        } else {
+            setCalorieData()
+        }
+    }
+    
+    // Notifies when user switched between weight and calorie graphs
+    @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            setWeightData()
+        } else {
+            setCalorieData()
+        }
     }
     
     @objc func suggestionButtonTouchUpInside() {
@@ -109,6 +123,8 @@ class DashboardViewController: UIViewController{
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
         lineChartView.heightToWidth(of: graphView)
+        // Change the graph view if the segment button is changed
+        graphViewButton.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
     }
 
                                    
@@ -116,7 +132,8 @@ class DashboardViewController: UIViewController{
         print(entry)
     }
     
-    func setData() {
+    func setCalorieData() {
+        lineChartView.leftAxis.removeAllLimitLines()
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         // Get all of the user's activity and food history, including weights and timestamps
@@ -229,9 +246,13 @@ class DashboardViewController: UIViewController{
         lineChartView.leftAxis.addLimitLine(oneLbGain)
         lineChartView.leftAxis.addLimitLine(twoLbGain)
         lineChartView.leftAxis.addLimitLine(unsafeGain)
+        let sortedValues = calorieDictionary.values.sorted(by: <)
+        lineChartView.leftAxis.axisMinimum = Double(sortedValues.first!) - 100.0
+        lineChartView.leftAxis.axisMaximum = Double(sortedValues.last!) + 100.0
     }
     
     func setWeightData() {
+        lineChartView.leftAxis.removeAllLimitLines()
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         // Get all of the user's weight history, including weights and timestamps
@@ -246,6 +267,7 @@ class DashboardViewController: UIViewController{
         let minimumSafeWeightPounds = 2.20462 * Double(minimumSafeWeightKilograms)
         let maximumSafeWeightPounds = 2.20462 * Double(maximumSafeWeightKilograms)
         var dataEntry: [ChartDataEntry] = []
+        var valueData: [Double] = []
         for entry in userWeightHistory{
             // Convert timestamp to epoch time
             let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
@@ -256,6 +278,7 @@ class DashboardViewController: UIViewController{
                 let finalDate = roundedDate.timeIntervalSince1970
                 // Append both the weight and date to the graph data
                 dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
+                valueData.append(Double(entry.weight))
             }
         }
         // Set the Y axis label and load dataEntry into the first line chart dataset
@@ -282,6 +305,9 @@ class DashboardViewController: UIViewController{
         lineChartView.isUserInteractionEnabled = false
         // Show a date for every entry on the graph to ensure they are aligned correctly
         lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
+        let sortedData = valueData.sorted(by: <)
+        lineChartView.leftAxis.axisMinimum = Double(sortedData.first!) - 100.0
+        lineChartView.leftAxis.axisMaximum = Double(sortedData.last!) + 100.0
     }
     
     @objc func getTheWeather() {
@@ -319,7 +345,11 @@ public class ChartFormatter: NSObject, IAxisValueFormatter {
 extension DashboardViewController: UIPopoverPresentationControllerDelegate,WeightDelegate {
 
     @objc func weightInfoUpdated() {
-        self.setData()
+        if graphViewButton.selectedSegmentIndex == 0 {
+            setWeightData()
+        } else {
+            setCalorieData()
+        }
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
