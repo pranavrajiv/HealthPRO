@@ -181,38 +181,27 @@ class DashboardViewController: UIViewController{
             }
         }
         var count = calorieDictionary.startIndex
+        let userHeightComponent = 6.25 * userHeightCentimeters
+        let userAgeComponent = 5.0 * Double(userAge)
+        var userGenderComponent = -161.0
+        if user?.gender == "M" {
+            userGenderComponent = 5.0
+        }
         while count < calorieDictionary.endIndex {
             let (key, value) = calorieDictionary[count]
-            let userHeightComponent = 6.25 * userHeightCentimeters
-            let userAgeComponent = 5.0 * Double(userAge)
-            var userGenderComponent = -161.0
-            if user?.gender == "M" {
-                userGenderComponent = 5.0
-            }
             let entryDate = Date(timeIntervalSince1970: key)
             let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)})[0].weight
             let userWeightInKg = round(Double(userWeightOnDate) * 0.453592)
             let userWeightComponent = 10.0 * Double(userWeightInKg)
             let basalMetabolicRate = userWeightComponent + userHeightComponent - userAgeComponent + userGenderComponent
-            print("----------------------------------------------------")
-            print(basalMetabolicRate)
-            print(userWeightComponent)
-            print(userHeightComponent)
-            print(userAgeComponent)
-            print(userGenderComponent)
             let newValue = value - basalMetabolicRate
             calorieDictionary.updateValue(newValue, forKey: key)
             calorieDictionary.formIndex(after: &count)
         }
         let sortedKeys = calorieDictionary.keys.sorted(by: <)
-        let sortedValues = calorieDictionary.values.sorted(by: <)
-        var countVar = 0
-        while countVar < sortedKeys.count {
-            dataEntry.append(ChartDataEntry(x: Double(sortedKeys[countVar]), y: Double(sortedValues[countVar])))
-            countVar = countVar + 1
+        for key in sortedKeys {
+            dataEntry.append(ChartDataEntry(x: Double(key), y: Double(calorieDictionary[key]!)))
         }
-        // Append both the weight and date to the graph data
-        // dataEntry.append(ChartDataEntry(x: Double(finalDate), y: Double(entry.weight)))
         // Set the Y axis label and load dataEntry into the first line chart dataset
         let set1 = LineChartDataSet(entries: dataEntry, label: "Net Calories")
         set1.mode = .cubicBezier
@@ -228,6 +217,18 @@ class DashboardViewController: UIViewController{
         lineChartView.isUserInteractionEnabled = false
         // Show a date for every entry on the graph to ensure they are aligned correctly
         lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
+        let oneLbGain = ChartLimitLine(limit: 500, label: "Gain 1 lb/week")
+        let twoLbGain = ChartLimitLine(limit: 1000, label: "Gain 2 lbs/week")
+        let unsafeGain = ChartLimitLine(limit: 1500, label: "Unsafe weight gain")
+        let oneLbLoss = ChartLimitLine(limit: -500, label: "Lose 1 lb/week")
+        let twoLbLoss = ChartLimitLine(limit: -1000, label: "Lose 2 lbs/week")
+        let unsafeLoss = ChartLimitLine(limit: -1500, label: "Unsafe weight loss")
+        lineChartView.leftAxis.addLimitLine(oneLbLoss)
+        lineChartView.leftAxis.addLimitLine(twoLbLoss)
+        lineChartView.leftAxis.addLimitLine(unsafeLoss)
+        lineChartView.leftAxis.addLimitLine(oneLbGain)
+        lineChartView.leftAxis.addLimitLine(twoLbGain)
+        lineChartView.leftAxis.addLimitLine(unsafeGain)
     }
     
     func setWeightData() {
