@@ -136,23 +136,17 @@ class DashboardViewController: UIViewController{
         lineChartView.leftAxis.removeAllLimitLines()
         let formatter = DateFormatter()
         formatter.dateStyle = .short
+        formatter.dateFormat = "YYYY-MM-dd"
         // Get all of the user's activity and food history, including weights and timestamps
         userActivityHistory = CoreDataHandler.init().getAllActivityHistory()
         userFoodHistory = CoreDataHandler.init().getAllFoodHistory()
         // Calculate the maximum and minimum safe weights to plot alongside the user's logged weights
-        let user = CoreDataHandler.init().getUser()
-        let userHeightInches = user?.height.description
-        let userBirthYear = Int((user?.birthYear.description)!)
-        let currentYear = Int(Calendar.current.component(.year, from: Date()))
-        let userAge = currentYear - userBirthYear!
-        let userHeightCentimeters = round(Double(userHeightInches!)! * 2.54)
         var dataEntry: [ChartDataEntry] = []
         var calorieDictionary: [TimeInterval: Double] = [:]
         for entry in userFoodHistory {
             // Convert timestamp to epoch time
             let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
             let myDate = Date(timeIntervalSince1970: dateAsDouble)
-            formatter.dateFormat = "YYYY-MM-dd"
             let strDate = formatter.string(from: myDate)
             if let roundedDate = formatter.date(from: strDate) {
                 let finalDate = roundedDate.timeIntervalSince1970
@@ -176,7 +170,6 @@ class DashboardViewController: UIViewController{
             // Convert timestamp to epoch time
             let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
             let myDate = Date(timeIntervalSince1970: dateAsDouble)
-            formatter.dateFormat = "YYYY-MM-dd"
             let strDate = formatter.string(from: myDate)
             if let roundedDate = formatter.date(from: strDate) {
                 let finalDate = roundedDate.timeIntervalSince1970
@@ -198,19 +191,9 @@ class DashboardViewController: UIViewController{
             }
         }
         var count = calorieDictionary.startIndex
-        let userHeightComponent = 6.25 * userHeightCentimeters
-        let userAgeComponent = 5.0 * Double(userAge)
-        var userGenderComponent = -161.0
-        if user?.gender == "M" {
-            userGenderComponent = 5.0
-        }
         while count < calorieDictionary.endIndex {
             let (key, value) = calorieDictionary[count]
-            let entryDate = Date(timeIntervalSince1970: key)
-            let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)})[0].weight
-            let userWeightInKg = round(Double(userWeightOnDate) * 0.453592)
-            let userWeightComponent = 10.0 * Double(userWeightInKg)
-            let basalMetabolicRate = userWeightComponent + userHeightComponent - userAgeComponent + userGenderComponent
+            let basalMetabolicRate = calculateBMR(key: key)
             let newValue = value - basalMetabolicRate
             calorieDictionary.updateValue(newValue, forKey: key)
             calorieDictionary.formIndex(after: &count)
@@ -247,8 +230,34 @@ class DashboardViewController: UIViewController{
         lineChartView.leftAxis.addLimitLine(twoLbGain)
         lineChartView.leftAxis.addLimitLine(unsafeGain)
         let sortedValues = calorieDictionary.values.sorted(by: <)
-        lineChartView.leftAxis.axisMinimum = Double(sortedValues.first!) - 100.0
-        lineChartView.leftAxis.axisMaximum = Double(sortedValues.last!) + 100.0
+        if sortedValues.count != 0 {
+            lineChartView.leftAxis.axisMinimum = Double(sortedValues.first!) - 100.0
+            lineChartView.leftAxis.axisMaximum = Double(sortedValues.last!) + 100.0
+        }
+    }
+    
+    func calculateBMR(key: Double) -> Double  {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = "YYYY-MM-dd"
+        let user = CoreDataHandler.init().getUser()
+        let userHeightInches = user?.height.description
+        let userBirthYear = Int((user?.birthYear.description)!)
+        let currentYear = Int(Calendar.current.component(.year, from: Date()))
+        let userAge = currentYear - userBirthYear!
+        let userHeightCentimeters = round(Double(userHeightInches!)! * 2.54)
+        let userHeightComponent = 6.25 * userHeightCentimeters
+        let userAgeComponent = 5.0 * Double(userAge)
+        var userGenderComponent = -161.0
+        if user?.gender == "M" {
+            userGenderComponent = 5.0
+        }
+        let entryDate = Date(timeIntervalSince1970: key)
+        let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)})[0].weight
+        let userWeightInKg = round(Double(userWeightOnDate) * 0.453592)
+        let userWeightComponent = 10.0 * Double(userWeightInKg)
+        let basalMetabolicRate = userWeightComponent + userHeightComponent - userAgeComponent + userGenderComponent
+        return basalMetabolicRate
     }
     
     func setWeightData() {
@@ -306,8 +315,10 @@ class DashboardViewController: UIViewController{
         // Show a date for every entry on the graph to ensure they are aligned correctly
         lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
         let sortedData = valueData.sorted(by: <)
-        lineChartView.leftAxis.axisMinimum = Double(sortedData.first!) - 20.0
-        lineChartView.leftAxis.axisMaximum = Double(sortedData.last!) + 20.0
+        if sortedData.count != 0 {
+            lineChartView.leftAxis.axisMinimum = Double(sortedData.first!) - 20.0
+            lineChartView.leftAxis.axisMaximum = Double(sortedData.last!) + 20.0
+        }
     }
     
     @objc func getTheWeather() {
