@@ -122,7 +122,7 @@ class DashboardViewController: UIViewController{
         // Storyboard proper to set limits, we'll instead use code-based constraints
         lineChartView.center(in: graphView)
         lineChartView.width(to: graphView)
-        lineChartView.heightToWidth(of: graphView)
+        lineChartView.height(to: graphView)
         // Change the graph view if the segment button is changed
         graphViewButton.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
     }

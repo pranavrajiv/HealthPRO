@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,8 +22,8 @@
                                 <color key="textColor" red="0.94805461228495891" green="0.84250881728380533" blue="0.6734042013307342" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-Pv-nSU">
-                                <rect key="frame" x="0.0" y="94" width="375" height="210"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-Pv-nSU" userLabel="weatherView">
+                                <rect key="frame" x="0.0" y="94" width="375" height="250"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CAE-ql-mdi">
                                         <rect key="frame" x="139" y="9.9999999999999929" width="97" height="111.33333333333331"/>
@@ -69,29 +69,15 @@
                                             <constraint firstAttribute="width" constant="125" id="dqU-tz-iaL"/>
                                         </constraints>
                                     </imageView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gup-RO-lnA">
-                                        <rect key="frame" x="92" y="179" width="191" height="32"/>
-                                        <segments>
-                                            <segment title="Weight"/>
-                                            <segment title="Net Calories"/>
-                                        </segments>
-                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.70904682860179069" green="0.83757579326629639" blue="0.69825926702289298" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="ofE-Xu-6jH" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="2Vw-Zw-aMR"/>
-                                    <constraint firstItem="gup-RO-lnA" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="Kg4-2N-IS2"/>
-                                    <constraint firstAttribute="bottom" secondItem="gup-RO-lnA" secondAttribute="bottom" id="NPl-Lh-AQO"/>
-                                    <constraint firstAttribute="trailing" secondItem="gup-RO-lnA" secondAttribute="trailing" constant="92" id="T8J-bo-BMJ"/>
+                                    <constraint firstAttribute="height" constant="250" id="Agr-h7-qBP"/>
                                     <constraint firstItem="ofE-Xu-6jH" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="top" constant="100" id="YkM-nB-UkU"/>
                                     <constraint firstItem="CAE-ql-mdi" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="top" constant="10" id="Ymx-Sj-qsy"/>
-                                    <constraint firstItem="gup-RO-lnA" firstAttribute="leading" secondItem="YYY-Pv-nSU" secondAttribute="leading" constant="92" id="cBJ-be-EB6"/>
                                     <constraint firstItem="CAE-ql-mdi" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="wqW-oy-pzj"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQu-cW-szz">
-                                <rect key="frame" x="0.0" y="335" width="375" height="374"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbe-af-tvN">
                                 <rect key="frame" x="5" y="44" width="70.333333333333329" height="31"/>
@@ -103,24 +89,40 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Suggestions" cornerStyle="capsule"/>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gup-RO-lnA">
+                                <rect key="frame" x="92" y="344" width="191" height="32"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <segments>
+                                    <segment title="Weight"/>
+                                    <segment title="Net Calories"/>
+                                </segments>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFx-qF-KBJ" userLabel="graphView">
+                                <rect key="frame" x="0.0" y="375" width="375" height="334"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.50980392156862742" green="0.40784313725490196" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="kbe-af-tvN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="5" id="1jl-mL-Dta"/>
+                            <constraint firstItem="gup-RO-lnA" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="92" id="22M-LT-G97"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="YYY-Pv-nSU" secondAttribute="trailing" id="7zj-mu-c0V"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hQu-cW-szz" secondAttribute="bottom" constant="20" id="DLe-7T-kPL"/>
-                            <constraint firstItem="hQu-cW-szz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Fhr-Xg-cuB"/>
+                            <constraint firstItem="wFx-qF-KBJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="GBr-S5-WFG"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NKI-3e-KhB" secondAttribute="trailing" id="Goo-JN-qNn"/>
                             <constraint firstItem="NKI-3e-KhB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Hpn-4F-nXV"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="YYY-Pv-nSU" secondAttribute="bottom" constant="425" id="KT6-gO-Qbd"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hQu-cW-szz" secondAttribute="trailing" id="OSf-rO-aM6"/>
+                            <constraint firstItem="gup-RO-lnA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="IUg-LV-pz8"/>
+                            <constraint firstAttribute="trailing" secondItem="gup-RO-lnA" secondAttribute="trailing" constant="92" id="JEy-jN-Hcm"/>
                             <constraint firstItem="kbe-af-tvN" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ZYS-uq-J6W"/>
                             <constraint firstItem="NKI-3e-KhB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ZaW-oE-1W6"/>
-                            <constraint firstItem="hQu-cW-szz" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="bottom" constant="31" id="Znt-ur-qMt"/>
+                            <constraint firstItem="gup-RO-lnA" firstAttribute="top" secondItem="YYY-Pv-nSU" secondAttribute="bottom" id="ZhG-et-xiI"/>
+                            <constraint firstItem="wFx-qF-KBJ" firstAttribute="top" secondItem="gup-RO-lnA" secondAttribute="bottom" id="Zhl-oJ-E5k"/>
                             <constraint firstItem="YYY-Pv-nSU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="aEr-t4-Mj4"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="D85-dZ-6LA" secondAttribute="trailing" constant="5" id="itl-mO-ub6"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wFx-qF-KBJ" secondAttribute="bottom" constant="20" id="maU-Yp-IcG"/>
                             <constraint firstItem="D85-dZ-6LA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="o7N-sj-sUk"/>
+                            <constraint firstItem="wFx-qF-KBJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="phJ-ll-NY3"/>
+                            <constraint firstItem="wFx-qF-KBJ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="qc3-Pp-GSx"/>
                             <constraint firstItem="YYY-Pv-nSU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="x3G-se-hMO"/>
                         </constraints>
                     </view>
@@ -130,7 +132,7 @@
                         <outlet property="currentCity" destination="DbN-sJ-Yso" id="trb-pD-8r6"/>
                         <outlet property="currentTemperature" destination="V6z-kK-e1x" id="EEv-gM-NzG"/>
                         <outlet property="currentWeather" destination="I2E-XX-e9t" id="SkV-ws-b32"/>
-                        <outlet property="graphView" destination="hQu-cW-szz" id="usr-V5-Dt3"/>
+                        <outlet property="graphView" destination="wFx-qF-KBJ" id="S3D-wT-IOM"/>
                         <outlet property="graphViewButton" destination="gup-RO-lnA" id="Wd1-bj-E8X"/>
                         <outlet property="historyButton" destination="kbe-af-tvN" id="Baw-9t-JXb"/>
                         <outlet property="suggestionsButton" destination="D85-dZ-6LA" id="wjS-vT-Sjq"/>
@@ -147,6 +149,9 @@
         <image name="book.fill" catalog="system" width="128" height="95"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
