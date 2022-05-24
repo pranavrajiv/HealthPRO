@@ -179,6 +179,10 @@ class DashboardViewController: UIViewController{
                 let activityId = (CoreDataHandler.init().getAllActivityHistory().first(where: {$0.activityHistoryId == activityHistoryId})?.activityRelationship?.activityId)!
                 let activityEntry = CoreDataHandler.init().getActivityForId(activityId: activityId)
                 let caloriesPerHourPerLb = (activityEntry?.caloriesPerHourPerLb)!
+                // If there is no weight entry for the day of the activity, skip processing it
+                if CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: roundedDate) == formatter.string(from: $0.timeStamp!)}).count == 0 {
+                    continue
+                }
                 let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: roundedDate) == formatter.string(from: $0.timeStamp!)})[0].weight
                 // Calculate the number of calories burned by multiplying the user's weight on that day by the activity by calories
                 // per hour per pound by the activity duration in hours
@@ -190,13 +194,24 @@ class DashboardViewController: UIViewController{
                 }
             }
         }
+        var keysToRemove: [Double] = []
         var count = calorieDictionary.startIndex
         while count < calorieDictionary.endIndex {
             let (key, value) = calorieDictionary[count]
             let basalMetabolicRate = calculateBMR(key: key)
+            if basalMetabolicRate == 0.0 {
+                keysToRemove.append(key)
+            }
             let newValue = value - basalMetabolicRate
             calorieDictionary.updateValue(newValue, forKey: key)
             calorieDictionary.formIndex(after: &count)
+        }
+        for key in keysToRemove {
+            calorieDictionary.removeValue(forKey: key)
+        }
+        if calorieDictionary.count < 2 {
+            lineChartView.data = nil
+            return
         }
         let sortedKeys = calorieDictionary.keys.sorted(by: <)
         for key in sortedKeys {
@@ -242,22 +257,42 @@ class DashboardViewController: UIViewController{
         formatter.dateFormat = "YYYY-MM-dd"
         let user = CoreDataHandler.init().getUser()
         let userHeightInches = user?.height.description
+        if Double(userHeightInches!) == 0.0 {
+            let basalMetabolicRate = 0.0
+            return basalMetabolicRate
+        }
         let userBirthYear = Int((user?.birthYear.description)!)
+        if Double(userBirthYear!) == 0.0 {
+            let basalMetabolicRate = 0.0
+            return basalMetabolicRate
+        }
         let currentYear = Int(Calendar.current.component(.year, from: Date()))
         let userAge = currentYear - userBirthYear!
         let userHeightCentimeters = round(Double(userHeightInches!)! * 2.54)
         let userHeightComponent = 6.25 * userHeightCentimeters
         let userAgeComponent = 5.0 * Double(userAge)
-        var userGenderComponent = -161.0
+        var userGenderComponent = 0.0
         if user?.gender == "M" {
             userGenderComponent = 5.0
         }
+        if user?.gender == "F" {
+            userGenderComponent = -161.0
+        }
+        if userGenderComponent == 0.0 {
+            let basalMetabolicRate = 0.0
+            return basalMetabolicRate
+        }
         let entryDate = Date(timeIntervalSince1970: key)
-        let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)})[0].weight
-        let userWeightInKg = round(Double(userWeightOnDate) * 0.453592)
-        let userWeightComponent = 10.0 * Double(userWeightInKg)
-        let basalMetabolicRate = userWeightComponent + userHeightComponent - userAgeComponent + userGenderComponent
-        return basalMetabolicRate
+        if CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)}).count == 0 {
+            let basalMetabolicRate = 0.0
+            return basalMetabolicRate
+        } else {
+            let userWeightOnDate = CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)})[0].weight
+            let userWeightInKg = round(Double(userWeightOnDate) * 0.453592)
+            let userWeightComponent = 10.0 * Double(userWeightInKg)
+            let basalMetabolicRate = userWeightComponent + userHeightComponent - userAgeComponent + userGenderComponent
+            return basalMetabolicRate
+        }
     }
     
     func setWeightData() {
@@ -266,6 +301,10 @@ class DashboardViewController: UIViewController{
         formatter.dateStyle = .short
         // Get all of the user's weight history, including weights and timestamps
         userWeightHistory = CoreDataHandler.init().getAllWeightHistory()
+        if userWeightHistory.count < 2 {
+            lineChartView.data = nil
+            return
+        }
         // Calculate the maximum and minimum safe weights to plot alongside the user's logged weights
         let user = CoreDataHandler.init().getUser()
         let userHeightInches = user?.height.description
