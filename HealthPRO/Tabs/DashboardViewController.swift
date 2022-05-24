@@ -56,8 +56,10 @@ class DashboardViewController: UIViewController{
         self.weatherUpdateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(getTheWeather), userInfo: nil, repeats: true)
         if graphViewButton.selectedSegmentIndex == 0 {
             setWeightData()
+            lineChartView.notifyDataSetChanged()
         } else {
             setCalorieData()
+            lineChartView.notifyDataSetChanged()
         }
     }
     
@@ -65,8 +67,10 @@ class DashboardViewController: UIViewController{
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             setWeightData()
+            lineChartView.notifyDataSetChanged()
         } else {
             setCalorieData()
+            lineChartView.notifyDataSetChanged()
         }
     }
     
@@ -397,8 +401,10 @@ extension DashboardViewController: UIPopoverPresentationControllerDelegate,Weigh
     @objc func weightInfoUpdated() {
         if graphViewButton.selectedSegmentIndex == 0 {
             setWeightData()
+            lineChartView.notifyDataSetChanged()
         } else {
             setCalorieData()
+            lineChartView.notifyDataSetChanged()
         }
     }
     
