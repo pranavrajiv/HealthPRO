@@ -2,7 +2,6 @@
 //  ParsedNutritionLabelViewController.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/16/22.
 //
 
 import UIKit

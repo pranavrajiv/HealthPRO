@@ -2,7 +2,6 @@
 //  HealthPROTests.swift
 //  HealthPROTests
 //
-//  Created by Pranav Rajiv on 4/9/22.
 //
 
 import XCTest

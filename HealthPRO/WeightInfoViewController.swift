@@ -2,7 +2,6 @@
 //  WeightInfoViewController.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 5/10/22.
 //
 
 import UIKit

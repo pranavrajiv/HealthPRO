@@ -2,7 +2,6 @@
 //  DashboardViewController.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/19/22.
 //
 
 import UIKit

@@ -2,7 +2,6 @@
 //  SuggestionsViewController.swift
 //  HealthPRO
 //
-//  Created by CIS 498 on 5/7/22.
 //
 
 import UIKit
