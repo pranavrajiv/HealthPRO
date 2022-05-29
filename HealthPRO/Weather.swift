@@ -2,7 +2,6 @@
 //  Weather.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/21/22.
 //
 
 import Foundation

@@ -2,7 +2,6 @@
 //  CoreDataHandler.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/14/22.
 //
 
 import Foundation

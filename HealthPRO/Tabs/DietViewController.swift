@@ -2,7 +2,6 @@
 //  DietViewController.swift
 //  HealthPRO
 //
-//  Created by Pranav Rajiv on 4/11/22.
 //
 
 import UIKit
