@@ -255,6 +255,8 @@ class DashboardViewController: UIViewController{
     }
     
     func calculateBMR(key: Double) -> Double  {
+        // Calculate the user's BMR using the user's provided data,
+        // including their age, sex, height and current weight
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.dateFormat = "YYYY-MM-dd"
@@ -281,11 +283,13 @@ class DashboardViewController: UIViewController{
         if user?.gender == "F" {
             userGenderComponent = -161.0
         }
+        // If the user hasn't set their gender, don't calculate the BMR
         if userGenderComponent == 0.0 {
             let basalMetabolicRate = 0.0
             return basalMetabolicRate
         }
         let entryDate = Date(timeIntervalSince1970: key)
+        // If there is no weight history logged, don't calculate the BMR
         if CoreDataHandler.init().getAllWeightHistory().filter({formatter.string(from: entryDate) == formatter.string(from: $0.timeStamp!)}).count == 0 {
             let basalMetabolicRate = 0.0
             return basalMetabolicRate
