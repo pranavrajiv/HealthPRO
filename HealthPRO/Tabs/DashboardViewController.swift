@@ -10,6 +10,7 @@ import Charts
 import TinyConstraints
 
 class DashboardViewController: UIViewController{
+    @IBOutlet weak var emptyGraphLabel: UILabel!
     @IBOutlet weak var todayDate: UILabel!
     @IBOutlet weak var currentCity: UILabel!
     @IBOutlet weak var currentTemperature: UILabel!
@@ -60,6 +61,17 @@ class DashboardViewController: UIViewController{
             setCalorieData()
             lineChartView.notifyDataSetChanged()
         }
+        
+        
+        let user = CoreDataHandler.init().getUser()
+        if user?.height == 0.0 || user?.weight == 0.0 || user?.birthYear == 0 {
+            self.lineChartView.isHidden = true
+            self.emptyGraphLabel.isHidden = false
+        } else {
+            self.lineChartView.isHidden = false
+            self.emptyGraphLabel.isHidden = true
+        }
+        
     }
     
     // Notifies when user switched between weight and calorie graphs
@@ -118,6 +130,7 @@ class DashboardViewController: UIViewController{
             }
             self.present(controller, animated: true, completion: nil)
         }
+        
         // Add the lineChartView to the graphView as a subview; this allows
         // us to sidestep the compatibility issues between Charts and Xcode 13 that don't permit using Storyboard for the UI
         graphView.addSubview(lineChartView)

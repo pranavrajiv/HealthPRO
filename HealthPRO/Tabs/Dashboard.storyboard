@@ -70,7 +70,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.70904682860179069" green="0.83757579326629639" blue="0.69825926702289298" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.70904682860000001" green="0.83757579329999998" blue="0.69825926699999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="ofE-Xu-6jH" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="2Vw-Zw-aMR"/>
                                     <constraint firstAttribute="height" constant="250" id="Agr-h7-qBP"/>
@@ -99,7 +99,21 @@
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFx-qF-KBJ" userLabel="graphView">
                                 <rect key="frame" x="0.0" y="375" width="375" height="334"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please complete your Profile to view the graphs. Weight, Height, Birth Year and Sex are required" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIv-3T-feX">
+                                        <rect key="frame" x="20" y="136.66666666666669" width="335" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.70904682860000001" green="0.83757579329999998" blue="0.69825926699999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="uIv-3T-feX" secondAttribute="trailing" constant="20" id="2AX-Ya-xAh"/>
+                                    <constraint firstItem="uIv-3T-feX" firstAttribute="centerY" secondItem="wFx-qF-KBJ" secondAttribute="centerY" id="GJG-Ws-kyo"/>
+                                    <constraint firstItem="uIv-3T-feX" firstAttribute="leading" secondItem="wFx-qF-KBJ" secondAttribute="leading" constant="20" id="JJB-u8-g6q"/>
+                                    <constraint firstItem="uIv-3T-feX" firstAttribute="centerX" secondItem="wFx-qF-KBJ" secondAttribute="centerX" id="p3J-Lx-teS"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -132,6 +146,7 @@
                         <outlet property="currentCity" destination="DbN-sJ-Yso" id="trb-pD-8r6"/>
                         <outlet property="currentTemperature" destination="V6z-kK-e1x" id="EEv-gM-NzG"/>
                         <outlet property="currentWeather" destination="I2E-XX-e9t" id="SkV-ws-b32"/>
+                        <outlet property="emptyGraphLabel" destination="uIv-3T-feX" id="5Vp-lO-bnM"/>
                         <outlet property="graphView" destination="wFx-qF-KBJ" id="S3D-wT-IOM"/>
                         <outlet property="graphViewButton" destination="gup-RO-lnA" id="Wd1-bj-E8X"/>
                         <outlet property="historyButton" destination="kbe-af-tvN" id="Baw-9t-JXb"/>
@@ -147,9 +162,6 @@
     </scenes>
     <resources>
         <image name="book.fill" catalog="system" width="128" height="95"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
