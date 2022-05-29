@@ -8,6 +8,7 @@ import UIKit
 
 class ProfileViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet weak var userAvatar: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var usageButton: UIButton!
     @IBOutlet weak var logoutButton: UIButton!
@@ -48,6 +49,12 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"),let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"})?.text), let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
             _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
 
+            if (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"}))?.text == "F" {
+                self.userAvatar.image = UIImage(named: "User_Avatar_Female")
+            } else {
+                self.userAvatar.image = UIImage(named: "User_Avatar_Male")
+            }
+            
             //add weight history entry
             if(CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
                 
