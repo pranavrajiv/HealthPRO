@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var usageButton: UIButton!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var genderButton: UIButton!
     @IBOutlet var textFieldCollection: [UITextField]!
     @IBOutlet weak var foodPreferenceButton: UIButton!
     @IBOutlet weak var activityPreferenceButton: UIButton!
@@ -26,10 +27,12 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         self.editButton.addTarget(self, action: #selector(editButtonTouchUpInside), for: .touchUpInside)
         self.foodPreferenceButton.addTarget(self, action: #selector(foodPreferenceButtonTouchUpInside), for: .touchUpInside)
         self.activityPreferenceButton.addTarget(self, action: #selector(activityPreferenceButtonTouchUpInside), for: .touchUpInside)
+        self.genderButton.addTarget(self, action: #selector(genderButtonTouchUpInside), for: .touchUpInside)
         self.textFieldCollection.forEach({$0.delegate = self})
         self.textFieldCollection.forEach({$0.isEnabled = false})
         self.foodPreferenceButton.isUserInteractionEnabled = false
         self.activityPreferenceButton.isUserInteractionEnabled = false
+        self.genderButton.isUserInteractionEnabled = false
     }
     
     @objc private func populateData() {
@@ -40,16 +43,16 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"}))?.text = user?.weight.description
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"}))?.text = user?.birthYear.description
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"}))?.text = user?.height.description
-        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"}))?.text = user?.gender
+        self.genderButton.titleLabel?.text = user?.gender
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text = user?.contactNumber
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text = user?.emailAddress
     }
     
     @objc private func saveData() {
-        if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"),let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"})?.text), let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
+        if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"),let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = self.genderButton.titleLabel?.text, let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
             _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
 
-            if (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "gender"}))?.text == "F" {
+            if self.genderButton.titleLabel?.text == "F" {
                 self.userAvatar.image = UIImage(named: "User_Avatar_Female")
             } else {
                 self.userAvatar.image = UIImage(named: "User_Avatar_Male")
@@ -57,7 +60,6 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
             
             //add weight history entry
             if(CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
-                
                 let formatter = DateFormatter()
                 formatter.dateStyle = .short
                 _  = CoreDataHandler.init().updateWeightHistory(historyId: CoreDataHandler.init().getAllWeightHistory().first(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: Date())})!.weightHistoryId, timeStamp: Date(), weight: weight)
@@ -76,6 +78,8 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         self.textFieldCollection.forEach({$0.isEnabled = !$0.isEnabled})
         self.foodPreferenceButton.isUserInteractionEnabled = !self.foodPreferenceButton.isUserInteractionEnabled
         self.activityPreferenceButton.isUserInteractionEnabled = !self.activityPreferenceButton.isUserInteractionEnabled
+        self.genderButton.isUserInteractionEnabled = !self.genderButton.isUserInteractionEnabled
+        
         
         if self.editButton.titleLabel?.text == "Save Info" {
             self.saveData()
@@ -92,6 +96,10 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     @objc private func activityPreferenceButtonTouchUpInside(){
         self.activityPreferenceButton.setTitle(self.activityPreferenceButton.titleLabel?.text == "Cardio" ? "Strength" : "Cardio", for: .normal)
         
+    }
+
+    @objc private func genderButtonTouchUpInside(){
+        self.genderButton.setTitle(self.genderButton.titleLabel?.text == "M" ? "F" : "M", for: .normal)
     }
     
     @objc private func logoutButtonTouchUpInside(){
@@ -128,6 +136,13 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.populateData()
+        
+        if self.genderButton.titleLabel?.text == "F" {
+            self.userAvatar.image = UIImage(named: "User_Avatar_Female")
+        } else {
+            self.userAvatar.image = UIImage(named: "User_Avatar_Male")
+        }
+        
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(keyboardWillDisappear),name: UIResponder.keyboardWillHideNotification,object: nil)
     }

@@ -63,7 +63,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5h-hB-ECS">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sex" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5h-hB-ECS">
                                                 <rect key="frame" x="266.33333333333331" y="0.0" width="68.666666666666686" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
@@ -97,17 +97,18 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="M/F" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RER-TU-sMI">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7h-0g-N4z">
                                                 <rect key="frame" x="266.33333333333331" y="0.0" width="68.666666666666686" height="34"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="gender"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="M" cornerStyle="capsule">
+                                                    <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
+                                                </buttonConfiguration>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="2st-Aa-Zq0" firstAttribute="width" secondItem="lls-Xo-NcP" secondAttribute="width" id="4F2-uD-PDB"/>
-                                            <constraint firstItem="RER-TU-sMI" firstAttribute="width" secondItem="lls-Xo-NcP" secondAttribute="width" id="HzB-TH-hmh"/>
                                             <constraint firstItem="MHY-TK-odq" firstAttribute="width" secondItem="lls-Xo-NcP" secondAttribute="width" id="lKw-c5-sLd"/>
+                                            <constraint firstItem="l7h-0g-N4z" firstAttribute="width" secondItem="2st-Aa-Zq0" secondAttribute="width" id="q46-iV-gUQ"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -253,6 +254,7 @@
                         <outlet property="activityPreferenceButton" destination="xGD-jn-7N2" id="GAO-do-vMG"/>
                         <outlet property="editButton" destination="Qt5-mS-f5c" id="Adi-YX-HCm"/>
                         <outlet property="foodPreferenceButton" destination="8ZR-3N-hd2" id="nlc-Fe-9fd"/>
+                        <outlet property="genderButton" destination="l7h-0g-N4z" id="TZD-u3-s0V"/>
                         <outlet property="logoutButton" destination="1qq-i2-MrD" id="qKK-1r-Msm"/>
                         <outlet property="usageButton" destination="zxw-xl-Bwa" id="ZOm-0o-zQz"/>
                         <outlet property="userAvatar" destination="dAu-LX-W0l" id="eOF-sO-Pve"/>
@@ -260,7 +262,6 @@
                         <outletCollection property="textFieldCollection" destination="lls-Xo-NcP" collectionClass="NSMutableArray" id="A0H-KF-pfi"/>
                         <outletCollection property="textFieldCollection" destination="MHY-TK-odq" collectionClass="NSMutableArray" id="XAH-w7-Ul4"/>
                         <outletCollection property="textFieldCollection" destination="2st-Aa-Zq0" collectionClass="NSMutableArray" id="Y68-rM-EON"/>
-                        <outletCollection property="textFieldCollection" destination="RER-TU-sMI" collectionClass="NSMutableArray" id="BZH-ok-pHp"/>
                         <outletCollection property="textFieldCollection" destination="N77-ml-Zmq" collectionClass="NSMutableArray" id="MuH-GK-ESR"/>
                         <outletCollection property="textFieldCollection" destination="sGT-BV-RPi" collectionClass="NSMutableArray" id="ymR-fU-mor"/>
                     </connections>
