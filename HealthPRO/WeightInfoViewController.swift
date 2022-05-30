@@ -113,6 +113,19 @@ class WeightInfoViewController: UIViewController {
         ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
             _ = CoreDataHandler.init().deleteWeightHistoryForId(weightHistoryId: self.weightHistoryId)
             self.delegate?.weightInfoUpdated()
+            
+            
+            //update user weight to the current last recorded weight incase the last recorded weight was just deleted
+            if let weightDouble = CoreDataHandler.init().getAllWeightHistory().last?.weight {
+                if let user = CoreDataHandler.init().getUser() {
+                    _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
+                }
+            } else { //if there are  0 weight histories then log user weight to 0
+                if let user = CoreDataHandler.init().getUser() {
+                    _ = CoreDataHandler.init().updateUser(weight: 0.0, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
+                }
+            }
+            
             self.dismiss(animated: true, completion: nil)
         }))
         self.present(ac, animated: true)
