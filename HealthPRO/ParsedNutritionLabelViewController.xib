@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParsedNutritionLabelViewController" customModule="HealthPRO" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParsedNutritionLabelViewController" customModule="HEALTH_PRO" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="l45-Dz-6JT" id="1Ng-jI-cd5"/>
                 <outlet property="deleteButton" destination="J6f-Ay-KyW" id="jrb-GG-Pdk"/>
@@ -58,7 +58,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gel-jE-ChE">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
-                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="25"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>

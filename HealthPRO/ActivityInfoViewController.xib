@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivityInfoViewController" customModule="HealthPRO" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivityInfoViewController" customModule="HEALTH_PRO" customModuleProvider="target">
             <connections>
                 <outlet property="activityName" destination="LH2-MP-704" id="BEc-qf-k61"/>
                 <outlet property="calories" destination="tBh-DL-yuu" id="ISs-pU-EA6"/>
@@ -49,7 +49,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iia-FA-49L">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
-                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="25"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="29"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -104,7 +104,8 @@
                                     <rect key="frame" x="167.66666666666663" y="0.0" width="167.33333333333337" height="34"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="filled" title="YES" cornerStyle="capsule">
-                                        <color key="baseBackgroundColor" red="0.51068292150000005" green="0.40716481780000002" blue="0.93939012290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
                                     </buttonConfiguration>
                                 </button>
                             </subviews>
@@ -147,6 +148,9 @@
         <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

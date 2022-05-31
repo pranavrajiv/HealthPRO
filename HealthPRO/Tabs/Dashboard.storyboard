@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hai There" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKI-3e-KhB">
-                                <rect key="frame" x="0.0" y="44" width="375" height="30.666666666666671"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="28"/>
-                                <color key="textColor" red="0.94805461228495891" green="0.84250881728380533" blue="0.6734042013307342" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi There!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKI-3e-KhB">
+                                <rect key="frame" x="0.0" y="44" width="375" height="33.666666666666657"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYY-Pv-nSU" userLabel="weatherView">
@@ -70,7 +70,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.70904682860000001" green="0.83757579329999998" blue="0.69825926699999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ofE-Xu-6jH" firstAttribute="centerX" secondItem="YYY-Pv-nSU" secondAttribute="centerX" id="2Vw-Zw-aMR"/>
                                     <constraint firstAttribute="height" constant="250" id="Agr-h7-qBP"/>
@@ -107,7 +107,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.70904682860000001" green="0.83757579329999998" blue="0.69825926699999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="uIv-3T-feX" secondAttribute="trailing" constant="20" id="2AX-Ya-xAh"/>
                                     <constraint firstItem="uIv-3T-feX" firstAttribute="centerY" secondItem="wFx-qF-KBJ" secondAttribute="centerY" id="GJG-Ws-kyo"/>
@@ -117,7 +117,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.50980392156862742" green="0.40784313725490196" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
                             <constraint firstItem="kbe-af-tvN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="5" id="1jl-mL-Dta"/>
                             <constraint firstItem="gup-RO-lnA" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="92" id="22M-LT-G97"/>
@@ -164,6 +164,9 @@
         <image name="book.fill" catalog="system" width="128" height="95"/>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

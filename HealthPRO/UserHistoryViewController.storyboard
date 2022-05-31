@@ -11,7 +11,7 @@
         <!--User History View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="userHistoryVC" id="Y6W-OH-hqX" customClass="UserHistoryViewController" customModule="HealthPRO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userHistoryVC" id="Y6W-OH-hqX" customClass="UserHistoryViewController" customModule="HEALTH_PRO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J2t-Mu-9ny">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,9 +20,9 @@
                                 <rect key="frame" x="0.0" y="33" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgS-h8-pg6">
-                                        <rect key="frame" x="100" y="8.6666666666666643" width="175" height="33"/>
-                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="26"/>
-                                        <color key="textColor" red="0.61479038119999996" green="0.0057555172590000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <rect key="frame" x="110.33333333333333" y="7.6666666666666643" width="154.33333333333337" height="34.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmu-z0-1gU">
@@ -89,7 +89,7 @@
                                 </segments>
                             </segmentedControl>
                             <datePicker contentMode="center" placeholderIntrinsicWidth="112" placeholderIntrinsicHeight="31" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="iCn-91-Ooe">
-                                <rect key="frame" x="131.66666666666666" y="102" width="112" height="31"/>
+                                <rect key="frame" x="131" y="102" width="113" height="31"/>
                             </datePicker>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l6O-hq-5B2">
                                 <rect key="frame" x="306" y="113" width="51" height="31"/>
