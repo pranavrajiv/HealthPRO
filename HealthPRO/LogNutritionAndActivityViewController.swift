@@ -17,7 +17,7 @@ class LogNutritionAndActivityViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     var historyId:Int64!
     var isKeyboardUp:Bool = false
-    
+    //stores if its a activity or a food log
     var logType:String!
     var itemId:Int64!
     
@@ -27,6 +27,7 @@ class LogNutritionAndActivityViewController: UIViewController {
         self.itemId = id
     }
     
+    //set the logType to be a activity or food
     convenience init(historyId: Int64, type:String) {
         self.init()
         self.logType = type
@@ -79,12 +80,14 @@ class LogNutritionAndActivityViewController: UIViewController {
         }
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    //keyboard disappear. Enable all userInteraction
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -96,6 +99,7 @@ class LogNutritionAndActivityViewController: UIViewController {
         self.datePicker.isUserInteractionEnabled = true
     }
     
+    //keyboard Appear. Disable all userInteraction
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -108,6 +112,7 @@ class LogNutritionAndActivityViewController: UIViewController {
         
     }
     
+    //this function moves the position of textfields higher incase the keyboard covers them
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
         if up == self.isKeyboardUp {
             return
@@ -130,15 +135,16 @@ class LogNutritionAndActivityViewController: UIViewController {
             }, completion: nil)
         }
     }
+    
     //Dismiss the keyboard when touched outside the screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
 
-    
+    //editActivityFood or deleteHistory pressed
     @objc private func editButtonTouchUpInside() {
-        if (self.historyId != nil) {
+        if (self.historyId != nil) {//deleteHistory
             let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Delete", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 if self.logType == "Activity" {
@@ -150,7 +156,7 @@ class LogNutritionAndActivityViewController: UIViewController {
             }))
             ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             self.present(ac, animated: true)
-        }else {
+        }else {//editActivityFood
             if self.logType == "Activity" {
                 let secondViewController = ActivityInfoViewController.init(activityId:self.itemId)
                 secondViewController.modalPresentationStyle = .fullScreen
@@ -163,12 +169,13 @@ class LogNutritionAndActivityViewController: UIViewController {
         }
     }
     
+    //cancel button pressed
     @objc private func cancelButtonTouchUp() {
         self.dismiss(animated: true)
     }
     
+    //logActivityFood or updateHistory pressed
     @objc private func logButtonTouchUp() {
-        
         if (self.hrsAndServingTextField.text=="") {
             let ac = UIAlertController(title: "Error", message: "Please enter serving size", preferredStyle: .alert)
             if self.logType == "Activity" {
@@ -186,7 +193,7 @@ class LogNutritionAndActivityViewController: UIViewController {
             if let calorieNum = Double(calorieHoursString!.filter("0123456789.".contains)) {
                 calorieNumber = calorieNum
             }
-            if (self.historyId != nil) {
+            if (self.historyId != nil) {//updateHistory
                 if self.logType == "Activity" {
                     _ = CoreDataHandler.init().updateActivityHistory(historyId: self.historyId, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
                 } else {
@@ -194,7 +201,7 @@ class LogNutritionAndActivityViewController: UIViewController {
                 }
             }
             else
-            {
+            {//logActivityFood
                 if self.logType == "Activity" {
                     var historyId:Int64 = -1
                     if let largestActivityHistoryId = CoreDataHandler.init().getAllActivityHistory().map({$0.activityHistoryId}).max() {

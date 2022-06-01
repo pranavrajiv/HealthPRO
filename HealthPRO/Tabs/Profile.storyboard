@@ -83,19 +83,19 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="68.666666666666671" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="birthYear"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Inches" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MHY-TK-odq">
                                                 <rect key="frame" x="88.666666666666671" y="0.0" width="69.000000000000014" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="height"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pounds" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2st-Aa-Zq0">
                                                 <rect key="frame" x="177.66666666666666" y="0.0" width="68.666666666666657" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="weight"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7h-0g-N4z">
                                                 <rect key="frame" x="266.33333333333331" y="0.0" width="68.666666666666686" height="34"/>
@@ -144,13 +144,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="160" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="contactNumber"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="john.doe@xyz.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sGT-BV-RPi">
                                                 <rect key="frame" x="175" y="0.0" width="160" height="34"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="emailAddress"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
                                         </subviews>
                                         <constraints>

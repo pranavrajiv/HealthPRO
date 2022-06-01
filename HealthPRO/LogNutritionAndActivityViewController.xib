@@ -58,7 +58,7 @@
                                     <rect key="frame" x="187.66666666666663" y="0.0" width="167.33333333333337" height="44"/>
                                     <color key="backgroundColor" systemColor="systemGray4Color"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 </textField>
                             </subviews>
                             <constraints>

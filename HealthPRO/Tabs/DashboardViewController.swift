@@ -349,7 +349,7 @@ class DashboardViewController: UIViewController{
         // Calculate the maximum and minimum safe weights to plot alongside the user's logged weights
         let user = CoreDataHandler.init().getUser()
         let userHeightInches = user?.height.description
-        let userHeightMeters = Double(userHeightInches!)! * 0.0254
+        let userHeightMeters = Double(userHeightInches ?? "0.0")! * 0.0254
         let userHeightMetersSquared = Double(userHeightMeters) * Double(userHeightMeters)
         let minimumSafeWeightKilograms = 18.5 * Double(userHeightMetersSquared)
         let maximumSafeWeightKilograms = 24.9 * Double(userHeightMetersSquared)
@@ -403,15 +403,16 @@ class DashboardViewController: UIViewController{
     
     //get the weather from LoginViewController
     @objc func getTheWeather() {
-        let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
         todayDate.text = Date.getTodaysDate()
-        currentCity.text = viewController.weatherInfoNow.currentCity
-        if let currentWeatherHere  = viewController.weatherInfoNow.currentWeather {
-            currentWeather.text = currentWeatherHere.weather[0].description.uppercased()
-            currentTemperature.text = currentWeatherHere.temp.description + " F°"
-            weatherImage.image = UIImage(named: currentWeatherHere.weather[0].icon)
+        if let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as? LoginViewController, let weatherInfoNow  = viewController.weatherInfoNow {
+            currentCity.text = weatherInfoNow.currentCity
+            
+            if let currentWeatherHere  = weatherInfoNow.currentWeather {
+                currentWeather.text = currentWeatherHere.weather[0].description.uppercased()
+                currentTemperature.text = currentWeatherHere.temp.description + " F°"
+                weatherImage.image = UIImage(named: currentWeatherHere.weather[0].icon)
+            }
         }
-        
     }
     
 }

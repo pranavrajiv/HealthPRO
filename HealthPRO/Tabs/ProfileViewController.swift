@@ -56,13 +56,6 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"), let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = self.genderButton.titleLabel?.text, let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
             _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
             
-            //based on what gender was saved, decides what Avatar to display
-            if self.genderButton.titleLabel?.text == "F" {
-                self.userAvatar.image = UIImage(named: "User_Avatar_Female")
-            } else {
-                self.userAvatar.image = UIImage(named: "User_Avatar_Male")
-            }
-            
             //update the logged weight history for the day with the newly saved weight in the profile
             if(CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
                 let formatter = DateFormatter()
@@ -110,7 +103,14 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
 
     //gender button pressed. It values toggles between 'M' and 'F'
     @objc private func genderButtonTouchUpInside(){
-        self.genderButton.setTitle(self.genderButton.titleLabel?.text == "M" ? "F" : "M", for: .normal)
+        //based on what gender was saved, decides what Avatar to display and also sets the new title
+        if self.genderButton.titleLabel?.text == "F" {
+            self.genderButton.setTitle("M", for: .normal)
+            self.userAvatar.image = UIImage(named: "User_Avatar_Male")
+        } else {
+            self.genderButton.setTitle("F", for: .normal)
+            self.userAvatar.image = UIImage(named: "User_Avatar_Female")
+        }
     }
     
     //used to log out a user from their account

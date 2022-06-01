@@ -16,6 +16,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var cancelButton: UIButton!
     var ocrText: String = ""
     var foodItem:Food!
+    //dictionary with key as the macro and value as its quantity
     var macro:[String:String]=["Calories":"","Total Fat":"","Total Carb":"","Cholesterol":"","Sodium":"","Dietary Fiber":"","Sugars":"","Protein":"","Calcium":"","Iron":"","Potassium":""]
     var activeTextField:UITextField?
     var isKeyboardUp:Bool = false
@@ -23,10 +24,13 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
     //stores current parent so that the parent can be dismissed if deleting an item
     private var presentingController: UIViewController?
 
+    //called when processing a nutrition label image
     convenience init( ocrText: String ) {
         self.init()
         self.ocrText = ocrText
     }
+    
+    //called when updating a food item
     convenience init( foodId: Int64 ) {
         self.init()
         self.foodItem = CoreDataHandler.init().getFoodForId(foodId: foodId)
@@ -40,7 +44,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
 
         if(self.ocrText != "") {
             self.processOcrText()
-        } else {
+        } else {//populate food macro
             itemNameVal.text = foodItem?.foodName
             macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Calories"})?.text = foodItem?.calories.description
             macroTextFieldCollections.first(where: {$0.accessibilityIdentifier == "Total Fat"})?.text = foodItem?.total_fat
@@ -80,6 +84,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    //indicate keyboard disappear
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -87,6 +92,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    //indicate keyboard appear
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -100,6 +106,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         super.touchesBegan(touches, with: event)
     }
     
+    //save button pressed
     @objc private func saveButtonTouchUp() {
         if((self.itemNameVal.text == nil) || (self.itemNameVal.text == "")){
             let ac = UIAlertController(title: "Error", message: "Food Item name empty. Please enter a name before saving", preferredStyle: .alert)
@@ -107,7 +114,6 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
             self.present(ac, animated: true)
             return
         }
-        
         
         let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Save", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -137,6 +143,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         self.present(ac, animated: true)
     }
     
+    //cancel button pressed
     @objc private func cancelButtonTouchUp() {
         if(self.ocrText != "") {
             let ac = UIAlertController(title: "Confirmation", message: "Information not saved. Please press 'Confirm' if you would like to Cancel", preferredStyle: .alert)
@@ -150,6 +157,8 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
             self.dismiss(animated: true)
         }
     }
+    
+    //delete button pressed
     @objc private func deleteButtonTouchUp() {
 
         let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Delete", preferredStyle: .alert)
@@ -171,6 +180,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
 
     }
 
+    //get macro value from the OCR text
     @objc private func processOcrText() {
         let lines = self.ocrText.split(whereSeparator: \.isNewline)
         
@@ -186,7 +196,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
                             macro[macroKey] = value
                         }
                         
-                        if(macroKey == "Calories") {
+                        if(macroKey == "Calories") {//calories do not end with a unit
                             if let value = self.getMacroValue(macroNutrientLine: String(lines[index][macroIndex...]), endingWith: "") {
                                macro[macroKey] = value
                            } //Apple OCR scanner keeps scanning calorie value in the nextLine. Special case
@@ -220,6 +230,7 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         return nil
     }
     
+    //this function moves the position of textfields higher incase the keyboard covers them
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
         if up == self.isKeyboardUp {
             return
@@ -242,8 +253,12 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
             }, completion: nil)
         }
     }
+    
+    //indicates text field begin editing
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.itemNameVal.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.itemNameVal.accessibilityIdentifier)
+        
+        //all textFields have userInteraction disabled except for the currently active textField
         self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = (textField.accessibilityIdentifier == $0.accessibilityIdentifier)})
         self.activeTextField = textField
         
@@ -252,9 +267,11 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
         self.cancelButton.isUserInteractionEnabled = false
         
     }
-
+    
+    //indicates text field ends editing
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.itemNameVal.isUserInteractionEnabled = true
+        //all textFields have userInteraction enabled
         self.macroTextFieldCollections.forEach({$0.isUserInteractionEnabled = true})
         self.activeTextField = textField
         

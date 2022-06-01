@@ -8,6 +8,7 @@ import UIKit
 import LocalAuthentication
 import TabularData
 
+//this struct holds the latest weather info
 struct WeatherNow {
     var currentWeather:Current!
     var weatherInfo:Weather!
@@ -19,12 +20,14 @@ struct WeatherNow {
         self.weatherInfo = theWeather
     }
     
+    //updates the weather
     mutating func updateCurrent(result:Result,currentCity:String) {
         self.currentCity = currentCity
         self.currentWeather = result.current
         self.weatherInOneHour = result.hourly[1].weather[0].description.uppercased()
         self.weatherInTwoHours = result.hourly[2].weather[0].description.uppercased()
     }
+    
     mutating func cleanup() {
         self.currentCity = ""
         self.currentWeather = nil
@@ -44,8 +47,11 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var blurView: UIVisualEffectView!
     
+    //holds the CoreData object
     var coreDataHandler:CoreDataHandler!
+    //holds current weather
     var weatherInfoNow:WeatherNow!
+    //stores the timeStamp when the app was first launched
     var appStartTimeStamp:Date!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,9 +67,20 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         super.viewDidAppear(animated)
         
         //if no food entries are in core data, then populate it
-        if self.coreDataHandler.getAllFood().count == 0 || self.coreDataHandler.getAllActivities().count == 0 {
-            self.gettingStarted()
+        if self.coreDataHandler.getAllFood().count == 0 {
+            self.populateFood()
         }
+    
+        //if no activity entries are in core data, then populate it
+        if self.coreDataHandler.getAllActivities().count == 0 {
+            self.populateActivity()
+        }
+        
+        //if no suggestions entries are in core data, then populate it
+        if self.coreDataHandler.getAllSuggestions().count == 0 {
+            self.populateSuggestions()
+        }
+        
         self.afterInitialLaunch()
     }
     
@@ -71,6 +88,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         super.viewDidLoad()
         self.coreDataHandler = CoreDataHandler.init()
         
+        //stores launch count of the app into userDefaults
         if let launchCount = UserDefaults.standard.object(forKey: "LaunchCount") as? Int {
             UserDefaults.standard.set(launchCount+1, forKey: "LaunchCount")
         } else {
@@ -95,7 +113,6 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         self.loginRegisterButton.layer.cornerRadius = 25
         self.loginRegisterButton.addTarget(self, action: #selector(loginOrRegisterProfile(_:)), for: .touchUpInside)
         self.segCtrl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControl.Event.valueChanged)
-        
     }
     
     //Used to Log into Error file any unexpected errors
@@ -284,13 +301,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         }
     }
     
-    //does all the onboarding steps including coreData populations from .csv payloads
-    @objc private func gettingStarted() {
-       self.populateFood()
-        self.populateActivity()
-        self.populateSuggestions()
-    }
-    
+    //add CSV food entries into CoreData
     @objc private func populateFood() {
         let url = Bundle.main.url(forResource: "nutrition", withExtension: "csv")!
         guard let result = try? DataFrame(contentsOfCSVFile: url) else {
@@ -310,6 +321,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         }
     }
     
+    //add CSV activity entries into CoreData
     @objc private func populateActivity() {
         let url = Bundle.main.url(forResource: "activity", withExtension: "csv")!
         guard let result = try? DataFrame(contentsOfCSVFile: url) else {
@@ -330,6 +342,7 @@ class LoginViewController: UIViewController,WeatherInfoReceivedDelegate {
         }
     }
     
+    //add CSV suggestions entries into CoreData
     @objc private func populateSuggestions() {
         let url = Bundle.main.url(forResource: "suggestions", withExtension: "csv")!
         guard let result = try? DataFrame(contentsOfCSVFile: url) else {
