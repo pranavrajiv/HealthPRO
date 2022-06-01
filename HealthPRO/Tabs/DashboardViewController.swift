@@ -20,6 +20,7 @@ class DashboardViewController: UIViewController{
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var suggestionsButton: UIButton!
     @IBOutlet weak var graphViewButton: UISegmentedControl!
+    //timer that keeps pulling weather info every 5 seconds
     var weatherUpdateTimer:Timer!
     var userWeightHistory:[WeightHistory]!
     var userActivityHistory:[ActivityHistory]!
@@ -64,6 +65,8 @@ class DashboardViewController: UIViewController{
         
         
         let user = CoreDataHandler.init().getUser()
+        
+        //check if user profile is complete to display graphs
         if user?.height == 0.0 || user?.weight == 0.0 || user?.birthYear == 0 {
             self.lineChartView.isHidden = true
             self.emptyGraphLabel.isHidden = false
@@ -85,6 +88,7 @@ class DashboardViewController: UIViewController{
         }
     }
     
+    //clicked on suggestion button
     @objc func suggestionButtonTouchUpInside() {
         let storyboard = UIStoryboard(name: "SuggestionViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "suggestionVC")
@@ -92,8 +96,8 @@ class DashboardViewController: UIViewController{
         self.present(controller, animated: true, completion: nil)
     }
     
+    //clicked on user history button
     @objc func viewHistoryButtonTouchUpInside() {
-        
         let storyboard = UIStoryboard(name: "UserHistoryViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "userHistoryVC")
         controller.modalPresentationStyle = .fullScreen
@@ -110,7 +114,7 @@ class DashboardViewController: UIViewController{
         self.historyButton.addTarget(self, action: #selector(viewHistoryButtonTouchUpInside), for: .touchUpInside)
         self.suggestionsButton.addTarget(self, action: #selector(suggestionButtonTouchUpInside), for: .touchUpInside)
         
-        //show weight logger
+        //show daily weight logger
         if(!CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
             let controller = WeightInfoViewController.init(popOverHeading: "Log Daily Weight", popOverMessage: "Enter Today's Weight", button1Label: "Log",button2Label: "", button3Label: "Cancel",delegate: self ,weightHistoryId: -1)
             
@@ -118,12 +122,9 @@ class DashboardViewController: UIViewController{
             
             if let popover = controller.popoverPresentationController {
                 popover.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-               
                 popover.sourceView = self.view
-
                // the position of the popover where it's showed
                 popover.sourceRect = CGRect(x: 20, y: 400, width: 0, height: 0)
-
                // the size you want to display
                 controller.preferredContentSize = CGSize(width: self.view.frame.width - 40, height: 200)
                popover.delegate = self
@@ -400,6 +401,7 @@ class DashboardViewController: UIViewController{
         }
     }
     
+    //get the weather from LoginViewController
     @objc func getTheWeather() {
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
         todayDate.text = Date.getTodaysDate()

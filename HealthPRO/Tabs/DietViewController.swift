@@ -33,6 +33,7 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         addNewButton.addTarget(self, action: #selector(addNewButtonTouchUp), for: .touchUpInside)
     }
     
+    //new food entry
     @objc private func addNewButtonTouchUp() {
         let secondViewController = ParsedNutritionLabelViewController.init()
         secondViewController.modalPresentationStyle = .fullScreen
@@ -43,6 +44,7 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         return self.allFood.count
     }
     
+    //row at index
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath)
         cell.accessibilityLabel = self.allFood[indexPath.row].foodId.description
@@ -50,6 +52,7 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         return cell
     }
     
+    //row selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchBarField.resignFirstResponder()
 
@@ -69,7 +72,8 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         }
         self.tableView.reloadData()
     }
-                    
+          
+    //search button clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.searchTextField.text {
             if searchText != "" {
@@ -81,15 +85,5 @@ class DietViewController: UIViewController, UITableViewDataSource,UITableViewDel
         searchBar.resignFirstResponder()
         self.tableView.reloadData()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

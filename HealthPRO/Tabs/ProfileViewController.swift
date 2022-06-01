@@ -17,7 +17,9 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var textFieldCollection: [UITextField]!
     @IBOutlet weak var foodPreferenceButton: UIButton!
     @IBOutlet weak var activityPreferenceButton: UIButton!
+    //stores which text field is currently active
     var activeTextField:UITextField?
+    //stores if the keyboard is up/down
     var isKeyboardUp:Bool = false
     
     override func viewDidLoad() {
@@ -35,6 +37,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         self.genderButton.isUserInteractionEnabled = false
     }
     
+    //function populates the profile field with data present in CoreData
     @objc private func populateData() {
         let user = CoreDataHandler.init().getUser()
         self.userName.text = user?.loginId
@@ -48,22 +51,25 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text = user?.emailAddress
     }
     
+    //Saves profile data into CoreData
     @objc private func saveData() {
-        if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"),let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = self.genderButton.titleLabel?.text, let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
+        if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"), let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = self.genderButton.titleLabel?.text, let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
             _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
-
+            
+            //based on what gender was saved, decides what Avatar to display
             if self.genderButton.titleLabel?.text == "F" {
                 self.userAvatar.image = UIImage(named: "User_Avatar_Female")
             } else {
                 self.userAvatar.image = UIImage(named: "User_Avatar_Male")
             }
             
-            //add weight history entry
+            //update the logged weight history for the day with the newly saved weight in the profile
             if(CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
                 let formatter = DateFormatter()
                 formatter.dateStyle = .short
                 _  = CoreDataHandler.init().updateWeightHistory(historyId: CoreDataHandler.init().getAllWeightHistory().first(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: Date())})!.weightHistoryId, timeStamp: Date(), weight: weight)
             } else {
+                //add weight history entry
                 var historyId:Int64 = -1
                 if let largestWeightHistoryId = CoreDataHandler.init().getAllWeightHistory().map({$0.weightHistoryId}).max() {
                     historyId = largestWeightHistoryId
@@ -74,6 +80,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    // edit button pressed to edit profile
     @objc private func editButtonTouchUpInside(){
         self.textFieldCollection.forEach({$0.isEnabled = !$0.isEnabled})
         self.foodPreferenceButton.isUserInteractionEnabled = !self.foodPreferenceButton.isUserInteractionEnabled
@@ -84,24 +91,29 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         if self.editButton.titleLabel?.text == "Save Info" {
             self.saveData()
         } else {
+            //selects birth year text field to be active
             self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.becomeFirstResponder()
         }
         self.editButton.setTitle(self.editButton.titleLabel?.text == "Edit Profile" ? "Save Info" : "Edit Profile", for: .normal)
     }
     
+    //food preference button pressed. It values toggles between 'Low Carb' and 'Low Fat'
     @objc private func foodPreferenceButtonTouchUpInside(){
         self.foodPreferenceButton.setTitle(self.foodPreferenceButton.titleLabel?.text == "Low Carb" ? "Low Fat" : "Low Carb", for: .normal)
     }
     
+    //activity preference button pressed. It values toggles between 'Cardio' and 'Strength'
     @objc private func activityPreferenceButtonTouchUpInside(){
         self.activityPreferenceButton.setTitle(self.activityPreferenceButton.titleLabel?.text == "Cardio" ? "Strength" : "Cardio", for: .normal)
         
     }
 
+    //gender button pressed. It values toggles between 'M' and 'F'
     @objc private func genderButtonTouchUpInside(){
         self.genderButton.setTitle(self.genderButton.titleLabel?.text == "M" ? "F" : "M", for: .normal)
     }
     
+    //used to log out a user from their account
     @objc private func logoutButtonTouchUpInside(){
         
         let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Logout", preferredStyle: .alert)
@@ -113,6 +125,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         self.present(ac, animated: true)
     }
     
+    //function displays the overall app usage time
     @objc private func usageButtonTouchUpInside(){
         
         let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController as! LoginViewController
@@ -153,6 +166,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    //indicates if a keyboard disappears
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -160,6 +174,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    //indicates if a keyboard is shown
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -167,6 +182,7 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    //this function moves the position of textfields higher incase the keyboard covers them
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
         if up == self.isKeyboardUp  {
             return
@@ -191,11 +207,13 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
+        //disable UserInteraction on all textfields except for the one thats currently selected
         self.textFieldCollection.forEach({$0.isUserInteractionEnabled = (textField.accessibilityIdentifier == $0.accessibilityIdentifier) ? true : false })
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activeTextField = textField
+        //Enable UserInteraction on all textfields except for the one thats currently selected
         self.textFieldCollection.forEach({$0.isUserInteractionEnabled = true})
     }
     

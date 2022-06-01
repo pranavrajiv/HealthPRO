@@ -27,7 +27,7 @@ class WeightInfoViewController: UIViewController {
     var titleMsg = ""
     var delegate:WeightDelegate?
     
-
+    //stores the text value for the various buttons in the VC
     convenience init(popOverHeading:String,popOverMessage:String,button1Label:String,button2Label:String,button3Label:String,delegate:WeightDelegate? = nil,weightHistoryId:Int64) {
         self.init()
         self.titleLabel = popOverHeading
@@ -51,13 +51,13 @@ class WeightInfoViewController: UIViewController {
             self.button2.isHidden = true
         }
         
-        if self.titleMsg == "" {
+        if self.titleMsg == "" { //happens when updating/deleting an already existing weight entry
             self.weightLabel.isHidden = true
-        } else {
+        } else { // date selector not required when logging your daily weights
             self.dateSelector.isHidden = true
         }
         
-        
+        //weightHistoryId with any value other than -1 would mean its not a new weight history entry
         if self.weightHistoryId != -1 {
             self.dateSelector.date = (CoreDataHandler.init().getAllWeightHistory().first(where: {$0.weightHistoryId == weightHistoryId})?.timeStamp)!
             self.weightTextField.text = CoreDataHandler.init().getAllWeightHistory().first(where: {$0.weightHistoryId == weightHistoryId})?.weight.description
@@ -75,6 +75,7 @@ class WeightInfoViewController: UIViewController {
         self.button3.addTarget(self, action: #selector(button3TouchUpInside), for: .touchUpInside)
     }
 
+    //log/update button pressed
     @objc func button1TouchUpInside() {
         let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to "+self.b1Label, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -86,6 +87,7 @@ class WeightInfoViewController: UIViewController {
                     self.updateWeight()
                 }
                 
+                //updates user profile with the last logged/updated weight
                 if let weightDouble = CoreDataHandler.init().getAllWeightHistory().last?.weight {
                     if let user = CoreDataHandler.init().getUser() {
                         _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
@@ -97,6 +99,7 @@ class WeightInfoViewController: UIViewController {
         self.present(ac, animated: true)
     }
     
+    //Cancel button pressed
     @objc func button3TouchUpInside() {
         let ac = UIAlertController(title: "Confirmation", message: "Please press 'Confirm' if you would like to Cancel", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -106,7 +109,7 @@ class WeightInfoViewController: UIViewController {
         self.present(ac, animated: true)
     }
     
-    
+    //Delete button pressed
     @objc func button2TouchUpInside() {
         let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Delete", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -120,7 +123,7 @@ class WeightInfoViewController: UIViewController {
                 if let user = CoreDataHandler.init().getUser() {
                     _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
                 }
-            } else { //if there are  0 weight histories then log user weight to 0
+            } else { //if there are 0 weight histories then log user weight to 0
                 if let user = CoreDataHandler.init().getUser() {
                     _ = CoreDataHandler.init().updateUser(weight: 0.0, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
                 }
@@ -131,7 +134,7 @@ class WeightInfoViewController: UIViewController {
         self.present(ac, animated: true)
     }
     
-    
+    //updates a weight histroy entry
     @objc private func updateWeight(){
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -147,14 +150,16 @@ class WeightInfoViewController: UIViewController {
         self.delegate?.weightInfoUpdated()
     }
     
-    @objc private func logWeight(){
+    //logs a new weight history entry
+    @objc private func logWeight() {
         if let weightTextFieldText = self.weightTextField.text, let weightDouble = Double(weightTextFieldText) {
             if(CoreDataHandler.init().doesWeightHistoryExist(forDate: self.dateSelector.date)){
-                
+                //Double checks if weight history already exists
                 let formatter = DateFormatter()
                 formatter.dateStyle = .short
                 _  = CoreDataHandler.init().updateWeightHistory(historyId: CoreDataHandler.init().getAllWeightHistory().first(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: self.dateSelector.date)})!.weightHistoryId, timeStamp: self.dateSelector.date, weight: weightDouble)
             } else {
+                // creates new log weight history
                 var historyId:Int64 = -1
                 if let largestWeightHistoryId = CoreDataHandler.init().getAllWeightHistory().map({$0.weightHistoryId}).max() {
                     historyId = largestWeightHistoryId

@@ -27,6 +27,7 @@ class ExerciseViewController: UIViewController,UITableViewDataSource,UITableView
         addNewButton.addTarget(self, action: #selector(addNewButtonTouchUp), for: .touchUpInside)
     }
     
+    //new food entry
     @objc private func addNewButtonTouchUp() {
         let secondViewController = ActivityInfoViewController.init()
         secondViewController.modalPresentationStyle = .fullScreen
@@ -37,6 +38,7 @@ class ExerciseViewController: UIViewController,UITableViewDataSource,UITableView
         return self.allExercise.count
     }
     
+    //row at index
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseTableViewCell", for: indexPath)
         cell.accessibilityLabel = self.allExercise[indexPath.row].activityId.description
@@ -44,13 +46,13 @@ class ExerciseViewController: UIViewController,UITableViewDataSource,UITableView
         return cell
     }
     
+    //row selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchBarField.resignFirstResponder()
 
         let secondViewController = LogNutritionAndActivityViewController.init(id: Int64(Int((tableView.cellForRow(at: indexPath)?.accessibilityLabel)!)!), type: "Activity")
         secondViewController.modalPresentationStyle = .fullScreen
         self.present(secondViewController, animated: true, completion: nil)
-              
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -64,6 +66,7 @@ class ExerciseViewController: UIViewController,UITableViewDataSource,UITableView
         self.tableView.reloadData()
     }
     
+    //search button clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.searchTextField.text {
             if searchText != "" {
