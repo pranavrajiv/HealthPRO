@@ -156,7 +156,64 @@ class DashboardViewController: UIViewController{
         // Calculate the maximum and minimum safe weights to plot alongside the user's logged weights
         var dataEntry: [ChartDataEntry] = []
         // Add all of the calories consumed per day and store them in a dictionary
-        var calorieDictionary = aggregateUserFoodHistory(formatter: formatter)
+        let calorieDictionary = aggregateUserFoodHistory(formatter: formatter)
+        // Subtract all of the calories burned per day via activities and store them in a dictionary
+        var newCalorieDictionary = aggregateUserActivityHistory(formatter: formatter, calorieDictionary: calorieDictionary)
+        // Calculate the user's BMR for each day that food or exercise has been logged
+        var keysToRemove: [Double] = []
+        var count = newCalorieDictionary.startIndex
+        while count < newCalorieDictionary.endIndex {
+            let (key, value) = newCalorieDictionary[count]
+            let basalMetabolicRate = calculateBMR(key: key)
+            if basalMetabolicRate == 0.0 {
+                keysToRemove.append(key)
+            }
+            let newValue = value - basalMetabolicRate
+            newCalorieDictionary.updateValue(newValue, forKey: key)
+            newCalorieDictionary.formIndex(after: &count)
+        }
+        // For each day that a BMR has been calculated, subtract it from the net calories
+        for key in keysToRemove {
+            newCalorieDictionary.removeValue(forKey: key)
+        }
+        // Sort the graph data to ensure it is plotted correctly
+        let sortedKeys = newCalorieDictionary.keys.sorted(by: <)
+        for key in sortedKeys {
+            dataEntry.append(ChartDataEntry(x: Double(key), y: Double(newCalorieDictionary[key]!)))
+        }
+        // Plot the net calorie data
+        plotCalorieData(dataEntry: dataEntry, newCalorieDictionary: newCalorieDictionary)
+        // Add limit lines showing weekly weight gain and loss with net calories consumed
+        setCalorieLimitLines()
+    }
+    
+    func aggregateUserFoodHistory(formatter: DateFormatter) -> [TimeInterval: Double] {
+        var calorieDictionary: [TimeInterval: Double] = [:]
+        for entry in userFoodHistory {
+            // Convert timestamp to epoch time
+            let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
+            let myDate = Date(timeIntervalSince1970: dateAsDouble)
+            let strDate = formatter.string(from: myDate)
+            if let roundedDate = formatter.date(from: strDate) {
+                let finalDate = roundedDate.timeIntervalSince1970
+                let numServings = entry.serviceSize
+                let foodEntry = entry.foodRelationship
+                let numCaloriesPerServing = (foodEntry?.calories)!
+                // Calculate the number of calories consumed by multiplying the number of portions consumed by the number of calories
+                // per portion
+                let caloriesConsumed = Double(numServings) * Double(numCaloriesPerServing)
+                if calorieDictionary[finalDate] != nil {
+                    calorieDictionary[finalDate] = calorieDictionary[finalDate]! + caloriesConsumed
+                } else {
+                    calorieDictionary[finalDate] = caloriesConsumed
+                }
+            }
+        }
+        return calorieDictionary
+    }
+    
+    func aggregateUserActivityHistory(formatter: DateFormatter, calorieDictionary: [TimeInterval: Double]) -> [TimeInterval: Double] {
+        var newCalorieDictionary = calorieDictionary
         for entry in userActivityHistory {
             // Convert timestamp to epoch time
             let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
@@ -184,80 +241,14 @@ class DashboardViewController: UIViewController{
                 // Calculate the number of calories burned by multiplying the user's weight on that day by the activity by calories
                 // per hour per pound by the activity duration in hours
                 let caloriesBurned = Double(caloriesPerHourPerLb) * Double(activityDuration) * Double(userWeightOnDate ?? 0.0)
-                if calorieDictionary[finalDate] != nil {
-                    calorieDictionary[finalDate] = calorieDictionary[finalDate]! - caloriesBurned
+                if newCalorieDictionary[finalDate] != nil {
+                    newCalorieDictionary[finalDate] = calorieDictionary[finalDate]! - caloriesBurned
                 } else {
-                    calorieDictionary[finalDate] = 0.0 - caloriesBurned
+                    newCalorieDictionary[finalDate] = 0.0 - caloriesBurned
                 }
             }
         }
-        var keysToRemove: [Double] = []
-        var count = calorieDictionary.startIndex
-        while count < calorieDictionary.endIndex {
-            let (key, value) = calorieDictionary[count]
-            let basalMetabolicRate = calculateBMR(key: key)
-            if basalMetabolicRate == 0.0 {
-                keysToRemove.append(key)
-            }
-            let newValue = value - basalMetabolicRate
-            calorieDictionary.updateValue(newValue, forKey: key)
-            calorieDictionary.formIndex(after: &count)
-        }
-        for key in keysToRemove {
-            calorieDictionary.removeValue(forKey: key)
-        }
-        
-        let sortedKeys = calorieDictionary.keys.sorted(by: <)
-        for key in sortedKeys {
-            dataEntry.append(ChartDataEntry(x: Double(key), y: Double(calorieDictionary[key]!)))
-        }
-        // Set the Y axis label and load dataEntry into the first line chart dataset
-        let set1 = LineChartDataSet(entries: dataEntry, label: "Net Calories")
-        set1.mode = .cubicBezier
-        set1.lineWidth = 3
-        set1.setColor(.black)
-        let data = LineChartData(dataSet: set1)
-        lineChartView.data = data
-        // Display dates in a human-readable format instead of epoch time
-        lineChartView.xAxis.valueFormatter = ChartFormatter()
-        //Rotate x axis label to prevent clipping off the side of the graph
-        lineChartView.xAxis.labelRotationAngle = 90.0
-        // Disable user interaction with the chart
-        lineChartView.isUserInteractionEnabled = false
-        // Show a date for every entry on the graph to ensure they are aligned correctly
-        lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
-        // Add limit lines showing weekly weight gain and loss with net calories consumed
-        setCalorieLimitLines()
-        let sortedValues = calorieDictionary.values.sorted(by: <)
-        if sortedValues.count != 0 {
-            lineChartView.leftAxis.axisMinimum = Double(sortedValues.first!) - 100.0
-            lineChartView.leftAxis.axisMaximum = Double(sortedValues.last!) + 100.0
-        }
-    }
-    
-    func aggregateUserFoodHistory(formatter: DateFormatter) -> [TimeInterval: Double] {
-        var calorieDictionary: [TimeInterval: Double] = [:]
-        for entry in userFoodHistory {
-            // Convert timestamp to epoch time
-            let dateAsDouble = entry.timeStamp!.timeIntervalSince1970
-            let myDate = Date(timeIntervalSince1970: dateAsDouble)
-            let strDate = formatter.string(from: myDate)
-            if let roundedDate = formatter.date(from: strDate) {
-                let finalDate = roundedDate.timeIntervalSince1970
-                let numServings = entry.serviceSize
-                let foodEntry = entry.foodRelationship
-                let numCaloriesPerServing = (foodEntry?.calories)!
-                // Calculate the number of calories consumed by multiplying the number of portions consumed by the number of calories
-                // per portion
-                let caloriesConsumed = Double(numServings) * Double(numCaloriesPerServing)
-                if calorieDictionary[finalDate] != nil {
-                    calorieDictionary[finalDate] = calorieDictionary[finalDate]! + caloriesConsumed
-                } else {
-                    calorieDictionary[finalDate] = caloriesConsumed
-                }
-            }
-        }
-        return calorieDictionary
+        return newCalorieDictionary
     }
     
     func calculateBMR(key: Double) -> Double  {
@@ -327,6 +318,29 @@ class DashboardViewController: UIViewController{
             }
             // Unwrap and return the result. If it is still nil, return 0.0 for the weight
             return userWeightOnDate ?? 0.0
+        }
+    }
+    
+    func plotCalorieData(dataEntry: [ChartDataEntry], newCalorieDictionary: [TimeInterval: Double]) {
+        // Set the Y axis label and load dataEntry into the first line chart dataset
+        let set1 = LineChartDataSet(entries: dataEntry, label: "Net Calories")
+        set1.mode = .cubicBezier
+        set1.lineWidth = 3
+        set1.setColor(.black)
+        let data = LineChartData(dataSet: set1)
+        lineChartView.data = data
+        // Display dates in a human-readable format instead of epoch time
+        lineChartView.xAxis.valueFormatter = ChartFormatter()
+        //Rotate x axis label to prevent clipping off the side of the graph
+        lineChartView.xAxis.labelRotationAngle = 90.0
+        // Disable user interaction with the chart
+        lineChartView.isUserInteractionEnabled = false
+        // Show a date for every entry on the graph to ensure they are aligned correctly
+        lineChartView.xAxis.setLabelCount(dataEntry.count, force: true)
+        let sortedValues = newCalorieDictionary.values.sorted(by: <)
+        if sortedValues.count != 0 {
+            lineChartView.leftAxis.axisMinimum = Double(sortedValues.first!) - 100.0
+            lineChartView.leftAxis.axisMaximum = Double(sortedValues.last!) + 100.0
         }
     }
     
