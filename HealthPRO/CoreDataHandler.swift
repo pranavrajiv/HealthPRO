@@ -16,6 +16,7 @@ import UIKit
         self.context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
     
+    // function that posts notification to log error
     @objc public func logToErrorFile(message:String)
     {
         var notificationInfo: [AnyHashable: Any] = [:]

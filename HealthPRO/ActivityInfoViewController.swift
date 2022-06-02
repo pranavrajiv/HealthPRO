@@ -63,6 +63,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    //keyboard disappears
     @objc func keyboardWillDisappear(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -70,6 +71,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         }
     }
     
+    //keyboard appears
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -83,6 +85,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         super.touchesBegan(touches, with: event)
     }
     
+    //this function moves the position of textfields higher incase the keyboard covers them
     func animateTextField(up: Bool, keyBoardFrame:CGRect) {
         if up == self.isKeyboardUp  {
             return
@@ -105,6 +108,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         }
     }
     
+    //indicates text field has begun editing. UserInteraction has been disabled for all UI except for the current active textField
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activityName.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.activityName.accessibilityIdentifier)
         self.calories.isUserInteractionEnabled = (textField.accessibilityIdentifier == self.calories.accessibilityIdentifier)
@@ -117,6 +121,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         
     }
 
+    //indicates text field has ended editing. UserInteraction has been enabled for all UI
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.activityName.isUserInteractionEnabled = true
         self.calories.isUserInteractionEnabled = true
@@ -129,8 +134,8 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         
     }
     
+    //save button pressed
     @objc private func saveButtonTouchUp() {
-        
         if((self.activityName.text == nil) || (self.activityName.text == "")){
             let ac = UIAlertController(title: "Error", message: "Activity name empty. Please enter a name before saving", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -171,13 +176,13 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         self.present(ac, animated: true)
     }
     
+    //cancel button pressed
     @objc private func cancelButtonTouchUp() {
         self.dismiss(animated: true)
     }
     
-    
+    //delete button pressed
     @objc private func deleteButtonTouchUp() {
-        
         let ac = UIAlertController(title: "Confirmation", message: "Please confirm if you would like to Delete", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             
@@ -196,6 +201,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
         
     }
     
+    //IsIndoor button pressed
     @objc private func isIndoorButtonTouchUp(_ sender: UIButton) {
         if sender.titleLabel?.text == "YES" {
             sender.setTitle("NO", for: .normal)
