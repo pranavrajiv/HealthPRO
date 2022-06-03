@@ -64,7 +64,7 @@ class DashboardViewController: UIViewController{
         }
         let user = CoreDataHandler.init().getUser()
         //check if user profile is complete to display graphs
-        if user?.height == 0.0 || user?.weight == 0.0 || user?.birthYear == 0 {
+        if user?.height == 0.0 || user?.weight == 0.0 || user?.birthYear == 0 || user?.targetWeight == 0.0 {
             self.lineChartView.isHidden = true
             self.emptyGraphLabel.isHidden = false
         } else {

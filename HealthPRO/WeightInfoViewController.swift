@@ -90,7 +90,7 @@ class WeightInfoViewController: UIViewController {
                 //updates user profile with the last logged/updated weight
                 if let weightDouble = CoreDataHandler.init().getAllWeightHistory().last?.weight {
                     if let user = CoreDataHandler.init().getUser() {
-                        _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
+                        _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!, targetWeight: user.targetWeight)
                     }
                 }
             }
@@ -121,11 +121,11 @@ class WeightInfoViewController: UIViewController {
             //update user weight to the current last recorded weight incase the last recorded weight was just deleted
             if let weightDouble = CoreDataHandler.init().getAllWeightHistory().last?.weight {
                 if let user = CoreDataHandler.init().getUser() {
-                    _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
+                    _ = CoreDataHandler.init().updateUser(weight: weightDouble, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!, targetWeight:  user.targetWeight)
                 }
             } else { //if there are 0 weight histories then log user weight to 0
                 if let user = CoreDataHandler.init().getUser() {
-                    _ = CoreDataHandler.init().updateUser(weight: 0.0, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!)
+                    _ = CoreDataHandler.init().updateUser(weight: 0.0, height: user.height, gender: user.gender!, emailAddress: user.emailAddress!, contactNumber: user.contactNumber!, birthYear: Int(user.birthYear), foodPreference: user.foodPreference!, activityPreference: user.activityPreference!, targetWeight:  user.targetWeight)
                 }
             }
             

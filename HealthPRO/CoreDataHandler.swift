@@ -525,7 +525,7 @@ import UIKit
     }
     
     //Update user into Core Data
-    @objc public func updateUser(weight:Double,height:Double, gender:String, emailAddress:String, contactNumber:String, birthYear:Int,foodPreference:String,activityPreference:String )->Bool {
+    @objc public func updateUser(weight:Double,height:Double, gender:String, emailAddress:String, contactNumber:String, birthYear:Int,foodPreference:String,activityPreference:String,targetWeight: Double)->Bool {
         do {
             let request = User.fetchRequest()
             let id = UserDefaults.standard.string(forKey: "LoginUserName")!
@@ -539,6 +539,7 @@ import UIKit
             currentUser.first!.birthYear = Int64(birthYear)
             currentUser.first!.foodPreference = foodPreference
             currentUser.first!.activityPreference = activityPreference
+            currentUser.first!.targetWeight = targetWeight
             try context.save()
             
         } catch let error as NSError {

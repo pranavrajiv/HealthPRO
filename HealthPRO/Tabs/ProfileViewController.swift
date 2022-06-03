@@ -49,12 +49,14 @@ class ProfileViewController: UIViewController,UITextFieldDelegate {
         self.genderButton.titleLabel?.text = user?.gender
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text = user?.contactNumber
         (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text = user?.emailAddress
+        (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "targetWeight"}))?.text = user?.targetWeight.description
+        
     }
     
     //Saves profile data into CoreData
     @objc private func saveData() {
-        if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"), let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = self.genderButton.titleLabel?.text, let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text {
-            _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference)
+        if let weight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "weight"})?.text) ?? "0.0"), let height = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "height"})?.text) ?? "0.0") , let gender = self.genderButton.titleLabel?.text, let email = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "emailAddress"}))?.text, let contactNumber = (self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "contactNumber"}))?.text, let birthYear = Int((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "birthYear"})?.text) ?? "0"), let foodPreference = self.foodPreferenceButton.titleLabel?.text, let activityPreference = self.activityPreferenceButton.titleLabel?.text, let targetWeight = Double((self.textFieldCollection.first(where: {$0.accessibilityIdentifier == "targetWeight"})?.text) ?? "0.0") {
+            _ = CoreDataHandler.init().updateUser(weight: weight, height: height, gender: gender, emailAddress: email, contactNumber: contactNumber, birthYear: birthYear, foodPreference: foodPreference, activityPreference: activityPreference, targetWeight: targetWeight)
             
             //update the logged weight history for the day with the newly saved weight in the profile
             if(CoreDataHandler.init().doesWeightHistoryExist(forDate: Date())){
