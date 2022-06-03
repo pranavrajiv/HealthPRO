@@ -418,12 +418,19 @@ class DashboardViewController: UIViewController{
         let maximumSafeWeightPounds = 2.20462 * Double(maximumSafeWeightKilograms)
         let lowerTargetLine = ChartLimitLine(limit: minimumSafeWeightPounds, label: "Minimum healthy weight")
         let upperTargetLine = ChartLimitLine(limit: maximumSafeWeightPounds, label: "Maximum healthy weight")
+        let weightTargetLine = ChartLimitLine(limit: user?.targetWeight ?? 0.0, label: "Target weight")
         // Don't display the upper and lower safe weights if the user hasn't set their height yet
         if Double(userHeightInches!) != 0.0 {
             lineChartView.leftAxis.addLimitLine(lowerTargetLine)
             lineChartView.leftAxis.addLimitLine(upperTargetLine)
+            lineChartView.leftAxis.addLimitLine(weightTargetLine)
             lineChartView.leftAxis.axisMinimum = minimumSafeWeightPounds - 10.0
-            lineChartView.leftAxis.axisMaximum = maximumSafeWeightPounds + 10.0
+            // Set the axis minimum to either the target weight or the minimum safe weight, whichever is lower
+            if user?.targetWeight ?? 0.0 < minimumSafeWeightPounds - 10.0 {
+                lineChartView.leftAxis.axisMinimum = user?.targetWeight ?? 0.0
+            } else {
+                lineChartView.leftAxis.axisMaximum = maximumSafeWeightPounds + 10.0
+            }
         }
     }
     
