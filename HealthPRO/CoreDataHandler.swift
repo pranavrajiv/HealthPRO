@@ -182,6 +182,18 @@ import UIKit
         return true
     }
     
+    //Get largest activity history id from Core Data
+    @objc public func getLargestActivityHistoryId()->Int64 {
+        do {
+            let request = ActivityHistory.fetchRequest()
+            let activityHistory = try context.fetch(request)
+            return activityHistory.map({$0.activityHistoryId}).max() ?? -1
+        } catch let error as NSError {
+            self.logToErrorFile(message:"Could not get the Largest Activity History ID due to the error: \(error), \(error.userInfo)")
+        }
+        return -1
+    }
+    
     //Get all activity history from Core Data
     @objc public func getAllActivityHistory()->[ActivityHistory] {
         do {
@@ -383,6 +395,18 @@ import UIKit
         return true
     }
     
+    //Get the largest food history id from Core Data
+    @objc public func getLargestFoodHistoryId()->Int64 {
+        do {
+            let request = FoodHistory.fetchRequest()
+            let foodHistory = try context.fetch(request)
+            return foodHistory.map({$0.foodHistoryId}).max() ?? -1
+        } catch let error as NSError {
+            self.logToErrorFile(message:"Could not get the Largest Food History ID due to the error: \(error), \(error.userInfo)")
+        }
+        return -1
+    }
+    
     //Get all food history from Core Data
     @objc public func getAllFoodHistory()->[FoodHistory] {
         do {
@@ -441,6 +465,19 @@ import UIKit
             return false
         }
         return true
+    }
+    
+ 
+    //Get largest weight history id from Core Data
+    @objc public func getLargestWeightHistoryId()->Int64 {
+        do {
+            let request = WeightHistory.fetchRequest()
+            let weightHistory = try context.fetch(request)
+            return weightHistory.map({$0.weightHistoryId}).max() ?? -1
+        } catch let error as NSError {
+            self.logToErrorFile(message:"Could not get the Largest Weight History ID due to the error: \(error), \(error.userInfo)")
+        }
+        return -1
     }
     
     //Get all weight history from Core Data

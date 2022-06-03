@@ -203,17 +203,12 @@ class LogNutritionAndActivityViewController: UIViewController {
             else
             {//logActivityFood
                 if self.logType == "Activity" {
-                    var historyId:Int64 = -1
-                    if let largestActivityHistoryId = CoreDataHandler.init().getAllActivityHistory().map({$0.activityHistoryId}).max() {
-                        historyId = largestActivityHistoryId
-                    }
+                    let historyId:Int64 =  CoreDataHandler.init().getLargestActivityHistoryId()
                     _ = CoreDataHandler.init().logUserActivity(historyId:historyId + 1, activityId: self.itemId, timeStamp: self.datePicker.date, duration: calorieNumber)
                   
                 } else {
-                    var historyId:Int64 = -1
-                    if let largestFoodHistoryId = CoreDataHandler.init().getAllFoodHistory().map({$0.foodHistoryId}).max() {
-                        historyId = largestFoodHistoryId
-                    }
+                    let historyId:Int64 = CoreDataHandler.init().getLargestFoodHistoryId()
+                    
                     _ = CoreDataHandler.init().logUserFood(historyId:historyId + 1,foodId: self.itemId, timeStamp: self.datePicker.date, servingSize: calorieNumber)
                 }
                 

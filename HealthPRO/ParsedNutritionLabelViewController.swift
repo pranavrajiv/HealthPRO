@@ -128,10 +128,8 @@ class ParsedNutritionLabelViewController: UIViewController,UITextFieldDelegate {
             
             //new food
             if (self.foodItem == nil) {
-                var largestFoodId:Int64 = -1
-                if let foodID = viewController.coreDataHandler.getAllFood().map({ $0.foodId }).max() {
-                    largestFoodId = foodID
-                }
+                let largestFoodId:Int64 = viewController.coreDataHandler.getLargestFoodHistoryId()
+                
                 _ = viewController.coreDataHandler.addFood(foodId:largestFoodId + 1,foodName: self.itemNameVal.text ?? "", calories: Int64(calorieNumber), total_fat: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Fat"})?.text ?? "", cholesterol: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Cholesterol"})?.text ?? "", sodium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sodium"})?.text ?? "", calcium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Calcium"})?.text ?? "", iron: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Iron"})?.text ?? "", potassium: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Potassium"})?.text ?? "", protein: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Protein"})?.text ?? "", carbohydrate: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Total Carb"})?.text ?? "", sugars: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Sugars"})?.text ?? "", fiber: self.macroTextFieldCollections.first(where: {$0.accessibilityIdentifier=="Dietary Fiber"})?.text ?? "")
             } else {
                 //update food

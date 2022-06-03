@@ -160,10 +160,7 @@ class WeightInfoViewController: UIViewController {
                 _  = CoreDataHandler.init().updateWeightHistory(historyId: CoreDataHandler.init().getAllWeightHistory().first(where: {formatter.string(from: $0.timeStamp!) == formatter.string(from: self.dateSelector.date)})!.weightHistoryId, timeStamp: self.dateSelector.date, weight: weightDouble)
             } else {
                 // creates new log weight history
-                var historyId:Int64 = -1
-                if let largestWeightHistoryId = CoreDataHandler.init().getAllWeightHistory().map({$0.weightHistoryId}).max() {
-                    historyId = largestWeightHistoryId
-                }
+                let historyId:Int64 = CoreDataHandler.init().getLargestWeightHistoryId()
                 _  = CoreDataHandler.init().logUserWeightHistory(historyId: historyId + 1, timeStamp: self.dateSelector.date, weight: weightDouble)
             }
         
