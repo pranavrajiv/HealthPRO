@@ -156,7 +156,7 @@ class ActivityInfoViewController: UIViewController,UITextFieldDelegate  {
             
             //new activity
             if (self.activityItem == nil) {
-                let largestActivityID:Int64 = viewController.coreDataHandler.getLargestActivityHistoryId()
+                let largestActivityID:Int64 = viewController.coreDataHandler.getLargestActivityId()
                 
                 _ = viewController.coreDataHandler.addActivity(activityId: largestActivityID + 1, activityName: self.activityName.text!, caloriesPerHourPerLb: calorieNumber, isIndoor: self.isIndoorButton.titleLabel!.text!)
             }

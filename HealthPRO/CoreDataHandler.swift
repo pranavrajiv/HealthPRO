@@ -182,6 +182,19 @@ import UIKit
         return true
     }
     
+    //Get largest activity  id from Core Data
+    @objc public func getLargestActivityId()->Int64 {
+        do {
+            let request = Activity.fetchRequest()
+            let activities = try context.fetch(request)
+            return activities.map({$0.activityId}).max() ?? -1
+        } catch let error as NSError {
+            self.logToErrorFile(message:"Could not get the Largest Activity ID due to the error: \(error), \(error.userInfo)")
+        }
+        return -1
+    }
+    
+    
     //Get largest activity history id from Core Data
     @objc public func getLargestActivityHistoryId()->Int64 {
         do {
@@ -393,6 +406,18 @@ import UIKit
             return false
         }
         return true
+    }
+    
+    //Get the largest food id from Core Data
+    @objc public func getLargestFoodId()->Int64 {
+        do {
+            let request = Food.fetchRequest()
+            let foodItems = try context.fetch(request)
+            return foodItems.map({$0.foodId}).max() ?? -1
+        } catch let error as NSError {
+            self.logToErrorFile(message:"Could not get the Largest Food ID due to the error: \(error), \(error.userInfo)")
+        }
+        return -1
     }
     
     //Get the largest food history id from Core Data
